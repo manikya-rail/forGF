@@ -14,14 +14,14 @@
 }
 
 .dropdown-padd{
-   padding: 10px 40px;
+   padding: 6px 40px;
 }
 .dropdown-less-padd{
    padding: 2px 30px;
 
 }
 .state-drop-dwn{
-    margin-top: 20px;
+    margin-top: 23px !important;
 }
 
 .upload-btn{
@@ -30,4 +30,11 @@
 
 .whole-num{
     color: #16A476;
+}
+.btn-add{
+    font-size: 24px !important;
+    color: #16A476 !important;
+    background-color: white !important;
+    border-color: #16A476 !important;
+    padding: 3px 20px !important;
 }

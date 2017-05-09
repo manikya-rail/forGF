@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503181112) do
+ActiveRecord::Schema.define(version: 20170508182035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,79 @@ ActiveRecord::Schema.define(version: 20170503181112) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "amenities", force: :cascade do |t|
+    t.boolean  "restaurants"
+    t.boolean  "caddies"
+    t.boolean  "carts"
+    t.integer  "course_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["course_id"], name: "index_amenities_on_course_id", using: :btree
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "course_type"
+    t.text     "bio"
+    t.string   "website"
+    t.string   "phone_num"
+    t.integer  "total_par"
+    t.string   "slope"
+    t.string   "rating"
+    t.integer  "length"
+    t.integer  "admin_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["admin_id"], name: "index_courses_on_admin_id", using: :btree
+  end
+
+  create_table "holes", force: :cascade do |t|
+    t.string   "par"
+    t.string   "yards"
+    t.string   "mhcp"
+    t.string   "whcp"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_holes_on_course_id", using: :btree
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "town"
+    t.string   "state"
+    t.integer  "lat"
+    t.integer  "lng"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_locations_on_course_id", using: :btree
+  end
+
+  create_table "networks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_networks_on_course_id", using: :btree
+  end
+
+  create_table "resorts", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_resorts_on_course_id", using: :btree
+  end
+
+  create_table "score_cards", force: :cascade do |t|
+    t.string   "tee_name"
+    t.string   "color"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_score_cards_on_course_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

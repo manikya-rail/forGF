@@ -1,0 +1,181 @@
+<div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
+  <%=link_to "Sign out", destroy_admin_session_path , :method => :delete %>
+  <%= form_for(@course, url: {controller: 'courses', action: 'create'}, method: "post" ) do |f|%>
+    
+    <div class="col-md-12">
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-4">
+              <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :name , class:"col-md-12", placeholder: "Full name of course"%>
+            </div>
+
+            <div class="col-md-8">
+                <%= f.fields_for :location do |location_form| %>
+                  <%= render 'admin/locations/form.html.erb', location_form: location_form %>
+                <% end %>
+                
+            </div>
+
+        </div>
+        
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-4">
+              <%= label_tag :course_type ,'Course Type',class:"col-md-12 zero-left-right-padd"%>
+              <%= check_box_tag 'course[course_type]' %> Public
+              <%= check_box_tag 'course[course_type]'%> Private
+              <%= check_box_tag 'course[course_type]'%> Semi-Private
+            
+            </div>
+
+            <div class="col-md-4">
+              <%= select_tag('resorts', option_tags = nil, options = {prompt: 'Resort', class:'dropdown-padd'}) %>
+              <button type="button" class="btn btn-info btn-add" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
+
+              <%= render :partial => 'admin/networks/new_modal' , :locals => { f: f }%>
+
+            </div>
+
+            <div class="col-md-4">
+              <%= select_tag('network', option_tags = nil, options = {prompt: 'Network',class:'dropdown-padd'}) %>
+              <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
+
+              <%= render :partial => 'admin/resorts/new_modal', :locals => { f: f }%>
+            </div>
+        </div>
+
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-5">
+              <%= label_tag :bio ,'Bio',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_area :bio, rows: "4", class: 'col-md-12' %>
+            
+            </div>
+
+            <div class="col-md-3">
+              <%= label_tag :contact_info, 'Contact Info',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :website, class:"col-md-12", placeholder: "Website" %>
+              <%= f.text_field :phone_num, class:"col-md-12", placeholder: "Phone Number" %>
+            </div>
+
+            
+            
+        </div>
+
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-2">
+              <%= label_tag :logo ,'Logo',class:"col-md-12 zero-left-right-padd"%>
+              <button type="button" class="btn btn-success upload-btn">Upload</button>
+            </div>
+
+            <div class="col-md-2">
+              <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd"%>
+              <button type="button" class="btn btn-success upload-btn">Upload</button>
+            </div>
+
+            <div class="col-md-8"></div>
+            
+        </div>
+        
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-2">
+              <%= label_tag :total_par ,'Total Par',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :total_par, class:"col-md-12", placeholder: "Total Par" %>
+            </div>
+
+            <div class="col-md-2">
+              <%= label_tag :slope ,'Slope',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :slope, class:"col-md-12", placeholder: "Slope" %>
+            </div>
+
+            <div class="col-md-2">
+              <%= label_tag :rating ,'Rating',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :rating, class:"col-md-12", placeholder: "Rating" %>
+            </div>
+
+            <div class="col-md-2">
+              <%= label_tag :length ,'Length',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :length, class:"col-md-12", placeholder: "Length"%>
+            </div>
+        </div>
+
+        <div class="col-md-12 course-info-row score-cards-wrapper">
+            <%= label_tag :score_card ,'Score Card',class:"col-md-12 zero-left-right-padd"%>
+            <div class="col-md-8 score-card-wrapper">
+              
+              <%= f.fields_for :score_cards do |score_card_form| %>
+                <%= render 'admin/score_cards/form', s: score_card_form %>
+              <% end %>
+
+
+            </div>
+
+            <div class="col-md-4">
+              
+            </div>
+            
+        </div>
+
+        <div class="col-md-12 course-info-row">
+          <%=render :partial => 'hole' , locals: {f: f } %>  
+        </div>
+
+
+    </div>
+  <%end%>
+</div>
+
+
+
+<script type="text/javascript">
+  
+  $("input:checkbox").on('click', function() {
+    var $box = $(this);
+    if ($box.is(":checked")) {
+      var group = "input:checkbox[name='" + $box.attr("name") + "']";
+      $(group).prop("checked", false);
+      $box.prop("checked", true);
+    } else {
+      $box.prop("checked", false);
+    }
+  });
+
+  $('#add-resorts').click(function() {
+
+    var clonedField = $('#resort-name-field').clone();
+    var resortNameFieldLen = $('.resort-name-field').length ;
+    clonedField.removeAttr( "id" )
+    clonedField.attr('name', 'course[resorts_attributes][' + resortNameFieldLen + '][name]' );
+    
+    clonedField.appendTo($('#resort-name-field').parent('div'))
+
+  });
+
+  $('#add-networks').click(function() {
+    var clonedField = $('#network-name-field').clone();
+    clonedField.removeAttr( "id" )
+    var networkNameFieldLen = $('.network-name-field').length ;
+    clonedField.attr('name', 'course[networks_attributes][' + networkNameFieldLen + '][name]' );
+    clonedField.appendTo($('#network-name-field').parent('div'))
+
+  });
+
+  $('#add-score-card').click(function() {
+    var clonedField = $('.score-card-wrapper').first().clone();
+    var teeNameField = clonedField.find('#tee-name-field');
+    var colorField = clonedField.find('#course_score_cards_attributes_0_color');
+    var btnAdd = clonedField.find('.btn-add').remove();
+
+    teeNameField.removeAttr( "id" )
+    colorField.removeAttr( "id" )
+    var scoreCardLen = $('.score-card-wrapper').length ;
+    teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
+    colorField.attr('name', 'course[networks_attributes][' + scoreCardLen + '][name]' );
+    clonedField.appendTo($('.score-cards-wrapper'))
+
+  });
+
+  
+  $( "#create-course-btn" ).click(function() {
+    $( "#new_course" ).submit();
+  });
+  
+</script>

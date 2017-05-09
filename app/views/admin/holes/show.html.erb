@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Par:</strong>
+  <%= @hole.par %>
+</p>
+
+<p>
+  <strong>Yards:</strong>
+  <%= @hole.yards %>
+</p>
+
+<p>
+  <strong>Mhcp:</strong>
+  <%= @hole.mhcp %>
+</p>
+
+<p>
+  <strong>Whcp:</strong>
+  <%= @hole.whcp %>
+</p>
+
+<%= link_to 'Edit', edit_hole_path(@hole) %> |
+<%= link_to 'Back', holes_path %>

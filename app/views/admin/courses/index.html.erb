@@ -1,0 +1,38 @@
+<%= link_to 'New Course', new_admin_course_path %>
+<p id="notice"><%= notice %></p>
+
+<h1>Courses</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Bio</th>
+      <th>Website</th>
+      <th>Phone num</th>
+      <th>Total par</th>
+      <th>Slope</th>
+      <th>Rating</th>
+      <th>Length</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.name %></td>
+        <td><%= course.bio %></td>
+        <td><%= course.website %></td>
+        <td><%= course.phone_num %></td>
+        <td><%= course.total_par %></td>
+        <td><%= course.slope %></td>
+        <td><%= course.rating %></td>
+        <td><%= course.length %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

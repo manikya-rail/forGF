@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  restaurants: false
+  caddies: false
+  carts: false
+
+two:
+  restaurants: false
+  caddies: false
+  carts: false

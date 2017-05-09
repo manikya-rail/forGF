@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Score Cards</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tee name</th>
+      <th>Color</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @score_cards.each do |score_card| %>
+      <tr>
+        <td><%= score_card.tee_name %></td>
+        <td><%= score_card.color %></td>
+        <td><%= link_to 'Show', score_card %></td>
+        <td><%= link_to 'Edit', edit_score_card_path(score_card) %></td>
+        <td><%= link_to 'Destroy', score_card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Score Card', new_score_card_path %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Amenities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Restaurants</th>
+      <th>Caddies</th>
+      <th>Carts</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @amenities.each do |amenity| %>
+      <tr>
+        <td><%= amenity.restaurants %></td>
+        <td><%= amenity.caddies %></td>
+        <td><%= amenity.carts %></td>
+        <td><%= link_to 'Show', amenity %></td>
+        <td><%= link_to 'Edit', edit_amenity_path(amenity) %></td>
+        <td><%= link_to 'Destroy', amenity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Amenity', new_amenity_path %>

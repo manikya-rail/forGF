@@ -10,6 +10,12 @@
    </head>
 
   <body>
-    <%= yield %>
+    <%= yield :side_nav %>
+    
+    <div id="course-page-content-wrapper" class="col-md-10">
+        <%= yield %>
+    </div>
+    </div>
+    </div>
   </body>
 </html>

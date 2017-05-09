@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Restaurants:</strong>
+  <%= @amenity.restaurants %>
+</p>
+
+<p>
+  <strong>Caddies:</strong>
+  <%= @amenity.caddies %>
+</p>
+
+<p>
+  <strong>Carts:</strong>
+  <%= @amenity.carts %>
+</p>
+
+<%= link_to 'Edit', edit_amenity_path(@amenity) %> |
+<%= link_to 'Back', amenities_path %>
