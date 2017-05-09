@@ -1,4 +1,5 @@
 class Admin::ScoreCardsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_score_card, only: [:show, :edit, :update, :destroy]
 
   # GET /score_cards

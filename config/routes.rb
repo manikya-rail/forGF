@@ -19,5 +19,5 @@ end
     resources :pages, only: [:index]
   end
 
-  root :to => "admin/courses#new"
+  root :to => "admins#create_course"
 end

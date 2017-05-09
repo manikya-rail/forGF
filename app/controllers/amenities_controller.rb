@@ -1,4 +1,5 @@
 class Admin::AmenitiesController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_amenity, only: [:show, :edit, :update, :destroy]
 
   # GET /amenities
