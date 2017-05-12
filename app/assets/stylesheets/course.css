@@ -18,6 +18,7 @@
 }
 .dropdown-less-padd{
    padding: 2px 30px;
+   /*color:red;*/
 
 }
 .state-drop-dwn{
@@ -36,5 +37,19 @@
     color: #16A476 !important;
     background-color: white !important;
     border-color: #16A476 !important;
-    padding: 3px 20px !important;
+    padding: 0px 15px !important;
+    margin: 0px 5px;
 }
+.hole-field, .contact-info{
+    margin-top: 5px;
+    margin-bottom: 5px;    
+}
+.inline{
+    display: inline !important;
+}
+.dynamic-fields *{
+    margin-bottom: 10px !important;
+}
+/*.modal-footer{
+    border-top: none !important;
+}*/

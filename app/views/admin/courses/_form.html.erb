@@ -1,15 +1,15 @@
-<div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
+<div id="course-page-content-wrapper" class="col-md-10" style="margin-top: 0px;">
   <%=link_to "Sign out", destroy_admin_session_path , :method => :delete %>
   <%= form_for(@course, url: {controller: 'courses', action: 'create'}, method: "post" ) do |f|%>
     
     <div class="col-md-12">
         <div class="col-md-12 course-info-row">
-            <div class="col-md-4">
+            <div class="col-md-4 form-group">
               <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :name , class:"col-md-12", placeholder: "Full name of course"%>
+              <%= f.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Full name of course"%>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-8 form-group">
                 <%= f.fields_for :location do |location_form| %>
                   <%= render 'admin/locations/form.html.erb', location_form: location_form %>
                 <% end %>
@@ -19,24 +19,34 @@
         </div>
         
         <div class="col-md-12 course-info-row">
+            <%= label_tag :course_type ,'Course Type',class:"col-md-12 zero-left-right-padd",style:"margin-left:15px;"%>
             <div class="col-md-4">
-              <%= label_tag :course_type ,'Course Type',class:"col-md-12 zero-left-right-padd"%>
-              <%= check_box_tag 'course[course_type]' %> Public
-              <%= check_box_tag 'course[course_type]'%> Private
-              <%= check_box_tag 'course[course_type]'%> Semi-Private
+              
+              <div class="inline">
+                <%= check_box_tag 'course[course_type]' ,'public',false ,class: 'checkbox check-field inline'%> 
+                <span class="inline">Public</span>
+              </div>
+              <div class="inline">
+                <%= check_box_tag 'course[course_type]' ,'private',false ,class: 'checkbox check-field inline'%> 
+                <span class="inline">Private</span>
+              </div>
+              <div class="inline">
+                <%= check_box_tag 'course[course_type]' ,'semi-private',false ,class: 'checkbox check-field inline'%>
+                <span class="inline">Semi-Private</span>
+              </div>
             
             </div>
 
             <div class="col-md-4">
-              <%= select_tag('resorts', option_tags = nil, options = {prompt: 'Resort', class:'dropdown-padd'}) %>
-              <button type="button" class="btn btn-info btn-add" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
+              <%= select_tag('resorts', option_tags = nil, options = {prompt: 'Resort', class:'dropdown-padd dropdown form-control inline ' , style: 'width:50%;'}) %>
+              <button type="button" class="btn btn-info btn-add inline" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
 
               <%= render :partial => 'admin/networks/new_modal' , :locals => { f: f }%>
 
             </div>
 
             <div class="col-md-4">
-              <%= select_tag('network', option_tags = nil, options = {prompt: 'Network',class:'dropdown-padd'}) %>
+              <%= select_tag('network', option_tags = nil, options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;'}) %>
               <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
 
               <%= render :partial => 'admin/resorts/new_modal', :locals => { f: f }%>
@@ -44,16 +54,16 @@
         </div>
 
         <div class="col-md-12 course-info-row">
-            <div class="col-md-5">
+            <div class="col-md-5 form-group">
               <%= label_tag :bio ,'Bio',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_area :bio, rows: "4", class: 'col-md-12' %>
+              <%= f.text_area :bio, rows: "4", class: 'col-md-12 form-control check-field'%>
             
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 form-group">
               <%= label_tag :contact_info, 'Contact Info',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :website, class:"col-md-12", placeholder: "Website" %>
-              <%= f.text_field :phone_num, class:"col-md-12", placeholder: "Phone Number" %>
+              <%= f.text_field :website, class:"col-md-12 form-control contact-info check-field", placeholder: "Website" %>
+              <%= f.text_field :phone_num, class:"col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
             </div>
 
             
@@ -62,12 +72,12 @@
 
         <div class="col-md-12 course-info-row">
             <div class="col-md-2">
-              <%= label_tag :logo ,'Logo',class:"col-md-12 zero-left-right-padd"%>
+              <%= label_tag :logo ,'Logo',class:"col-md-12 zero-left-right-padd "%>
               <button type="button" class="btn btn-success upload-btn">Upload</button>
             </div>
 
             <div class="col-md-2">
-              <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd"%>
+              <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
               <button type="button" class="btn btn-success upload-btn">Upload</button>
             </div>
 
@@ -76,30 +86,30 @@
         </div>
         
         <div class="col-md-12 course-info-row">
-            <div class="col-md-2">
+            <div class="col-md-2 form-group">
               <%= label_tag :total_par ,'Total Par',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :total_par, class:"col-md-12", placeholder: "Total Par" %>
+              <%= f.text_field :total_par, class:"col-md-12 form-control check-field", placeholder: "Total Par" %>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-2 form-group">
               <%= label_tag :slope ,'Slope',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :slope, class:"col-md-12", placeholder: "Slope" %>
+              <%= f.text_field :slope, class:"col-md-12 form-control check-field", placeholder: "Slope" %>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-2 form-group">
               <%= label_tag :rating ,'Rating',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :rating, class:"col-md-12", placeholder: "Rating" %>
+              <%= f.text_field :rating, class:"col-md-12 form-control check-field", placeholder: "Rating" %>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-2 form-group">
               <%= label_tag :length ,'Length',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :length, class:"col-md-12", placeholder: "Length"%>
+              <%= f.text_field :length, class:"col-md-12 form-control check-field", placeholder: "Length"%>
             </div>
         </div>
 
         <div class="col-md-12 course-info-row score-cards-wrapper">
             <%= label_tag :score_card ,'Score Card',class:"col-md-12 zero-left-right-padd"%>
-            <div class="col-md-8 score-card-wrapper">
+            <div class="col-md-8 score-card-wrapper dynamic-fields">
               
               <%= f.fields_for :score_cards do |score_card_form| %>
                 <%= render 'admin/score_cards/form', s: score_card_form %>
@@ -126,6 +136,127 @@
 
 
 <script type="text/javascript">
+function containText(textFieldId){
+  if ( $('#' + textFieldId).val().length > 0 ){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function enableCheck(checkID){
+  $('#' + checkID).show();
+}
+
+function disableCheck(checkID){
+  $('#' + checkID).hide();
+}
+
+function checkLocation() {
+  if( 
+      containText('course_location_attributes_town') &&
+      containText('course_location_attributes_lat') &&
+      containText('course_location_attributes_lng') &&
+      $('#course_location_attributes_state').val() != ""
+    ){
+    enableCheck('location-check')
+  }
+  else{
+    disableCheck('location-check')
+  }
+
+}
+
+function checkCourseType() {
+  if( 
+      containText('course_location_attributes_town') &&
+      containText('course_location_attributes_lat') &&
+      containText('course_location_attributes_lng')
+    ){
+    enableCheck('location-check')
+  }
+  else{
+    disableCheck('location-check')
+  }
+    
+}
+
+function checkContactInfo() {
+   if( 
+      containText('course_website') &&
+      containText('course_phone_num')
+    ){
+    enableCheck('contact_info-check')
+  }
+  else{
+    disableCheck('contact_info-check')
+  } 
+}
+
+function checkAmenities() {
+    
+}
+
+function checkScoreCard() {
+  if( 
+      containText('tee-name-field') &&
+      $('#course_score_cards_attributes_0_color').val() != ""
+    ){
+    enableCheck('score_card-check')
+  }
+  else{
+    disableCheck('score_card-check')
+  }    
+}
+
+
+function checkFields(){
+  $('.glyphicon-ok').hide();
+
+  var idsHash =  { 
+        'course_length': 'length-check',
+        'course_rating': 'rating-check',
+        'course_total_par': 'par-check',
+        'course_slope': 'slope-check',
+        'course_bio': 'bio-check',
+        'course_name': 'name-check',
+        // : 'cover_photo-check',
+        // : 'logo-check',
+        // : 'overview-checkbox',
+      }
+
+    $(".check-field").focusout(function() {
+      if (idsHash[this.id]){
+        if (containText(this.id)){
+          enableCheck(idsHash[this.id]);
+        }
+        else{
+          disableCheck(idsHash[this.id]);
+        }
+      }
+      else{
+        if (checkLocation()){
+          enableCheck('location-check');
+        }
+        else if(checkCourseType()){
+          enableCheck('course_type-check')
+        }
+        else if(checkContactInfo()){
+          enableCheck('contact_info-check')
+        }
+        else if(checkAmenities()){
+          enableCheck('amenities-check')
+        }
+        else if(checkScoreCard()){
+          enableCheck('score_card-check')
+        }
+
+      }
+  })
+}
+
+checkFields();  
   
   $("input:checkbox").on('click', function() {
     var $box = $(this);

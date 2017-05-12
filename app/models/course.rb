@@ -13,5 +13,5 @@ class Course < ApplicationRecord
      accepts_nested_attributes_for :score_cards, :allow_destroy => true
      accepts_nested_attributes_for :holes, :allow_destroy => true
      accepts_nested_attributes_for :amenity, :allow_destroy => true
-
+     validates_presence_of :name,:bio, :website, :phone_num, :total_par, :slope, :rating, :length
 end
