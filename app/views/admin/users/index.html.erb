@@ -1,0 +1,50 @@
+<% content_for :side_nav do %>
+  <%= render :partial => 'admin/shared/side_nav' %>
+<% end %>
+
+<div class="container">
+  <div class="panel panel-default">
+    <h2>User List</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div id="user-search-form">
+          <div class="col-md-3" style="padding:0px;">
+            <%= form_tag(nil, url: {controller: 'user', action: 'search'}, method: "post" ) do |f|%>
+              <%= text_field_tag :user, "", class: "form-control", placeholder: "Search For User" %>
+            <%end%>
+          </div>
+          <div class="col-md-9">
+          </div>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>NAME</th>
+              <th>MEMBER SINCE</th>
+              <th>EMAIL</th>
+              <th ></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= user.created_at %></td>
+                <td><%= user.email %></td>
+                <td>
+                  <span><%= link_to 'Edit Account Details', "#"%></span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>      
+
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
+

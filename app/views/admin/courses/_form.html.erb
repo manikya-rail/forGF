@@ -1,5 +1,4 @@
-<div id="course-page-content-wrapper" class="col-md-10" style="margin-top: 0px;">
-  <%=link_to "Sign out", destroy_admin_session_path , :method => :delete %>
+<div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
   <%= form_for(@course, url: {controller: 'courses', action: 'create'}, method: "post" ) do |f|%>
     
     <div class="col-md-12">
@@ -54,16 +53,25 @@
         </div>
 
         <div class="col-md-12 course-info-row">
-            <div class="col-md-5 form-group">
+            <div class="col-md-4 form-group">
               <%= label_tag :bio ,'Bio',class:"col-md-12 zero-left-right-padd"%>
               <%= f.text_area :bio, rows: "4", class: 'col-md-12 form-control check-field'%>
             
             </div>
 
-            <div class="col-md-3 form-group">
+            <div class="col-md-4 form-group">
               <%= label_tag :contact_info, 'Contact Info',class:"col-md-12 zero-left-right-padd"%>
               <%= f.text_field :website, class:"col-md-12 form-control contact-info check-field", placeholder: "Website" %>
               <%= f.text_field :phone_num, class:"col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
+            </div>
+
+            <div class="col-md-4">
+              <div class="col-md-12">
+                <%= f.fields_for :amenity do |amenity_form| %>
+                  <%= render 'admin/amenities/form', a: amenity_form %>
+                <% end %>
+              </div>
+
             </div>
 
             

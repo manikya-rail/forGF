@@ -10,12 +10,23 @@
    </head>
 
   <body>
-    <%= yield :side_nav %>
     
     <div id="container-fluid">
-        <%= yield %>
-    </div>
-    </div>
+      <!-- <div  style="margin-left: 0px !important;padding-left: 15px !important; "> -->
+      <div class="row">
+        <div class="col-md-12">
+            <%= render partial: 'layouts/navigation' %>
+        </div>
+
+        <%= yield :side_nav %>
+        
+        
+        <div id="" class="<%= current_admin ? 'col-md-10' : 'col-md-12'%>">
+          <%= render partial: 'layouts/messages' %>
+          <%= yield %>
+        </div>
+      </div>
+    <!-- </div> -->
     </div>
   </body>
 </html>

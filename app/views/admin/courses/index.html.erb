@@ -1,38 +1,51 @@
-<%= link_to 'New Course', new_admin_course_path %>
-<p id="notice"><%= notice %></p>
 
-<h1>Courses</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Bio</th>
-      <th>Website</th>
-      <th>Phone num</th>
-      <th>Total par</th>
-      <th>Slope</th>
-      <th>Rating</th>
-      <th>Length</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container">
 
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.name %></td>
-        <td><%= course.bio %></td>
-        <td><%= course.website %></td>
-        <td><%= course.phone_num %></td>
-        <td><%= course.total_par %></td>
-        <td><%= course.slope %></td>
-        <td><%= course.rating %></td>
-        <td><%= course.length %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% content_for :side_nav do %>
+  <%= render :partial => 'admin/shared/side_nav' %>
+<% end %>
 
-<br>
+  <div class="panel panel-default">
+    <h2>Course List</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div id="course-search-form">
+          <div class="col-md-3" style="padding:0px;">
+            <%= form_tag(nil, url: {controller: 'courses', action: 'search'}, method: "post" ) do |f|%>
+              <%= text_field_tag :course, "", class: "form-control", placeholder: "Search Courses" %>
+            <%end%>
+          </div>
+          <div class="col-md-9">
+          </div>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>COURSE NAME</th>
+              <th>LOCATION</th>
+              <th>RESORT</th>
+              <th>NETWORK</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @courses.each do |course| %>
+              <tr>
+                <td><%= course.name %></td>
+                <td><%= course.try(:formated_location) %></td>
+                <td><%= course.try(:resorts_names) %></td>
+                <td><%= course.try(:networks_names) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>      
+
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
 

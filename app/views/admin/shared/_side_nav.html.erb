@@ -1,0 +1,7 @@
+<%if params[:controller] == "admin/courses" and params[:action] == "index" and params[:ad_manage] == "true"%>
+  <%= render :partial => 'admin/shared/ad_manage_side_nav' %>
+<%elsif params[:controller] == "admin/courses" and params[:action] == "index"%>
+  <%= render :partial => 'admin/shared/courses_side_nav' %>
+<%elsif params[:controller] == "admin/users" and params[:action] == "index"%>
+  <%= render :partial => 'admin/shared/users_side_nav' %>
+<%end%>

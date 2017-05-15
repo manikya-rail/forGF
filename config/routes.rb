@@ -8,9 +8,12 @@ namespace :admin do
   resources :resorts
   resources :locations
   resources :courses
+  get "users/index"
 end
 
   devise_for :admins
+  devise_for :users
+  # put '/users', :to => 'devise/registrations#update', :as => :update_user
   namespace :v1, defaults: {format: :json} do
     delete '/sessions', :to => 'sessions#destroy'  
     resources :sessions, only: [:create]

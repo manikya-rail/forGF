@@ -1,7 +1,8 @@
-<div class="col-md-4">
+<div class="col-md-12">
   <%= label_tag :amenties ,'Amenties',class:"col-md-12 zero-left-right-padd"%>
-  <%= f.check_box :restaurant %> Restaurant
-  <%= f.check_box :caddies%> Caddies
-  <%= f.check_box :carts%> Carts
-
+  <div class="col-md-12">
+      <div class="inline"><%= a.check_box :restaurants %> Restaurant</div>
+      <div class="inline"><%= a.check_box :caddies%> Caddies</div>
+      <div class="inline"><%= a.check_box :carts%> Carts</div>
+  </div>
 </div>

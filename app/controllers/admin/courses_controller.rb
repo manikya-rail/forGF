@@ -17,7 +17,7 @@ class Admin::CoursesController < ApplicationController
   def new
     @course = Course.new
     @course.build_location
-    @course.amenity
+    @course.build_amenity
     @course.networks.build
     @course.resorts.build
     @course.score_cards.build
