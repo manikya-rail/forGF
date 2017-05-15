@@ -32,7 +32,7 @@
           <tbody>
             <% @courses.each do |course| %>
               <tr>
-                <td><%= course.name %></td>
+                <td><%= link_to course.name, admin_course_path(course) %></td>
                 <td><%= course.try(:formated_location) %></td>
                 <td><%= course.try(:resorts_names) %></td>
                 <td><%= course.try(:networks_names) %></td>

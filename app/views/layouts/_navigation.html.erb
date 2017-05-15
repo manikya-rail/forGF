@@ -1,5 +1,5 @@
 <%if current_admin%>
-  <nav class="navbar col-md-12 navbar-default" style=" border: none; border-radius: 0px;">
+  <nav class="navbar col-md-12 navbar-default" style=" border: none; border-radius: 0px; background-color: white; color:red;">
     <div class="container-fluid">
       <div class="navbar-header col-md-2">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -8,9 +8,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#" style="margin-top: 20px;">Fore</a>
+        <!-- <a class="navbar-brand" href="#" style="margin-top: 20px;">Fore</a> -->
       </div>
-      <div id="navbar" class="navbar-collapse collapse col-md-10">
+      <div id="navbar" class="navbar-collapse collapse col-md-10" ">
         <ul class="nav navbar-nav">
           <li><%= link_to 'Create Course', '/' %></li>
           <li><%= link_to 'Ad Manage', admin_courses_path(ad_manage: :true) %></li>

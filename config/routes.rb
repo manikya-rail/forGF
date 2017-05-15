@@ -9,6 +9,8 @@ namespace :admin do
   resources :locations
   resources :courses
   get "users/index"
+  post "videos/create"
+  get "videos/:id" , to: 'videos#show' ,as: 'video'
 end
 
   devise_for :admins

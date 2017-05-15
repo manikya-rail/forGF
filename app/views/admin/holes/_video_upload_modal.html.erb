@@ -1,0 +1,25 @@
+<div id= <%= "hole-#{hole_num}-vid-upl-modal" %>  class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload Video</h4>
+      </div>
+      <div class="modal-body">
+        <%=form_for Video.new, url: {controller: 'videos', action: 'create'}, method: "post" do |v|%>
+            <%#= v.text_field :title, placeholder: 'Title' %>
+            <%#= v.text_area :description, placeholder: 'Description', rows: '3'%>
+            <%= v.file_field :video , style: "padding: 10 0px; margin:10px 0px;"%>
+            <%= v.submit 'Upload', id: 'fileUpload', class: "btn btn-success upload-btn"%>
+            <!-- <button type="button" class="btn btn-success upload-btn upload_video_btn" >Upload</button> -->
+        <%end%>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

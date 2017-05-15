@@ -1,49 +1,44 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @course.type %>
-</p>
+<div class="container">
 
-<p>
-  <strong>Bio:</strong>
-  <%= @course.bio %>
-</p>
+<% content_for :side_nav do %>
+  <%= render :partial => 'admin/shared/side_nav' %>
+<% end %>
 
-<p>
-  <strong>Website:</strong>
-  <%= @course.website %>
-</p>
+  <div class="panel panel-default">
+    <h2><%=@course.name%> Hole List</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>HOLE NUMBER</th>
+              <th>UPLOAD VIDEO</th>
+            </tr>
+          </thead>
 
-<p>
-  <strong>Phone num:</strong>
-  <%= @course.phone_num %>
-</p>
+          <tbody>
+            <% @course.holes.each_with_index do |hole, index| %>
+              <tr>
+                <td><%= "Hole " + (index + 1).to_s  %></td>
+                <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-vid-upl-modal" %> >Upload Video</button></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>      
 
-<p>
-  <strong>Total par:</strong>
-  <%= @course.total_par %>
-</p>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Slope:</strong>
-  <%= @course.slope %>
-</p>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @course.rating %>
-</p>
+  <%@course.holes.each_with_index do |hole, index|%>
+    <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole_num: index + 1 } %>
+  <%end%>
 
-<p>
-  <strong>Length:</strong>
-  <%= @course.length %>
-</p>
+  
+</div>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+
