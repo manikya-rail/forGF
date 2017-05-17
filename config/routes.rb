@@ -21,6 +21,8 @@ end
     resources :sessions, only: [:create]
     resources :registrations, only: [:create]
     resources :pages, only: [:index]
+    resources :courses, only:[:index,:show]
+    resources :users, only:[:show]
   end
 
   root to: "admin/courses#new"
