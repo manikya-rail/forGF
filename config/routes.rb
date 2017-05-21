@@ -9,8 +9,10 @@ namespace :admin do
   resources :locations
   resources :courses
   get "users/index"
-  post "videos/create"
+  post "videos/create", to: 'videos#create' ,as: 'video_create'
   get "videos/:id" , to: 'videos#show' ,as: 'video'
+  post "tags/:video_id/save" ,to: 'tags#create', as: 'create_tag'
+  delete "tags/:id" ,to: 'tags#destroy', as: 'delete_tag'
 end
 
   devise_for :admins
@@ -23,6 +25,7 @@ end
     resources :pages, only: [:index]
     resources :courses, only:[:index,:show]
     resources :users, only:[:show]
+    resources :videos, only:[:show]
   end
 
   root to: "admin/courses#new"

@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
 
     belongs_to :hole
+    has_many :tags
     has_attached_file :video, styles: {
     :medium => {
       :geometry => "640x480",

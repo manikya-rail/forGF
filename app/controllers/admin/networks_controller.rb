@@ -26,14 +26,16 @@ class Admin::NetworksController < ApplicationController
   def create
     @network = Network.new(network_params)
 
+    if @network.save
+     @flash_class = "alert alert-success"
+     @message = "Network added successfully." 
+    else
+      @flash_class = "alert alert-danger"
+      @message = "Something went wrong."
+    end
+    
     respond_to do |format|
-      if @network.save
-        format.html { redirect_to @network, notice: 'Network was successfully created.' }
-        format.json { render :show, status: :created, location: @network }
-      else
-        format.html { render :new }
-        format.json { render json: @network.errors, status: :unprocessable_entity }
-      end
+      format.js
     end
   end
 

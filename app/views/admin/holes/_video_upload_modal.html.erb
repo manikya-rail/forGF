@@ -8,12 +8,11 @@
         <h4 class="modal-title">Upload Video</h4>
       </div>
       <div class="modal-body">
-        <%=form_for Video.new, url: {controller: 'videos', action: 'create'}, method: "post" do |v|%>
-            <%#= v.text_field :title, placeholder: 'Title' %>
-            <%#= v.text_area :description, placeholder: 'Description', rows: '3'%>
+      <div id="message"></div>
+        <%=form_for Video.new, url: admin_video_create_path, method: "post", :html => { :multipart => true }, :remote => true do |v|%>
             <%= v.file_field :video , style: "padding: 10 0px; margin:10px 0px;"%>
+            <%= v.hidden_field :hole_id ,value: hole.id%>
             <%= v.submit 'Upload', id: 'fileUpload', class: "btn btn-success upload-btn"%>
-            <!-- <button type="button" class="btn btn-success upload-btn upload_video_btn" >Upload</button> -->
         <%end%>        
       </div>
       <div class="modal-footer">

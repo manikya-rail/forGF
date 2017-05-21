@@ -37,18 +37,18 @@
             </div>
 
             <div class="col-md-4">
-              <%= select_tag('resorts', option_tags = nil, options = {prompt: 'Resort', class:'dropdown-padd dropdown form-control inline ' , style: 'width:50%;'}) %>
+              <%= select_tag('resort', options_for_select(Resort.all.pluck(:name, :id)), options = {prompt: 'Resort', class:'dropdown-padd dropdown form-control inline ' , style: 'width:50%;' , name: 'course[resort_id]'}) %>
               <button type="button" class="btn btn-info btn-add inline" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
 
-              <%= render :partial => 'admin/networks/new_modal' , :locals => { f: f }%>
+              
 
             </div>
 
             <div class="col-md-4">
-              <%= select_tag('network', option_tags = nil, options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;'}) %>
+              <%= select_tag('network',options_for_select(Network.all.pluck(:name, :id)), options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;' , name: 'course[network_id]'}) %>
               <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
 
-              <%= render :partial => 'admin/resorts/new_modal', :locals => { f: f }%>
+              
             </div>
         </div>
 
@@ -139,6 +139,9 @@
 
     </div>
   <%end%>
+
+  <%= render :partial => 'admin/resorts/new_modal' %>
+  <%= render :partial => 'admin/networks/new_modal' %>
 </div>
 
 
@@ -279,25 +282,25 @@ checkFields();
     }
   });
 
-  $('#add-resorts').click(function() {
+  // $('#add-resorts').click(function() {
 
-    var clonedField = $('#resort-name-field').clone();
-    var resortNameFieldLen = $('.resort-name-field').length ;
-    clonedField.removeAttr( "id" )
-    clonedField.attr('name', 'course[resorts_attributes][' + resortNameFieldLen + '][name]' );
+  //   var clonedField = $('#resort-name-field').clone();
+  //   var resortNameFieldLen = $('.resort-name-field').length ;
+  //   clonedField.removeAttr( "id" )
+  //   clonedField.attr('name', 'course[resorts_attributes][' + resortNameFieldLen + '][name]' );
     
-    clonedField.appendTo($('#resort-name-field').parent('div'))
+  //   clonedField.appendTo($('#resort-name-field').parent('div'))
 
-  });
+  // });
 
-  $('#add-networks').click(function() {
-    var clonedField = $('#network-name-field').clone();
-    clonedField.removeAttr( "id" )
-    var networkNameFieldLen = $('.network-name-field').length ;
-    clonedField.attr('name', 'course[networks_attributes][' + networkNameFieldLen + '][name]' );
-    clonedField.appendTo($('#network-name-field').parent('div'))
+  // $('#add-networks').click(function() {
+  //   var clonedField = $('#network-name-field').clone();
+  //   clonedField.removeAttr( "id" )
+  //   var networkNameFieldLen = $('.network-name-field').length ;
+  //   clonedField.attr('name', 'course[networks_attributes][' + networkNameFieldLen + '][name]' );
+  //   clonedField.appendTo($('#network-name-field').parent('div'))
 
-  });
+  // });
 
   $('#add-score-card').click(function() {
     var clonedField = $('.score-card-wrapper').first().clone();

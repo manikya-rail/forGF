@@ -1,15 +1,75 @@
 
-<div class="container">
+<div class="container" style="margin-top: 10%;">
   <div class="panel panel-default">
     <h2>Flyover Video</h2>
     <div class="panel panel-default">
       <div class="panel-body">
-        <%= video_tag @video.video.url, controls: true, style: "max-width: 100%;" %>
-      </div>
+        <%= video_tag @video.video.url, controls: true, style: "max-width: 100%;", id: 'hole-vid' %>
+      </div> 
+   
+
     </div>
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#add-tag-modal">Add Tag</button>
+    <%if @video.tags.present?%>
+        <hr>
+        <h1> Video Tags </h1>
+        <div id="current-tags-wrapper" >
+            <%=render :partial => '/admin/tags/video_tags', :locals => { :video => @video} %>
+        </div>
+    <%end%>
+
   </div>
 
   
 </div>
 
 
+
+<div id="add-tag-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Tag</h4>
+      </div>
+      <div class="modal-body">
+      <div id="message"></div>
+        <%= form_for Tag.new, :url => admin_create_tag_path(@video), :method => :post, :remote => true do  %>
+          <%= text_field_tag :tag, nil, placeholder: 'Enter tag here...', class: "form-control margin-10" ,name: 'tag[tag]' %>
+          <%= hidden_field(:tag, :time, id:'tag-timestamp')%>
+          <%= submit_tag "Save", class: "save-tag-btn btn btn-primary margin-10" %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<script src="http://vjs.zencdn.net/5.19.2/video.js"></script>
+
+
+<script type="text/javascript">
+    
+var vid = document.getElementById("hole-vid");
+var timeStampInput = $('#tag-timestamp');
+timeStampInput.val(vid.currentTime);
+vid.ontimeupdate = function() {
+    timeStampInput.val(vid.currentTime);
+};
+
+
+$('#add-tag-modal').on('shown.bs.modal', function() {
+    vid.pause()
+})
+
+
+</script>

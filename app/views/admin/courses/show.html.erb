@@ -15,15 +15,20 @@
           <thead>
             <tr>
               <th>HOLE NUMBER</th>
-              <th>UPLOAD VIDEO</th>
+              <th>VIDEO</th>
             </tr>
           </thead>
 
           <tbody>
             <% @course.holes.each_with_index do |hole, index| %>
               <tr>
-                <td><%= "Hole " + (index + 1).to_s  %></td>
-                <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-vid-upl-modal" %> >Upload Video</button></td>
+                <td><%= "Hole " + hole.try(:hole_num).to_s  %></td>
+                <%if hole.video.present?%>
+                  <td><%=link_to hole.try(:video).try(:video_file_name), admin_video_path(hole.video)%></td>
+                <%else%>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-vid-upl-modal" %> >Upload Video</button></td>
+                <%end%>
+                
               </tr>
             <% end %>
           </tbody>
@@ -35,7 +40,7 @@
 
 
   <%@course.holes.each_with_index do |hole, index|%>
-    <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole_num: index + 1 } %>
+    <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
   <%end%>
 
   

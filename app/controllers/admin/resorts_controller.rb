@@ -26,15 +26,18 @@ class Admin::ResortsController < ApplicationController
   def create
     @resort = Resort.new(resort_params)
 
-    respond_to do |format|
-      if @resort.save
-        format.html { redirect_to @resort, notice: 'Resort was successfully created.' }
-        format.json { render :show, status: :created, location: @resort }
-      else
-        format.html { render :new }
-        format.json { render json: @resort.errors, status: :unprocessable_entity }
-      end
+    if @resort.save
+      @flash_class = "alert alert-success"
+      @message = "Resort added successfully."
+    else
+      @flash_class = "alert alert-danger"
+      @message = "Something went wrong."
     end
+
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   # PATCH/PUT /resorts/1

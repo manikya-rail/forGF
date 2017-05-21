@@ -11,6 +11,8 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.string :rating
       t.integer :length
       t.references :admin, index: true
+      t.references :resort, index: true
+      t.references :network, index: true
       t.timestamps
     end
   end

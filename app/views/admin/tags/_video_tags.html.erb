@@ -1,0 +1,19 @@
+<table class="table" id="current-tags">
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>Time</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%video.tags.each do |tag|%>
+        <tr>
+          <td><%= tag.tag%></td>
+          <td><%= tag.time%></td>
+          <td><%=link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, admin_delete_tag_path(tag), :confirm => 'Are you sure?' ,method: :delete, remote:true %></td>
+        </tr>
+      <%end%>
+  
+  </tbody>
+</table>

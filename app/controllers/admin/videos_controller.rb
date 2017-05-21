@@ -4,16 +4,20 @@ class Admin::VideosController < ApplicationController
 
   def create
     @video = Video.create(video_params)
-    # @video.user = current_user
-
+    @flash_class = "alert alert-success"
+    @success = false
     if @video.save
-      
-      redirect_to admin_video_path(@video)
-      flash[:success] = "Video uploaded successfully."
+      @success = true
+      @message = "Video uploaded successfully."
     else
-      flash[:error] = "Failed to upload video."
-      redirect :back
+      @message = "Failed to upload video."
+      @flash_class = "alert alert-danger"
     end
+
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   def show
@@ -28,7 +32,7 @@ class Admin::VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:video)
+      params.require(:video).permit(:video, :hole_id)
     end
 
 end

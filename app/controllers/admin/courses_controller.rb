@@ -18,8 +18,6 @@ class Admin::CoursesController < ApplicationController
     @course = Course.new
     @course.build_location
     @course.build_amenity
-    @course.networks.build
-    @course.resorts.build
     @course.score_cards.build
     1..18.times do |index| 
       @course.holes.build
@@ -78,12 +76,10 @@ class Admin::CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :total_par, :slope, :rating, :length,
+      params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :total_par, :slope, :rating, :length, :resort_id, :network_id,
           location_attributes: [:town,:state, :lat, :lng],
-          networks_attributes: [:name],
-          resorts_attributes: [:name],
           score_cards_attributes: [:tee_name, :color],
-          holes_attributes: [:par, :yards, :mhcp, :whcp]
+          holes_attributes: [:par, :yards, :mhcp, :whcp, :hole_num]
         )
     end
 end

@@ -4,7 +4,7 @@
 </div>
 
 <div class="col-md-3 form-group">
-  <%= location_form.select(:state, [], options = {prompt: 'State'}, {class:'dropdown-less-padd state-drop-dwn dropdown form-control check-field' }) %>
+  <%= location_form.select(:state, Location.us_states, options = {prompt: 'State'}, {class:'dropdown-less-padd state-drop-dwn dropdown form-control check-field' }) %>
 </div>
 
 <div class="col-md-3 form-group">
