@@ -1,6 +1,5 @@
 class V1::VideosController < ApplicationController
   before_action :authenticate!
-  # before_action :set_video, only: [:show]
   before_action :set_hole, only: [:show]
 
   def show
@@ -13,7 +12,7 @@ class V1::VideosController < ApplicationController
       @hole = Hole.find(params[:id])
     end
 
-    def user_params
+    def video_params
       params.permit(:id)
     end
 end
