@@ -1,4 +1,8 @@
 class Course < ApplicationRecord
+
+     include PgSearch
+     pg_search_scope :search_by_name, :against => [:name]
+     
      has_one :amenity
      has_many :holes
      has_one :location

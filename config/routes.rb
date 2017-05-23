@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 namespace :admin do
+  post "search", to: "search#search", as: 'search'
   resources :holes
   resources :score_cards
   resources :amenities
@@ -13,6 +14,7 @@ namespace :admin do
   get "videos/:id" , to: 'videos#show' ,as: 'video'
   post "tags/:video_id/save" ,to: 'tags#create', as: 'create_tag'
   delete "tags/:id" ,to: 'tags#destroy', as: 'delete_tag'
+
 end
 
   devise_for :admins

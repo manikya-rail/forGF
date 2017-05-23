@@ -1,0 +1,19 @@
+<%res.each do |r|%>
+    <%if klass == "course" %>
+        <tr>
+            <td><%= link_to r.name, admin_course_path(r) %></td>
+            <td><%= r.try(:formated_location) %></td>
+            <td><%= r.resort.try(:name) %></td>
+            <td><%= r.network.try(:name) %></td>
+        </tr>
+    <%elsif klass == "user"%>
+        <tr>
+            <td><%= r.name %></td>
+            <td><%= r.created_at %></td>
+            <td><%= r.email %></td>
+            <td>
+              <span><%= link_to 'Edit Account Details', "#"%></span>
+            </td>
+        </tr>
+    <%end%>
+<%end%>

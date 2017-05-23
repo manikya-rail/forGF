@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+
+  include PgSearch
+  pg_search_scope :search_by_name, :against => [:first_name, :last_name]
+    
   acts_as_token_authenticatable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
