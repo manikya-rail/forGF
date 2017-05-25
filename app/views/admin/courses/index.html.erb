@@ -12,14 +12,16 @@
       <div class="panel-body">
         <div id="course-search-form">
           <div class="col-md-3" style="padding:0px;">
-            <%= form_tag(nil, url: {controller: 'courses', action: 'search'}, method: "post" ) do |f|%>
-              <%= text_field_tag :course, "", class: "form-control", placeholder: "Search Courses" %>
+            <%= form_for('', :url => url_for(:controller => 'search', :action => 'search') , method: "post", remote: true ) do |f|%>
+              <%= text_field_tag :course, "", class: "form-control", placeholder: "Search Courses",name: 'search[q]' %>
+              <%= hidden_field_tag :klass, "course", class: "form-control",name: 'search[klass]' %>
+              <%= hidden_field_tag :id, "courses-tbl", class: "form-control",name: 'search[id]' %>
             <%end%>
           </div>
           <div class="col-md-9">
           </div>
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped" id="courses-tbl">
           <thead>
             <tr>
               <th>COURSE NAME</th>

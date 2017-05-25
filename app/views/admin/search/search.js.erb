@@ -1,0 +1,2 @@
+var id = "<%= '#' + @id + ' tbody'%>"
+$(id).html("<%= escape_javascript(render :partial => '/admin/search/result', :locals => { :res => @res, :klass => @klass} ) %>");
