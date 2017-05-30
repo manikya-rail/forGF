@@ -1,6 +1,6 @@
 <div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
   <%= form_for(@course, url: {controller: 'courses', action: 'create'}, method: "post" ) do |f|%>
-    
+
     <div class="col-md-12">
         <div class="col-md-12 course-info-row">
             <div class="col-md-4 form-group">
@@ -12,35 +12,35 @@
                 <%= f.fields_for :location do |location_form| %>
                   <%= render 'admin/locations/form.html.erb', location_form: location_form %>
                 <% end %>
-                
+
             </div>
 
         </div>
-        
+
         <div class="col-md-12 course-info-row">
             <%= label_tag :course_type ,'Course Type',class:"col-md-12 zero-left-right-padd",style:"margin-left:15px;"%>
             <div class="col-md-4">
-              
+
               <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'public',false ,class: 'checkbox check-field inline'%> 
+                <%= check_box_tag 'course[course_type]' ,'public',false ,class: 'checkbox check-field inline', id: 'course_type_public' %>
                 <span class="inline">Public</span>
               </div>
               <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'private',false ,class: 'checkbox check-field inline'%> 
+                <%= check_box_tag 'course[course_type]' ,'private',false ,class: 'checkbox check-field inline', id: 'course_type_private' %>
                 <span class="inline">Private</span>
               </div>
               <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'semi-private',false ,class: 'checkbox check-field inline'%>
+                <%= check_box_tag 'course[course_type]' ,'semi-private',false ,class: 'checkbox check-field inline', id: 'course_type_semi_private' %>
                 <span class="inline">Semi-Private</span>
               </div>
-            
+
             </div>
 
             <div class="col-md-4">
               <%= select_tag('resort', options_for_select(Resort.all.pluck(:name, :id)), options = {prompt: 'Resort', class:'dropdown-padd dropdown form-control inline ' , style: 'width:50%;' , name: 'course[resort_id]'}) %>
               <button type="button" class="btn btn-info btn-add inline" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
 
-              
+
 
             </div>
 
@@ -48,7 +48,7 @@
               <%= select_tag('network',options_for_select(Network.all.pluck(:name, :id)), options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;' , name: 'course[network_id]'}) %>
               <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
 
-              
+
             </div>
         </div>
 
@@ -56,7 +56,7 @@
             <div class="col-md-4 form-group">
               <%= label_tag :bio ,'Bio',class:"col-md-12 zero-left-right-padd"%>
               <%= f.text_area :bio, rows: "4", class: 'col-md-12 form-control check-field'%>
-            
+
             </div>
 
             <div class="col-md-4 form-group">
@@ -74,25 +74,25 @@
 
             </div>
 
-            
-            
+
+
         </div>
 
         <div class="col-md-12 course-info-row">
-            <div class="col-md-2">
-              <%= label_tag :logo ,'Logo',class:"col-md-12 zero-left-right-padd "%>
-              <button type="button" class="btn btn-success upload-btn">Upload</button>
+            <div class="col-md-4">
+              <%= label_tag :logo ,'Logo',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.file_field :logo, class: 'btn btn-success upload-btn check-field' %>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-4">
               <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
-              <button type="button" class="btn btn-success upload-btn">Upload</button>
+              <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field' %>
             </div>
 
             <div class="col-md-8"></div>
-            
+
         </div>
-        
+
         <div class="col-md-12 course-info-row">
             <div class="col-md-2 form-group">
               <%= label_tag :total_par ,'Total Par',class:"col-md-12 zero-left-right-padd"%>
@@ -118,7 +118,7 @@
         <div class="col-md-12 course-info-row score-cards-wrapper">
             <%= label_tag :score_card ,'Score Card',class:"col-md-12 zero-left-right-padd"%>
             <div class="col-md-8 score-card-wrapper dynamic-fields">
-              
+
               <%= f.fields_for :score_cards do |score_card_form| %>
                 <%= render 'admin/score_cards/form', s: score_card_form %>
               <% end %>
@@ -127,13 +127,13 @@
             </div>
 
             <div class="col-md-4">
-              
+
             </div>
-            
+
         </div>
 
         <div class="col-md-12 course-info-row">
-          <%=render :partial => 'hole' , locals: {f: f } %>  
+          <%=render :partial => 'hole' , locals: {f: f } %>
         </div>
 
 
@@ -167,7 +167,7 @@ function disableCheck(checkID){
 }
 
 function checkLocation() {
-  if( 
+  if(
       containText('course_location_attributes_town') &&
       containText('course_location_attributes_lat') &&
       containText('course_location_attributes_lng') &&
@@ -182,21 +182,20 @@ function checkLocation() {
 }
 
 function checkCourseType() {
-  if( 
-      containText('course_location_attributes_town') &&
-      containText('course_location_attributes_lat') &&
-      containText('course_location_attributes_lng')
-    ){
-    enableCheck('location-check')
+  var course_type_checkbox = $('input[id="course_type_private"]:checked').length +
+    $('input[id="course_type_public"]:checked').length +
+    $('input[id="course_type_semi_private"]:checked').length
+
+  if ( course_type_checkbox > 0 ) {
+    enableCheck('course-type-check')
   }
-  else{
-    disableCheck('location-check')
+  else {
+    disableCheck('course-type-check')
   }
-    
 }
 
 function checkContactInfo() {
-   if( 
+   if(
       containText('course_website') &&
       containText('course_phone_num')
     ){
@@ -204,15 +203,42 @@ function checkContactInfo() {
   }
   else{
     disableCheck('contact_info-check')
-  } 
+  }
 }
 
 function checkAmenities() {
-    
+  var amenities_checkboxes = $('input[name="course[amenity_attributes][restaurants]"]:checked').length +
+    $('input[name="course[amenity_attributes][caddies]"]:checked').length +
+    $('input[name="course[amenity_attributes][carts]"]:checked').length
+
+  if ( amenities_checkboxes >= 1 ) {
+    enableCheck('amenities-check')
+  }
+  else {
+    disableCheck('amenities-check')
+  }
+}
+
+function checkLogo() {
+  if ($('#course_logo').val()) {
+    enableCheck('logo-check')
+  }
+  else {
+    disableCheck('logo-check')
+  }
+}
+
+function checkCover() {
+  if ($('#course_cover').val()) {
+    enableCheck('cover-check')
+  }
+  else {
+    disableCheck('cover-check')
+  }
 }
 
 function checkScoreCard() {
-  if( 
+  if(
       containText('tee-name-field') &&
       $('#course_score_cards_attributes_0_color').val() != ""
     ){
@@ -220,22 +246,23 @@ function checkScoreCard() {
   }
   else{
     disableCheck('score_card-check')
-  }    
+  }
 }
 
 
 function checkFields(){
   $('.glyphicon-ok').hide();
 
-  var idsHash =  { 
+  var idsHash =  {
         'course_length': 'length-check',
         'course_rating': 'rating-check',
         'course_total_par': 'par-check',
         'course_slope': 'slope-check',
         'course_bio': 'bio-check',
         'course_name': 'name-check',
-        // : 'cover_photo-check',
-        // : 'logo-check',
+        'course_amenities': 'amenities-check',
+        'course_logo' : 'logo-check',
+        'course_cover' : 'cover-check',
         // : 'overview-checkbox',
       }
 
@@ -253,7 +280,7 @@ function checkFields(){
           enableCheck('location-check');
         }
         else if(checkCourseType()){
-          enableCheck('course_type-check')
+          enableCheck('course-type-check')
         }
         else if(checkContactInfo()){
           enableCheck('contact_info-check')
@@ -261,16 +288,21 @@ function checkFields(){
         else if(checkAmenities()){
           enableCheck('amenities-check')
         }
+        else if(checkLogo()){
+          enableCheck('logo-check')
+        }
+        else if(checkCover()){
+          enableCheck('cover-check')
+        }
         else if(checkScoreCard()){
           enableCheck('score_card-check')
         }
-
       }
   })
 }
 
-checkFields();  
-  
+checkFields();
+
   $("input:checkbox").on('click', function() {
     var $box = $(this);
     if ($box.is(":checked")) {
@@ -288,7 +320,7 @@ checkFields();
   //   var resortNameFieldLen = $('.resort-name-field').length ;
   //   clonedField.removeAttr( "id" )
   //   clonedField.attr('name', 'course[resorts_attributes][' + resortNameFieldLen + '][name]' );
-    
+
   //   clonedField.appendTo($('#resort-name-field').parent('div'))
 
   // });
@@ -317,10 +349,10 @@ checkFields();
 
   });
 
-  
+
   $( "#create-course-btn" ).click(function() {
     $( "#new_course" ).submit();
   });
 
-  
+
 </script>
