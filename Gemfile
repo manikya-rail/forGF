@@ -43,16 +43,17 @@ gem 'simple_form'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
-gem "paperclip", "~> 5.0.0"
+gem 'paperclip', '~> 4.3.1'
+gem 'aws-sdk', '< 2.0'
 gem 'paperclip-av-transcoder'
 gem "paperclip-ffmpeg", "~> 1.2.0"
-gem 'aws-sdk', '< 2.0'
 
 gem 'remotipart', '~> 1.2'
 gem 'carmen-rails', '~> 1.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'dotenv-rails'
   gem 'byebug', platform: :mri
 end
 
