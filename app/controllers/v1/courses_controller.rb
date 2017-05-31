@@ -8,9 +8,9 @@ class V1::CoursesController < ApplicationController
     @courses = Course.all
     if params[:state].present?
       state = params[:state]
-      @courses = @courses.joins(:location).where(locations: {state: state.downcase})
+      @courses = @courses.joins(:location).where(locations: {state: state})
     end
-    
+
     render :index, status: :ok
   end
 
@@ -77,7 +77,7 @@ class V1::CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :total_par, :slope, :rating, :length,
+      params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :total_par, :slope, :rating, :length, :logo, :cover,
           location_attributes: [:town,:state, :lat, :lng],
           networks_attributes: [:name],
           resorts_attributes: [:name],

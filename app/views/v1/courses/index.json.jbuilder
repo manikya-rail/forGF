@@ -1,6 +1,6 @@
 json.data do
     json.courses @courses do |course|
-        json.id course.id 
+        json.id course.id
         json.name course.name
         json.course_type course.course_type
         json.bio course.bio
@@ -10,10 +10,12 @@ json.data do
         json.slope course.slope
         json.rating course.rating
         json.length course.length
+        json.logo course.logo.url
+        json.cover course.cover.url
         json.created_at course.created_at
         json.updated_at course.updated_at
         json.location course.location , :town, :state, :lat, :lng, :created_at, :updated_at
-        json.amenities course.try(:amenity) , :restaurants, :caddies, :carts, :created_at, :updated_at if course.try(:amenity) 
+        json.amenities course.try(:amenity) , :restaurants, :caddies, :carts, :created_at, :updated_at if course.try(:amenity)
         json.holes course.holes do |hole|
             json.id hole.id
             json.number hole.hole_num
