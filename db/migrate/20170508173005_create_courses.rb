@@ -7,8 +7,8 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.string :website
       t.string :phone_num
       t.integer :total_par
-      t.string :slope
-      t.string :rating
+      t.float :slope
+      t.float :rating
       t.integer :length
       t.references :admin, index: true
       t.references :resort, index: true
