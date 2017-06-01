@@ -22,7 +22,12 @@ class Course < ApplicationRecord
      has_attached_file :logo, styles: {
       thumb: '100x100>',
       square: '200x200#',
-      medium: '300x300>'
+      medium: '300x300>',
+      bucket: 'fore',
+      :s3_credentials => {
+        :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+        :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+      }
     }
 
     # Validate the attached image is image/jpg, image/png, etc
@@ -31,7 +36,12 @@ class Course < ApplicationRecord
     has_attached_file :cover, styles: {
      thumb: '100x100>',
      square: '200x200#',
-     medium: '300x300>'
+     medium: '300x300>',
+     bucket: 'fore',
+     :s3_credentials => {
+       :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+     }
    }
 
    # Validate the attached image is image/jpg, image/png, etc
