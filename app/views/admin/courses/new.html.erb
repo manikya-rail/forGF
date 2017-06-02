@@ -212,9 +212,9 @@ function checkContactInfo() {
 }
 
 function checkAmenities() {
-  var amenities_checkboxes = $('input[name="course[amenity_attributes][0][restaurants]"]:checked').length +
-    $('input[name="course[amenity_attributes][0][caddies]"]:checked').length +
-    $('input[name="course[amenity_attributes][0][carts]"]:checked').length
+  var amenities_checkboxes = $('input[name="course[amenities_attributes][0][restaurants]"]:checked').length +
+    $('input[name="course[amenities_attributes][0][caddies]"]:checked').length +
+    $('input[name="course[amenities_attributes][0][carts]"]:checked').length
 
   if ( amenities_checkboxes >= 1 ) {
     enableCheck('amenities-check')
