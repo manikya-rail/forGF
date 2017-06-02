@@ -15,7 +15,13 @@ json.data do
         json.created_at course.created_at
         json.updated_at course.updated_at
         json.location course.location , :town, :state, :lat, :lng, :created_at, :updated_at
-        json.amenities course.try(:amenity) , :restaurants, :caddies, :carts, :created_at, :updated_at if course.try(:amenity)
+        json.amenities course.amenities do |amenity|
+            json.restaurants amenity.restaurants
+            json.caddies amenity.caddies
+            json.carts amenity.carts
+            json.created_at amenity.created_at
+            json.updated_at amenity.updated_at
+        end
         json.holes course.holes do |hole|
             json.id hole.id
             json.number hole.hole_num

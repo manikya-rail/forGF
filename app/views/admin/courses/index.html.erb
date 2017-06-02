@@ -28,6 +28,7 @@
               <th>LOCATION</th>
               <th>RESORT</th>
               <th>NETWORK</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -38,16 +39,15 @@
                 <td><%= course.try(:formated_location) %></td>
                 <td><%= course.resort.try(:name) %></td>
                 <td><%= course.network.try(:name) %></td>
+                <td><%= link_to 'Edit', edit_admin_course_path(course) %></td>
               </tr>
             <% end %>
           </tbody>
-        </table>      
+        </table>
 
       </div>
     </div>
   </div>
 
-  
+
 </div>
-
-
