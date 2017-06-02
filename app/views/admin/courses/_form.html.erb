@@ -22,15 +22,15 @@
             <div class="col-md-4">
 
               <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'public',false ,class: 'checkbox check-field inline', id: 'course_type_public' %>
+                <%= check_box_tag 'course[course_type]' ,'is_public',false ,class: 'checkbox check-field inline', id: 'course_type_public' %>
                 <span class="inline">Public</span>
               </div>
               <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'private',false ,class: 'checkbox check-field inline', id: 'course_type_private' %>
+                <%= check_box_tag 'course[course_type]' ,'is_private',false ,class: 'checkbox check-field inline', id: 'course_type_private' %>
                 <span class="inline">Private</span>
               </div>
               <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'semi-private',false ,class: 'checkbox check-field inline', id: 'course_type_semi_private' %>
+                <%= check_box_tag 'course[course_type]' ,'is_semi_private',false ,class: 'checkbox check-field inline', id: 'course_type_semi_private' %>
                 <span class="inline">Semi-Private</span>
               </div>
 
@@ -67,7 +67,7 @@
 
             <div class="col-md-4">
               <div class="col-md-12">
-                <%= f.fields_for :amenity do |amenity_form| %>
+                <%= f.fields_for :amenities do |amenity_form| %>
                   <%= render 'admin/amenities/form', a: amenity_form %>
                 <% end %>
               </div>

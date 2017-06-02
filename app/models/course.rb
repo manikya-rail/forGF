@@ -3,7 +3,7 @@ class Course < ApplicationRecord
      include PgSearch
      pg_search_scope :search_by_name, :against => [:name]
 
-     has_one :amenity
+     has_many :amenities
      has_many :holes
      has_one :location
 
@@ -16,7 +16,7 @@ class Course < ApplicationRecord
      accepts_nested_attributes_for :location, :allow_destroy => true
      accepts_nested_attributes_for :score_cards, :allow_destroy => true
      accepts_nested_attributes_for :holes, :allow_destroy => true
-     accepts_nested_attributes_for :amenity, :allow_destroy => true
+     accepts_nested_attributes_for :amenities, :allow_destroy => true
      validates_presence_of :name,:bio, :website, :phone_num, :total_par, :slope, :rating, :length
 
      has_attached_file :logo, styles: {
@@ -37,6 +37,7 @@ class Course < ApplicationRecord
    # Validate the attached image is image/jpg, image/png, etc
    validates_attachment_content_type :cover, :content_type => /\Aimage\/.*\Z/
 
+   enum course_type: [ :is_public, :is_private, :is_semi_private ]
 
      def formated_location
           formated_location_result = ""
@@ -59,5 +60,4 @@ class Course < ApplicationRecord
      def networks_names
           self.networks.pluck(:name).join(',')
      end
-
 end
