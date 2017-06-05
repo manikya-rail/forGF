@@ -4,9 +4,17 @@ class V1::UsersController < ApplicationController
 
   def index
   end
-  
+
   def show
     render :show, status: :ok
+  end
+
+  def update
+    if @user.update(user_params)
+        return head :ok
+    else
+        render json: {errors: user.errors.full_messages}, status: :failed
+    end
   end
 
   private
@@ -15,7 +23,7 @@ class V1::UsersController < ApplicationController
     end
 
     def user_params
-      params.permit(:email, :first_name, :last_name, 
+      params.permit(:email, :first_name, :last_name,
         :password, :password_confirmation)
     end
 end

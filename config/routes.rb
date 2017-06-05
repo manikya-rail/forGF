@@ -21,12 +21,12 @@ end
   devise_for :users
   # put '/users', :to => 'devise/registrations#update', :as => :update_user
   namespace :v1, defaults: {format: :json} do
-    delete '/sessions', :to => 'sessions#destroy'  
+    delete '/sessions', :to => 'sessions#destroy'
     resources :sessions, only: [:create]
     resources :registrations, only: [:create]
     resources :pages, only: [:index]
     resources :courses, only:[:index,:show]
-    resources :users, only:[:show]
+    resources :users, only:[:show, :update]
     resources :videos, only:[:show]
   end
 
