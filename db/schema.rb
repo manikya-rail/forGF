@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530195756) do
+ActiveRecord::Schema.define(version: 20170605230343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,9 @@ ActiveRecord::Schema.define(version: 20170530195756) do
     t.string   "cover_content_type"
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
+    t.integer  "list_id"
     t.index ["admin_id"], name: "index_courses_on_admin_id", using: :btree
+    t.index ["list_id"], name: "index_courses_on_list_id", using: :btree
     t.index ["network_id"], name: "index_courses_on_network_id", using: :btree
     t.index ["resort_id"], name: "index_courses_on_resort_id", using: :btree
   end
@@ -82,6 +84,16 @@ ActiveRecord::Schema.define(version: 20170530195756) do
     t.datetime "updated_at", null: false
     t.integer  "hole_num"
     t.index ["course_id"], name: "index_holes_on_course_id", using: :btree
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "courses_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["courses_id"], name: "index_lists_on_courses_id", using: :btree
+    t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
   end
 
   create_table "locations", force: :cascade do |t|
@@ -144,6 +156,14 @@ ActiveRecord::Schema.define(version: 20170530195756) do
     t.string   "authentication_token",   limit: 30
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "gender"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.string   "location"
+    t.string   "home_courses"
+    t.string   "handicap_value"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -157,4 +177,5 @@ ActiveRecord::Schema.define(version: 20170530195756) do
     t.integer  "hole_id"
   end
 
+  add_foreign_key "courses", "lists"
 end
