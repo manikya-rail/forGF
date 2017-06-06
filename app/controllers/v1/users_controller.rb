@@ -6,7 +6,11 @@ class V1::UsersController < ApplicationController
   end
 
   def show
-    render :show, status: :ok
+    if @user
+      render :show, status: :ok
+    else
+      render json: {errors: "User not found"}, status: :failed
+    end
   end
 
   def update
@@ -23,7 +27,6 @@ class V1::UsersController < ApplicationController
     end
 
     def user_params
-      params.permit(:email, :first_name, :last_name,
-        :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :location, :picture, :gender, :home_courses, :handicap_value)
     end
 end
