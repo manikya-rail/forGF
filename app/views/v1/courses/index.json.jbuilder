@@ -30,6 +30,7 @@ json.data do
             json.mhcp hole.mhcp
             json.whcp hole.whcp
             json.video_url hole.video.try(:video).try(:url)
+            json.image_url hole.image.url
             json.created_at hole.created_at
             json.updated_at hole.updated_at
         end
