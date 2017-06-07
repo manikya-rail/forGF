@@ -61,6 +61,16 @@ class Admin::HolesController < ApplicationController
     end
   end
 
+  def add_image
+    @hole = Hole.find(params[:hole][:hole_id])
+
+    if @hole.update(hole_params)
+      redirect_to admin_course_path(@hole.course), notice: 'Image was successfully uploaded.'
+    else
+      redirect_to admin_course_path(@hole.course), notice: 'Image not uploaded.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hole
@@ -69,6 +79,6 @@ class Admin::HolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hole_params
-      params.require(:hole).permit(:par, :yards, :mhcp, :whcp)
+      params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :image)
     end
 end
