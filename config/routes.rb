@@ -14,7 +14,7 @@ namespace :admin do
   get "videos/:id" , to: 'videos#show' ,as: 'video'
   post "tags/:video_id/save" ,to: 'tags#create', as: 'create_tag'
   delete "tags/:id" ,to: 'tags#destroy', as: 'delete_tag'
-
+  post "holes/add_image" ,to: 'holes#add_image', as: 'add_image'
 end
 
   devise_for :admins

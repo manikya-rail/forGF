@@ -10,12 +10,13 @@
     <h2><%=@course.name%> Hole List</h2>
     <div class="panel panel-default">
       <div class="panel-body">
-        
+
         <table class="table table-striped">
           <thead>
             <tr>
               <th>HOLE NUMBER</th>
               <th>VIDEO</th>
+              <th>IMAGE</th>
             </tr>
           </thead>
 
@@ -28,11 +29,15 @@
                 <%else%>
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-vid-upl-modal" %> >Upload Video</button></td>
                 <%end%>
-                
+                <% if hole.image.present? %>
+                  <td><%= link_to hole.image_file_name, hole.image.url %></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-image-upl-modal" %> >Upload Image</button></td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
-        </table>      
+        </table>
 
       </div>
     </div>
@@ -41,9 +46,8 @@
 
   <%@course.holes.each_with_index do |hole, index|%>
     <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
+    <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
   <%end%>
 
-  
+
 </div>
-
-
