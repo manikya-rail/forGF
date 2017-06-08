@@ -21,6 +21,7 @@ class Admin::VideosController < ApplicationController
   end
 
   def show
+    gon.video = @video
   end
 
 

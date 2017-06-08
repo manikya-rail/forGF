@@ -1,0 +1,282 @@
+<div class="container" style="margin-top: 10%;">
+  <div class="panel panel-default">
+    <h2>Flyover Video</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <video id="hole-vid" class="video-js vjs-default-skin" controls width="700px" height="400px"></video>
+        <button class="previous">Previous</button>
+        <button class="next">Next</button>
+        <button class="jump">Play Third</button>
+        <%# TODO: <%= video_tag @video.video.url, controls: true, style: "max-width: 100%;", id: 'hole-vid' %>
+      </div>
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#add-tag-modal">Add Tag</button>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#embedded-modal">Embedded iFrame</button>
+
+    <%if @video.tags.present?%>
+        <hr>
+        <h1> Video Tags </h1>
+        <div id="current-tags-wrapper" >
+            <%=render :partial => '/admin/tags/video_tags', :locals => { :video => @video} %>
+        </div>
+    <%end%>
+
+  </div>
+
+
+</div>
+
+
+
+<div id="add-tag-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Tag</h4>
+      </div>
+      <div class="modal-body">
+      <div id="message"></div>
+        <%= form_for Tag.new, :url => admin_create_tag_path(@video), :method => :post, :remote => true do  %>
+          <%= text_field_tag :tag, nil, placeholder: 'Enter tag here...', class: "form-control margin-10" ,name: 'tag[tag]' %>
+          <%= hidden_field(:tag, :time, id:'tag-timestamp')%>
+          <%= submit_tag "Save", class: "save-tag-btn btn btn-primary margin-10" %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="embedded-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Embedded iFrame</h4>
+      </div>
+      <div class="modal-body">
+        <% @str = embed_iframe(@video.video.url) %>
+        <p><%= @str %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/5.19/video.min.js"></script>
+<script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
+
+<script type="text/javascript">
+
+var vid = document.getElementById("hole-vid");
+var timeStampInput = $('#tag-timestamp');
+timeStampInput.val(vid.currentTime);
+vid.ontimeupdate = function() {
+    timeStampInput.val(vid.currentTime);
+};
+
+
+$('#add-tag-modal').on('shown.bs.modal', function() {
+    vid.pause()
+})
+
+/* VIDEO JS CONFIG - START */
+var videoList = [{
+  sources: [{
+    src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'https://www.rt.com/static/img/og-logo-rt.png'
+}, {
+  sources: [{
+    src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+}, {
+  sources: [{
+    src: 'https://vjs.zencdn.net/v/oceans.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'https://vjs.zencdn.net/v/oceans.png'
+}, {
+  sources: [{
+    src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+}, {
+  sources: [{
+    src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'http://media.w3.org/2010/05/video/poster.png'
+}];
+var player = videojs(document.querySelector('video'), {
+  inactivityTimeout: 0
+});
+try {
+  // try on ios
+  player.volume(1);
+  // player.play();
+} catch (e) {}
+//player.playlist(videoList, 4);/// play video 5
+player.playlist(videoList);
+document.querySelector('.previous').addEventListener('click', function() {
+  player.playlist.previous();
+});
+document.querySelector('.next').addEventListener('click', function() {
+  player.playlist.next();
+});
+document.querySelector('.jump').addEventListener('click', function() {
+  player.playlist.currentItem(2); // play third
+});
+
+player.playlist.autoadvance(0); // play all
+
+Array.prototype.forEach.call(document.querySelectorAll('[name=autoadvance]'), function(el) {
+  el.addEventListener('click', function() {
+    var value = document.querySelector('[name=autoadvance]:checked').value;
+    //alert(value);
+    player.playlist.autoadvance(JSON.parse(value));
+  });
+});
+
+/* ADD PREVIOUS */
+var Button = videojs.getComponent('Button');
+
+// Extend default
+var PrevButton = videojs.extend(Button, {
+  //constructor: function(player, options) {
+  constructor: function() {
+    Button.apply(this, arguments);
+    //this.addClass('vjs-chapters-button');
+    this.addClass('icon-angle-left');
+    this.controlText("Previous");
+  },
+
+  // constructor: function() {
+  //   Button.apply(this, arguments);
+  //   this.addClass('vjs-play-control vjs-control vjs-button vjs-paused');
+  // },
+
+  // createEl: function() {
+  //   return Button.prototype.createEl('button', {
+  //     //className: 'vjs-next-button vjs-control vjs-button',
+  //     //innerHTML: 'Next >'
+  //   });
+  // },
+
+  handleClick: function() {
+    console.log('click');
+    player.playlist.previous();
+  }
+});
+
+/* ADD BUTTON */
+//var Button = videojs.getComponent('Button');
+
+// Extend default
+var NextButton = videojs.extend(Button, {
+  //constructor: function(player, options) {
+  constructor: function() {
+    Button.apply(this, arguments);
+    //this.addClass('vjs-chapters-button');
+    this.addClass('icon-angle-right');
+    this.controlText("Next");
+  },
+
+  handleClick: function() {
+    console.log('click');
+    player.playlist.next();
+  }
+});
+
+// Register the new component
+videojs.registerComponent('NextButton', NextButton);
+videojs.registerComponent('PrevButton', PrevButton);
+//player.getChild('controlBar').addChild('SharingButton', {});
+player.getChild('controlBar').addChild('PrevButton', {}, 0);
+player.getChild('controlBar').addChild('NextButton', {}, 2);
+//player.controlBar.addChild('SharingButton', {}, 6);
+
+//var MyButton = player.controlBar.addChild(new MyButtonComponent(), {}, 6);
+
+//const ControlBar = videojs.getComponent('ControlBar');
+//ControlBar.prototype.options_.children.splice(ControlBar.prototype.options_.children.length - 1, 0, 'SharingButton');
+
+// Register the new component
+//videojs.registerComponent('SharingButton', SharingButton);
+//player.getChild('controlBar').addChild('SharingButton', {});
+/* VIDEO JS CONFIG - END */
+</script>
+
+<style type="text/css">
+  .video-holder,
+  .video-holder * {
+    box-sizing: border-box !important
+  }
+
+  .video-holder {
+    background: #1b1b1b;
+    padding: 10px
+  }
+
+  .centered {
+    width: 100%
+  }
+
+  #video {
+    border-radius: 8px
+  }
+
+  .video-holder .vjs-big-play-button {
+    left: 50%;
+    width: 100px;
+    margin-left: -50px;
+    height: 80px;
+    top: 50%;
+    margin-top: -40px
+  }
+
+
+  /* CUSTOM BUTTONS */
+  [class^="icon-"]:before,
+  [class*=" icon-"]:before {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+  }
+  .icon-angle-left:before {
+      content: "\f104";
+  }
+  .icon-angle-right:before {
+      content: "\f105";
+  }
+
+  .video-js .icon-angle-right, .video-js .icon-angle-left {
+      cursor: pointer;
+      -webkit-box-flex: none;
+      -moz-box-flex: none;
+      -webkit-flex: none;
+      -ms-flex: none;
+      flex: none;
+  }
+</style>

@@ -3,7 +3,7 @@ class V1::VideosController < ApplicationController
   before_action :set_hole, only: [:show]
 
   def show
-    @video = @hole.video
+    @video = @hole.video    
   end
 
   private
