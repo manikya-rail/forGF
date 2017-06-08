@@ -11,6 +11,14 @@ class Admin::CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    gon.videos = []
+    gon.videos_urls = []
+    gon.tags = []
+    @course.holes.each do |hole|
+      gon.videos << hole.video if hole.video.present?
+      gon.videos_urls << hole.video.video if hole.video.present?
+      gon.tags << hole.video.tags if hole.video.present?
+    end
   end
 
   # GET /courses/new
