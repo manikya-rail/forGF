@@ -33,4 +33,8 @@ end
   end
 
   root to: "admin/courses#new"
+
+  namespace :embed do
+    resources :pages, only: :show, path: "" # -> domain.com/embed/1
+  end
 end
