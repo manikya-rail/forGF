@@ -12,6 +12,7 @@ class Course < ApplicationRecord
 
      has_many :score_cards
      belongs_to :admin
+     has_many :reviews
 
      accepts_nested_attributes_for :location, :allow_destroy => true
      accepts_nested_attributes_for :score_cards, :allow_destroy => true

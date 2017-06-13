@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+-- Development running guide
 
-Things you may want to cover:
+* git clone https://github.com/Dvlp3r/Fore-WEBAPP.git -b admin_portal
+* bundle install
+* rails db:create db:migrate
+* mv config/database.yml.example config/database.yml
+* rails db:create db:migrate
+* rails s
 
-* Ruby version
+-- Deployment guide
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* ssh -i path_to_fore_pem/fore.pem fore@34.209.118.108
+* password when requested is: fore
+* cd /var/www/fore/code
+* git pull
+* sudo /etc/init.d/apache2 restart

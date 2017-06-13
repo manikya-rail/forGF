@@ -29,8 +29,13 @@ end
     resources :users, only:[:show, :update]
     resources :videos, only:[:show]
     resources :lists, only: [:create, :show]
+    resources :reviews, only: [:show]
     post "lists/:id/add_course", to: 'lists#add_course', as: 'add_course'
   end
 
   root to: "admin/courses#new"
+
+  namespace :embed do
+    resources :pages, only: :show, path: "" # -> domain.com/embed/1
+  end
 end
