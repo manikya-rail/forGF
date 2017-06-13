@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607001448) do
+ActiveRecord::Schema.define(version: 20170612213304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,21 @@ ActiveRecord::Schema.define(version: 20170607001448) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.float    "overall_rating",          default: 3.0
+    t.float    "value_rating",            default: 3.0
+    t.float    "course_upkeep_rating",    default: 3.0
+    t.float    "customer_service_rating", default: 3.0
+    t.float    "clubhouse_vibe_rating",   default: 3.0
+    t.string   "text"
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.index ["course_id"], name: "index_reviews_on_course_id", using: :btree
+    t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
 
   create_table "score_cards", force: :cascade do |t|

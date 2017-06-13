@@ -10,6 +10,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :lists
+  has_many :reviews
 
   enum gender: [:female, :male]
 
