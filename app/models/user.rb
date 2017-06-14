@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   has_many :lists
   has_many :reviews
+  has_many :scores
 
   enum gender: [:female, :male]
 
