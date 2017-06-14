@@ -1,6 +1,6 @@
 class V1::UsersController < ApplicationController
   before_action :authenticate!
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :lists]
 
   def index
   end
@@ -19,6 +19,10 @@ class V1::UsersController < ApplicationController
     else
         render json: {errors: user.errors.full_messages}, status: :failed
     end
+  end
+
+  def lists
+    render :lists, status: :ok
   end
 
   private
