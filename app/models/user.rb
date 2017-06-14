@@ -11,6 +11,9 @@ class User < ApplicationRecord
 
   has_many :lists
   has_many :reviews
+  has_many :scores
+  has_many :course_users
+  has_many :courses, through: :course_users
 
   enum gender: [:female, :male]
 

@@ -2,6 +2,7 @@ class Hole < ApplicationRecord
     belongs_to :course
     validates :par,:yards, :mhcp, :whcp, presence: true
     has_one :video
+    has_one :score
 
 
     has_attached_file :image, styles: {
