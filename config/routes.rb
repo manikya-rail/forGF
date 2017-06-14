@@ -32,6 +32,7 @@ end
     resources :reviews, only: [:show]
     resources :scores, only: [:create, :show]
     post "lists/:id/add_course", to: 'lists#add_course', as: 'add_course'
+    post "courses/:id/add_user", to: 'courses#add_user', as: 'add_user'
   end
 
   root to: "admin/courses#new"

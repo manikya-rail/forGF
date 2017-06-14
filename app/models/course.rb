@@ -13,6 +13,8 @@ class Course < ApplicationRecord
      has_many :score_cards
      belongs_to :admin
      has_many :reviews
+     has_many :course_users
+     has_many :users, through: :course_users
 
      accepts_nested_attributes_for :location, :allow_destroy => true
      accepts_nested_attributes_for :score_cards, :allow_destroy => true
