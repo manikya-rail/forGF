@@ -1,0 +1,31 @@
+<%if current_admin%>
+  <nav class="navbar col-md-12 navbar-default" style=" border: none; border-radius: 0px; background-color: white;">
+    <div class="container-fluid">
+      <div class="navbar-header col-md-2">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- <a class="navbar-brand" href="#" style="margin-top: 20px;">Fore</a> -->
+      </div>
+      <div id="navbar" class="navbar-collapse collapse col-md-10" ">
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Create Course', '/' %></li>
+          <li><%= link_to 'Ad Manage', admin_courses_path(ad_manage: :true) %></li>
+          <li><%= link_to 'Analytics', '#' %></li>
+          <li><%= link_to 'User Management', admin_users_index_path %></li>
+          <li><%= link_to 'Course Catalog', admin_courses_path %></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%=link_to "Sign out", destroy_admin_session_path , :method => :delete %>
+          </li>
+        </ul>
+
+      </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+  </nav>
+<%end%>

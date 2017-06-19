@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  par: MyString
+  yards: MyString
+  mhcp: MyString
+  whcp: MyString
+
+two:
+  par: MyString
+  yards: MyString
+  mhcp: MyString
+  whcp: MyString

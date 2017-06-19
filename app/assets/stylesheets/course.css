@@ -1,0 +1,69 @@
+#course-page-content-wrapper{
+    margin-top: 5%;
+
+}
+
+.zero-left-right-padd{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.hole,.course-info-row{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.dropdown-padd{
+   padding: 6px 40px;
+}
+.dropdown-less-padd{
+   padding: 2px 30px;
+   /*color:red;*/
+
+}
+.state-drop-dwn{
+    margin-top: 23px !important;
+}
+
+.upload-btn{
+    background-color: #16A476 !important;
+}
+
+.whole-num{
+    color: #16A476;
+}
+.btn-add{
+    font-size: 24px !important;
+    color: #16A476 !important;
+    background-color: white !important;
+    border-color: #16A476 !important;
+    padding: 0px 15px !important;
+    margin: 0px 5px;
+}
+.hole-field, .contact-info{
+    margin-top: 5px;
+    margin-bottom: 5px;    
+}
+.inline{
+    display: inline !important;
+}
+.dynamic-fields *{
+    margin-bottom: 10px !important;
+}
+/*.modal-footer{
+    border-top: none !important;
+}*/
+.navbar-default{
+    margin-bottom: 0px !important;
+}
+
+.panel{
+    margin: 20px; 
+    padding:20px; 
+}
+table th{
+    color: #16A476;    
+}
+.container{
+    margin-top: 10%;
+}

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tee name:</strong>
+  <%= @score_card.tee_name %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @score_card.color %>
+</p>
+
+<%= link_to 'Edit', edit_score_card_path(@score_card) %> |
+<%= link_to 'Back', score_cards_path %>

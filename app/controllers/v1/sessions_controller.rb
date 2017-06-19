@@ -16,11 +16,11 @@ class V1::SessionsController < ApplicationController
         if @user.save
             head(:ok)
         else
-            head(:unauthorized)    
+            head(:unauthorized)
         end
     end
 
-    private 
+    private
 
-    
+
 end

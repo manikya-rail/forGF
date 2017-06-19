@@ -12,7 +12,7 @@ class V1::RegistrationsController < ApplicationController
     private
 
     def user_params
-      params.permit(:email,  
+      params.permit(:email, :first_name, :last_name, 
         :password, :password_confirmation)
     end
 end

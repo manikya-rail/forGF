@@ -1,0 +1,20 @@
+<div class="col-md-3 form-group">
+  <%= label_tag :location ,'Location',class:"col-md-12 zero-left-right-padd"%>
+  <%= location_form.text_field :town, class:"col-md-12 form-control check-field", placeholder: "Town" %>
+</div>
+
+<div class="col-md-3 form-group">
+  <%= location_form.select(:state, Location.us_states, options = {prompt: 'State'}, {class:'dropdown-less-padd state-drop-dwn dropdown form-control check-field' }) %>
+</div>
+
+<div class="col-md-3 form-group">
+  <%= label_tag :lattitude ,'lattitude',class:"col-md-12 zero-left-right-padd"%>
+  <%= location_form.text_field :lat, class:"col-md-12 form-control check-field", placeholder: "Lattitude" %>
+
+</div>
+
+<div class="col-md-3 form-group">
+  <%= label_tag :longitude ,'Longitude',class:"col-md-12 zero-left-right-padd"%>
+  <%= location_form.text_field :lng, class:"col-md-12 form-control check-field", placeholder: "Longitude"%>
+
+</div>

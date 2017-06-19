@@ -1,6 +1,7 @@
 json.data do
     json.user do
-        json.(@user, 
+        json.(@user,
+            :id, 
             :email,
             :authentication_token
         )

@@ -1,0 +1,223 @@
+<div class="container">
+
+<% content_for :side_nav do %>
+  <%= render :partial => 'admin/shared/side_nav' %>
+<% end %>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h2>Holes Videos</h2>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
+          <br>
+          <div>
+            <button class="previous">Previous</button>
+            <button class="next">Next</button>
+            <button class="flag">Flag</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <h2><%=@course.name.titleize%> Hole List</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>HOLE NUMBER</th>
+              <th>VIDEO</th>
+              <th>IMAGE</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @course.holes.each_with_index do |hole, index| %>
+              <tr>
+                <td><%= "Hole " + hole.try(:hole_num).to_s  %></td>
+                <%if hole.video.present?%>
+                  <td><%=link_to hole.try(:video).try(:video_file_name), admin_video_path(hole.video)%></td>
+                <%else%>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-vid-upl-modal" %> >Upload Video</button></td>
+                <%end%>
+                <% if hole.image.present? %>
+                  <td><%= link_to hole.image_file_name, hole.image.url %></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-image-upl-modal" %> >Upload Image</button></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+  <%@course.holes.each_with_index do |hole, index|%>
+    <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
+    <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
+  <%end%>
+
+
+</div>
+
+<link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/5.19/video.min.js"></script>
+<script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
+
+<script type="text/javascript">
+var videoList = []
+
+for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
+  videoList.push({
+    sources: [{
+      src: gon.videos_urls[i],
+      type: 'video/mp4'
+    }]
+  });
+}
+
+var player = videojs(document.querySelector('video'), {
+  inactivityTimeout: 0
+});
+
+try {
+  player.volume(1);
+} catch (e) {}
+
+player.playlist(videoList);
+
+document.querySelector('.previous').addEventListener('click', function() {
+  player.playlist.previous();
+});
+document.querySelector('.next').addEventListener('click', function() {
+  player.playlist.next();
+});
+document.querySelector('.flag').addEventListener('click', function() {
+  for (var i = 0, len = gon.videos.length; i < len; i++) {
+    if (gon.tags[i].length > 0) {
+      if (player.currentSrc().includes(gon.videos[i].video_file_name) && gon.videos[i].id == gon.tags[i][0].video_id) {
+        player.currentTime(gon.tags[i][0].time);
+      }
+    }
+  }
+});
+
+/* ADD PREVIOUS */
+var Button = videojs.getComponent('Button');
+
+var PrevButton = videojs.extend(Button, {
+  constructor: function() {
+    Button.apply(this, arguments);
+    this.addClass('icon-angle-left');
+    this.controlText("Previous");
+  },
+
+  handleClick: function() {
+    player.playlist.previous();
+  }
+});
+
+/* ADD NEXT */
+var NextButton = videojs.extend(Button, {
+  constructor: function() {
+    Button.apply(this, arguments);
+    this.addClass('icon-angle-right');
+    this.controlText("Next");
+  },
+
+  handleClick: function() {
+    player.playlist.next();
+  }
+});
+
+/* ADD FLAG */
+var FlagButton = videojs.extend(Button, {
+  constructor: function() {
+    Button.apply(this, arguments);
+    this.addClass('icon-flag');
+    this.controlText("Flag");
+  },
+
+  handleClick: function() {
+    for (var i = 0, len = gon.videos.length; i < len; i++) {
+      if (gon.tags[i].length > 0) {
+        if (player.currentSrc().includes(gon.videos[i].video_file_name) && gon.videos[i].id == gon.tags[i][0].video_id) {
+          player.currentTime(gon.tags[i][0].time);
+        }
+      }
+    }
+  }
+});
+
+// Register the new component
+videojs.registerComponent('NextButton', NextButton);
+videojs.registerComponent('PrevButton', PrevButton);
+videojs.registerComponent('FlagButton', FlagButton);
+player.getChild('controlBar').addChild('PrevButton', {}, 0);
+player.getChild('controlBar').addChild('NextButton', {}, 2);
+player.getChild('controlBar').addChild('FlagButton', {}, 3);
+</script>
+
+<style type="text/css">
+  .video-holder,
+  .video-holder * {
+    box-sizing: border-box !important
+  }
+
+  .video-holder {
+    background: #1b1b1b;
+    padding: 10px
+  }
+
+  .centered {
+    width: 100%
+  }
+
+  #video {
+    border-radius: 8px
+  }
+
+  .video-holder .vjs-big-play-button {
+    left: 50%;
+    width: 100px;
+    margin-left: -50px;
+    height: 80px;
+    top: 50%;
+    margin-top: -40px
+  }
+
+
+  /* CUSTOM BUTTONS */
+  [class^="icon-"]:before,
+  [class*=" icon-"]:before {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+  }
+  .icon-angle-left:before {
+      content: "\f104";
+  }
+  .icon-angle-right:before {
+      content: "\f105";
+  }
+  .icon-flag:before {
+      content: "\f024";
+  }
+
+  .video-js .icon-angle-right, .video-js .icon-angle-left .icon-flag {
+      cursor: pointer;
+      -webkit-box-flex: none;
+      -moz-box-flex: none;
+      -webkit-flex: none;
+      -ms-flex: none;
+      flex: none;
+  }
+</style>

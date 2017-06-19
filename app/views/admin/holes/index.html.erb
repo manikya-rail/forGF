@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Holes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Par</th>
+      <th>Yards</th>
+      <th>Mhcp</th>
+      <th>Whcp</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @holes.each do |hole| %>
+      <tr>
+        <td><%= hole.par %></td>
+        <td><%= hole.yards %></td>
+        <td><%= hole.mhcp %></td>
+        <td><%= hole.whcp %></td>
+        <td><%= link_to 'Show', hole %></td>
+        <td><%= link_to 'Edit', edit_hole_path(hole) %></td>
+        <td><%= link_to 'Destroy', hole, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hole', new_hole_path %>

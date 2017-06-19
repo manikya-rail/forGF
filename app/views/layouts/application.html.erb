@@ -2,13 +2,30 @@
 <html>
   <head>
     <title>ForeWebapp</title>
+    <%= Gon::Base.render_data %>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+
+   </head>
 
   <body>
-    <%= yield %>
+
+    <div id="container-fluid">
+      <!-- <div  style="margin-left: 0px !important;padding-left: 15px !important; "> -->
+      <div class="row">
+
+
+        <%= yield :side_nav %>
+        <div class="<%= current_admin ? 'col-md-10' : 'col-md-12'%>">
+            <%= render partial: 'layouts/navigation' %>
+            <%= render partial: 'layouts/messages' %>
+          <%= yield %>
+        </div>
+
+      </div>
+    <!-- </div> -->
+    </div>
   </body>
 </html>
