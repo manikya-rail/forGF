@@ -16,3 +16,4 @@
 //= require bootstrap-sprockets
 //= require jquery.remotipart
 //= require_tree .
+

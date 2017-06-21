@@ -1,6 +1,3 @@
-<%= Gon::Base.render_data %>
-<%= csrf_meta_tags %>
-<!-- 
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-body">
@@ -18,39 +15,10 @@
     </div>
   </div>
 </div>
- -->
-
- <div class="container">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div style="z-index: -1;">
-        <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
-      </div>
-      <div class="on-video">
-        <button class="previous"><h1> < </h1></button>
-        <button class="next"><h1> > </h1></button>
-        <button class="flag"><%= image_tag "flag.png" %></button>
-        <button class="eye"><%= image_tag "eye.png" %></button>
-        <button class="logo"><%= image_tag "logo.png" %></button>
-      </div>
-      <!-- <div style="border: 2px solid black; background-color: #ffffff; width:700px; height:200px;">  -->
-      <div class="vjs-playlist">
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- <button class="flag"><i class="fa fa-flag" aria-hidden="true"></i></button>
-<button class="eye"><i class="fa fa-eye" aria-hidden="true"></i></i></button>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
- -->
-
 
 <link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
-<%#= stylesheet_link_tag "playlistui/videojs-playlist-ui.vertical.css", media: "all" %>
 <script src="//vjs.zencdn.net/5.19/video.min.js"></script>
 <script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
-<%#= javascript_include_tag "playlistui/videojs-playlist-ui.js" %>
 
 <script type="text/javascript">
 var videoList = []
@@ -137,8 +105,6 @@ var FlagButton = videojs.extend(Button, {
   }
 });
 
-// player.playlistUi();
-
 // Register the new component
 videojs.registerComponent('NextButton', NextButton);
 videojs.registerComponent('PrevButton', PrevButton);
@@ -146,9 +112,6 @@ videojs.registerComponent('FlagButton', FlagButton);
 player.getChild('controlBar').addChild('PrevButton', {}, 0);
 player.getChild('controlBar').addChild('NextButton', {}, 2);
 player.getChild('controlBar').addChild('FlagButton', {}, 3);
-
-
-// videojs(document.querySelector('video')).playlistUi();
 </script>
 
 <style type="text/css">
@@ -207,85 +170,4 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
       -ms-flex: none;
       flex: none;
   }
-
-  .on-video {
-      /*margin-top: -400px;*/
-      position: absolute;
-      left: 8px;
-      top: 8px;
-      z-index: 5;
-
-      height: 400px; 
-      width: 700px;
-      /*background-color: #ffffff;
-      border: 1px solid black;
-      */
-      opacity: 0.5;
-      filter: alpha(opacity=50); /* For IE8 and earlier */
-
-  }
-
-  .previous{
-    /*margin:top right down left;*/
-    margin-top:180px; 
-    float: left;
-    background-color: #ffffff; 
-    /*background-color:#808080;*/
-    height: 100px; 
-    width: 50px;
-    opacity: 0.3;
-    font-family: "Times New Roman", Times, serif;
-  }
-  .next{
-    margin-top:180px;
-    float: right;
-    background-color: #ffffff; 
-    height: 100px; 
-    width: 50px;
-    opacity: 0.3;
-    font-family: "Times New Roman", Times, serif;
-  }
-
-.flag {
-  display:block;
-  margin-top:120px;
-  margin-right: -40px;
-  float: right;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border: 2px solid white;  
-  background-color: transparent; 
-}
-
-.eye {
-  display:block;
-  margin-top:60px;
-  margin-right: -50px;
-  float: right;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border: 2px solid white;  
-  background-color: transparent; 
-}
-
-.logo {
-  display:block;
-  position: absolute;
-      left: 8px;
-      top: 8px;
-      z-index: 6;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border: 2px solid white;  
-  background-color: transparent; 
-}
-
-img {
-    max-width: 80%;
-    max-height: 80%;
-}
-
 </style>
