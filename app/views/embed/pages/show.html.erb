@@ -1,31 +1,26 @@
 <%= Gon::Base.render_data %>
 <%= csrf_meta_tags %>
-<!-- 
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <h2>Holes Videos</h2>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
-          <br>
-          <div>
-            <button class="previous">Previous</button>
-            <button class="next">Next</button>
-            <button class="flag">Flag</button>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
- -->
+
+<!-- Linkers -->
+
+<link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
+<link href="https://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/stylesheets/videojs-playlist-ui.vertical.css" rel="stylesheet">
+
+<script src="//vjs.zencdn.net/5.19/video.min.js"></script>
+<script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
+<script src="https://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/javascripts/videojs-playlist-ui.js"></script>
+
+
+<!-- Body -->
 
  <div class="container">
   <div class="panel panel-default">
     <div class="panel-body">
+      
       <div style="z-index: -1;">
         <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
       </div>
+      
       <div class="on-video">
         <button class="previous"><h1> < </h1></button>
         <button class="next"><h1> > </h1></button>
@@ -33,7 +28,7 @@
         <button class="eye"><%= image_tag "eye.png" %></button>
         <button class="logo"><%= image_tag "logo.png" %></button>
       </div>
-      <!-- <div style="border: 2px solid black; background-color: #ffffff; width:700px; height:200px;">  -->
+      
       <div class="vjs-playlist">
       </div>
     </div>
@@ -46,22 +41,51 @@
  -->
 
 
-<link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
-<script src="//vjs.zencdn.net/5.19/video.min.js"></script>
-<script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
-
+<!-- JavaScript -->
 
 <script type="text/javascript">
-var videoList = []
+// var videoList = []
 
-for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
-  videoList.push({
-    sources: [{
-      src: gon.videos_urls[i],
-      type: 'video/mp4'
-    }]
-  });
-}
+var videoList = [{
+  sources: [{
+    src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'https://www.rt.com/static/img/og-logo-rt.png'
+}, {
+  sources: [{
+    src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+}, {
+  sources: [{
+    src: 'https://vjs.zencdn.net/v/oceans.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'https://vjs.zencdn.net/v/oceans.png'
+}, {
+  sources: [{
+    src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+}, {
+  sources: [{
+    src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
+    type: 'video/mp4'
+  }],
+  poster: 'http://media.w3.org/2010/05/video/poster.png'
+}];
+
+// for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
+//   videoList.push({
+//     sources: [{
+//       src: gon.videos_urls[i],
+//       type: 'video/mp4'
+//     }]
+//   });
+// }
 
 var player = videojs(document.querySelector('video'), {
   inactivityTimeout: 0
@@ -136,7 +160,10 @@ var FlagButton = videojs.extend(Button, {
   }
 });
 
-// player.playlistUi();
+// Play List Integral
+// videojs(document.querySelector('video')).playlistUi();
+player.playlistUi();
+
 
 // Register the new component
 videojs.registerComponent('NextButton', NextButton);
@@ -147,8 +174,10 @@ player.getChild('controlBar').addChild('NextButton', {}, 2);
 player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
 
-// videojs(document.querySelector('video')).playlistUi();
+
 </script>
+
+<!-- StyleSheet -->
 
 <style type="text/css">
   .video-holder,
@@ -285,6 +314,12 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 img {
     max-width: 80%;
     max-height: 80%;
+}
+
+.vjs-playlist {
+  border: 2px solid black; 
+  width:700px; 
+  height:200px;
 }
 
 </style>
