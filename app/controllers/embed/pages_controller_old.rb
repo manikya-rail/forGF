@@ -1,8 +1,6 @@
 class Embed::PagesController < ApplicationController
   before_action :set_course, only: [:show]
-  # after_filter :allow_iframe, only: [:show, :awesome_embed]
   after_action :set_version_header
-
 
   def show
     gon.videos = []
@@ -13,12 +11,6 @@ class Embed::PagesController < ApplicationController
       gon.videos_urls << hole.video.video if hole.video.present?
       gon.tags << hole.video.tags if hole.video.present?
     end
-
-    render :layout => false
-  end
-
-    
-  def awesome_embed     
   end
 
   private
@@ -28,10 +20,7 @@ class Embed::PagesController < ApplicationController
 
     def set_version_header
         # response.headers['X-Frame-Options'] = 'AllowAll'
-        response.set_header("X-Frame-Options", "ALLOWALL")
-    end
+        response.set_header("X-Frame-Options", "AllowAll")
 
-    def allow_iframe
-      response.headers.delete "X-Frame-Options"
     end
 end

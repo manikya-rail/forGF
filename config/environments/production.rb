@@ -68,6 +68,9 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
+  # to be iframed
+  # config.action_dispatch.default_headers = {'X-Frame-Options' => 'ALLOWALL'}
+
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 

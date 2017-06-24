@@ -1,34 +1,183 @@
-<div class="container">
+<%= Gon::Base.render_data %>
+<%#= csrf_meta_tags %>
+
+<!-- Linkers -->
+
+<link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
+<link href="http://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/stylesheets/videojs-playlist-ui.vertical.css" rel="stylesheet">
+
+<link href='https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.5.2/tachyons.min.css'>
+
+<script src="//vjs.zencdn.net/5.19/video.min.js"></script>
+<script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
+<script src="http://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/javascripts/videojs-playlist-ui.js"></script>
+
+
+<!-- Body -->
+
+ <div class="container">
   <div class="panel panel-default">
     <div class="panel-body">
-      <h2>Holes Videos</h2>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
-          <br>
-          <div>
-            <button class="previous">Previous</button>
-            <button class="next">Next</button>
-            <button class="flag">Flag</button>
-          </div>
-        </div>
+      
+      <div style="z-index: -1;">
+        <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
+      </div>
+      
+      <div class="on-video">
+        <button class="previous"><h1> < </h1></button>
+        <button class="next"><h1> > </h1></button>
+        <button class="flag"><%= image_tag "flag.png" %></button>
+        <button class="eye"><%= image_tag "eye.png" %></button>
+        <button class="logo"><%#= image_tag "logo.png" %></button>
+      </div>
+      
+      <!-- <div class="my-custom-class">
+      </div>
+ -->
+      <div class="vjs-playlist custom">
+      </div>
     </div>
   </div>
 </div>
 
-<link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
-<script src="//vjs.zencdn.net/5.19/video.min.js"></script>
-<script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
+<!-- <button class="flag"><i class="fa fa-flag" aria-hidden="true"></i></button>
+<button class="eye"><i class="fa fa-eye" aria-hidden="true"></i></i></button>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+ -->
+
+
+<!-- JavaScript -->
 
 <script type="text/javascript">
 var videoList = []
 
+// var videoList = [{
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'https://www.rt.com/static/img/og-logo-rt.png',
+//   thumbnail: 'https://www.rt.com/static/img/og-logo-rt.png',
+//   name: "Hole 1"
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+//   thumbnail:'http://media.w3.org/2010/05/bunny/poster.png'
+// }, {
+//   sources: [{
+//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'https://vjs.zencdn.net/v/oceans.png',
+//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
+// }, {
+//   sources: [{
+//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'https://vjs.zencdn.net/v/oceans.png',
+//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+//   thumbnail:'http://media.w3.org/2010/05/bunny/poster.png'
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+//   thumbnail:'http://media.w3.org/2010/05/bunny/poster.png',
+//   name: "Hole 2"
+// }, {
+//   sources: [{
+//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'https://vjs.zencdn.net/v/oceans.png',
+//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+//   thumbnail:'http://media.w3.org/2010/05/bunny/poster.png',
+//   name: "Hole 7"
+// }, {
+//   sources: [{
+//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'https://vjs.zencdn.net/v/oceans.png',
+//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
+// }, {
+//   sources: [{
+//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'https://vjs.zencdn.net/v/oceans.png',
+//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
+// }, {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/video/poster.png',
+//   thumbnail:   'http://media.w3.org/2010/05/video/poster.png'
+// }];
+
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
+  var nm = "Hole ".concat(i);
   videoList.push({
     sources: [{
       src: gon.videos_urls[i],
       type: 'video/mp4'
-    }]
+    }],
+    // poster: 'https://www.rt.com/static/img/og-logo-rt.png',
+    // thumbnail: 'https://www.rt.com/static/img/og-logo-rt.png',
+    name: nm
   });
 }
 
@@ -105,6 +254,16 @@ var FlagButton = videojs.extend(Button, {
   }
 });
 
+// Play List Integral
+// videojs(document.querySelector('video')).playlistUi();
+
+player.playlistUi();
+
+// player.playlistUi({
+//       className: 'my-custom-class'
+//     });
+
+
 // Register the new component
 videojs.registerComponent('NextButton', NextButton);
 videojs.registerComponent('PrevButton', PrevButton);
@@ -112,7 +271,12 @@ videojs.registerComponent('FlagButton', FlagButton);
 player.getChild('controlBar').addChild('PrevButton', {}, 0);
 player.getChild('controlBar').addChild('NextButton', {}, 2);
 player.getChild('controlBar').addChild('FlagButton', {}, 3);
+
+
+
 </script>
+
+<!-- StyleSheet -->
 
 <style type="text/css">
   .video-holder,
@@ -170,4 +334,131 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
       -ms-flex: none;
       flex: none;
   }
+
+  .on-video {
+      /*margin-top: -400px;*/
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      z-index: 5;
+
+      height: 400px; 
+      width: 700px;
+      /*background-color: #ffffff;
+      border: 1px solid black;
+      */
+      opacity: 0.5;
+      filter: alpha(opacity=50); /* For IE8 and earlier */
+
+  }
+
+  .previous{
+    /*margin:top right down left;*/
+    margin-top:180px; 
+    float: left;
+    background-color: #ffffff; 
+    /*background-color:#808080;*/
+    height: 100px; 
+    width: 50px;
+    opacity: 0.3;
+    font-family: "Times New Roman", Times, serif;
+  }
+  .next{
+    margin-top:180px;
+    float: right;
+    background-color: #ffffff; 
+    height: 100px; 
+    width: 50px;
+    opacity: 0.3;
+    font-family: "Times New Roman", Times, serif;
+  }
+
+.flag {
+  display:block;
+  margin-top:120px;
+  margin-right: -40px;
+  float: right;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid white;  
+  background-color: transparent; 
+}
+
+.eye {
+  display:block;
+  margin-top:60px;
+  margin-right: -50px;
+  float: right;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid white;  
+  background-color: transparent; 
+}
+
+.logo {
+  display:block;
+  position: absolute;
+      left: 8px;
+      top: 8px;
+      z-index: 6;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid white;  
+  background-color: transparent; 
+}
+
+img {
+    min-width: 20%;
+    min-height: 20%;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+img:hover {
+  transform: scale( 1.05 );
+}
+
+
+.vjs-playlist {
+  border: 2px solid black; 
+  width:696px; 
+  height:200px;
+  overflow: hidden;
+  /*background-color: white !important;*/
+}
+
+.custom {
+  
+  background-color: white;
+  margin: 0;
+
+}
+
+.vjs-playlist-item-list li{
+
+  float: left;
+  _display: inline;
+  width: 20%;
+  overflow: hidden;
+}
+
+.vjs-playlist-item {
+  object-fit: none;  /* Do not scale the image  */
+  object-position: center; /* Center the image within the element */
+  height: 50px;
+  width: 50px;
+}
+
+.vjs-playlist-thumbnail-placeholder {
+  background: #2F4F4F;
+  max-width:90% ;
+  max-height:90% ;
+  /*margin-left: 5px;*/
+}
+span {
+  visibility: hidden;
+}
 </style>
