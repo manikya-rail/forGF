@@ -6,8 +6,6 @@
 <link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
 <link href="http://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/stylesheets/videojs-playlist-ui.vertical.css" rel="stylesheet">
 
-<link href='https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.5.2/tachyons.min.css'>
-
 <script src="//vjs.zencdn.net/5.19/video.min.js"></script>
 <script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 <script src="http://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/javascripts/videojs-playlist-ui.js"></script>
@@ -16,16 +14,16 @@
 <!-- Body -->
 
  
-    <div class = "main"> 
+    <div class = "mn"> 
       <div style="z-index: -1;">
         <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
       </div>
 
-        <button class="previous on-video"><h1> < </h1></button>
-        <button class="next on-video"><h1> > </h1></button>
-        <button class="flag on-video"><%= image_tag "flag.png" %></button>
-        <button class="eye on-video"><%= image_tag "eye.png" %></button>
-        <button class="logo on-video"><%#= image_tag "logo.png" %></button>
+        <button class="on-video previous"><h1> < </h1></button>
+        <button class="on-video next"><h1> > </h1></button>
+        <button class="on-video flag"><%= image_tag "flag.png" %></button>
+        <button class="on-video eye"><%= image_tag "eye.png" %></button>
+        <button class="on-video logo"><%#= image_tag "logo.png" %></button>
       
       <!-- <div class="my-custom-class">
       </div>
@@ -329,7 +327,7 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
       flex: none;
   }
 
-.main {
+.mn {
   position: absolute;
     left: 8px;
     top: 8px;
@@ -337,8 +335,8 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
 .on-video {
     position: absolute;
-      left: 0px;
-      top: 0px;
+    left: 0px;
+    top: 0px;  
     z-index: 5;
     opacity: 0.5;
     filter: alpha(opacity=50); /* For IE8 and earlier */
@@ -347,7 +345,7 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
   .previous{
     /*margin:top right down left;*/
-    margin:180 0 0 0;
+    margin:180 0 0 0 !important;
     /*float: left;*/
     background-color: #ffffff; 
     /*background-color:#808080;*/
@@ -358,7 +356,6 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
   }
   .next{
     margin:180 0 0 650;
-    /*float: right;*/
     background-color: #ffffff; 
     height: 100px; 
     width: 50px;
@@ -369,7 +366,6 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 .flag {
   display:block;
   margin:120 0 0 640;
-  /*float: right;*/
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -380,7 +376,6 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 .eye {
   display:block;
   margin:60 0 0 640;
-  /*float: right;*/
   height: 50px;
   width: 50px;
   border-radius: 50%;
