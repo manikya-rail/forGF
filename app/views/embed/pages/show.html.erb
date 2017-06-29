@@ -16,18 +16,16 @@
 <!-- Body -->
 
  
-    <div > 
+    <div class = "main"> 
       <div style="z-index: -1;">
         <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
       </div>
-      
-      <div class="on-video">
-        <button class="previous"><h1> < </h1></button>
-        <button class="next"><h1> > </h1></button>
-        <button class="flag"><%= image_tag "flag.png" %></button>
-        <button class="eye"><%= image_tag "eye.png" %></button>
-        <button class="logo"><%#= image_tag "logo.png" %></button>
-      </div>
+
+        <button class="previous on-video"><h1> < </h1></button>
+        <button class="next on-video"><h1> > </h1></button>
+        <button class="flag on-video"><%= image_tag "flag.png" %></button>
+        <button class="eye on-video"><%= image_tag "eye.png" %></button>
+        <button class="logo on-video"><%#= image_tag "logo.png" %></button>
       
       <!-- <div class="my-custom-class">
       </div>
@@ -331,27 +329,26 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
       flex: none;
   }
 
-  .on-video {
-      /*margin-top: -400px;*/
-      position: absolute;
-      left: 8px;
-      top: 8px;
-      z-index: 5;
+.main {
+  position: absolute;
+    left: 8px;
+    top: 8px;
+}
 
-      height: 400px; 
-      width: 700px;
-      /*background-color: #ffffff;
-      border: 1px solid black;
-      */
-      opacity: 0.5;
-      filter: alpha(opacity=50); /* For IE8 and earlier */
+.on-video {
+    position: absolute;
+      left: 0px;
+      top: 0px;
+    z-index: 5;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
 
-  }
+}
 
   .previous{
     /*margin:top right down left;*/
-    margin-top:180px; 
-    float: left;
+    margin:180 0 0 0;
+    /*float: left;*/
     background-color: #ffffff; 
     /*background-color:#808080;*/
     height: 100px; 
@@ -360,8 +357,8 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
     font-family: "Times New Roman", Times, serif;
   }
   .next{
-    margin-top:180px;
-    float: right;
+    margin:180 0 0 650;
+    /*float: right;*/
     background-color: #ffffff; 
     height: 100px; 
     width: 50px;
@@ -371,9 +368,8 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
 .flag {
   display:block;
-  margin-top:120px;
-  margin-right: -40px;
-  float: right;
+  margin:120 0 0 640;
+  /*float: right;*/
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -383,9 +379,8 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
 .eye {
   display:block;
-  margin-top:60px;
-  margin-right: -50px;
-  float: right;
+  margin:60 0 0 640;
+  /*float: right;*/
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -395,10 +390,7 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
 .logo {
   display:block;
-  position: absolute;
-      left: 8px;
-      top: 8px;
-      z-index: 6;
+  margin:10 0 0 10;
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -419,8 +411,8 @@ img:hover {
 
 
 .vjs-playlist {
-  border: 2px solid black; 
-  width:696px; 
+  /*border: 2px solid black; */
+  width:700px; 
   height:200px;
   overflow: hidden;
   /*background-color: white !important;*/
