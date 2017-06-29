@@ -19,25 +19,11 @@
         <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
       </div>
 
-      <div class = "on-video">
-        <button class="previous"><h1> < </h1></button>
-      </div>
-
-      <div class = "on-video">
-        <button class="next"><h1> > </h1></button>
-      </div>
-
-      <div class = "on-video">
-        <button class="flag"><%= image_tag "flag.png" %></button>
-      </div>
-
-      <div class = "on-video">
-        <button class="eye"><%= image_tag "eye.png" %></button>
-      <div>
-
-      <div class = "on-video">
-        <button class="logo"><%#= image_tag "logo.png" %></button>
-      <div>
+        <button class="previous on-video"><h1> < </h1></button>
+        <button class="next on-video"><h1> > </h1></button>
+        <button class="flag on-video"><%= image_tag "flag.png" %></button>
+        <button class="eye on-video"><%= image_tag "eye.png" %></button>
+        <button class="logo on-video"><%#= image_tag "logo.png" %></button>
       
       <!-- <div class="my-custom-class">
       </div>
@@ -348,9 +334,9 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 }
 
 .on-video {
-    position: absolute;
+    /*position: absolute;
     left: 0px;
-    top: 0px;  
+    top: 0px;*/  
     z-index: 5;
     opacity: 0.5;
     filter: alpha(opacity=50); /* For IE8 and earlier */
@@ -359,17 +345,19 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
   .previous{
     /*margin:top right down left;*/
-    margin:180 0 0 0 !important;
-    /*float: left;*/
+    position: absolute;
+    left: 0px;
+    top: 180px;
     background-color: #ffffff; 
-    /*background-color:#808080;*/
     height: 100px; 
     width: 50px;
     opacity: 0.3;
     font-family: "Times New Roman", Times, serif;
   }
   .next{
-    margin:180 0 0 650 !important;
+    position: absolute;
+    left: 650px;
+    top: 180px;
     background-color: #ffffff; 
     height: 100px; 
     width: 50px;
@@ -379,7 +367,9 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
   .flag {
     display:block;
-    margin:120 0 0 640 !important;
+    position: absolute;
+    left: 640px;
+    top: 120px;
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -389,7 +379,9 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
   .eye {
     display:block;
-    margin:60 0 0 640 !important;
+    position: absolute;
+    left: 640px;
+    top: 60px;
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -399,7 +391,9 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
   .logo {
     display:block;
-    margin:10 0 0 10 !important;
+    position: absolute;
+    left: 10px;
+    top: 10px;
     height: 50px;
     width: 50px;
     border-radius: 50%;
