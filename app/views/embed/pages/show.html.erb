@@ -14,16 +14,30 @@
 <!-- Body -->
 
  
-    <div class = "mn"> 
+    <div class = "main-container"> 
       <div style="z-index: -1;">
         <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
       </div>
 
-        <button class="on-video previous"><h1> < </h1></button>
-        <button class="on-video next"><h1> > </h1></button>
-        <button class="on-video flag"><%= image_tag "flag.png" %></button>
-        <button class="on-video eye"><%= image_tag "eye.png" %></button>
-        <button class="on-video logo"><%#= image_tag "logo.png" %></button>
+      <div class = "on-video">
+        <button class="previous"><h1> < </h1></button>
+      </div>
+
+      <div class = "on-video">
+        <button class="next"><h1> > </h1></button>
+      </div>
+
+      <div class = "on-video">
+        <button class="flag"><%= image_tag "flag.png" %></button>
+      </div>
+
+      <div class = "on-video">
+        <button class="eye"><%= image_tag "eye.png" %></button>
+      <div>
+
+      <div class = "on-video">
+        <button class="logo"><%#= image_tag "logo.png" %></button>
+      <div>
       
       <!-- <div class="my-custom-class">
       </div>
@@ -327,7 +341,7 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
       flex: none;
   }
 
-.mn {
+.main-container {
   position: absolute;
     left: 8px;
     top: 8px;
@@ -355,7 +369,7 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
     font-family: "Times New Roman", Times, serif;
   }
   .next{
-    margin:180 0 0 650;
+    margin:180 0 0 650 !important;
     background-color: #ffffff; 
     height: 100px; 
     width: 50px;
@@ -363,35 +377,35 @@ player.getChild('controlBar').addChild('FlagButton', {}, 3);
     font-family: "Times New Roman", Times, serif;
   }
 
-.flag {
-  display:block;
-  margin:120 0 0 640;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border: 2px solid white;  
-  background-color: transparent; 
-}
+  .flag {
+    display:block;
+    margin:120 0 0 640 !important;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid white;  
+    background-color: transparent; 
+  }
 
-.eye {
-  display:block;
-  margin:60 0 0 640;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border: 2px solid white;  
-  background-color: transparent; 
-}
+  .eye {
+    display:block;
+    margin:60 0 0 640 !important;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid white;  
+    background-color: transparent; 
+  }
 
-.logo {
-  display:block;
-  margin:10 0 0 10;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border: 2px solid white;  
-  background-color: transparent; 
-}
+  .logo {
+    display:block;
+    margin:10 0 0 10 !important;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid white;  
+    background-color: transparent; 
+  }
 
 img {
     min-width: 20%;
@@ -407,6 +421,9 @@ img:hover {
 
 .vjs-playlist {
   /*border: 2px solid black; */
+  position: absolute;
+  left:0px ;
+  top: 400px ;
   width:700px; 
   height:200px;
   overflow: hidden;
@@ -415,8 +432,9 @@ img:hover {
 
 .custom {
   
-  background-color: white;
-  margin: 0;
+  /*background-color: white;*/
+  /*margin: 0;*/
+  /*margin:350 0 0 0;*/
 
 }
 
