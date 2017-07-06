@@ -9,10 +9,9 @@
       <h2>Holes Videos</h2>
       <div class="panel panel-default">
         <div class="panel-body">
-          <iframe width="720px" height="620px" src="http://localhost:3000/embed/1"> </iframe> 
-          <textarea style="width:710px;">
-                  <iframe width="720px" height="620px" src="http://localhost:3000/embed/1"> </iframe> 
-          </textarea>
+          <iframe width="720px" height="620px"
+             src=<%= "#{request.base_url}/embed/#{@course.id}" %>> </iframe> 
+          <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; "><iframe width="720px" height="620px" src=<%= "#{request.base_url}/embed/#{@course.id}" %>> </iframe></textarea>
           <!-- <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
           <br>
           <div>
