@@ -6,7 +6,32 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-      <h2><%=@course.name.titleize%></h2>
+      <h2>
+        <%= image_tag @course.logo %>
+        <%=@course.name.titleize %>
+      </h2>
+      <table class="table">
+        <tr>
+          <td>Location</td>
+          <td><%= @course.try(:formated_location) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td><%= @course.try(:course_type) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Amenities</td>
+          <td><%= @course.try(:amenities_list) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Contact</td>
+          <td><%= @course.try(:phone_num) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Website</td>
+          <td><%= @course.try(:website) || 'N/A' %></td>
+        </tr>
+      </table>
       <div class="panel panel-default">
         <div class="panel-body">
           <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" controls width="700px" height="400px"></video>
@@ -16,15 +41,17 @@
             <button class="next">Next</button>
             <button class="flag">Flag</button>
           </div>
+          <br>
           <h4>Embedable Link For Videos</h4>
-          <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; " readonly><iframe width="720px" height="620px" src="<%= "#{request.base_url}/embed/#{@course.id}" %>"> </iframe></textarea>
-          
+          <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; " readonly>
+            <iframe width="100%" height="100%" src="<%= "#{request.base_url}/embed/#{@course.id}" %>"$ >
+          </textarea >
         </div>
     </div>
   </div>
 
   <div class="panel panel-default">
-    <h2><%=@course.name.titleize%> Hole List</h2>
+    <h2>Holes List</h2>
     <div class="panel panel-default">
       <div class="panel-body">
 

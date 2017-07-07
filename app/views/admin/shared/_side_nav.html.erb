@@ -4,4 +4,6 @@
   <%= render :partial => 'admin/shared/courses_side_nav' %>
 <%elsif params[:controller] == "admin/users" and params[:action] == "index"%>
   <%= render :partial => 'admin/shared/users_side_nav' %>
+<%elsif params[:controller] == "admin/users" and params[:action] == "show"%>
+  <%= render :partial => 'admin/shared/courses' %>
 <%end%>
