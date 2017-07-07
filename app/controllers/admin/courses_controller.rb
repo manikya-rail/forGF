@@ -32,6 +32,10 @@ class Admin::CoursesController < ApplicationController
     end
   end
 
+  def holes
+    @course = Course.find(params[:id])
+  end
+
   # GET /courses/1/edit
   def edit
   end
@@ -43,7 +47,7 @@ class Admin::CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to admin_courses_path, notice: 'Course was successfully created.' }
+        format.html { redirect_to admin_holes_create_path(@course), notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new }
