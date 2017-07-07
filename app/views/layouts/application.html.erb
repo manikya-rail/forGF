@@ -12,12 +12,12 @@
 
   <body>
 
-    <div id="container-fluid">
+    <div id="container-fluid" style="background-color: #F1F1F1 ">
       <!-- <div  style="margin-left: 0px !important;padding-left: 15px !important; "> -->
       <div class="row">
-
-
-        <%= yield :side_nav %>
+        <div class="col-md-2">
+          <%= yield :side_nav %>
+        </div>
         <div class="<%= current_admin ? 'col-md-10' : 'col-md-12'%>">
             <%= render partial: 'layouts/navigation' %>
             <%= render partial: 'layouts/messages' %>
