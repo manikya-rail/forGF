@@ -51,7 +51,7 @@ class Course < ApplicationRecord
 
           formated_location_result << town  if town
           formated_location_result << ", " + state if state
-          formated_location_result << " " +  "(lat: #{ lat },lng: #{ lng })" if lat and lng
+          # formated_location_result << " " +  "(lat: #{ lat },lng: #{ lng })" if lat and lng
 
           formated_location_result
      end
@@ -62,5 +62,9 @@ class Course < ApplicationRecord
 
      def networks_names
           self.networks.pluck(:name).join(',')
+     end
+
+     def amenities_list
+       self.amenities.pluck(:name).join(',') rescue 'N/A'
      end
 end
