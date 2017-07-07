@@ -7,6 +7,7 @@
   <%= form_for(@course, url: {controller: 'courses', action: 'create'}, method: "post" ) do |f|%>
 
     <div class="col-md-12">
+      <div class="basic-course-info">
         <div class="col-md-12 course-info-row">
             <div class="col-md-4 form-group">
               <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
@@ -136,11 +137,14 @@
             </div>
 
         </div>
-
-        <div class="col-md-12 course-info-row">
+      </div>  
+        <div class="col-md-12 course-info-row course-holes-info" hidden>
           <%=render :partial => 'hole' , locals: {f: f } %>
         </div>
-
+        <div class="text-center">
+          <!-- <span id="previous" class="btn btn-primary">Previous</span> -->
+          <span id="next" class="btn btn-primary" style="margin-left:20px;">Next</span>
+        </div>
 
     </div>
   <%end%>
@@ -162,6 +166,20 @@ function containText(textFieldId){
     return false;
   }
 }
+
+$('#previous').click(function courseView(){
+  $('.basic-course-info').show();
+  $('.course-holes-info').hide();
+});
+
+$('#next').click(function holesView(){
+  $( "#new_course" ).submit();
+  // $('.basic-course-info').hide();
+  // $('.course-holes-info').show();
+});
+
+
+
 
 function enableCheck(checkID){
   $('#' + checkID).show();
@@ -358,6 +376,8 @@ checkFields();
   $( "#create-course-btn" ).click(function() {
     $( "#new_course" ).submit();
   });
+
+  $( "#create-course-btn" ).hide();
 
 
 </script>

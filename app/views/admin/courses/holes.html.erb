@@ -1,0 +1,261 @@
+
+<% content_for :side_nav do %>
+  <%= render :partial => 'side_nav' %>
+<% end %>
+
+<div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
+  
+  <%#= form_for , url: {controller: 'courses', action: 'update'}, method: "put"  do |f|%>
+  <%#= form_for(@holes, url: admin_course_path(@holes), html: {method: "patch"})  do |f|%>
+  <%= form_for(@course, url: url_for(controller: 'courses', action: 'update')) do |f| %>
+        <div class="col-md-12 course-info-row">
+          <%= f.fields_for :holes do |hole| %>
+            <div class="col-md-2 hole" id="hole_num_<%="#{hole.index + 1}"%>">
+                <div class="col-md-12 zero-left-right-padd whole-num" style="color:green">
+                    <%="Hole #{hole.index + 1 }"%>
+                </div>
+                <%= render  'admin/holes/form', hole: hole ,hole_num: hole.index + 1 %>
+
+                <span class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.index + 1}-vid-upl-modal" %> >Upload Video</span>
+
+                  <span style="margin-top:10px;"  class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.index + 1}-image-upl-modal" %> >Upload Image</span>
+  
+  
+            </div>
+          <% end %>
+        </div>
+        <%= f.submit "Update", class: 'btn btn-primary' %>
+  <% end %>
+
+  <%@course.holes.each_with_index do |hole, index|%>
+    <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
+    <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
+  <%end%>
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+function containText(textFieldId){
+  if ( $('#' + textFieldId).val().length > 0 ){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+$('#previous').click(function courseView(){
+  $('.basic-course-info').show();
+  $('.course-holes-info').hide();
+});
+
+$('#next').click(function holesView(){
+  $('.basic-course-info').hide();
+  $('.course-holes-info').show();
+});
+
+
+
+
+function enableCheck(checkID){
+  $('#' + checkID).show();
+}
+
+function disableCheck(checkID){
+  $('#' + checkID).hide();
+}
+
+function checkLocation() {
+  if(
+      containText('course_location_attributes_town') &&
+      containText('course_location_attributes_lat') &&
+      containText('course_location_attributes_lng') &&
+      $('#course_location_attributes_state').val() != ""
+    ){
+    enableCheck('location-check')
+  }
+  else{
+    disableCheck('location-check')
+  }
+
+}
+
+function checkCourseType() {
+  var course_type_checkbox = $('input[id="course_type_private"]:checked').length +
+    $('input[id="course_type_public"]:checked').length +
+    $('input[id="course_type_semi_private"]:checked').length
+
+  if ( course_type_checkbox > 0 ) {
+    enableCheck('course-type-check')
+  }
+  else {
+    disableCheck('course-type-check')
+  }
+}
+
+function checkContactInfo() {
+   if(
+      containText('course_website') &&
+      containText('course_phone_num')
+    ){
+    enableCheck('contact_info-check')
+  }
+  else{
+    disableCheck('contact_info-check')
+  }
+}
+
+function checkAmenities() {
+  var amenities_checkboxes = $('input[name="course[amenities_attributes][0][restaurants]"]:checked').length +
+    $('input[name="course[amenities_attributes][0][caddies]"]:checked').length +
+    $('input[name="course[amenities_attributes][0][carts]"]:checked').length
+
+  if ( amenities_checkboxes >= 1 ) {
+    enableCheck('amenities-check')
+  }
+  else {
+    disableCheck('amenities-check')
+  }
+}
+
+function checkLogo() {
+  if ($('#course_logo').val()) {
+    enableCheck('logo-check')
+  }
+  else {
+    disableCheck('logo-check')
+  }
+}
+
+function checkCover() {
+  if ($('#course_cover').val()) {
+    enableCheck('cover-check')
+  }
+  else {
+    disableCheck('cover-check')
+  }
+}
+
+function checkScoreCard() {
+  if(
+      containText('tee-name-field') &&
+      $('#course_score_cards_attributes_0_color').val() != ""
+    ){
+    enableCheck('score_card-check')
+  }
+  else{
+    disableCheck('score_card-check')
+  }
+}
+
+
+function checkFields(){
+  $('.glyphicon-ok').hide();
+
+  var idsHash =  {
+        'course_length': 'length-check',
+        'course_rating': 'rating-check',
+        'course_total_par': 'par-check',
+        'course_slope': 'slope-check',
+        'course_bio': 'bio-check',
+        'course_name': 'name-check',
+        'course_amenities': 'amenities-check',
+        'course_logo' : 'logo-check',
+        'course_cover' : 'cover-check',
+        // : 'overview-checkbox',
+      }
+
+    $(".check-field").focusout(function() {
+      if (idsHash[this.id]){
+        if (containText(this.id)){
+          enableCheck(idsHash[this.id]);
+        }
+        else{
+          disableCheck(idsHash[this.id]);
+        }
+      }
+      else{
+        if (checkLocation()){
+          enableCheck('location-check');
+        }
+        else if(checkCourseType()){
+          enableCheck('course-type-check')
+        }
+        else if(checkContactInfo()){
+          enableCheck('contact_info-check')
+        }
+        else if(checkAmenities()){
+          enableCheck('amenities-check')
+        }
+        else if(checkLogo()){
+          enableCheck('logo-check')
+        }
+        else if(checkCover()){
+          enableCheck('cover-check')
+        }
+        else if(checkScoreCard()){
+          enableCheck('score_card-check')
+        }
+      }
+  })
+}
+
+checkFields();
+
+  $("input:checkbox").on('click', function() {
+    var $box = $(this);
+    if ($box.is(":checked")) {
+      var group = "input:checkbox[name='" + $box.attr("name") + "']";
+      $(group).prop("checked", false);
+      $box.prop("checked", true);
+    } else {
+      $box.prop("checked", false);
+    }
+  });
+
+  // $('#add-resorts').click(function() {
+
+  //   var clonedField = $('#resort-name-field').clone();
+  //   var resortNameFieldLen = $('.resort-name-field').length ;
+  //   clonedField.removeAttr( "id" )
+  //   clonedField.attr('name', 'course[resorts_attributes][' + resortNameFieldLen + '][name]' );
+
+  //   clonedField.appendTo($('#resort-name-field').parent('div'))
+
+  // });
+
+  // $('#add-networks').click(function() {
+  //   var clonedField = $('#network-name-field').clone();
+  //   clonedField.removeAttr( "id" )
+  //   var networkNameFieldLen = $('.network-name-field').length ;
+  //   clonedField.attr('name', 'course[networks_attributes][' + networkNameFieldLen + '][name]' );
+  //   clonedField.appendTo($('#network-name-field').parent('div'))
+
+  // });
+
+  $('#add-score-card').click(function() {
+    var clonedField = $('.score-card-wrapper').first().clone();
+    var teeNameField = clonedField.find('#tee-name-field');
+    var colorField = clonedField.find('#course_score_cards_attributes_0_color');
+    var btnAdd = clonedField.find('.btn-add').remove();
+
+    teeNameField.removeAttr( "id" )
+    colorField.removeAttr( "id" )
+    var scoreCardLen = $('.score-card-wrapper').length ;
+    teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
+    colorField.attr('name', 'course[networks_attributes][' + scoreCardLen + '][name]' );
+    clonedField.appendTo($('.score-cards-wrapper'))
+
+  });
+
+
+  $( "#create-course-btn" ).click(function() {
+    $( "#new_course" ).submit();
+  });
+
+
+</script>
