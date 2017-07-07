@@ -29,6 +29,9 @@
     .navbar-header {
       float: none;
     }
+    .navbar {
+      height: 65px;
+    }
 
     .navbar-brand {
       height: auto;
