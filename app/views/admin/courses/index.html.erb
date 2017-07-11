@@ -26,9 +26,9 @@
             <tr>
               <th>COURSE NAME</th>
               <th>LOCATION</th>
-              <th>RESORT</th>
-              <th>NETWORK</th>
-              <th></th>
+              <th>Course Type</th>
+              <th>Amenities</th>
+              <th>Actions</th>
             </tr>
           </thead>
 
@@ -37,8 +37,8 @@
               <tr>
                 <td><%= link_to course.name, admin_course_path(course) %></td>
                 <td><%= course.try(:formated_location) %></td>
-                <td><%= course.resort.try(:name) %></td>
-                <td><%= course.network.try(:name) %></td>
+                <td><%= course.try(:course_type) %></td>
+                <td><%= course.try(:amenities_list) %></td>
                 <td><%= link_to 'Edit', edit_admin_course_path(course) %></td>
               </tr>
             <% end %>
