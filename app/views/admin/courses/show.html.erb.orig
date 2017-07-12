@@ -43,8 +43,14 @@
           </div>
           <br>
           <h4>Embedable Link For Videos</h4>
+<<<<<<< HEAD
           <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; " readonly><iframe width="720px" height="620px" src="<%= "#{request.base_url}/embed/#{@course.id}" %>"> </iframe></textarea>
           
+=======
+          <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; " readonly>
+            <iframe width="100%" height="100%" src="<%= "#{request.base_url}/embed/#{@course.id}" %>" >
+          </textarea >
+>>>>>>> master
         </div>
     </div>
   </div>
@@ -68,9 +74,7 @@
               <tr>
                 <td><%= "Hole " + hole.try(:hole_num).to_s  %></td>
                 <%if hole.video.present?%>
-                  <td><%#=link_to hole.try(:video).try(:video_file_name), admin_video_path(hole.video)%>
-                  <%=link_to "Add Tag", admin_video_path(hole.video)%>
-                </td>
+                  <td><%=link_to hole.try(:video).try(:video_file_name), admin_video_path(hole.video)%></td>
                 <%else%>
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-vid-upl-modal" %> >Upload Video</button></td>
                 <%end%>
@@ -96,13 +100,12 @@
 
 
 </div>
+
 <link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
-<script src="//vjs.zencdn.net/5.19/video.min.js"> </script>
+<script src="//vjs.zencdn.net/5.19/video.min.js"></script>
 <script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 
-
 <script type="text/javascript">
-
 var videoList = []
 
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
@@ -194,10 +197,6 @@ videojs.registerComponent('FlagButton', FlagButton);
 player.getChild('controlBar').addChild('PrevButton', {}, 0);
 player.getChild('controlBar').addChild('NextButton', {}, 2);
 player.getChild('controlBar').addChild('FlagButton', {}, 3);
-
-// $(document).ready('page:load', ready);
-// document.on('turbolinks:load', ready);
-
 </script>
 
 <style type="text/css">
