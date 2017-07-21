@@ -1,0 +1,78 @@
+<div class="container">
+
+<% content_for :side_nav do %>
+  <%= render :partial => 'admin/shared/side_nav' %>
+<% end %>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h2>
+        <%= image_tag @course.logo, style: "height:75px; widht: 75px" %>
+        <%=@course.name.titleize %>
+      </h2>
+      <table class="table">
+        <tr>
+          <td>Location</td>
+          <td><%= @course.try(:formated_location) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td><%= @course.try(:course_type) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Amenities</td>
+          <td><%= @course.try(:amenities_list) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Contact</td>
+          <td><%= @course.try(:phone_num) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Website</td>
+          <td><%= @course.try(:website) || 'N/A' %></td>
+        </tr>
+      </table>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h4>Embedable Link For Videos</h4>
+          <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; " readonly><iframe width="720px" height="620px" src="<%= "#{request.base_url}/embed/#{@course.id}" %>"> </iframe></textarea>
+        </div>
+    </div>
+  
+    <h2>Holes List</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>HOLE NUMBER</th>
+              <th>IMAGE</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @course.holes.each_with_index do |hole, index| %>
+              <tr>
+                <td><%= "Hole " + hole.try(:hole_num).to_s  %></td>
+
+                <% if hole.image.present? %>
+                  <td><%= link_to hole.image_file_name, hole.image.url %></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-image-upl-modal" %> >Upload Image</button></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+  <%@course.holes.each_with_index do |hole, index|%>
+    <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
+  <%end%>
+</div>
+

@@ -9,6 +9,7 @@ namespace :admin do
   resources :resorts
   resources :locations
   resources :courses
+  resources :ads
   get "users/index"
   get "courses/holes/:id", to: 'courses#holes',as: 'holes_create'
   post "videos/create", to: 'videos#create' ,as: 'video_create'

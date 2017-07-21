@@ -1,0 +1,50 @@
+
+<div class="container">
+
+<% content_for :side_nav do %>
+  <%= render :partial => 'admin/shared/side_nav' %>
+<% end %>
+
+  <div class="panel panel-default">
+    <h2>Course List</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div id="course-search-form">
+          <div class="col-md-3" style="padding:0px;">
+            <%= form_for('', :url => url_for(:controller => 'search', :action => 'search') , method: "post", remote: true ) do |f|%>
+              <%= text_field_tag :course, "", class: "form-control", placeholder: "Search Courses",name: 'search[q]' %>
+              <%= hidden_field_tag :klass, "course", class: "form-control",name: 'search[klass]' %>
+              <%= hidden_field_tag :id, "courses-tbl", class: "form-control",name: 'search[id]' %>
+            <%end%>
+          </div>
+          <div class="col-md-9">
+          </div>
+        </div>
+        <table class="table table-striped" id="courses-tbl">
+          <thead>
+            <tr>
+              <th>COURSE NAME</th>
+              <th>LOCATION</th>
+              <th>Course Type</th>
+              <th>Amenities</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @courses.each do |course| %>
+              <tr>
+                <td><%= link_to course.name, admin_ad_path(course) %></td>
+                <td><%= course.try(:formated_location) %></td>
+                <td><%= course.try(:course_type) %></td>
+                <td><%= course.try(:amenities_list) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

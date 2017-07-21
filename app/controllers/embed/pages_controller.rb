@@ -8,10 +8,16 @@ class Embed::PagesController < ApplicationController
     gon.videos = []
     gon.videos_urls = []
     gon.tags = []
+    gon.par = []
+    gon.yard = []
+    gon.mhcp = []
     @course.holes.each do |hole|
-      gon.videos << hole.video if hole.video.present?
-      gon.videos_urls << hole.video.video if hole.video.present?
-      gon.tags << hole.video.tags if hole.video.present?
+        gon.videos << hole.video  if hole.video.present?
+        gon.videos_urls << hole.video.video  if hole.video.present?
+        gon.tags << hole.video.tags  if hole.video.present?
+        gon.par << hole.par if hole.video.present?
+        gon.yard << hole.yards if hole.video.present?
+        gon.mhcp << hole.mhcp if hole.video.present?
     end
 
     render :layout => false
@@ -31,7 +37,4 @@ class Embed::PagesController < ApplicationController
         response.set_header("X-Frame-Options", "ALLOWALL")
     end
 
-    def allow_iframe
-      response.headers.delete "X-Frame-Options"
-    end
 end
