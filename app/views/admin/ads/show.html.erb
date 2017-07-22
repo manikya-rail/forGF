@@ -47,19 +47,38 @@
           <thead>
             <tr>
               <th>HOLE NUMBER</th>
-              <th>IMAGE</th>
+              <th>Slot 1</th>
+              <th>Slot 2</th>
+              <th>Slot 3</th>
             </tr>
           </thead>
 
           <tbody>
-            <% @course.holes.each_with_index do |hole, index| %>
+            <% @course.holes.sort_by{ |m| m.id }.each_with_index do |hole, index| %>
               <tr>
-                <td><%= "Hole " + hole.try(:hole_num).to_s  %></td>
+                <td>
+                  <%#= "Hole " + hole.try(:hole_num).to_s  %>
+                  <%= "Hole " + hole.try(:hole_num).to_s  %>
+                </td>
 
-                <% if hole.image.present? %>
-                  <td><%= link_to hole.image_file_name, hole.image.url %></td>
+                <%# if hole.ads.where('slot_num in (?)',1).present? %>
+                <%# if hole.ads.find_by(slot_num: 1).image_file_name.present? %>
+                <% if hole.ads.find_by(slot_num: 1).present? %>
+                  <td><%= link_to hole.ads.find_by(slot_num: 1).image_file_name, hole.ads.find_by(slot_num: 1).image.url %></td>
                 <% else %>
-                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-image-upl-modal" %> >Upload Image</button></td>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal-1" %> >Upload Image</button></td>
+                <% end %>
+
+                <% if hole.ads.find_by(slot_num: 2).present? %>
+                  <td><%= link_to hole.ads.find_by(slot_num: 2).image_file_name, hole.ads.find_by(slot_num: 2).image.url %></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal-2" %> >Upload Image</button></td>
+                <% end %>
+
+                <% if hole.ads.find_by(slot_num: 3).present? %>
+                  <td><%= link_to hole.ads.find_by(slot_num: 3).image_file_name, hole.ads.find_by(slot_num: 3).image.url %></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal-3" %> >Upload Image</button></td>
                 <% end %>
               </tr>
             <% end %>
@@ -72,7 +91,9 @@
 
 
   <%@course.holes.each_with_index do |hole, index|%>
-    <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
+    <%=render :partial => 'admin/ads/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num, slot_num: 1 } %>
+    <%=render :partial => 'admin/ads/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num, slot_num: 2 } %>
+    <%=render :partial => 'admin/ads/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num, slot_num: 3 } %>
   <%end%>
 </div>
 

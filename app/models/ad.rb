@@ -1,12 +1,7 @@
-class Hole < ApplicationRecord
-    belongs_to :course
-    # validates :par,:yards, :mhcp, :whcp, presence: true
-    has_one :video
-    has_one :score
-    has_many :ads
+class Ad < ApplicationRecord
+	belongs_to :hole
 
-
-    has_attached_file :image, styles: {
+	has_attached_file :image, styles: {
      thumb: '100x100>',
      square: '200x200#',
      medium: '300x300>'
@@ -14,4 +9,5 @@ class Hole < ApplicationRecord
 
    # Validate the attached image is image/jpg, image/png, etc
    validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+ 
 end

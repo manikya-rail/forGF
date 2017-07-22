@@ -22,12 +22,12 @@ class Admin::AdsController < ApplicationController
   end
 
   def add_image
-    @hole = Hole.find(params[:hole][:hole_id])
+    @ad = Ad.new(ad_params)
 
-    if @hole.update(hole_params)
-      redirect_to admin_ad_path(@hole.course), notice: 'Image was successfully uploaded.'
+    if @ad.save!
+      redirect_to admin_ad_path(Hole.find(@ad.hole_id).course), notice: 'Image was successfully uploaded.'
     else
-      redirect_to admin_ad_path(@hole.course), notice: 'Image not uploaded.'
+      redirect_to :back, notice: 'Image not uploaded.'
     end
   end
   
@@ -41,6 +41,10 @@ class Admin::AdsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])
+    end
+
+    def ad_params
+      params.require(:ad).permit(:hole_id, :slot_num, :image)
     end
 
 end

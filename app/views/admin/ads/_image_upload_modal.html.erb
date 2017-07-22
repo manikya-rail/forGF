@@ -1,0 +1,26 @@
+
+<div id= <%= "hole-#{hole_num}-image-upl-modal-#{slot_num}" %>  class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload Image <%#="#{slot_num}"%></h4>
+      </div>
+      <div class="modal-body">
+      <div id="message"></div>
+        <%=form_for :ad, url: admin_upload_image_path, method: "post", :html => { :multipart => true }, :remote => true do |v|%>
+            <%= v.file_field :image , style: "padding: 10 0px; margin:10px 0px;"%>
+            <%= v.hidden_field :hole_id ,value: hole.id%>
+            <%= v.hidden_field :slot_num ,value: "#{slot_num}"%>
+            <%= v.submit 'Upload', id: 'fileUpload', class: "btn btn-success upload-btn"%>
+        <%end%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
