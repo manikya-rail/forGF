@@ -4,11 +4,9 @@
 <!-- Linkers -->
 
 <link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
-<link href="http://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/stylesheets/videojs-playlist-ui.vertical.css" rel="stylesheet">
 
 <script src="//vjs.zencdn.net/5.19/video.min.js"></script>
 <script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
-<script src="http://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/javascripts/videojs-playlist-ui.js"></script>
 
 
 
@@ -16,39 +14,37 @@
 
  
     <div class = "main-container"> 
-      <div class="vplayer">
-        <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" width="700px" height="400px"></video>
-      </div>
-        <div class="hole-bar">
-          <ul >
-            <li >
-              <span>HOLE</span> <text id="hole" style>00</text>
-            </li>
-            <li id="parli">
-              <span>PAR</span> <text id="par">00</text>
-            </li>
-            <li >
-              <span>YD</span> <text id="yard">00</text>
-            </li>
-            <li >
-              <span>HDCP</span> <text id="mhcp">00</text>
-            </li>
-            <li >
-              <%= image_tag "Fore.png" %>
-            </li>
-          </ul>
-        </div>
+      <div class= "player-container">
+        <div class="vplayer">
+          
+          <div class="hole-bar-container">
+            <div class="hole-bar">
+              <ul >
+                <li ><span>HOLE</span> <text id="hole" style>0</text></li>
+                <li ><span>PAR</span> <text id="par">0</text></li>
+                <li ><span>YD</span> <text id="yard">0</text></li>
+                <li id="lastli" ><span>HDCP</span> <text id="mhcp">0</text></li>
+              </ul>
+            </div>
+          </div>
+          
+          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered"></video>
+          
+          <div class="previous on-video"><h1> < </h1></div>
+          <div class="next on-video"><h1> > </h1></div>
+          <div class="flag on-video"><%= image_tag "flag.png" %></div>
+          <div class="eye on-video"><%= image_tag "eye.png" %></div>
+          <div class="upload on-video"><%= image_tag "flag.png" %></div>
+          <div class="logo on-video"><%= image_tag "logo.png" %></div>
 
-        <button class="previous on-video"><h1> < </h1></button>
-        <button class="next on-video"><h1> > </h1></button>
-        <button class="flag on-video"><%= image_tag "flag.png" %></button>
-        <button class="eye on-video"><%= image_tag "eye.png" %></button>
-        <button class="logo on-video"><%#= image_tag "logo.png" %></button>
-      
-      <!-- <div class="my-custom-class">
-      </div>
- -->
-      <div class="vjs-playlist custom">
+          <div class="vjs-playlist">
+            <div  class="playlist">
+              <ul id="playlist" >
+                
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -63,158 +59,33 @@
 <script type="text/javascript">
 var videoList = []
 
-// var videoList = [{
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'https://www.rt.com/static/img/og-logo-rt.png',
-//   thumbnail: 'https://www.rt.com/static/img/og-logo-rt.png',
-//   name: "Hole 1"
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-//   thumbnail:'http://media.w3.org/2010/05/bunny/poster.png'
-// }, {
-//   sources: [{
-//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'https://vjs.zencdn.net/v/oceans.png',
-//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
-// }, {
-//   sources: [{
-//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'https://vjs.zencdn.net/v/oceans.png',
-//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-//   thumbnail:'http://media.w3.org/2010/05/bunny/poster.png'
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-//   thumbnail:'http://media.w3.org/2010/05/bunny/poster.png',
-//   name: "Hole 2"
-// }, {
-//   sources: [{
-//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'https://vjs.zencdn.net/v/oceans.png',
-//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-//   thumbnail:'http://media.w3.org/2010/05/bunny/poster.png',
-//   name: "Hole 7"
-// }, {
-//   sources: [{
-//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'https://vjs.zencdn.net/v/oceans.png',
-//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
-// }, {
-//   sources: [{
-//     src: 'https://vjs.zencdn.net/v/oceans.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'https://vjs.zencdn.net/v/oceans.png',
-//   thumbnail: 'https://vjs.zencdn.net/v/oceans.png'
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png',
-//   thumbnail: 'http://media.w3.org/2010/05/bunny/poster.png'
-// }, {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/video/poster.png',
-//   thumbnail:   'http://media.w3.org/2010/05/video/poster.png'
-// }];
-
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
-  var nm = "Hole ".concat(i+1);
   videoList.push({
     sources: [{
       src: gon.videos_urls[i],
       type: 'video/mp4'
-    }],
-    // poster: 'https://www.rt.com/static/img/og-logo-rt.png',
-    // thumbnail: 'https://www.rt.com/static/img/og-logo-rt.png',
-    name: nm
+    }]
   });
 }
 
-// var player = videojs(document.querySelector('video'), {
-//   inactivityTimeout: 0
-// });
 
 var player = videojs('hole-vid', {
-  preload: true, inactivityTimeout: 0, controls: true,  
+  preload: true, inactivityTimeout: 0, controls: true, width: 700, height:400,
    controlBar: {
     children:[
+      'playToggle',
+      'progressControl',
+      'volumeMenuButton',
       'playbackRateMenuButton',
-      'progressControl'
+      'fullscreenToggle'
     ],
-    // volumeMenuButton: false,
-    // playToggle: false,
-    // fullscreenToggle: false,
-    playbackRateMenuButton: { playbackRates: [0.5, 1, 1.5, 2] }
+    playbackRateMenuButton: { playbackRates: [0.5, 1, 1.5, 2] },
+    inactivityTimeout: 0
     // muteToggle: true
     }
 });
 
-try {
-  player.volume(0.5);
-} catch (e) {}
+try {player.volume(1);} catch (e) {}
 
 player.playlist(videoList);
 
@@ -224,6 +95,7 @@ document.querySelector('.previous').addEventListener('click', function() {
 document.querySelector('.next').addEventListener('click', function() {
   player.playlist.next();
 });
+
 document.querySelector('.flag').addEventListener('click', function() {
   for (var i = 0, len = gon.videos.length; i < len; i++) {
     if (gon.tags[i].length > 0) {
@@ -233,6 +105,13 @@ document.querySelector('.flag').addEventListener('click', function() {
     }
   }
 });
+
+player.on("loadedmetadata",function () {
+  barupdate();
+  current_video();
+});
+window.onload=playlisyui();
+
 
 /* ADD PREVIOUS */
 // var Button = videojs.getComponent('Button');
@@ -249,27 +128,6 @@ document.querySelector('.flag').addEventListener('click', function() {
 //   }
 // });
 
-/* ADD NEXT */
-// var NextButton = videojs.extend(Button, {
-//   constructor: function() {
-//     Button.apply(this, arguments);
-//     this.addClass('icon-angle-right');
-//     this.controlText("Next");
-//   },
-
-//   handleClick: function() {
-//     player.playlist.next();
-//   }
-// });
-
-/* ADD FLAG */
-// var FlagButton = videojs.extend(Button, {
-//   constructor: function() {
-//     Button.apply(this, arguments);
-//     this.addClass('icon-flag');
-//     this.controlText("Flag");
-//   },
-
 //   handleClick: function() {
 //     for (var i = 0, len = gon.videos.length; i < len; i++) {
 //       if (gon.tags[i].length > 0) {
@@ -281,24 +139,16 @@ document.querySelector('.flag').addEventListener('click', function() {
 //   }
 // });
 
-// Play List Integral
-// videojs(document.querySelector('video')).playlistUi();
-player.playlistUi();
-
-
-
 // Register the new component
-// videojs.registerComponent('NextButton', NextButton);
 // videojs.registerComponent('PrevButton', PrevButton);
-// videojs.registerComponent('FlagButton', FlagButton);
 // player.getChild('controlBar').addChild('PrevButton', {}, 0);
-// player.getChild('controlBar').addChild('NextButton', {}, 2);
-// player.getChild('controlBar').addChild('FlagButton', {}, 3);
 
-
-player.on("loadedmetadata",function () {
-  barupdate();
-});
+function playlisyui(){
+  // for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
+    for (var i = 1, len = 19; i < len; i++) {
+      document.getElementById('playlist').innerHTML += '<li id="'+i+'" onClick="select_video(this.id)">'+i+'</li>';
+    }
+}
 
 function barupdate(){
   
@@ -317,13 +167,27 @@ function leftPad(number, targetLength) {
     return output;
 }
 
-document.querySelector('.vjs-playlist').addEventListener('click', function() {
-  x = player.playbackRate();
-  console.log('this was x  '+x);
-  x+=1;
-  player.playbackRate(x);
-  console.log('this is x  '+x);
-});
+function select_video(id){
+  id-=1;
+  if (player.playlist.currentItem()!= hole){
+    player.playlist.currentItem(id);
+    current_video();
+  }
+}
+
+function current_video(){
+  id = player.playlist.currentItem();
+  for (i=0;i<18;i++){
+    if (i===id){
+      document.getElementById(i+1).className = "active";
+      console.log('im in id');
+    }
+    else{
+      document.getElementById(i+1).removeAttribute("class");
+            console.log(i);
+    }
+  }
+}
 
 
 </script>
@@ -331,186 +195,137 @@ document.querySelector('.vjs-playlist').addEventListener('click', function() {
 <!-- StyleSheet -->
 
 <style type="text/css">
+.player-container{
+  position: absolute;
+}
 .vplayer{
   z-index: -1;
 }
-  .video-holder,
-  .video-holder * {
-    box-sizing: border-box !important
-  }
-
-  .video-holder {
-    background: #1b1b1b;
-    padding: 10px
-  }
-
-  .centered {
-    width: 100%
-  }
-
-  #video {
-    border-radius: 8px
-  }
-  .video-js .vjs-big-play-button {
-    width: 70px;
-    height: 70px;
-    font-size: 50px;
-    line-height: 65px;
-    border: 2px solid;
-    border-radius: 50%;
-    background: transparent !important;
+.video-js .vjs-big-play-button {
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+  line-height: 46px;
+  border: 2px solid;
+  border-radius: 50%;
+  background: transparent !important;
 }
 .vjs-big-play-centered .vjs-big-play-button {
   top: 45%;
   left:55%;
 }
-
-
-
-  /* CUSTOM BUTTONS */
-  [class^="icon-"]:before,
-  [class*=" icon-"]:before {
-    font-family: FontAwesome;
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-    text-decoration: inherit;
-  }
-  .icon-angle-left:before {
-      content: "\f104";
-  }
-  .icon-angle-right:before {
-      content: "\f105";
-  }
-  .icon-flag:before {
-      content: "\f024";
-  }
-
-/*  .video-js .icon-angle-right, .video-js .icon-angle-left .icon-flag {
-      cursor: pointer;
-      -webkit-box-flex: none;
-      -moz-box-flex: none;
-      -webkit-flex: none;
-      -ms-flex: none;
-      flex: none;
-  }*/
-
-.main-container {
+.hole-bar-container {
+  width: 50%;
+  left:22%;
+  height: 29px;
   position: absolute;
-    left: 8px;
-    top: 8px;
-}
-
-.on-video {  
-    z-index: 5;
-    opacity: 0.5;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
+  margin-top: 4px;
+  z-index: 5;
+  text-align: center;
+  background-color: rgba(240,248,255,0.3);
+  border-radius: 5px;
 }
 .hole-bar{
-  width: 450px;
-  height: 40px;
-  background-color: #1b1912;
-  position: absolute;
-  margin: -400px 0 0 250px;
-  z-index: 5;
-  background: -webkit-linear-gradient(#313133,#242426,#313133); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#313133,#242426,#313133); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#313133,#242426,#313133); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#313133,#242426,#313133); /* Standard syntax (must be last) */
+  /*left:22%;*/
+  /*margin-top: 4px;*/
+  margin-top: 2px;
+  margin-left: 2.5%;
+  width: 95%;
+  height: 25px;
+  /*position: absolute;*/
+  border-radius: 5px;
+  opacity: 1;
+  background: linear-gradient(#696969, black);
+
+  /*z-index: 5;*/
+  /*background: -webkit-linear-gradient(#313133,#242426,#313133);*/ /* For Safari 5.1 to 6.0 */
+  /*background: -o-linear-gradient(#313133,#242426,#313133);*/ /* For Opera 11.1 to 12.0 */
+  /*background: -moz-linear-gradient(#313133,#242426,#313133);*/ /* For Firefox 3.6 to 15 */
+  /*background: linear-gradient(#313133,#242426,#313133);*/ /* Standard syntax (must be last) */
 
 }
 .hole-bar ul{
   list-style: none; 
   width:100%;
-  margin: 0 0 0 0;
-  padding: 5px 0 0 10px;
+  margin: 0;
+  padding: 3px;
+  text-align: center;
 }
 .hole-bar ul li {
   color:white; 
-  width:21%; 
+  width:24%; 
   float:left;
-  /*margin-top: 3px;*/
-  vertical-align: center;
+  border-right: 2px solid #696969;
 }
-.hole-bar ul li#parli{
-  width:16%; 
+#lastli {
+  border: 0;
 }
 .hole-bar ul li span {
-  font-size:15px; 
-  padding-top: 3px;
-  border-top: 2px solid green;
+  font-size:14px;
 }
 .hole-bar ul li text {
-  font-size:26px; 
+  font-size:18px; 
   font-family: sans-serif;
-  /*border-right:1px dashed black;*/
-  /*padding-right: 10px;*/
-  /*font-style: oblique;*/
 }
-.hole-bar ul li img {
-  min-width: 20%;
-  max-width: 60%;
-  /*vertical-align: center;*/
-  margin: 5% 0 0 15px;
-
+.on-video {  
+    z-index: 5;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+    color: white;
 }
 
   .previous{
     /*margin:top right down left;*/
     position: absolute;
-    left: 0px;
-    top: 180px;
-    background-color: #ffffff; 
+    left: 10px;
+    top: 45%;
     height: 100px; 
-    width: 50px;
-    opacity: 0.3;
     font-family: "Times New Roman", Times, serif;
-  }
+   }
   .next{
     position: absolute;
-    left: 650px;
-    top: 180px;
-    background-color: #ffffff; 
+    right: 10px;
+    top: 45%;
     height: 100px; 
-    width: 50px;
-    opacity: 0.3;
     font-family: "Times New Roman", Times, serif;
   }
 
   .flag {
     display:block;
     position: absolute;
-    left: 640px;
-    top: 120px;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border: 2px solid white;  
-    background-color: transparent; 
+    right: 2%;
+    top: 7px;
+    height: 30px;
+    width: 30px;
   }
 
   .eye {
     display:block;
     position: absolute;
-    left: 640px;
-    top: 60px;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border: 2px solid white;  
-    background-color: transparent; 
+    right: 10%;
+    top: 7px;
+    height: 30px;
+    width: 30px;
+  }
+  .upload {
+    display:block;
+    position: absolute;
+    right: 18%;
+    top: 7px;
+    height: 30px;
+    width: 30px;
   }
 
   .logo {
     display:block;
     position: absolute;
-    left: 10px;
-    top: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border: 2px solid white;  
-    background-color: transparent; 
+    width: 13%;
+    height: 18px;
+    left: 1%;
+    top: 7px;
+     
   }
 
 img {
@@ -520,67 +335,40 @@ img {
     max-height: 90%;
 }
 
-img:hover {
+/*img:hover {
   transform: scale( 1.05 );
 }
-
+*/
 
 .vjs-playlist {
-  /*border: 2px solid black; */
-  position: absolute;
   left:0px ;
-  top: 400px ;
-  width:700px; 
-  height:200px;
-  overflow: hidden;
-  /*background-color: white !important;*/
+  width:100%; 
+  height:35px;
+}
+.playlist{
+  height: 30px;
+  background: linear-gradient(#696969, black);
 }
 
-.custom {
-  
-  /*background-color: white;*/
-  /*margin: 0;*/
-  /*margin:350 0 0 0;*/
-
+.playlist ul{
+  list-style: none; 
+  width:100%;
+  margin: 0 0 0 0;
+  padding: 5px 0 0 0;
+}
+.playlist ul li {
+  padding: 0;
+  color:#C0C0C0; 
+  width:5.4%;
+  text-align: center; 
+  float:left;
+  vertical-align: center;
+  cursor: pointer;
+}
+.playlist ul li.active {
+  color:white; 
 }
 
-.vjs-playlist-item-list li{
-
-  float: left;  
-  _display: inline;
-  width: 16.66%;
-  overflow: hidden;
-}
-
-.vjs-playlist-item {
-  object-fit: none;  /* Do not scale the image  */
-  object-position: center; /* Center the image within the element */
-  height: 50px;
-  width: 50px;
-}
-
-.vjs-playlist-thumbnail-placeholder {
-  background: #2F4F4F;
-  max-width:90% ;
-  max-height:90% ;
-  /*margin-left: 5px;*/
-}
-.vjs-up-next .vjs-up-next-text, span.vjs-playlist-now-playing {
-  display: none !important;
-}
-/*.video-js button.vjs-control {
-  display: none;
-}*/
-.video-js .vjs-progress-holder {
-  height: 88% ;
-  margin-bottom: 0.4%;
-}
-.video-js .vjs-time-control {
-  display: none;
-}
-.video-js .vjs-play-progress:before {
-  display: none;
-}
-  
+ 
 
 </style>
