@@ -17,5 +17,8 @@ module ForeWebapp
         resource '*', :headers => :any, :methods => [:get, :patch, :put, :delete, :post, :options]
       end
     end
+    
+    config.assets.enabled = true
+    config.assets.paths << Rails.root.join('/app/assets/fonts')
   end
 end

@@ -8,6 +8,11 @@
 <script src="//vjs.zencdn.net/5.19/video.min.js"></script>
 <script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 
+<!-- Fonts -->
+<style type="text/css">@import url('https://fonts.googleapis.com/css?family=Armata');</style>
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+
 
 
 <!-- Body -->
@@ -18,23 +23,24 @@
         <div class="vplayer">
           
           <div class="hole-bar-container">
+            <div class="upper-border"></div>
             <div class="hole-bar">
               <ul >
-                <li ><span>HOLE</span> <text id="hole" style>0</text></li>
+                <li ><text id="hole" style>0</text> <span id="hole-num">0</span> </li>
                 <li ><span>PAR</span> <text id="par">0</text></li>
-                <li ><span>YD</span> <text id="yard">0</text></li>
-                <li id="lastli" ><span>HDCP</span> <text id="mhcp">0</text></li>
+                <li ><text id="yard">0</text> <span>YDS</span> </li>
+                <li id="lastli" ><text id="mhcp">0</text><span>HCP</span> </li>
               </ul>
             </div>
           </div>
           
           <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered"></video>
           
-          <div class="previous on-video"><h1> < </h1></div>
-          <div class="next on-video"><h1> > </h1></div>
+          <div class="previous on-video"> < </div>
+          <div class="next on-video"> > </div>
           <div class="flag on-video"><%= image_tag "flag.png" %></div>
           <div class="eye on-video"><%= image_tag "eye.png" %></div>
-          <div class="upload on-video"><%= image_tag "flag.png" %></div>
+          <div class="upload on-video"><%= image_tag "upload.png" %></div>
           <div class="logo on-video"><%= image_tag "logo.png" %></div>
 
           <div class="vjs-playlist">
@@ -151,11 +157,13 @@ function playlisyui(){
 }
 
 function barupdate(){
+  var hole = player.playlist.currentItem();
   
-  document.getElementById('hole').innerHTML = leftPad(player.playlist.currentItem()+1,2);
-  document.getElementById('par').innerHTML = leftPad(gon.par[player.playlist.currentItem()],1);
-  document.getElementById('yard').innerHTML = leftPad(gon.yard[player.playlist.currentItem()],3);
-  document.getElementById('mhcp').innerHTML = leftPad(gon.mhcp[player.playlist.currentItem()],2);
+  document.getElementById('hole').innerHTML = leftPad(hole+1,1);
+  document.getElementById('hole-num').innerHTML = pos(hole+1);
+  document.getElementById('par').innerHTML = leftPad(gon.par[hole],1);
+  document.getElementById('yard').innerHTML = leftPad(gon.yard[hole],1);
+  document.getElementById('mhcp').innerHTML = leftPad(gon.mhcp[hole],1);
 
 }
 
@@ -165,6 +173,22 @@ function leftPad(number, targetLength) {
         output = '0' + output;
     }
     return output;
+}
+
+function pos(num){
+  switch (num) {
+    default:
+        return "TH";
+        break;
+    case 1:
+        return "ST";
+        break;
+    case 2:
+        return "ND";
+        break;
+    case 3:
+        return "RD";
+  }
 }
 
 function select_video(id){
@@ -222,22 +246,30 @@ function current_video(){
   margin-top: 4px;
   z-index: 5;
   text-align: center;
-  background-color: rgba(240,248,255,0.3);
+  background-color: rgba(240,248,255,0.5);
   border-radius: 5px;
+}
+.upper-border {
+  height: 2px;
+  width: 80%;
+  margin-left: 10%;
+  /*background: linear-gradient(#696969, #8B4513);*/
+  background: linear-gradient(#696969, grey);
 }
 .hole-bar{
   /*left:22%;*/
   /*margin-top: 4px;*/
-  margin-top: 2px;
+/*  margin-top: 2px;*/
   margin-left: 2.5%;
   width: 95%;
   height: 25px;
   /*position: absolute;*/
   border-radius: 5px;
   opacity: 1;
-  background: linear-gradient(#696969, black);
+  background: linear-gradient(black, #212112, black);
 
-  /*z-index: 5;*/
+
+  /*z-index: 5; #696969*/
   /*background: -webkit-linear-gradient(#313133,#242426,#313133);*/ /* For Safari 5.1 to 6.0 */
   /*background: -o-linear-gradient(#313133,#242426,#313133);*/ /* For Opera 11.1 to 12.0 */
   /*background: -moz-linear-gradient(#313133,#242426,#313133);*/ /* For Firefox 3.6 to 15 */
@@ -248,7 +280,7 @@ function current_video(){
   list-style: none; 
   width:100%;
   margin: 0;
-  padding: 3px;
+  padding: 1px;
   text-align: center;
 }
 .hole-bar ul li {
@@ -256,16 +288,21 @@ function current_video(){
   width:24%; 
   float:left;
   border-right: 2px solid #696969;
+  
 }
 #lastli {
   border: 0;
 }
 .hole-bar ul li span {
   font-size:14px;
+  font-family: 'Armata0',sans-serif;
+  font-weight: 900; 
 }
 .hole-bar ul li text {
-  font-size:18px; 
-  font-family: sans-serif;
+  font-size:18px;
+  font-family: 'Armata0',sans-serif;
+  font-weight: 900; 
+  /*font-family: sans-serif;*/
 }
 .on-video {  
     z-index: 5;
@@ -280,16 +317,21 @@ function current_video(){
     /*margin:top right down left;*/
     position: absolute;
     left: 10px;
-    top: 45%;
+    top: 40%;
     height: 100px; 
-    font-family: "Times New Roman", Times, serif;
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: normal;
    }
   .next{
     position: absolute;
     right: 10px;
-    top: 45%;
+    top: 40%;
     height: 100px; 
-    font-family: "Times New Roman", Times, serif;
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    font-weight: normal;
+
   }
 
   .flag {
@@ -304,17 +346,17 @@ function current_video(){
   .eye {
     display:block;
     position: absolute;
-    right: 10%;
+    right: 9%;
     top: 7px;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 40px;
   }
   .upload {
     display:block;
     position: absolute;
     right: 18%;
     top: 7px;
-    height: 30px;
+    height: 25px;
     width: 30px;
   }
 
@@ -339,6 +381,30 @@ img {
   transform: scale( 1.05 );
 }
 */
+.video-js .vjs-control-bar {
+  background: transparent;
+}
+.video-js .vjs-play-progress, .video-js .vjs-volume-level {
+  background-color: #3CB371;
+}
+.video-js .vjs-load-progress, .video-js .vjs-slider{
+  background-color: white;
+}
+.video-js .vjs-play-progress:before, .video-js .vjs-volume-level:before{
+  color: #3CB371;
+}
+.video-js .vjs-control:before {
+  /*font-size: 25px;*/
+  font-size: 260%;
+  line-height: 1;
+}
+.vjs-playback-rate .vjs-playback-rate-value {
+  font-size: 210%;
+  line-height: 1.3;
+}
+.vjs-menu li {
+  font-size: 15px;
+}
 
 .vjs-playlist {
   left:0px ;
@@ -347,9 +413,10 @@ img {
 }
 .playlist{
   height: 30px;
-  background: linear-gradient(#696969, black);
-}
 
+  background: linear-gradient(#696969, #212112, black);
+}
+/*linear-gradient(#696969, black)*/
 .playlist ul{
   list-style: none; 
   width:100%;
@@ -364,9 +431,20 @@ img {
   float:left;
   vertical-align: center;
   cursor: pointer;
+  font-family: 'Armata0',sans-serif;
+  font-weight: 900;
+  /*font-weight: 5px;*/
+
 }
 .playlist ul li.active {
   color:white; 
+}
+
+@font-face {
+  font-family: 'Armata0';
+  src: url('/assets/Armata-Regular.ttf');
+  /*font-weight: bold;*/
+  /*font-style: normal;*/
 }
 
  
