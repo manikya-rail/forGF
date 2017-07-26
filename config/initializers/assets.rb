@@ -10,5 +10,5 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( navbar-fixed-side.css course.css)
-Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf|otf)$/
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf|otf|ttc)$/
 
