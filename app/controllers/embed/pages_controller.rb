@@ -2,6 +2,7 @@ class Embed::PagesController < ApplicationController
   before_action :set_course, only: [:show]
   # after_filter :allow_iframe, only: [:show, :awesome_embed]
   after_action :set_version_header
+  layout "embed", only: [:show]
 
 
   def show
@@ -20,7 +21,6 @@ class Embed::PagesController < ApplicationController
         gon.mhcp << hole.mhcp if hole.video.present?
     end
 
-    render layout: 'embed'
   end
 
     
