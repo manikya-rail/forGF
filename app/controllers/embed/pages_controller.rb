@@ -20,7 +20,7 @@ class Embed::PagesController < ApplicationController
         gon.mhcp << hole.mhcp if hole.video.present?
     end
 
-    render :layout => false
+    render layout: 'embed'
   end
 
     
