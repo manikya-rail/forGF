@@ -9,14 +9,15 @@
 <script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Armata" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Economica" rel="stylesheet"> 
+
 
 <!-- Body -->
 
  
     <div class = "main-container"> 
       <div class= "player-container">
+        <div class = "upper-gradient"></div>
         <div class="vplayer">
           
           <div class="hole-bar-container">
@@ -48,18 +49,40 @@
             </div>
           </div>
         </div>
+        <div class = "lower-gradient"></div>
+        
+        
       </div>
+      <div class="player-container">
+        <div id="hole-information">
+          Show Hole
+          <%#= link_to "Show Hole", admin_hole_path('98'), id:'hole-information', remote: true %>
+        </div>
+      </div>
+      
     </div>
 
-<!-- <button class="flag"><i class="fa fa-flag" aria-hidden="true"></i></button>
-<button class="eye"><i class="fa fa-eye" aria-hidden="true"></i></i></button>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
- -->
 
+    <style type="text/css">
+      #hole-information {
+        width:700px; 
+        height:500px;
+        margin-top: 64%;
+        z-index:11; 
+        background: black; 
+      }
+    </style>
 
 <!-- JavaScript -->
 
 <script type="text/javascript">
+
+
+
+$(document).ready(function(){
+
+});
+
 var videoList = []
 
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
@@ -219,6 +242,23 @@ function current_video(){
 .player-container{
   position: absolute;
   /*width: 97%;*/
+  /*background: linear-gradient(rgba(64,64,64,1), rgba(64,64,64,0));*/
+
+}
+.upper-gradient{
+  width: 100%;
+  padding-top: 4%;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0));
+  position: absolute;
+  z-index: 1;
+}
+.lower-gradient{
+  width: 100%;
+  padding-top: 4%;
+  margin-top: -4.5%;
+  background: linear-gradient(rgba(64,64,64,0), rgba(0,0,0,0.7));
+  position: absolute;
+  z-index: 1; 
 }
 .vplayer{
   z-index: -1;
@@ -315,20 +355,20 @@ body{
   .previous{
     /*margin:top right down left;*/
     position: absolute;
-    left: 10px;
+    left: 15px;
     top: 40%;
     height: 100px; 
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.2em;
+    font-family: 'Economica', sans-serif;
+    font-size: 2.5em;
     font-weight: normal;
    }
   .next{
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 40%;
     height: 100px; 
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.2em;
+    font-family: 'Economica', sans-serif;
+    font-size: 2.5em;
     font-weight: normal;
 
   }
@@ -414,6 +454,8 @@ img {
 .vjs-playlist {
   left:0px ;
   width:100%; 
+  padding-top: 0.5%;
+  background: black;
 }
 .playlist{
   position: absolute;
@@ -449,7 +491,8 @@ img {
 @font-face {
   font-family: 'RakerDisHvy';
   src: url(<%= asset_url "RakerDisHvy.otf" %>);
-  }
+}
+
 
  
 

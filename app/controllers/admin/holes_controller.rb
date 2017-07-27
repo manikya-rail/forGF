@@ -56,7 +56,7 @@ class Admin::HolesController < ApplicationController
   def destroy
     @hole.destroy
     respond_to do |format|
-      format.html { redirect_to holes_url, notice: 'Hole was successfully destroyed.' }
+      format.html { redirect_to admin_holes_url, notice: 'Hole was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

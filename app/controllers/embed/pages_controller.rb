@@ -12,6 +12,9 @@ class Embed::PagesController < ApplicationController
     gon.par = []
     gon.yard = []
     gon.mhcp = []
+
+    @holes=@course.holes
+    
     @course.holes.each do |hole|
         gon.videos << hole.video  if hole.video.present?
         gon.videos_urls << hole.video.video  if hole.video.present?

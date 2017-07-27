@@ -20,9 +20,9 @@
         <td><%= hole.yards %></td>
         <td><%= hole.mhcp %></td>
         <td><%= hole.whcp %></td>
-        <td><%= link_to 'Show', hole %></td>
-        <td><%= link_to 'Edit', edit_hole_path(hole) %></td>
-        <td><%= link_to 'Destroy', hole, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', admin_hole_path(hole) %></td>
+        <td><%= link_to 'Edit', edit_admin_hole_path(hole) %></td>
+        <td><%= link_to 'Destroy', admin_hole_path(hole), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Hole', new_hole_path %>
+<%#= link_to 'New Hole', new_hole_path %>
