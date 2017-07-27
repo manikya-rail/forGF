@@ -53,12 +53,12 @@
         
         
       </div>
-      <div class="player-container">
-        <div id="hole-information">
-          Show Hole
-          <%#= link_to "Show Hole", admin_hole_path('98'), id:'hole-information', remote: true %>
-        </div>
+      
+      <div id="hole-information">
+        Show Hole
+        <%#= render :partial => 'hole_information' %>
       </div>
+        
       
     </div>
 
@@ -67,7 +67,8 @@
       #hole-information {
         width:700px; 
         height:500px;
-        margin-top: 64%;
+        position: absolute;
+        margin-top: 35%;
         z-index:11; 
         background: black; 
       }
@@ -76,12 +77,6 @@
 <!-- JavaScript -->
 
 <script type="text/javascript">
-
-
-
-$(document).ready(function(){
-
-});
 
 var videoList = []
 
@@ -135,10 +130,11 @@ document.querySelector('.flag').addEventListener('click', function() {
 player.on("loadedmetadata",function () {
   barupdate();
   current_video();
+  hole_information();
 });
 window.onload=playlisyui();
 
-
+  
 /* ADD PREVIOUS */
 // var Button = videojs.getComponent('Button');
 
@@ -210,13 +206,16 @@ function pos(num){
         return "RD";
   }
 }
+function hole_information(){
+  var hole = player.playlist.currentItem();
+
+  document.getElementById('hole-information').innerHTML = '<div class="hole-title"> <span>HOLE</span> <h1>'+(hole+1)+'</h1><span>PAR '+gon.par[hole]+'</span></div> <div class="hole-descriptionn"> <span>'+(hole+1)+pos(hole+1)+' HOLE</span> <text>'+gon.description[hole]+'</text></div> <div class="hole-image"> <img src="'+gon.image_urls[hole]+'"></div>';
+}
 
 function select_video(id){
   id-=1;
-  if (player.playlist.currentItem()!= hole){
-    player.playlist.currentItem(id);
-    current_video();
-  }
+  
+  player.playlist.currentItem(id);
 }
 
 function current_video(){
