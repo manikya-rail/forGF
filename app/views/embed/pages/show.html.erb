@@ -68,9 +68,26 @@
         width:700px; 
         height:500px;
         position: absolute;
-        margin-top: 35%;
+        margin-top: 62%;
         z-index:11; 
-        background: black; 
+        background: grey; 
+      }
+      .hole-title {
+        padding: 5%;
+        width:20%;
+        float: left;
+      }
+      .hole-descriptionn {
+        padding: 5%;
+        width: 80%;
+        float: left;
+      }
+      .hole-image {
+        text-align: center;
+        margin-top: 10%;
+      }
+      .info-container {
+        overflow: auto;
       }
     </style>
 
@@ -209,12 +226,11 @@ function pos(num){
 function hole_information(){
   var hole = player.playlist.currentItem();
 
-  document.getElementById('hole-information').innerHTML = '<div class="hole-title"> <span>HOLE</span> <h1>'+(hole+1)+'</h1><span>PAR '+gon.par[hole]+'</span></div> <div class="hole-descriptionn"> <span>'+(hole+1)+pos(hole+1)+' HOLE</span> <text>'+gon.description[hole]+'</text></div> <div class="hole-image"> <img src="'+gon.image_urls[hole]+'"></div>';
+  document.getElementById('hole-information').innerHTML = '<div class="info-container"><div class="hole-title"> <span>HOLE</span> <h1>'+(hole+1)+'</h1><span>PAR '+gon.par[hole]+'</span></div> <div class="hole-descriptionn"> <span>'+(hole+1)+pos(hole+1)+' HOLE</span> <p>'+gon.description[hole]+'</p></div></div> <div class="hole-image"> <img src="'+gon.image_urls[hole]+'"></div>';
 }
 
 function select_video(id){
   id-=1;
-  
   player.playlist.currentItem(id);
 }
 
@@ -223,11 +239,9 @@ function current_video(){
   for (i=0;i<18;i++){
     if (i===id){
       document.getElementById(i+1).className = "active";
-      // console.log('im in id');
     }
     else{
       document.getElementById(i+1).removeAttribute("class");
-      // console.log(i);
     }
   }
 }
@@ -257,7 +271,7 @@ function current_video(){
   margin-top: -4.5%;
   background: linear-gradient(rgba(64,64,64,0), rgba(0,0,0,0.7));
   position: absolute;
-  z-index: 1; 
+  z-index: 0; 
 }
 .vplayer{
   z-index: -1;
@@ -421,6 +435,7 @@ img {
 
 .video-js .vjs-control-bar {
   background: transparent;
+  z-index: 2;
 }
 .video-js .vjs-play-progress, .video-js .vjs-volume-level {
   background-color: #3CB371;

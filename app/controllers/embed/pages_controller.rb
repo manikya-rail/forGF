@@ -6,6 +6,7 @@ class Embed::PagesController < ApplicationController
 
 
   def show
+    gon.hole_num = []
     gon.videos = []
     gon.videos_urls = []
     gon.tags = []
@@ -16,9 +17,10 @@ class Embed::PagesController < ApplicationController
     gon.image_urls = []
     gon.description = []
     
-    @holes = @course.holes
+    @holes = @course.holes.sort_by{ |m| m.id }
 
     @holes.each do |hole|
+        gon.hole_num << hole.hole_num if hole.video.present?
         gon.videos << hole.video  if hole.video.present?
         gon.videos_urls << hole.video.video  if hole.video.present?
         gon.tags << hole.video.tags  if hole.video.present?
