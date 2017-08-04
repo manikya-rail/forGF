@@ -20,24 +20,25 @@
         <div class = "upper-gradient"></div>
         <div class="vplayer">
           
-          
+          <div class="hole-bar-container">
+            <div class="upper-border"></div>
             <div class="hole-bar">
               <ul >
-                <li id="lastli" ><text id="mhcp">0</text><span>HCP</span> </li>
-                <li ><text id="yard">0</text> <span>YDS</span> </li>
-                <li ><span>PAR</span> <text id="par">0</text></li>
                 <li ><text id="hole" style>0</text> <span id="hole-num">0</span> </li>
+                <li ><span>PAR</span> <text id="par">0</text></li>
+                <li ><text id="yard">0</text> <span>YDS</span> </li>
+                <li id="lastli" ><text id="mhcp">0</text><span>HCP</span> </li>
               </ul>
             </div>
-          
+          </div>
           
           <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered"></video>
           
-          <div class="previous on-video"> <%= image_tag "left.png" %> </div>
-          <div class="next on-video"><%= image_tag "right.png" %></div>
-          <!-- <div class="flag on-video"><%= image_tag "flag.png" %></div> -->
-          <!-- <div class="eye on-video"><%= image_tag "eye.png" %></div> -->
-          <!-- <div class="upload on-video"><%= image_tag "upload.png" %></div> -->
+          <div class="previous on-video"> < </div>
+          <div class="next on-video"> > </div>
+          <div class="flag on-video"><%= image_tag "flag.png" %></div>
+          <div class="eye on-video"><%= image_tag "eye.png" %></div>
+          <div class="upload on-video"><%= image_tag "upload.png" %></div>
           <div class="logo on-video"><%= image_tag "logo.png" %> </div>
 
           <div class="vjs-playlist">
@@ -105,28 +106,19 @@ for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
   });
 }
 
-// 320, 480, 760, 960, 1200 and 1600px.
+
 var player = videojs('hole-vid', {
-  preload: true, inactivityTimeout: 0, controls: true, width: 1600,
+  preload: true, inactivityTimeout: 0, controls: true, width: 700,
    controlBar: {
-    children: [
+    children:[
       'playToggle',
+      'progressControl',
       'volumeMenuButton',
-      'progressControl',      
       'playbackRateMenuButton',
-      'settingsMenuButton',
       'fullscreenToggle'
     ],
-    settingsMenuButton: {
-                entries : [
-                    'muteToggle',
-                    // 'subtitlesButton',
-                    // 'captionsButton',
-                    'playbackRateMenuButton',
-                    'qualityMenuButton'
-                ]
-            },
     playbackRateMenuButton: { playbackRates: [0.5, 1, 1.5, 2] },
+    inactivityTimeout: 0
     // muteToggle: true
     }
 });
@@ -142,12 +134,7 @@ document.querySelector('.next').addEventListener('click', function() {
   player.playlist.next();
 });
 
-// document.querySelector('.flag').addEventListener('click', function() {
-//   flag_control();
-  
-// });
-
-function flag_control(){
+document.querySelector('.flag').addEventListener('click', function() {
   for (var i = 0, len = gon.videos.length; i < len; i++) {
     if (gon.tags[i].length > 0) {
       if (player.currentSrc().includes(gon.videos[i].video_file_name) && gon.videos[i].id == gon.tags[i][0].video_id) {
@@ -155,41 +142,48 @@ function flag_control(){
       }
     }
   }
-}
-
-
+});
 
 player.on("loadedmetadata",function () {
   barupdate();
   current_video();
   hole_information();
 });
-window.onload=playlistui();
+window.onload=playlisyui();
 
   
-/* ADD flag */
-var Button = videojs.getComponent('Button');
+/* ADD PREVIOUS */
+// var Button = videojs.getComponent('Button');
 
-var FlagButton = videojs.extend(Button, {
-  constructor: function() {
-    Button.apply(this, arguments);
-    this.addClass('flag');
-    this.controlText("Flag");
-  },
+// var PrevButton = videojs.extend(Button, {
+//   constructor: function() {
+//     Button.apply(this, arguments);
+//     this.addClass('icon-angle-left');
+//     this.controlText("Previous");
+//   },
 
-  handleClick: function() {
-    flag_control();
-  }
-});
+//   handleClick: function() {
+//     player.playlist.previous();
+//   }
+// });
 
+//   handleClick: function() {
+//     for (var i = 0, len = gon.videos.length; i < len; i++) {
+//       if (gon.tags[i].length > 0) {
+//         if (player.currentSrc().includes(gon.videos[i].video_file_name) && gon.videos[i].id == gon.tags[i][0].video_id) {
+//           player.currentTime(gon.tags[i][0].time);
+//         }
+//       }
+//     }
+//   }
+// });
 
 // Register the new component
-videojs.registerComponent('FlagButton', FlagButton);
-player.getChild('controlBar').addChild('FlagButton', {}, 4);
+// videojs.registerComponent('PrevButton', PrevButton);
+// player.getChild('controlBar').addChild('PrevButton', {}, 0);
 
-function playlistui(){
+function playlisyui(){
   // for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
-    document.getElementById('playlist').innerHTML = '<li id="'+0+'" class="hole-home" onClick="select_video(this.id)"></li>';
     for (var i = 1, len = 19; i < len; i++) {
       document.getElementById('playlist').innerHTML += '<li id="'+i+'" onClick="select_video(this.id)">'+i+'</li>';
     }
@@ -295,29 +289,55 @@ function current_video(){
   top: 45%;
   left:55%;
 }
-
-.hole-bar{
-  width: 60%;
-  right:0;
+.hole-bar-container {
+  width: 50%;
+  left:22%;
   height: 8%;
   position: absolute;
+  margin-top: 4px;
   z-index: 5;
   text-align: center;
-  background: transparent;
+  background-color: rgba(240,248,255,0.5);
+  border-radius: 0.4em;
+}
+.upper-border {
+  height: 6%;
+  width: 80%;
+  margin-left: 10%;
+  border-radius: 5em;
+  /*background: linear-gradient(#696969, #8B4513);*/
+  background: linear-gradient(#696969, grey);
+}
+.hole-bar{
+  margin-left: 2.5%;
+  width: 95%;
+  height: 86%;
+  /*position: absolute;*/
+  border-radius: 0.4em;
+  opacity: 1;
+  background: linear-gradient(black, #212112, black);
+
+
+  /*z-index: 5; #696969*/
+  /*background: -webkit-linear-gradient(#313133,#242426,#313133);*/ /* For Safari 5.1 to 6.0 */
+  /*background: -o-linear-gradient(#313133,#242426,#313133);*/ /* For Opera 11.1 to 12.0 */
+  /*background: -moz-linear-gradient(#313133,#242426,#313133);*/ /* For Firefox 3.6 to 15 */
+  /*background: linear-gradient(#313133,#242426,#313133);*/ /* Standard syntax (must be last) */
+
 }
 .hole-bar ul{
   list-style: none; 
-  width:auto;
-  margin: 1.5% 2% 0 0;
-  /*padding: 7px;*/
+  width:100%;
+  margin: 0;
+  padding: 2px;
   text-align: center;
 }
 .hole-bar ul li {
   color:white; 
-  width:auto; 
-  float:right;
-  border-right: 5px solid green;
-  padding: 1% 4% 0 4%;
+  width:24%; 
+  float:left;
+  border-right: 0.15em solid #696969;
+  padding-top: 1.5%;
   
 }
 #lastli {
@@ -348,24 +368,40 @@ body{
   .previous{
     /*margin:top right down left;*/
     position: absolute;
-    left: 25px;
-    top: 45%;
-    height: 40px; 
+    left: 15px;
+    top: 40%;
+    height: 100px; 
+    font-family: 'Economica', sans-serif;
+    font-size: 2.5em;
+    font-weight: normal;
    }
   .next{
     position: absolute;
-    right: 25px;
-    top: 45%;
-    height: 40px; 
+    right: 15px;
+    top: 40%;
+    height: 100px; 
+    font-family: 'Economica', sans-serif;
+    font-size: 2.5em;
+    font-weight: normal;
+
   }
 
-  .flag:before {
-    content: url(<%= image_url "flag.png" %>);
+  .flag {
+    display:block;
+    top: 2.0%;
+    position: absolute;
+    right: 2.5%;
+    height: 7%;
+    width: 2.5%;
+  }
+  .flag:hover {
+    content: url(<%= image_url "flag-hover.png" %>);
+    height: 7%;
+    width: 2.5%;
   }
 
   .eye {
-    display:none;
-    /*display:block;*/
+    display:block;
     top: 2.8%;
     position: absolute;
     right: 9%;
@@ -373,8 +409,7 @@ body{
     width: 6%;
   }
   .upload {
-    display: none;
-    /*display:block;*/
+    display:block;
     top: 2.0%;
     position: absolute;
     right: 18%;
@@ -416,14 +451,11 @@ img {
   font-size: 2.2em;
   line-height: 1.4;
 }
-.video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
-  /*content: url(<%= image_url "flag.png" %>); */
-}
-
 .vjs-playback-rate .vjs-playback-rate-value {
   font-family: "RakerDisHvy";
   font-size: 1.8em;
   line-height: 1.9;
+
 }
 .vjs-menu li {
   font-family: "RakerDisHvy";
@@ -441,25 +473,20 @@ img {
 }
 .playlist{
   position: absolute;
-  height:7%;
+  height:8%;
   width: 100%;
-  /*background: linear-gradient(#696969, #212112, black);*/
-  background-image:url(<%= image_url "hole-selector-background.png" %>);
-  /*background-repeat: repeat-x;*/
-  background-size: 100% 100%; 
+  background: linear-gradient(#696969, #212112, black);
 }
 .playlist ul{
   list-style: none; 
   width:100%;
   margin: 0 0 0 0;
-  padding: 1% 1% 0 1%;
+  padding: 1% 0 0 0;
 }
 .playlist ul li {
   padding-top: 0%;
   color:#696969; 
-  /*width:5.4%;*/
-  margin-right: 1.25%;
-  margin-left: 1.25%;
+  width:5.4%;
   text-align: center; 
   float:left;
   vertical-align: center;
@@ -469,18 +496,6 @@ img {
 }
 .playlist ul li.active {
   color:white; 
-  border-bottom: 4px solid green;
-}
-.hole-home {
-  width: 40px;
-  height: 40px;
-  margin-top: -0.4%;
-  background-image: url(<%= image_url "hole-home.png" %>);
-  background-size: 100% 100%;  
-}
-.hole-home.actie {
-  background-image: url(<%= image_url "hole-home-active.png" %>);
-  background-size: 100% 100%;  
 }
 
 @font-face {
@@ -492,49 +507,6 @@ img {
   src: url(<%= asset_url "RakerDisHvy.otf" %>);
 }
 
-
-
-
-
-
-
-@media only screen and (min-width: 1600px) {
-    body {font-size: 44px;}
-    
-    .hole-bar ul li span {
-      font-size:2.2em;
-    }
-    
-    .hole-bar ul li text {
-      font-size:2.7em;
-    }
-    .playlist ul li {
-      font-size: 2.7em;
-      line-height: 35px;
-      margin-right: 1.60%;
-      margin-left: 1.7%;
-    }
-    .hole-home {
-      width: 40px;
-      height: 40px;
-      margin-top: -0.4%;
-    }
-    .video-js .vjs-control:before {
-      /*font-size: 25px;*/
-      font-size: 1.8em;
-      line-height: 1.4;
-    }
-    .vjs-playback-rate .vjs-playback-rate-value {
-      font-family: "RakerDisHvy";
-      font-size: 1.8em;
-      line-height: 1.9;
-    }
-    .vjs-menu li {
-      font-family: "RakerDisHvy";
-      font-size: 1.2em;
-    }
-    
-}
 
  
 
