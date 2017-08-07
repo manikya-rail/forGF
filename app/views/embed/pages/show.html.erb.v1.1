@@ -33,7 +33,6 @@
             </div>
           
           
-          
           <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered"></video>
           
           <div class="previous on-video"> <%= image_tag "left.png" %> </div>
@@ -96,7 +95,6 @@
 <!-- JavaScript -->
 
 <script type="text/javascript">
-var pw = player_width();
 
 var videoList = []
 
@@ -111,7 +109,7 @@ for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
 
 // 320, 480, 760, 960, 1200 and 1600px.
 var player = videojs('hole-vid', {
-  preload: true, inactivityTimeout: 0, controls: true, width: pw,
+  preload: true, inactivityTimeout: 0, controls: true, width: 1600,
   'playbackRates': [0.5, 1, 1.5, 2],
    controlBar: {
     children: {
@@ -187,21 +185,8 @@ player.getChild('controlBar').addChild('FlagButton', {}, 4);
 
 
 
-function player_width(){
-  viewport = $(window).width();
-  if (viewport>=1600)
-    return 1600;
-  else if (viewport >=1200)
-    return 1200;
-  else if (viewport >=960)
-    return 960;
-  else if (viewport >=760)
-    return 760;
-  else if (viewport >=480)
-    return 480;
-  else if (viewport >=320)
-    return 320;
-}
+
+
 
 
 
@@ -313,40 +298,33 @@ function current_video(){
   top: 45%;
   left:55%;
 }
+
 .hole-bar{
-  right: 1%;
-  top: 1%;
+  width: 60%;
+  right:0;
+  height: 8%;
   position: absolute;
-  height: 7%;
   z-index: 5;
-  /*padding-left: 0;*/
-  /*border-radius: 0.4em;*/
   text-align: center;
-  background-image: url(<%= image_url "top-bar.png" %>);
-  background-size: 100% 100%;
+  background: transparent;
 }
 .hole-bar ul{
   list-style: none; 
-  /*white-space: nowrap;
-  display: inline-block;*/
-  margin: 10px 0 0 0;
-  width: 105%;
-  padding-left: 0;
-  /*padding-right: 17%;*/
+  width:auto;
+  margin: 1.5% 2% 0 0;
+  /*padding: 7px;*/
   text-align: center;
-  /*overflow: auto;*/
 }
 .hole-bar ul li {
-  /*display: inline-block;*/
   color:white; 
-  width:auto;
+  width:auto; 
   float:right;
-  border-right: 5px solid #696969;
-  padding: 2% 4% 0.6% 4%;
+  border-right: 5px solid green;
+  padding: 1% 4% 0 4%;
+  
 }
 #lastli {
   border: 0;
-  padding-right: 15%;
 }
 body{
   /*font-size: 2.5vw;*/
@@ -410,12 +388,11 @@ body{
 
   .logo {
     display:block;
-    top: 0;
-    left: 1%;
+    top: 0.5%;
     position: absolute;
     width: 11%;
     height: 6%;
-    
+    left: 1%;
   }
 
 img {
@@ -427,6 +404,7 @@ img {
 
 .video-js .vjs-control-bar {
   background: transparent;
+  height: 2.2em;
   z-index: 2;
 }
 .video-js .vjs-play-progress, .video-js .vjs-volume-level {
@@ -462,16 +440,6 @@ img {
   font-size: 1.8em;
   line-height: 1.9;
 }
-.vjs-playback-rate .vjs-playback-rate-value {
-      content: url(<%= image_url "settings.png" %>);
-      margin-left: 35px;
-      margin-top: 5px;
-      width: 45%;
-      height:70%;
-      /*font-size: 1.9em;
-      line-height: 1.2;*/
-}
-
 .vjs-menu li {
   font-family: "RakerDisHvy";
   font-size: 1.2em;
@@ -494,26 +462,21 @@ img {
   background-image:url(<%= image_url "hole-selector-background.png" %>);
   /*background-repeat: repeat-x;*/
   background-size: 100% 100%; 
-  overflow: auto;
 }
 .playlist ul{
-  display: inline-block;
-  white-space: nowrap;
   list-style: none; 
-  height: 100%;
   width:100%;
   margin: 0 0 0 0;
   padding: 1% 1% 0 1%;
 }
 .playlist ul li {
-  display: inline-block;
   padding-top: 0%;
   color:#696969; 
   /*width:5.4%;*/
   margin-right: 1.25%;
   margin-left: 1.25%;
   text-align: center; 
-  /*float:left;*/
+  float:left;
   vertical-align: center;
   cursor: pointer;
   font-family: 'RakerDisHvy',sans-serif;
@@ -552,25 +515,13 @@ img {
 
 @media only screen and (min-width: 1600px) {
     body {font-size: 44px;}
-    .video-js .vjs-big-play-button {
-      /*line-height: 1.70;*/
-    }
-    .hole-bar ul{
-      margin: 10px 0 0 0;
-      /*font-size: 16px;*/
-    }
-    .hole-bar ul li {
-      border-right: 5px solid #696969;
-      padding: 2% 4% 0.6% 4%;
-    }    
+    
     .hole-bar ul li span {
-      font-size:2.5em;
+      font-size:2.2em;
     }
+    
     .hole-bar ul li text {
-      font-size:3.0em;
-    }
-    .playlist{
-      height:8%;
+      font-size:2.7em;
     }
     .playlist ul li {
       font-size: 2.7em;
@@ -583,13 +534,6 @@ img {
       height: 40px;
       margin-top: -0.4%;
     }
-
-    .video-js .vjs-control-bar {
-      height: 2.2em;
-    }
-    .flag:before {
-      transform: scale(.8);
-    }
     .video-js .vjs-control:before {
       /*font-size: 25px;*/
       font-size: 2.0em;
@@ -600,6 +544,7 @@ img {
       line-height: 0.75;
     }
     .vjs-playback-rate .vjs-playback-rate-value {
+      content: url(<%= image_url "settings.png" %>);
       margin-left: 35px;
       margin-top: 5px;
       width: 45%;
@@ -608,80 +553,11 @@ img {
       line-height: 1.2;*/
     }
     .vjs-volume-bar.vjs-slider-horizontal {
-      margin-top: 18.5%;
+      margin-top: 19%;
     }
     .vjs-menu li {
       font-size: 1.2em;
     }
-    
-}
-
-
-@media only screen and (min-width: 1200px) and (max-width: 1600px) {
-    body {font-size: 30px;}
-    .video-js .vjs-big-play-button {
-      line-height: 1.70;
-    }
-    .hole-bar ul{
-      margin: 8px 0 0 0;
-      font-size: 10px;
-    }
-    .hole-bar ul li {
-      border-right: 2.5px solid #696969;
-      padding: 1.5% 4% 0 4%;
-    }    
-    
-    .hole-bar ul li span {
-      font-size:2.5em;
-    }
-    
-    .hole-bar ul li text {
-      font-size:3.0em;
-    }
-
-    .playlist {
-      height:11%; 
-    }
-    
-    .playlist ul li {
-      font-size: 35px;
-      line-height: 30px;
-      margin-right: 1.60%;
-      margin-left: 1.7%;
-    }
-    .hole-home {
-      width: 40px;
-      height: 40px;
-      margin-top: -0.4%;
-    }
-    .video-js .vjs-control-bar {
-      /*height: 3em;*/
-    }
-    .flag:before {
-      transform: scale(.6);
-      margin-top: -3px;
-    }
-    .video-js .vjs-control:before {
-      /*font-size: 25px;*/
-      /*font-size: 2.0em;*/
-      /*line-height: 0.9;*/
-    }
-    .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
-      font-size: 3.0em;
-      line-height: 0.85;
-    }
-    .vjs-playback-rate .vjs-playback-rate-value {
-      margin-left: 22px;
-      margin-top: 7px;
-      width:30px;
-      height:30px;
-    }
-    .vjs-volume-bar.vjs-slider-horizontal {
-      margin-top: 22.5%;
-    }
-    /*.vjs-menu li {
-      font-size: 1.2em;
-    }*/
     
 }
 
