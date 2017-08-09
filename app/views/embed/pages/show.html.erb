@@ -50,6 +50,12 @@
             <div id="0" class="hole-home" onClick="select_video(this.id)"><%= image_tag "hole-home.png" %></div>
             <div  class="playlist">
               <ul id="playlist" >
+                <% @holes.each do |hole| %> 
+                  <li id="<%=hole.hole_num%>" onClick="select_video(this.id)">
+                    <%=link_to hole.hole_num, embed_hole_info_path(hole.id), remote: true
+                    %>
+                  </li>
+                <% end %>
                 
               </ul>
             </div>
@@ -62,21 +68,32 @@
         
       </div>
 
-      
-      <div id="hole-information">
-        Show Hole
-        <%#= render :partial => 'hole_information' %>
+      <div class="hole-info-div">
+        <div class="linkto">Show Hole 
+          <%#= link_to "Hole Info", controller: "pages", action: "hole_by_hole", id: 289 %>
+          <%= link_to "Hole Info", embed_hole_info_path(289), remote: true %>
+        </div>
+        <div id="holeinfo" class="holeinfo"></div>
+        
       </div>
     </div>
 
 
     <style type="text/css">
-      #hole-information {
+      .hole-info-div{
         width:700px; 
         height:500px;
         position: absolute;
-        margin-top: 62%;
-        z-index:11; 
+        margin-top: 800px;
+        z-index:11;
+      }
+      .linkto {
+        width: 200px;
+        height: 200px;
+      }
+      #hole-information {
+        width:700px; 
+        height:500px;
         background: grey; 
       }
       .hole-title {
@@ -167,9 +184,8 @@ function flag_control(){
 player.on("loadedmetadata",function () {
   barupdate();
   current_video();
-  hole_information();
 });
-window.onload=playlistui();
+// window.onload=playlistui();
 
   
 /* ADD flag */
@@ -256,11 +272,7 @@ function pos(num){
         return "RD";
   }
 }
-function hole_information(){
-  var hole = player.playlist.currentItem();
 
-  document.getElementById('hole-information').innerHTML = '<div class="info-container"><div class="hole-title"> <span>HOLE</span> <h1>'+(hole+1)+'</h1><span>PAR '+gon.par[hole]+'</span></div> <div class="hole-descriptionn"> <span>'+(hole+1)+pos(hole+1)+' HOLE</span> <p>'+gon.description[hole]+'</p></div></div> <div class="hole-image"> <img src="'+gon.image_urls[hole]+'"></div>';
-}
 
 function select_video(id){
   id-=1;
@@ -292,6 +304,8 @@ document.querySelector('.hole-home').addEventListener('click', function() {
 
 // document.getElementById(0).className += " active";
 
+// trigger for forst ajax call
+$(document).ready(function() { $('#1 a').trigger('click') });
 
 </script>
 
@@ -547,9 +561,15 @@ body{
   font-family: 'RakerDisHvy',sans-serif;
   font-size: 1.6em;
 }
+
+.playlist ul li a{
+  color:#696969; 
+}
 .playlist ul li.active {
-  color:white; 
   border-bottom: 4px solid green;
+}
+.playlist ul li.active a {
+  color:white; 
 }
 .hole-home {
   float: left;
@@ -599,9 +619,9 @@ body{
     }
     
     .playlist ul li {
-      font-size: 40px;
+      font-size: 37px;
       line-height: 35px;
-      margin-right: 1.60%;
+      margin-right: 1.50%;
       margin-left: 1.7%;
     }
     .right-green {
@@ -614,7 +634,7 @@ body{
       width:6%;
       height: 100%;
       padding-left: 45px;
-      margin-top: -6px;
+      margin-top: -4px;
     }
     .hole-home img {
       

@@ -2,23 +2,46 @@
 
 <p>
   <strong>Par:</strong>
-  <%#= hole.par %>
+  <%= @hole.par %>
 </p>
 
 <p>
   <strong>Yards:</strong>
-  <%#= hole.yards %>
+  <%= @hole.yards %>
 </p>
 
 <p>
   <strong>Mhcp:</strong>
-  <%#= hole.mhcp %>
+  <%= @hole.mhcp %>
 </p>
 
 <p>
   <strong>Whcp:</strong>
-  <%#= hole.whcp %>
+  <%= @hole.whcp %>
 </p>
 
-<%# end %>
+<p>
+  <strong>Whcp:</strong>
+  <%= @hole.image_file_name %>
+</p>
+    
+<p>
+  <strong>Image</strong>
+  <%= @hole.image.url %>
+  <%= image_tag(@hole.image.url)  %>
+</p> 
 
+<p>
+  <strong>Description:</strong>
+  <%= @hole.description %>
+</p> 
+
+	<div id="hole-information">
+		Show Hole
+	</div>
+
+<style type="text/css">
+p{
+	background-color: lightgrey;
+}
+</style>

@@ -18,6 +18,7 @@ namespace :admin do
   delete "tags/:id" ,to: 'tags#destroy', as: 'delete_tag'
   post "holes/add_image" ,to: 'holes#add_image', as: 'add_image'
   post "ads/add_image" ,to: 'ads#add_image', as: 'upload_image'
+
 end
 
   devise_for :admins
@@ -43,5 +44,6 @@ end
 
   namespace :embed do
     resources :pages, only: :show, path: "" # -> domain.com/embed/1
+    get "hole/:id", to: 'pages#hole_by_hole',as: 'hole_info'
   end
 end

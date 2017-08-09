@@ -2,8 +2,8 @@ class Embed::PagesController < ApplicationController
   before_action :set_course, only: [:show]
   # after_filter :allow_iframe, only: [:show, :awesome_embed]
   after_action :set_version_header
-  layout "embed", only: [:show]
-
+  # layout "embed", only: [:show]
+  layout "embed"
 
   def show
     gon.hole_num = []
@@ -35,6 +35,11 @@ class Embed::PagesController < ApplicationController
 
   end
 
+  def hole_by_hole
+    @hole=Hole.find(params[:id])
+  end
+
+
     
   def awesome_embed     
   end
@@ -48,5 +53,6 @@ class Embed::PagesController < ApplicationController
         # response.headers['X-Frame-Options'] = 'AllowAll'
         response.set_header("X-Frame-Options", "ALLOWALL")
     end
+
 
 end
