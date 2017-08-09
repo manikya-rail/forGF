@@ -89,7 +89,7 @@ class Admin::CoursesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
       params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :total_par, :slope, :rating, :length, :number_of_tees, :resort_id, :network_id, :logo, :cover,
-          amenities_attributes: [:id, :restaurants, :caddies, :carts],
+          amenities_attributes: [:id, :restaurants, :caddies, :carts, :practice_range, :golf_boards],
           location_attributes: [:id, :town,:state, :lat, :lng],
           score_cards_attributes: [:id, :tee_name, :color],
           holes_attributes: [:id, :par, :yards, :mhcp, :whcp, :description, :hole_num]
