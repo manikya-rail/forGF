@@ -1,11 +1,30 @@
 <div class="col-md-12">
   <%= label_tag :amenities ,'Amenities',class:"col-md-12 zero-left-right-padd", id: 'course_amenities' %>
   <div class="col-md-12">
-      <div class="inline"><%= a.check_box :restaurants, class: 'check-field' %> Restaurant</div>
-      <div class="inline"><%= a.check_box :caddies, class: 'check-field' %> Caddies</div>
-      <div class="inline"><%= a.check_box :carts, class: 'check-field' %> Carts</div>
+      <div ><%= a.check_box :restaurants, class: 'check-field' %> Restaurant </div>
+      <div ><%= a.check_box :caddies, class: 'check-field' %> Caddies <%= image_tag "amenities/caddies.png", class: 'caddies' %></div>
+      <div ><%= a.check_box :carts, class: 'check-field' %> Carts <%= image_tag "amenities/carts.png", class: 'carts'  %></div>
 
-      <div class="inline"><%= a.check_box :practice_range, class: 'check-field' %> Practice Range</div>
-      <div class="inline"><%= a.check_box :golf_boards, class: 'check-field' %> Golf Boards</div>
+      <div ><%= a.check_box :practice_range, class: 'check-field' %> Practice Range <%= image_tag "amenities/practice-range.png", class: 'practice-range' %></div>
+      <div ><%= a.check_box :golf_boards, class: 'check-field' %> Golf Boards <%= image_tag "amenities/golfboard.png", class: 'golfboard' %></div>
   </div>
 </div>
+
+<style type="text/css">
+.caddies{
+	width: 30px;
+	height: 40px;
+}
+.carts {
+	width: 40px;
+	height: 30px;	
+}
+.practice-range{
+	width: 50px;
+	height: 45px;
+}
+.golfboard {
+	width: 50px;
+	height: 35px;
+}
+</style>
