@@ -71,6 +71,23 @@ class Admin::HolesController < ApplicationController
     end
   end
 
+  def add_hole_image
+    @hole = Hole.find(params[:hole][:hole_id])
+
+    # if @hole.update(hole_params)
+    if @hole.present?  
+      if params[:images]
+        params[:images].each { |image|
+          @hole.hole_image.create(image: image)
+        }
+        redirect_to admin_course_path(@hole.course), notice: 'Images were successfully uploaded.'
+      end
+        
+    else
+        redirect_to admin_course_path(@hole.course), notice: 'Image not uploaded.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hole

@@ -79,6 +79,9 @@
                 <% else %>
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-image-upl-modal" %> >Upload Image</button></td>
                 <% end %>
+                
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-hole-image-upl-modal" %> >Upload Image</button></td>
+                
               </tr>
             <% end %>
           </tbody>
@@ -92,6 +95,7 @@
   <%@course.holes.each_with_index do |hole, index|%>
     <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
     <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
+    <%=render :partial => 'admin/holes/hole_image_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
   <%end%>
 
 

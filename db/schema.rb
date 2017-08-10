@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809134547) do
+ActiveRecord::Schema.define(version: 20170810124025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,17 @@ ActiveRecord::Schema.define(version: 20170809134547) do
     t.index ["list_id"], name: "index_courses_on_list_id", using: :btree
     t.index ["network_id"], name: "index_courses_on_network_id", using: :btree
     t.index ["resort_id"], name: "index_courses_on_resort_id", using: :btree
+  end
+
+  create_table "hole_images", force: :cascade do |t|
+    t.integer  "hole_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["hole_id"], name: "index_hole_images_on_hole_id", using: :btree
   end
 
   create_table "holes", force: :cascade do |t|
@@ -233,5 +244,6 @@ ActiveRecord::Schema.define(version: 20170809134547) do
   add_foreign_key "course_users", "courses"
   add_foreign_key "course_users", "users"
   add_foreign_key "courses", "lists"
+  add_foreign_key "hole_images", "holes"
   add_foreign_key "lists", "courses"
 end

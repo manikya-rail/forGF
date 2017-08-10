@@ -4,6 +4,7 @@ class Hole < ApplicationRecord
     has_one :video
     has_one :score
     has_many :ads
+    has_many :hole_image, :dependent => :destroy
 
 
     has_attached_file :image, styles: {
