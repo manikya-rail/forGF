@@ -71,6 +71,16 @@ class Admin::HolesController < ApplicationController
     end
   end
 
+  def add_map
+    @hole = Hole.find(params[:hole][:hole_id])
+
+    if @hole.update(hole_params_map)
+      redirect_to admin_course_path(@hole.course), notice: 'Map was successfully uploaded.'
+    else
+      redirect_to admin_course_path(@hole.course), notice: 'Map not uploaded.'
+    end
+  end
+
   def add_hole_image
     @hole = Hole.find(params[:hole][:hole_id])
 
@@ -84,7 +94,7 @@ class Admin::HolesController < ApplicationController
       end
         
     else
-        redirect_to admin_course_path(@hole.course), notice: 'Image not uploaded.'
+        redirect_to admin_course_path(@hole.course), notice: 'Images not uploaded.'
     end
   end
 
@@ -97,5 +107,10 @@ class Admin::HolesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def hole_params
       params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :image)
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def hole_params_map
+      params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :map)
     end
 end

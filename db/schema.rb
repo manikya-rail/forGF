@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170810124025) do
+ActiveRecord::Schema.define(version: 20170811071914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,10 @@ ActiveRecord::Schema.define(version: 20170810124025) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.text     "description"
+    t.string   "map_file_name"
+    t.string   "map_content_type"
+    t.integer  "map_file_size"
+    t.datetime "map_updated_at"
     t.index ["course_id"], name: "index_holes_on_course_id", using: :btree
   end
 
