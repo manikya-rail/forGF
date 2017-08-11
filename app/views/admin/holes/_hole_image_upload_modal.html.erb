@@ -15,11 +15,8 @@
             <%= v.hidden_field :hole_id ,value: hole.id%>
             <%= v.submit 'Upload', id: 'fileUpload', class: "btn btn-success upload-btn"%>
         <%end%>
-        <% hole.hole_image.each do | holeimage | %>
-        <div style="margin:3px; display:inline;"> <%=image_tag holeimage.image.url(:thumb) %></div>
-        <% end%>
-        <%#= render :partial => 'admin/holes/gallery', locals: {hole: hole} %>
-        <!-- <div style="width:60%; height:200px; background-color:grey;"></div> -->
+        
+        <%= render :partial => 'admin/holes/gallery', locals: {hole: hole} %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
