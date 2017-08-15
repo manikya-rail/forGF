@@ -1,47 +1,138 @@
-<%#= @holes.each do |hole| %>
 
-<p>
-  <strong>Par:</strong>
-  <%= @hole.par %>
-</p>
+  <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
 
-<p>
-  <strong>Yards:</strong>
-  <%= @hole.yards %>
-</p>
-
-<p>
-  <strong>Mhcp:</strong>
-  <%= @hole.mhcp %>
-</p>
-
-<p>
-  <strong>Whcp:</strong>
-  <%= @hole.whcp %>
-</p>
-
-<p>
-  <strong>Whcp:</strong>
-  <%= @hole.image_file_name %>
-</p>
+  <div class="row description">
+    <div class="col-md-7">
+      <div class="row">
+        <div class="col-md-3">
+          <h3><b><%= @hole.hole_num %> Hole, Par <%= @hole.par%></b></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4><%= @hole.description %></h4>
+        </div>
+      </div>
+    </div>
     
-<p>
-  <strong>Image</strong>
-  <%= @hole.image.url %>
-  <%= image_tag(@hole.image.url)  %>
-</p> 
+    <div class="col-md-5 yards">
+      <div class="col-md-6 points">
+        <h3><b><%= @hole.hole_num %> Hole</b></h3>
+      </div>
+      <div class=" col-md-6 points">
+        <h3><b><%= @hole.hole_num %> Hole</b></h3>
+      </div>
+      <div class=" col-md-6 points">
+        <h3><b><%= @hole.hole_num %> Hole</b></h3>
+      </div>
+      <div class=" col-md-6 points">
+        <h3><b><%= @hole.hole_num %> Hole</b></h3>
+      </div>
+    </div>
+  </div>
+  <div class="row slider">
+    <div class="col-md-12">
+      <ul class="bxslider">
+        <% @hole.hole_image.each do | holeimage | %>
+          <li><%=image_tag holeimage.image.url %></li>
+        <% end%>
+      </ul>
+    </div>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @hole.description %>
-</p> 
-
-	<div id="hole-information">
-		Show Hole
-	</div>
-
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.bxslider').bxSlider({
+    mode: 'horizontal',
+    useCSS: false,
+    // infiniteLoop: false,
+    // hideControlOnEnd: true,
+    // // easing: 'easeOutElastic',
+    // speed: 2000,
+      pager: false,
+      nextText: '<%= image_tag "right.png" %>',
+      prevText: '<%= image_tag "left.png" %>'
+   });
+});
+</script>
 <style type="text/css">
-p{
-	background-color: lightgrey;
+.bxslider {
+    list-style:none;
+    margin:0;
+    padding:0
 }
+
+.bxslider li img {
+  width: 100%;
+  height: 100%;
+}
+
+.slider{
+  margin:0;
+  padding:0;
+}
+.slider .col-md-12{
+  margin:0;
+  padding:0;
+}
+
+.bx-next {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+}
+.bx-prev {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+}
+
+.description {
+  padding-left: 50px;
+}
+.yards{
+  text-align: right;
+  padding-top: 30px;
+  /*display: inline-block;*/
+}
+.yards .points{
+  display: inline;
+  width: 40%;
+}
+  .justify{
+    text-align: justify;
+  }
+      p{
+        background-color: lightgrey;
+        font-size: 0.5em;
+      }
+      .hole-info-div{
+        /*width:700px; */
+        position: absolute;
+        margin-top: 800px;
+      }
+      
+      .hole-title {
+        padding: 5%;
+        width:20%;
+        float: left;
+      }
+      .hole-descriptionn {
+        padding: 5%;
+        width: 80%;
+        float: left;
+      }
+      .hole-image {
+        text-align: center;
+        margin-top: 10%;
+      }
+      .info-container {
+        overflow: auto;
+      }
+
+
+      @media only screen and (min-width: 1600px) {
+
+      }
 </style>

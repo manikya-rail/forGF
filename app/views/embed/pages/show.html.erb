@@ -13,6 +13,9 @@
 <!-- Fonts -->
  <link href="https://fonts.googleapis.com/css?family=Economica" rel="stylesheet"> 
 
+<!-- slider -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
+
 
 <!-- Body -->
 
@@ -61,59 +64,13 @@
             </div>
             <div class="right-green"><%= image_tag "right-green.png" %></div>
           </div>
-
-          
         </div>
-        
-        
       </div>
 
       <div class="hole-info-div">
-        <div class="linkto">Show Hole 
-          <%#= link_to "Hole Info", controller: "pages", action: "hole_by_hole", id: 289 %>
-          <%= link_to "Hole Info", embed_hole_info_path(289), remote: true %>
-        </div>
         <div id="holeinfo" class="holeinfo"></div>
-        
       </div>
     </div>
-
-
-    <style type="text/css">
-      .hole-info-div{
-        width:700px; 
-        height:500px;
-        position: absolute;
-        margin-top: 800px;
-        z-index:11;
-      }
-      .linkto {
-        width: 200px;
-        height: 200px;
-      }
-      #hole-information {
-        width:700px; 
-        height:500px;
-        background: grey; 
-      }
-      .hole-title {
-        padding: 5%;
-        width:20%;
-        float: left;
-      }
-      .hole-descriptionn {
-        padding: 5%;
-        width: 80%;
-        float: left;
-      }
-      .hole-image {
-        text-align: center;
-        margin-top: 10%;
-      }
-      .info-container {
-        overflow: auto;
-      }
-    </style>
 
 <!-- JavaScript -->
 
@@ -135,7 +92,7 @@ for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
 
 // 320, 480, 760, 960, 1200 and 1600px.
 var player = videojs('hole-vid', {
-  preload: true, inactivityTimeout: 0, controls: true, width: pw,
+  preload: true, inactivityTimeout: 0, controls: true, fluid:true,
   'playbackRates': [0.5, 1, 1.5, 2],
    controlBar: {
     children: {
@@ -212,6 +169,8 @@ player.getChild('controlBar').addChild('FlagButton', {}, 4);
 
 function player_width(){
   viewport = $(window).width();
+  viewport+=15;
+  console.log(viewport);
   if (viewport>=1600)
     return 1600;
   else if (viewport >=1200)
@@ -528,12 +487,13 @@ body{
 .vjs-playlist {
   left:0px ;
   width:100%; 
+  overflow: hidden;
   padding-top: 0.5%;
   background-image:url(<%= image_url "hole-selector-background.png" %>);
   background-size: 100% 100%; 
 }
 .playlist{
-  height:100%;
+  height:130%;
   width: 90%;
   float: left;
   overflow: auto;
@@ -597,6 +557,7 @@ body{
 
 @media only screen and (min-width: 1600px) {
     body {font-size: 44px;}
+    .player-container {width: 1600px;}
     .video-js .vjs-big-play-button {
       /*line-height: 1.70;*/
     }
@@ -673,12 +634,18 @@ body{
     .vjs-menu li {
       font-size: 1.2em;
     }
+    .hole-info-div{
+      width:1600px; 
+      position: absolute;
+      margin-top: 980px;
+    }
     
 }
 
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
     body {font-size: 30px;}
+    .player-container {width: 1200px;}
     .video-js .vjs-big-play-button {
       line-height: 1.70;
     }
@@ -771,11 +738,17 @@ body{
     /*.vjs-menu li {
       font-size: 1.2em;
     }*/
+    .hole-info-div{
+      width:1200px; 
+      position: absolute;
+      margin-top: 740px;
+    }
     
 }
 
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
     body {font-size: 30px;}
+    .player-container {width: 960px;}
     .video-js .vjs-big-play-button {
       line-height: 1.35;
     }
@@ -874,11 +847,17 @@ body{
     /*.vjs-menu li {
       font-size: 1.2em;
     }*/
+    .hole-info-div{
+      width:960px; 
+      position: absolute;
+      margin-top: 600px;
+    }
     
 }
 
 @media only screen and (min-width: 760px) and (max-width: 959px) {
     body {font-size: 30px;}
+    .player-container {width: 760px;}
     .video-js .vjs-big-play-button {
       line-height: 1.06;
     }
@@ -985,12 +964,19 @@ body{
     }
     /*.vjs-menu li {
       font-size: 1.2em;
-    }*/
+    }-*/
+    .hole-info-div{
+      width:760px; 
+      position: absolute;
+      margin-top: 500px;
+    }
+
     
 }
 
 @media only screen and (min-width: 480px) and (max-width: 759px) {
     body {font-size: 25px;}
+    .player-container {width: 480px;}
     .video-js .vjs-big-play-button {
       /*margin-top: -30px;*/
       height: 25%;
@@ -1114,11 +1100,17 @@ body{
     /*.vjs-menu li {
       font-size: 1.2em;
     }*/
+    .hole-info-div{
+      width:480px; 
+      position: absolute;
+      margin-top: 330px;
+    }
     
 }
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
     body {font-size: 25px;}
+    .player-container {width: 320px;}
     .video-js .vjs-big-play-button {
       margin-top: -25px;
       margin-left: -45px;
@@ -1213,6 +1205,7 @@ body{
     .playlist{
       float: left;
       width: 70%;
+      height: 130%;
       /*background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%; */
       overflow: auto;
@@ -1245,6 +1238,11 @@ body{
     /*.vjs-menu li {
       font-size: 1.2em;
     }*/
+    .hole-info-div{
+      width:320px; 
+      position: absolute;
+      margin-top: 230px;
+    }
     
 }
 
