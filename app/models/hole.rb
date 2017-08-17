@@ -4,7 +4,11 @@ class Hole < ApplicationRecord
     has_one :video
     has_one :score
     has_many :ads
+    has_many :yardages
     has_many :hole_image, :dependent => :destroy
+
+
+    accepts_nested_attributes_for :yardages, :allow_destroy => true
 
 
     has_attached_file :image, styles: {

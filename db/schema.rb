@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816114251) do
+ActiveRecord::Schema.define(version: 20170817073712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,9 +246,21 @@ ActiveRecord::Schema.define(version: 20170816114251) do
     t.integer  "hole_id"
   end
 
+  create_table "yardages", force: :cascade do |t|
+    t.integer  "score_card_id"
+    t.integer  "hole_id"
+    t.integer  "yards"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["hole_id"], name: "index_yardages_on_hole_id", using: :btree
+    t.index ["score_card_id"], name: "index_yardages_on_score_card_id", using: :btree
+  end
+
   add_foreign_key "course_users", "courses"
   add_foreign_key "course_users", "users"
   add_foreign_key "courses", "lists"
   add_foreign_key "hole_images", "holes"
   add_foreign_key "lists", "courses"
+  add_foreign_key "yardages", "holes"
+  add_foreign_key "yardages", "score_cards"
 end

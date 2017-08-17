@@ -247,7 +247,7 @@ checkFields();
     colorField.removeAttr( "id" )
     var scoreCardLen = $('.score-card-wrapper').length ;
     teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
-    colorField.attr('name', 'course[networks_attributes][' + scoreCardLen + '][name]' );
+    colorField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][color]' );
     clonedField.appendTo($('.score-cards-wrapper'))
 
   });
