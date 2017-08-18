@@ -17,7 +17,7 @@ class Embed::PagesController < ApplicationController
     gon.image_urls = []
     gon.description = []
     
-    @holes = @course.holes.sort_by{ |m| m.id }
+    @holes = @course.holes.sort_by{ |m| m.hole_num }
 
     @holes.each do |hole|
         gon.hole_num << hole.hole_num if hole.video.present?

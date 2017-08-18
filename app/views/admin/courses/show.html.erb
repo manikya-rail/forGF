@@ -62,6 +62,7 @@
               <th>Cover</th>
               <th>Map</th>
               <th>Gallery</th>
+              <th>Yardages</th>
             </tr>
           </thead>
 
@@ -88,6 +89,8 @@
                 <% end %>
                 
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-hole-image-upl-modal" %> >Upload Image</button></td>
+
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-yardages-update-modal" %> >Update Yardages</button></td>
                 
               </tr>
             <% end %>
@@ -104,6 +107,7 @@
     <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
     <%=render :partial => 'admin/holes/hole_image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
     <%=render :partial => 'admin/holes/map_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
+    <%=render :partial => 'admin/holes/yardages_update_modal' , locals: {hole: hole,  hole_num:hole.hole_num} %>
   <%end%>
 
 

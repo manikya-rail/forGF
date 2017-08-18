@@ -118,7 +118,7 @@
         </div>
 
         <div class="col-md-12 course-info-row score-cards-wrapper">
-            <%= label_tag :score_card ,'Score Card',class:"col-md-12 zero-left-right-padd"%>
+            <%= label_tag :score_card ,'Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
             <div class="col-md-8 score-card-wrapper dynamic-fields">
 
               <%= f.fields_for :score_cards do |score_card_form| %>
@@ -149,3 +149,24 @@
   <%= render :partial => 'admin/resorts/new_modal' %>
   <%= render :partial => 'admin/networks/new_modal' %>
 </div>
+
+
+
+<script type="text/javascript">
+
+
+$('#add-score-card').click(function() {
+    var clonedField = $('.score-card-wrapper').first().clone();
+    var teeNameField = clonedField.find('#tee-name-field');
+    var colorField = clonedField.find('#course_score_cards_attributes_0_color');
+    var btnAdd = clonedField.find('.btn-add').remove();
+
+    teeNameField.removeAttr( "id" )
+    colorField.removeAttr( "id" )
+    var scoreCardLen = $('.score-card-wrapper').length ;
+    teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
+    colorField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][color]' );
+    clonedField.appendTo($('.score-cards-wrapper'))
+
+  });
+</script>

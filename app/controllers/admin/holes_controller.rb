@@ -74,11 +74,32 @@ class Admin::HolesController < ApplicationController
   def add_map
     @hole = Hole.find(params[:hole][:hole_id])
 
-    if @hole.update(hole_params_map)
+    if @hole.update(hole_params)
       redirect_to admin_course_path(@hole.course), notice: 'Map was successfully uploaded.'
     else
       redirect_to admin_course_path(@hole.course), notice: 'Map not uploaded.'
     end
+  end
+
+  def add_yardages
+    @hole = Hole.find(params[:yardages][:hole_id])
+
+    @hole.course.score_cards.each do |tees|
+      if @hole.yardages.where(score_card_id: tees.id).present?
+        @hole.yardages.where(score_card_id: tees.id).first.update(yards: params[:yardages][:"#{tees.id}".to_sym])
+        # redirect_to :back, notice: 'Tees yards successfully updated.'
+      else
+        @yard = @hole.yardages.new
+        @yard.score_card_id = tees.id
+        @yard.yards = params[:yardages][:"#{tees.id}".to_sym]
+        @yard.save
+      end
+    end
+    # if @hole.update(hole_params)
+      redirect_to :back, notice: 'Tees yards successfully uploaded.'
+    # else
+    #   redirect_to admin_course_path(@hole.course), notice: 'Map not uploaded.'
+    # end
   end
 
   def add_hole_image
@@ -106,11 +127,12 @@ class Admin::HolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hole_params
-      params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :image)
+      params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :image, :map)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def hole_params_map
-      params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :map)
+    def yard_params
+      params.require(:yardages).permit!
     end
+
 end

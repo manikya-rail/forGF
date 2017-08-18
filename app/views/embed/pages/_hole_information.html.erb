@@ -17,18 +17,13 @@
     </div>
     
     <div class="col-md-5 yards">
-      <span class="points">
-        <h3><b><%= @hole.hole_num %> Hole</b></h3>
-      </span>
-      <span class="points">
-        <h3><b><%= @hole.hole_num %> Hole</b></h3>
-      </span>
-      <span class="points">
-        <h3><b><%= @hole.hole_num %> Hole</b></h3>
-      </span>
-      <span class="points">
-        <h3><b><%= @hole.hole_num %> Hole</b></h3>
-      </span>
+      <% @hole.course.score_cards.each do |tee| %>
+        <span class="points">
+          <!-- <h3><b><%#= @hole.hole_num %> Hole</b></h3> -->
+          <% yard = @hole.yardages.find_by(score_card_id: tee.id)%>
+          <h3><%= image_tag "tees/#{tee.color}.png" %><b> <%= yard.present? ? yard.yards : 'N/A' %> YDS</b></h3>
+        </span>
+      <%end%>
     </div>
   </div>
   <div class="row slider">
@@ -176,6 +171,7 @@ h3, h4 {
 }
 .description {
   padding-left: 50px;
+  font-family: serif;
 }
 .yards{
   text-align: right;
@@ -185,6 +181,10 @@ h3, h4 {
 .points{
   display: inline-block;
   width: 45%;
+}
+.points h3 img {
+  padding-bottom: 5px;
+
 }
 .justify{
   text-align: justify;

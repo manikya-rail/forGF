@@ -16,9 +16,11 @@
                 </div>
                 <%= render  'admin/holes/form', hole: hole ,hole_num: hole.index + 1 %>
 
-                <span class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.index + 1}-vid-upl-modal" %> >Upload Video</span>
+                <!-- <span class="btn btn-success upload-btn" data-toggle="modal" data-target=<%#= "#hole-#{hole.index + 1}-vid-upl-modal" %> >Upload Video</span> -->
 
-                  <span style="margin-top:10px;"  class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.index + 1}-image-upl-modal" %> >Upload Image</span>
+                <!-- <span style="margin-top:10px;"  class="btn btn-success upload-btn" data-toggle="modal" data-target=<%#= "#hole-#{hole.index + 1}-image-upl-modal" %> >Upload Image</span> -->
+
+                <!-- <span style="margin-top:10px;"  class="btn btn-success upload-btn" data-toggle="modal" data-target=<%#= "#hole-#{hole.index + 1}-yardages-update-modal" %> >Tee Box Yards</span> -->
   
   
             </div>
@@ -27,10 +29,11 @@
         <%= f.submit "Update", class: 'btn btn-primary' %>
   <% end %>
 
-  <%@course.holes.each_with_index do |hole, index|%>
-    <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
-    <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
-  <%end%>
+  <%#@course.holes.each_with_index do |hole, index|%>
+    <%#=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num:hole.hole_num } %>
+    <%#=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num:hole.hole_num } %>
+    <%#=render :partial => 'admin/holes/yardages_update_modal' , locals: {hole: hole,  hole_num:hole.hole_num} %>
+  <%#end%>
 
 </div>
 

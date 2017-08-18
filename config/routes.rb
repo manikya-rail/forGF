@@ -20,6 +20,7 @@ namespace :admin do
   post "holes/add_map" ,to: 'holes#add_map', as: 'add_map'
   post "holes/add_hole_image" ,to: 'holes#add_hole_image', as: 'add_hole_image'
   post "ads/add_image" ,to: 'ads#add_image', as: 'upload_image'
+  post "holes/add_yardages" ,to: 'holes#add_yardages', as: 'add_yardages'
 
 end
 
