@@ -6,16 +6,7 @@ class Embed::PagesController < ApplicationController
   layout "embed"
 
   def show
-    gon.hole_num = []
-    gon.videos = []
-    gon.videos_urls = []
-    gon.tags = []
-    gon.par = []
-    gon.yard = []
-    gon.mhcp = []
-    gon.image = []
-    gon.image_urls = []
-    gon.description = []
+   
 
     @job = "547"
     
@@ -24,19 +15,7 @@ class Embed::PagesController < ApplicationController
     
     @holes = @course.holes.sort_by{ |m| m.hole_num }
 
-    @holes.each do |hole|
-        gon.hole_num << hole.hole_num if hole.video.present?
-        gon.videos << hole.video  if hole.video.present?
-        gon.videos_urls << hole.video.video  if hole.video.present?
-        gon.tags << hole.video.tags  if hole.video.present?
-        gon.par << hole.par if hole.video.present?
-        gon.yard << hole.yards if hole.video.present?
-        gon.mhcp << hole.mhcp if hole.video.present?
-        gon.image << hole.image_file_name if hole.video.present?
-        gon.image_urls << hole.image.url if hole.video.present?
-        gon.description << hole.description if hole.video.present?
-
-    end
+   
 
   end
 
