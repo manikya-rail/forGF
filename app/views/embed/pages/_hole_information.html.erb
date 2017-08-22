@@ -1,0 +1,386 @@
+
+  <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
+
+  <div class="row description">
+    <div class="col-md-7">
+      <div class="row">
+        <div class="col-md-6">
+          <h3><b><%= @hole.hole_num %><%= @hole.hole_num==1 ? 'st' : @hole.hole_num==2 ? 'nd' : @hole.hole_num==3 ? 'rd' : 'th' %> Hole, Par <%= @hole.par%></b></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4><%= @hole.description %></h4>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-5 yards">
+      <% @hole.course.score_cards.each do |tee| %>
+        <span class="points">
+          <!-- <h3><b><%#= @hole.hole_num %> Hole</b></h3> -->
+          <% yard = @hole.yardages.find_by(score_card_id: tee.id)%>
+          <h3><%= image_tag "tees/#{tee.color}.png" %><b> <%= yard.present? ? yard.yards : 'N/A' %> YDS</b></h3>
+        </span>
+      <%end%>
+    </div>
+  </div>
+  <div class="row slider">
+    <div class="col-md-12 st1">
+       <div class="btn-group btn-group-lg map-slecter">
+        <button type="button" class="btn" id="select_map">Map</button>
+        <button type="button" class="btn" id="select_photos">Photos</button>
+      </div> 
+      <ul id="map">
+        <li><%=image_tag @hole.map.url %></li>
+      </ul>
+      <ul id="slider" class="bxslider">
+        <% @hole.hole_image.each do | holeimage | %>
+          <li><%=image_tag holeimage.image.url %></li>
+        <% end%>
+      </ul>
+    </div>
+    <div class="col-md-12 st2"> 
+      <div class="row">
+        <div class="col-md-12">
+          <div class="divider">Map</div>
+          <%=image_tag @hole.map.url %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="divider">Photos</div>
+          <ul id="slider" class="bxslider">
+            <% @hole.hole_image.each do | holeimage | %>
+              <li><%=image_tag holeimage.image.url %></li>
+            <% end%>
+          </ul>
+         </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.bxslider').bxSlider({
+    mode: 'horizontal',
+    useCSS: false,
+    // infiniteLoop: false,
+    // hideControlOnEnd: true,
+    // // easing: 'easeOutElastic',
+    // speed: 2000,
+      pager: false,
+      nextText: '<%= image_tag "right.png" %>',
+      prevText: '<%= image_tag "left.png" %>'
+   });
+});
+
+$('#select_map').click(function (){
+  $('.bx-wrapper').hide();
+  // $('#slider').hide();
+  $('#select_photos').removeClass('selected');
+  $('#select_photos').addClass('non-selected');
+
+  $('#map').show();
+  $('#select_map').removeClass('non-selected');
+  $('#select_map').addClass('selected');
+
+  $('.bx-next').hide();
+  $('.bx-prev').hide();
+});
+
+$('#select_photos').click(function (){
+  $('#map').hide();
+  $('#select_map').removeClass('selected');
+  $('#select_map').addClass('non-selected');
+
+  $('.bx-wrapper').show();
+  // $('#slider').show();
+  $('#select_photos').removeClass('non-selected');
+  $('#select_photos').addClass('selected');
+
+  $('.bx-next').show();
+  $('.bx-prev').show();
+});
+
+$(document).ready(function() { $('#select_photos').trigger('click') });
+
+// $( window ).resize(function() {
+//   if($(document).width() >760) $('.map-slecter').addClass("btn-group-lg");
+//   else $('.map-slecter').removeClass("btn-group-lg");
+// });
+
+
+
+</script>
+<style type="text/css">
+.st2 {
+  display: none;
+}
+h3, h4 {
+  margin: 0;
+  margin-bottom: 5px;
+}
+.selected{
+  background: black;
+  color: white !important;
+}
+.non-selected{
+  background: white;
+  color: black;
+}
+.map-slecter {
+  position: absolute;
+  z-index: 11;
+  left:46%;
+  top:50px;
+}
+
+
+#map{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#map li img {
+  width: 100%;
+  height: 100%;
+}
+
+.bxslider {
+    list-style:none;
+    margin:0;
+    padding:0
+}
+
+.bxslider li img {
+  width: 100%;
+  height: 100%;
+}
+
+.bx-next {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+}
+.bx-prev {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+}
+.description {
+  padding-left: 50px;
+  font-family: serif;
+}
+.yards{
+  text-align: right;
+  padding-top: 30px;
+  padding-right: 60px;
+}
+.points{
+  display: inline-block;
+  width: 45%;
+}
+.points h3 img {
+  padding-bottom: 5px;
+
+}
+.justify{
+  text-align: justify;
+}
+/*// 320, 480, 760, 960, 1200 and 1600px.*/
+      @media only screen and (min-width: 1600px) {
+        .description {
+          margin-top: 50px;
+          margin-bottom: 50px;
+          padding-left: 60px;
+        }
+
+
+      }
+
+      @media only screen and (max-width: 1599px) and (min-width: 1200px) {
+        .description {
+          margin-top: 30px;
+          margin-bottom: 30px;
+          padding-left: 60px;
+        }
+        .bx-next img, .bx-prev img {
+          height: 60%;
+          width: 60%;
+        }
+
+
+      }
+
+      @media only screen and (max-width: 1199px) and (min-width: 960px) {
+        .description {
+          margin-top: 30px;
+          margin-bottom: 30px;
+          padding-left: 60px;
+        }
+        .bx-next img, .bx-prev img {
+          height: 60%;
+          width: 60%;
+        }
+
+      }
+
+      @media only screen and (max-width: 959px) and (min-width: 760px) {
+        .description {
+          margin-top: 30px;
+          margin-bottom: 40px;
+          padding-left: 50px;
+          padding-right: 50px;
+        }
+        .bx-next img, .bx-prev img {
+          height: 60%;
+          width: 60%;
+        }
+         .yards {
+          text-align: center;
+          width: 100%;
+          display: table;
+          table-layout: fixed;
+          padding-right: 0;
+          padding-left: 0;
+        }
+
+        .points{
+          display: table-cell;
+        }
+        .map-slecter {
+          left:40%;
+          top:50px;
+        }
+
+
+
+      }
+
+      @media only screen and (max-width: 759px) and (min-width: 480px) {
+        .st2 {
+          display: block;
+        }
+        .st1{
+          display: none;
+        }
+        .st2 img{
+          width: 100%;
+          height: 100%;
+        }
+        .divider{
+          text-align: center;
+          width:100%; 
+          height: 45px;
+          font-size: 20px;
+          line-height: 2;
+          color: white;
+          background-image:url(<%= image_url "hole-selector-background.png" %>);
+          background-size: 100% 100%; 
+        }
+        .description {
+          margin-top: 30px;
+          margin-bottom: 40px;
+          padding-left: 50px;
+          padding-right: 50px;
+          text-align: center;
+        }
+        .bx-next img, .bx-prev img {
+          height: 60%;
+          width: 60%;
+        }
+        .yards {
+          text-align: center;
+          width: 100%;
+          display: table;
+          table-layout: fixed;
+          padding-right: 0;
+          padding-left: 0;
+        }
+
+        .points{
+          display: table-cell;
+        }
+
+        /*.map-slecter {
+          left:35%;
+          top:40px;
+        }*/
+        .map-slecter {
+          display: none;
+        }
+        .description h3 {
+          font-size: 18px;
+        }
+        .description h4 {
+          font-size: 13px;
+        }
+
+
+      }
+
+      @media only screen and (max-width: 479px) and (min-width: 320px) {
+        .st2 {
+          display: block;
+        }
+        .st1{
+          display: none;
+        }
+        .st2 img{
+          width: 100%;
+          height: 100%;
+        }
+
+        .divider{
+          text-align: center;
+          width:100%; 
+          height: 40px;
+          font-size: 20px;
+          line-height: 2;
+          color: white;
+          background-image:url(<%= image_url "hole-selector-background.png" %>);
+          background-size: 100% 100%; 
+        }
+        .description {
+          margin-top: 15px;
+          margin-bottom: 40px;
+          padding-left: 20px;
+          padding-right: 20px;
+          text-align: center;
+        }
+        .bx-next img, .bx-prev img {
+          height: 50%;
+          width: 50%;
+        }
+        .yards {
+          text-align: center;
+          width: 100%;
+          padding-right: 0;
+        }
+
+        .points{
+          /*display: table-cell;*/
+          display: inline-block;
+        }
+
+        /*.map-slecter {
+          left:35%;
+          top:40px;
+        }*/
+        .map-slecter {
+          display: none;
+        }
+
+        .description h3 {
+          font-size: 15px;
+        }
+        .description h4 {
+          font-size: 12px;
+        }
+
+
+      }
+
+</style>

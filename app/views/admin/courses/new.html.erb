@@ -2,9 +2,10 @@
 <% content_for :side_nav do %>
   <%= render :partial => 'side_nav' %>
 <% end %>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
-  <%= form_for(@course, url: {controller: 'courses', action: 'create'}, method: "post" ) do |f|%>
+  <%= form_for @course, url: {controller: 'courses', action: 'create'}, method: "post", :html => { :multipart => true }, :remote => true do |f|%>
 
     <div class="col-md-12">
       <div class="basic-course-info">
@@ -87,16 +88,17 @@
         <div class="col-md-12 course-info-row">
             <div class="col-md-4">
               <%= label_tag :logo ,'Logo',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.file_field :logo, class: 'btn btn-success upload-btn check-field' %>
+              <div class="btn btn-success upload-btn">
+                <%= f.file_field :logo, class: 'check-field' %>
+              </div>
             </div>
 
             <div class="col-md-4">
               <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
-              <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field' %>
+              <div class="btn btn-success upload-btn">
+                <%= f.file_field :cover, class: 'check-field' %>
+              </div>
             </div>
-
-            <div class="col-md-8"></div>
-
         </div>
 
         <div class="col-md-12 course-info-row">
@@ -119,10 +121,19 @@
               <%= label_tag :length ,'Length',class:"col-md-12 zero-left-right-padd"%>
               <%= f.text_field :length, class:"col-md-12 form-control check-field", placeholder: "Length"%>
             </div>
+
+            <div class="col-md-3 form-group">
+              <%= label_tag :number_of_tees ,'Number of Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :number_of_tees, class:"col-md-12 form-control check-field", placeholder: "Number of Tee Boxes"%>
+            </div>
+            <div class="col-md-2 form-group">
+              <%= label_tag :architect ,'Architect',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :architect, class:"col-md-12 form-control check-field", placeholder: "Architect" %>
+            </div>
         </div>
 
         <div class="col-md-12 course-info-row score-cards-wrapper">
-            <%= label_tag :score_card ,'Score Card',class:"col-md-12 zero-left-right-padd"%>
+            <%= label_tag :score_card ,'Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
             <div class="col-md-8 score-card-wrapper dynamic-fields">
 
               <%= f.fields_for :score_cards do |score_card_form| %>
@@ -367,7 +378,7 @@ checkFields();
     colorField.removeAttr( "id" )
     var scoreCardLen = $('.score-card-wrapper').length ;
     teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
-    colorField.attr('name', 'course[networks_attributes][' + scoreCardLen + '][name]' );
+    colorField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][color]' );
     clonedField.appendTo($('.score-cards-wrapper'))
 
   });

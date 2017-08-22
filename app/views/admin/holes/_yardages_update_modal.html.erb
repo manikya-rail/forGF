@@ -1,0 +1,35 @@
+<div id= <%= "hole-#{hole_num}-yardages-update-modal" %>  class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Yards for Tees</h4>
+      </div>
+      <div class="modal-body">
+      <div id="message"></div>
+                
+
+        <%=form_for :yardages, url: admin_add_yardages_path, method: "post", :remote => true do |v|%>
+
+            <% hole.course.score_cards.each do |tee| %>
+              <div class="col-md-12" id="tee_num_<%="#{tee.id}"%>">
+                <%= label_tag :name ,"#{tee.color}", class:"col-md-6 zero-left-padd"%> 
+                <%= v.text_field "#{tee.id}" , class:"col-md-6 zero-right-padd", placeholder: 'Enter value', value: hole.yardages.find_by(score_card_id: tee.id).try(:yards) %>
+                <%#= v.hidden_field "sci#{tees.id}" ,value: tees.id%>             
+              </div>
+
+            <%end%>
+
+              <%= v.hidden_field :hole_id ,value: hole.id%>
+              <%= v.submit 'Upload', id: 'fileUpload', class: "btn btn-success upload-btn"%>
+        <%end%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

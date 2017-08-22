@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614225450) do
+ActiveRecord::Schema.define(version: 20170817073712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,13 +34,26 @@ ActiveRecord::Schema.define(version: 20170614225450) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "ads", force: :cascade do |t|
+    t.integer  "hole_id"
+    t.integer  "slot_num"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
   create_table "amenities", force: :cascade do |t|
     t.boolean  "restaurants"
     t.boolean  "caddies"
     t.boolean  "carts"
     t.integer  "course_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.boolean  "practice_range"
+    t.boolean  "golf_boards"
     t.index ["course_id"], name: "index_amenities_on_course_id", using: :btree
   end
 
@@ -77,10 +90,23 @@ ActiveRecord::Schema.define(version: 20170614225450) do
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
     t.integer  "list_id"
+    t.string   "number_of_tees"
+    t.string   "architect"
     t.index ["admin_id"], name: "index_courses_on_admin_id", using: :btree
     t.index ["list_id"], name: "index_courses_on_list_id", using: :btree
     t.index ["network_id"], name: "index_courses_on_network_id", using: :btree
     t.index ["resort_id"], name: "index_courses_on_resort_id", using: :btree
+  end
+
+  create_table "hole_images", force: :cascade do |t|
+    t.integer  "hole_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["hole_id"], name: "index_hole_images_on_hole_id", using: :btree
   end
 
   create_table "holes", force: :cascade do |t|
@@ -96,6 +122,11 @@ ActiveRecord::Schema.define(version: 20170614225450) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.text     "description"
+    t.string   "map_file_name"
+    t.string   "map_content_type"
+    t.integer  "map_file_size"
+    t.datetime "map_updated_at"
     t.index ["course_id"], name: "index_holes_on_course_id", using: :btree
   end
 
@@ -215,8 +246,21 @@ ActiveRecord::Schema.define(version: 20170614225450) do
     t.integer  "hole_id"
   end
 
+  create_table "yardages", force: :cascade do |t|
+    t.integer  "score_card_id"
+    t.integer  "hole_id"
+    t.integer  "yards"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["hole_id"], name: "index_yardages_on_hole_id", using: :btree
+    t.index ["score_card_id"], name: "index_yardages_on_score_card_id", using: :btree
+  end
+
   add_foreign_key "course_users", "courses"
   add_foreign_key "course_users", "users"
   add_foreign_key "courses", "lists"
+  add_foreign_key "hole_images", "holes"
   add_foreign_key "lists", "courses"
+  add_foreign_key "yardages", "holes"
+  add_foreign_key "yardages", "score_cards"
 end

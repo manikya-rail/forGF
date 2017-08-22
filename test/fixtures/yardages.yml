@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ScoreCard: one
+  Hole: one
+  yards: 1
+
+two:
+  ScoreCard: two
+  Hole: two
+  yards: 1

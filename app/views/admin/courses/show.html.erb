@@ -59,12 +59,15 @@
             <tr>
               <th>HOLE NUMBER</th>
               <th>VIDEO</th>
-              <th>IMAGE</th>
+              <th>Cover</th>
+              <th>Map</th>
+              <th>Gallery</th>
+              <th>Yardages</th>
             </tr>
           </thead>
 
           <tbody>
-            <% @course.holes.each_with_index do |hole, index| %>
+            <% @course.holes.sort_by{ |m| m.id }.each_with_index do |hole, index| %>
               <tr>
                 <td><%= "Hole " + hole.try(:hole_num).to_s  %></td>
                 <%if hole.video.present?%>
@@ -72,13 +75,23 @@
                   <%=link_to "Add Tag", admin_video_path(hole.video)%>
                 </td>
                 <%else%>
-                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-vid-upl-modal" %> >Upload Video</button></td>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-vid-upl-modal" %> >Upload Video</button></td>
                 <%end%>
                 <% if hole.image.present? %>
                   <td><%= link_to hole.image_file_name, hole.image.url %></td>
                 <% else %>
-                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{index + 1}-image-upl-modal" %> >Upload Image</button></td>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal" %> >Upload Cover</button></td>
                 <% end %>
+                 <% if hole.map.present? %>
+                  <td><%= link_to hole.map_file_name, hole.map.url %></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-map-upl-modal" %> >Upload Map</button></td>
+                <% end %>
+                
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-hole-image-upl-modal" %> >Upload Image</button></td>
+
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-yardages-update-modal" %> >Update Yardages</button></td>
+                
               </tr>
             <% end %>
           </tbody>
@@ -90,8 +103,11 @@
 
 
   <%@course.holes.each_with_index do |hole, index|%>
-    <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
-    <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: index + 1 } %>
+    <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
+    <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
+    <%=render :partial => 'admin/holes/hole_image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
+    <%=render :partial => 'admin/holes/map_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
+    <%=render :partial => 'admin/holes/yardages_update_modal' , locals: {hole: hole,  hole_num:hole.hole_num} %>
   <%end%>
 
 

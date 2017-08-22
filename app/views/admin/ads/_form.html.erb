@@ -1,0 +1,358 @@
+<div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
+  <%= form_for(@course, url: {controller: 'courses', action: 'create'}, method: "post" ) do |f|%>
+
+    <div class="col-md-12">
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-4 form-group">
+              <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Full name of course"%>
+            </div>
+
+            <div class="col-md-8 form-group">
+                <%= f.fields_for :location do |location_form| %>
+                  <%= render 'admin/locations/form.html.erb', location_form: location_form %>
+                <% end %>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-12 course-info-row">
+            <%= label_tag :course_type ,'Course Type',class:"col-md-12 zero-left-right-padd",style:"margin-left:15px;"%>
+            <div class="col-md-4">
+
+              <div class="inline">
+                <%= check_box_tag 'course[course_type]' ,'is_public',false ,class: 'checkbox check-field inline', id: 'course_type_public' %>
+                <span class="inline">Public</span>
+              </div>
+              <div class="inline">
+                <%= check_box_tag 'course[course_type]' ,'is_private',false ,class: 'checkbox check-field inline', id: 'course_type_private' %>
+                <span class="inline">Private</span>
+              </div>
+              <div class="inline">
+                <%= check_box_tag 'course[course_type]' ,'is_semi_private',false ,class: 'checkbox check-field inline', id: 'course_type_semi_private' %>
+                <span class="inline">Semi-Private</span>
+              </div>
+
+            </div>
+
+            <div class="col-md-4">
+              <%= select_tag('resort', options_for_select(Resort.all.pluck(:name, :id)), options = {prompt: 'Resort', class:'dropdown-padd dropdown form-control inline ' , style: 'width:50%;' , name: 'course[resort_id]'}) %>
+              <button type="button" class="btn btn-info btn-add inline" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
+
+
+
+            </div>
+
+            <div class="col-md-4">
+              <%= select_tag('network',options_for_select(Network.all.pluck(:name, :id)), options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;' , name: 'course[network_id]'}) %>
+              <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
+
+
+            </div>
+        </div>
+
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-4 form-group">
+              <%= label_tag :bio ,'Bio',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_area :bio, rows: "4", class: 'col-md-12 form-control check-field'%>
+
+            </div>
+
+            <div class="col-md-4 form-group">
+              <%= label_tag :contact_info, 'Contact Info',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :website, class:"col-md-12 form-control contact-info check-field", placeholder: "Website" %>
+              <%= f.text_field :phone_num, class:"col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
+            </div>
+
+            <div class="col-md-4">
+              <div class="col-md-12">
+                <%= f.fields_for :amenities do |amenity_form| %>
+                  <%= render 'admin/amenities/form', a: amenity_form %>
+                <% end %>
+              </div>
+
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-4">
+              <%= label_tag :logo ,'Logo',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.file_field :logo, class: 'btn btn-success upload-btn check-field' %>
+            </div>
+
+            <div class="col-md-4">
+              <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
+              <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field' %>
+            </div>
+
+            <div class="col-md-8"></div>
+
+        </div>
+
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-2 form-group">
+              <%= label_tag :total_par ,'Total Par',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :total_par, class:"col-md-12 form-control check-field", placeholder: "Total Par" %>
+            </div>
+
+            <div class="col-md-2 form-group">
+              <%= label_tag :slope ,'Slope',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :slope, class:"col-md-12 form-control check-field", placeholder: "Slope" %>
+            </div>
+
+            <div class="col-md-2 form-group">
+              <%= label_tag :rating ,'Rating',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :rating, class:"col-md-12 form-control check-field", placeholder: "Rating" %>
+            </div>
+
+            <div class="col-md-2 form-group">
+              <%= label_tag :length ,'Length',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :length, class:"col-md-12 form-control check-field", placeholder: "Length"%>
+            </div>
+        </div>
+
+        <div class="col-md-12 course-info-row score-cards-wrapper">
+            <%= label_tag :score_card ,'Score Card',class:"col-md-12 zero-left-right-padd"%>
+            <div class="col-md-8 score-card-wrapper dynamic-fields">
+
+              <%= f.fields_for :score_cards do |score_card_form| %>
+                <%= render 'admin/score_cards/form', s: score_card_form %>
+              <% end %>
+
+
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+
+        <div class="col-md-12 course-info-row">
+          <%=render :partial => 'hole' , locals: {f: f } %>
+        </div>
+
+
+    </div>
+  <%end%>
+
+  <%= render :partial => 'admin/resorts/new_modal' %>
+  <%= render :partial => 'admin/networks/new_modal' %>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+function containText(textFieldId){
+  if ( $('#' + textFieldId).val().length > 0 ){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function enableCheck(checkID){
+  $('#' + checkID).show();
+}
+
+function disableCheck(checkID){
+  $('#' + checkID).hide();
+}
+
+function checkLocation() {
+  if(
+      containText('course_location_attributes_town') &&
+      containText('course_location_attributes_lat') &&
+      containText('course_location_attributes_lng') &&
+      $('#course_location_attributes_state').val() != ""
+    ){
+    enableCheck('location-check')
+  }
+  else{
+    disableCheck('location-check')
+  }
+
+}
+
+function checkCourseType() {
+  var course_type_checkbox = $('input[id="course_type_private"]:checked').length +
+    $('input[id="course_type_public"]:checked').length +
+    $('input[id="course_type_semi_private"]:checked').length
+
+  if ( course_type_checkbox > 0 ) {
+    enableCheck('course-type-check')
+  }
+  else {
+    disableCheck('course-type-check')
+  }
+}
+
+function checkContactInfo() {
+   if(
+      containText('course_website') &&
+      containText('course_phone_num')
+    ){
+    enableCheck('contact_info-check')
+  }
+  else{
+    disableCheck('contact_info-check')
+  }
+}
+
+function checkAmenities() {
+  var amenities_checkboxes = $('input[name="course[amenity_attributes][restaurants]"]:checked').length +
+    $('input[name="course[amenity_attributes][caddies]"]:checked').length +
+    $('input[name="course[amenity_attributes][carts]"]:checked').length
+
+  if ( amenities_checkboxes >= 1 ) {
+    enableCheck('amenities-check')
+  }
+  else {
+    disableCheck('amenities-check')
+  }
+}
+
+function checkLogo() {
+  if ($('#course_logo').val()) {
+    enableCheck('logo-check')
+  }
+  else {
+    disableCheck('logo-check')
+  }
+}
+
+function checkCover() {
+  if ($('#course_cover').val()) {
+    enableCheck('cover-check')
+  }
+  else {
+    disableCheck('cover-check')
+  }
+}
+
+function checkScoreCard() {
+  if(
+      containText('tee-name-field') &&
+      $('#course_score_cards_attributes_0_color').val() != ""
+    ){
+    enableCheck('score_card-check')
+  }
+  else{
+    disableCheck('score_card-check')
+  }
+}
+
+
+function checkFields(){
+  $('.glyphicon-ok').hide();
+
+  var idsHash =  {
+        'course_length': 'length-check',
+        'course_rating': 'rating-check',
+        'course_total_par': 'par-check',
+        'course_slope': 'slope-check',
+        'course_bio': 'bio-check',
+        'course_name': 'name-check',
+        'course_amenities': 'amenities-check',
+        'course_logo' : 'logo-check',
+        'course_cover' : 'cover-check',
+        // : 'overview-checkbox',
+      }
+
+    $(".check-field").focusout(function() {
+      if (idsHash[this.id]){
+        if (containText(this.id)){
+          enableCheck(idsHash[this.id]);
+        }
+        else{
+          disableCheck(idsHash[this.id]);
+        }
+      }
+      else{
+        if (checkLocation()){
+          enableCheck('location-check');
+        }
+        else if(checkCourseType()){
+          enableCheck('course-type-check')
+        }
+        else if(checkContactInfo()){
+          enableCheck('contact_info-check')
+        }
+        else if(checkAmenities()){
+          enableCheck('amenities-check')
+        }
+        else if(checkLogo()){
+          enableCheck('logo-check')
+        }
+        else if(checkCover()){
+          enableCheck('cover-check')
+        }
+        else if(checkScoreCard()){
+          enableCheck('score_card-check')
+        }
+      }
+  })
+}
+
+checkFields();
+
+  $("input:checkbox").on('click', function() {
+    var $box = $(this);
+    if ($box.is(":checked")) {
+      var group = "input:checkbox[name='" + $box.attr("name") + "']";
+      $(group).prop("checked", false);
+      $box.prop("checked", true);
+    } else {
+      $box.prop("checked", false);
+    }
+  });
+
+  // $('#add-resorts').click(function() {
+
+  //   var clonedField = $('#resort-name-field').clone();
+  //   var resortNameFieldLen = $('.resort-name-field').length ;
+  //   clonedField.removeAttr( "id" )
+  //   clonedField.attr('name', 'course[resorts_attributes][' + resortNameFieldLen + '][name]' );
+
+  //   clonedField.appendTo($('#resort-name-field').parent('div'))
+
+  // });
+
+  // $('#add-networks').click(function() {
+  //   var clonedField = $('#network-name-field').clone();
+  //   clonedField.removeAttr( "id" )
+  //   var networkNameFieldLen = $('.network-name-field').length ;
+  //   clonedField.attr('name', 'course[networks_attributes][' + networkNameFieldLen + '][name]' );
+  //   clonedField.appendTo($('#network-name-field').parent('div'))
+
+  // });
+
+  $('#add-score-card').click(function() {
+    var clonedField = $('.score-card-wrapper').first().clone();
+    var teeNameField = clonedField.find('#tee-name-field');
+    var colorField = clonedField.find('#course_score_cards_attributes_0_color');
+    var btnAdd = clonedField.find('.btn-add').remove();
+
+    teeNameField.removeAttr( "id" )
+    colorField.removeAttr( "id" )
+    var scoreCardLen = $('.score-card-wrapper').length ;
+    teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
+    colorField.attr('name', 'course[networks_attributes][' + scoreCardLen + '][name]' );
+    clonedField.appendTo($('.score-cards-wrapper'))
+
+  });
+
+
+  $( "#create-course-btn" ).click(function() {
+    $( "#new_course" ).submit();
+  });
+
+
+</script>

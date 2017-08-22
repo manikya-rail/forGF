@@ -2,20 +2,43 @@ class Embed::PagesController < ApplicationController
   before_action :set_course, only: [:show]
   # after_filter :allow_iframe, only: [:show, :awesome_embed]
   after_action :set_version_header
-
+  # layout "embed", only: [:show]
+  layout "embed"
 
   def show
+    gon.hole_num = []
     gon.videos = []
     gon.videos_urls = []
     gon.tags = []
-    @course.holes.each do |hole|
-      gon.videos << hole.video if hole.video.present?
-      gon.videos_urls << hole.video.video if hole.video.present?
-      gon.tags << hole.video.tags if hole.video.present?
+    gon.par = []
+    gon.yard = []
+    gon.mhcp = []
+    gon.image = []
+    gon.image_urls = []
+    gon.description = []
+    
+    @holes = @course.holes.sort_by{ |m| m.hole_num }
+
+    @holes.each do |hole|
+        gon.hole_num << hole.hole_num if hole.video.present?
+        gon.videos << hole.video  if hole.video.present?
+        gon.videos_urls << hole.video.video  if hole.video.present?
+        gon.tags << hole.video.tags  if hole.video.present?
+        gon.par << hole.par if hole.video.present?
+        gon.yard << hole.yards if hole.video.present?
+        gon.mhcp << hole.mhcp if hole.video.present?
+        gon.image << hole.image_file_name if hole.video.present?
+        gon.image_urls << hole.image.url if hole.video.present?
+        gon.description << hole.description if hole.video.present?
+
     end
 
-    render :layout => false
   end
+
+  def hole_by_hole
+    @hole=Hole.find(params[:id])
+  end
+
 
     
   def awesome_embed     
@@ -31,7 +54,5 @@ class Embed::PagesController < ApplicationController
         response.set_header("X-Frame-Options", "ALLOWALL")
     end
 
-    def allow_iframe
-      response.headers.delete "X-Frame-Options"
-    end
+
 end

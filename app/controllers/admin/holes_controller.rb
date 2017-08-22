@@ -56,7 +56,7 @@ class Admin::HolesController < ApplicationController
   def destroy
     @hole.destroy
     respond_to do |format|
-      format.html { redirect_to holes_url, notice: 'Hole was successfully destroyed.' }
+      format.html { redirect_to admin_holes_url, notice: 'Hole was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +71,54 @@ class Admin::HolesController < ApplicationController
     end
   end
 
+  def add_map
+    @hole = Hole.find(params[:hole][:hole_id])
+
+    if @hole.update(hole_params)
+      redirect_to admin_course_path(@hole.course), notice: 'Map was successfully uploaded.'
+    else
+      redirect_to admin_course_path(@hole.course), notice: 'Map not uploaded.'
+    end
+  end
+
+  def add_yardages
+    @hole = Hole.find(params[:yardages][:hole_id])
+
+    @hole.course.score_cards.each do |tees|
+      if @hole.yardages.where(score_card_id: tees.id).present?
+        @hole.yardages.where(score_card_id: tees.id).first.update(yards: params[:yardages][:"#{tees.id}".to_sym])
+        # redirect_to :back, notice: 'Tees yards successfully updated.'
+      else
+        @yard = @hole.yardages.new
+        @yard.score_card_id = tees.id
+        @yard.yards = params[:yardages][:"#{tees.id}".to_sym]
+        @yard.save
+      end
+    end
+    # if @hole.update(hole_params)
+      redirect_to :back, notice: 'Tees yards successfully uploaded.'
+    # else
+    #   redirect_to admin_course_path(@hole.course), notice: 'Map not uploaded.'
+    # end
+  end
+
+  def add_hole_image
+    @hole = Hole.find(params[:hole][:hole_id])
+
+    # if @hole.update(hole_params)
+    if @hole.present?  
+      if params[:images]
+        params[:images].each { |image|
+          @hole.hole_image.create(image: image)
+        }
+        redirect_to admin_course_path(@hole.course), notice: 'Images were successfully uploaded.'
+      end
+        
+    else
+        redirect_to admin_course_path(@hole.course), notice: 'Images not uploaded.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hole
@@ -79,6 +127,12 @@ class Admin::HolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hole_params
-      params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :image)
+      params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :image, :map)
     end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def yard_params
+      params.require(:yardages).permit!
+    end
+
 end

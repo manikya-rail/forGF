@@ -1,0 +1,99 @@
+<div class="container">
+
+<% content_for :side_nav do %>
+  <%= render :partial => 'admin/shared/side_nav' %>
+<% end %>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h2>
+        <%= image_tag @course.logo, style: "height:75px; widht: 75px" %>
+        <%=@course.name.titleize %>
+      </h2>
+      <table class="table">
+        <tr>
+          <td>Location</td>
+          <td><%= @course.try(:formated_location) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td><%= @course.try(:course_type) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Amenities</td>
+          <td><%= @course.try(:amenities_list) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Contact</td>
+          <td><%= @course.try(:phone_num) || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Website</td>
+          <td><%= @course.try(:website) || 'N/A' %></td>
+        </tr>
+      </table>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h4>Embedable Link For Videos</h4>
+          <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; " readonly><iframe width="720px" height="620px" src="<%= "#{request.base_url}/embed/#{@course.id}" %>"> </iframe></textarea>
+        </div>
+    </div>
+  
+    <h2>Holes List</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>HOLE NUMBER</th>
+              <th>Slot 1</th>
+              <th>Slot 2</th>
+              <th>Slot 3</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @course.holes.sort_by{ |m| m.id }.each_with_index do |hole, index| %>
+              <tr>
+                <td>
+                  <%#= "Hole " + hole.try(:hole_num).to_s  %>
+                  <%= "Hole " + hole.try(:hole_num).to_s  %>
+                </td>
+
+                <%# if hole.ads.where('slot_num in (?)',1).present? %>
+                <%# if hole.ads.find_by(slot_num: 1).image_file_name.present? %>
+                <% if hole.ads.find_by(slot_num: 1).present? %>
+                  <td><%= link_to hole.ads.find_by(slot_num: 1).image_file_name, hole.ads.find_by(slot_num: 1).image.url %></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal-1" %> >Upload Image</button></td>
+                <% end %>
+
+                <% if hole.ads.find_by(slot_num: 2).present? %>
+                  <td><%= link_to hole.ads.find_by(slot_num: 2).image_file_name, hole.ads.find_by(slot_num: 2).image.url %></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal-2" %> >Upload Image</button></td>
+                <% end %>
+
+                <% if hole.ads.find_by(slot_num: 3).present? %>
+                  <td><%= link_to hole.ads.find_by(slot_num: 3).image_file_name, hole.ads.find_by(slot_num: 3).image.url %></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal-3" %> >Upload Image</button></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+  <%@course.holes.each_with_index do |hole, index|%>
+    <%=render :partial => 'admin/ads/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num, slot_num: 1 } %>
+    <%=render :partial => 'admin/ads/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num, slot_num: 2 } %>
+    <%=render :partial => 'admin/ads/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num, slot_num: 3 } %>
+  <%end%>
+</div>
+
