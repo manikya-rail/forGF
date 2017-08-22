@@ -1,0 +1,1254 @@
+<%= Gon::Base.render_data %>
+<%#= csrf_meta_tags %>
+
+<!-- Linkers -->
+
+<link href="//vjs.zencdn.net/5.20/video-js.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.rawgit.com/samsol6/Triphitrip-WEBAPP/modeling-user/lib/vjs/videojs-settings-menu.css" rel="stylesheet"> -->
+
+<script src="//vjs.zencdn.net/5.20/video.min.js"></script>
+<script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
+<!-- <script src="https://cdn.rawgit.com/samsol6/Triphitrip-WEBAPP/modeling-user/lib/vjs/videojs-settings-menu.min.js"></script> -->
+
+<!-- Fonts -->
+ <link href="https://fonts.googleapis.com/css?family=Economica" rel="stylesheet"> 
+
+<!-- slider -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
+
+
+<!-- Body -->
+
+ 
+    <div class = "main-container"> 
+      <div class= "player-container">
+        <div class = "upper-gradient"></div>
+        <div class="vplayer">
+          
+          
+            <div class="hole-bar">
+              <ul >
+                <li ><text id="hole" style>0</text> <span id="hole-num">0</span> </li>
+                <li ><span>PAR</span> <text id="par">0</text></li>
+                <li ><text id="yard">0</text> <span>YDS</span> </li>
+                <li id="lastli" ><text id="mhcp">0</text><span>HCP</span> </li>
+              </ul>
+            </div>
+          
+          
+          
+          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered"></video>
+          
+          <div class="previous on-video"> <%= image_tag "left.png" %> </div>
+          <div class="next on-video"><%= image_tag "right.png" %></div>
+          <!-- <div class="flag on-video"><%= image_tag "flag.png" %></div> -->
+          <!-- <div class="eye on-video"><%= image_tag "eye.png" %></div> -->
+          
+          
+          <!-- <div class="upload on-video"><%= image_tag "upload.png" %></div> -->
+          <div class="logo on-video"><%= image_tag "logo.png" %> </div>
+          <div class = "lower-gradient"></div>
+
+          <div class="vjs-playlist">
+            <div id="0" class="hole-home" onClick="select_video(this.id)"><%= image_tag "hole-home.png" %></div>
+            <div  class="playlist">
+              <ul id="playlist" >
+                <% @holes.try(:each) do |hole| %> 
+                  <li id="<%=hole.hole_num%>" onClick="select_video(this.id)">
+                    <%=link_to hole.hole_num, embed_hole_info_path(hole.id), remote: true
+                    %>
+                  </li>
+                <% end %>
+                
+              </ul>
+            </div>
+            <div class="right-green"><%= image_tag "right-green.png" %></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hole-info-div">
+        <div id="holeinfo" class="holeinfo"></div>
+      </div>
+    </div>
+
+<!-- JavaScript -->
+
+<script type="text/javascript">
+
+
+var pw = player_width();
+
+var videoList = []
+
+for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
+  videoList.push({
+    sources: [{
+      src: gon.videos_urls[i],
+      type: 'video/mp4'
+    }]
+  });
+}
+
+// 320, 480, 760, 960, 1200 and 1600px.
+var player = videojs('hole-vid', {
+  preload: true, inactivityTimeout: 0, controls: true, fluid:true,
+  'playbackRates': [0.5, 1, 1.5, 2],
+   controlBar: {
+    children: {
+      'playToggle':{},
+      'volumeMenuButton':{},
+      'progressControl':{},      
+      'playbackRateMenuButton':{},
+      // 'settingsMenuButton': {
+      //     entries : [
+      //       'subtitlesButton',
+      //       'playbackRateMenuButton'
+      //     ]
+      //   },
+      'fullscreenToggle':{}
+    } }
+});
+
+try {player.volume(1);} catch (e) {}
+
+player.playlist(videoList);
+
+document.querySelector('.previous').addEventListener('click', function() {
+  player.playlist.previous();
+});
+document.querySelector('.next').addEventListener('click', function() {
+  player.playlist.next();
+});
+
+// document.querySelector('.flag').addEventListener('click', function() {
+//   flag_control();
+  
+// });
+
+function flag_control(){
+  for (var i = 0, len = gon.videos.length; i < len; i++) {
+    if (gon.tags[i].length > 0) {
+      if (player.currentSrc().includes(gon.videos[i].video_file_name) && gon.videos[i].id == gon.tags[i][0].video_id) {
+        player.currentTime(gon.tags[i][0].time);
+      }
+    }
+  }
+}
+
+
+
+player.on("loadedmetadata",function () {
+  barupdate();
+  current_video();
+});
+// window.onload=playlistui();
+
+  
+/* ADD flag */
+var Button = videojs.getComponent('Button');
+
+var FlagButton = videojs.extend(Button, {
+  constructor: function() {
+    Button.apply(this, arguments);
+    this.addClass('flag');
+    this.controlText("Flag");
+  },
+
+  handleClick: function() {
+    flag_control();
+  }
+});
+
+// Register the new component
+videojs.registerComponent('FlagButton', FlagButton);
+player.getChild('controlBar').addChild('FlagButton', {}, 4);
+
+
+
+
+function player_width(){
+  viewport = $(window).width();
+  viewport+=15;
+  console.log(viewport);
+  if (viewport>=1600)
+    return 1600;
+  else if (viewport >=1200)
+    return 1200;
+  else if (viewport >=960)
+    return 960;
+  else if (viewport >=760)
+    return 760;
+  else if (viewport >=480)
+    return 480;
+  else if (viewport >=320)
+    return 320;
+}
+
+
+
+function playlistui(){
+  // for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
+
+    // document.getElementById('playlist').innerHTML = '<li id="'+0+'" class="hole-home" onClick="select_video(this.id)"></li>';
+
+    for (var i = 1, len = 19; i < len; i++) {
+      document.getElementById('playlist').innerHTML += '<li id="'+i+'" onClick="select_video(this.id)">'+i+'</li>';
+    }
+}
+
+function barupdate(){
+  var hole = player.playlist.currentItem();
+  
+  document.getElementById('hole').innerHTML = leftPad(hole+1,1);
+  document.getElementById('hole-num').innerHTML = pos(hole+1);
+  document.getElementById('par').innerHTML = leftPad(gon.par[hole],1);
+  document.getElementById('yard').innerHTML = leftPad(gon.yard[hole],1);
+  document.getElementById('mhcp').innerHTML = leftPad(gon.mhcp[hole],1);
+
+}
+
+function leftPad(number, targetLength) {
+    var output = number + '';
+    while (output.length < targetLength) {
+        output = '0' + output;
+    }
+    return output;
+}
+
+function pos(num){
+  switch (num) {
+    default:
+        return "TH";
+        break;
+    case 1:
+        return "ST";
+        break;
+    case 2:
+        return "ND";
+        break;
+    case 3:
+        return "RD";
+  }
+}
+
+
+function select_video(id){
+  id-=1;
+  player.playlist.currentItem(id);
+}
+
+function current_video(){
+  id = player.playlist.currentItem();
+  for (i=0;i<18;i++){
+    if (i===id){
+      document.getElementById(i+1).className = "active";
+    }
+    else{
+      document.getElementById(i+1).removeAttribute("class");
+    }
+  }
+}
+
+document.querySelector('.right-green').addEventListener('click', function() {
+  // $( "div.playlist" ).scrollLeft( zx );
+  // console.log ($( ".playlist ul" ).width());
+  $('div.playlist').animate( { scrollLeft: '+=100' }, 500);
+});
+
+document.querySelector('.hole-home').addEventListener('click', function() {
+  // $( "div.playlist" ).scrollLeft( zx );
+  $('div.playlist').animate( { scrollLeft: '-=1000' }, 500);
+});
+
+// document.getElementById(0).className += " active";
+
+// trigger for forst ajax call
+$(document).ready(function() { $('#1 a').trigger('click') });
+
+</script>
+
+<!-- StyleSheet -->
+
+<style type="text/css">
+::-webkit-scrollbar { 
+    display: none; 
+}
+.player-container{
+  position: absolute;
+  /*width: 97%;*/
+  /*background: linear-gradient(rgba(64,64,64,1), rgba(64,64,64,0));*/
+
+}
+.upper-gradient{
+  width: 100%;
+  padding-top: 4%;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0));
+  position: absolute;
+  z-index: 1;
+}
+.lower-gradient{
+  width: 100%;
+  padding-top: 4%;
+  margin-top: -4%;
+  background: linear-gradient(rgba(64,64,64,0), rgba(0,0,0,0.7));
+  position: absolute;
+  z-index: 0; 
+}
+.vplayer{
+  z-index: -1;
+}
+.video-js .vjs-big-play-button {
+  width: 10%;
+  height: 17%;
+  font-size: 4em;
+  line-height: 1.50;
+  border: 2px solid;
+  border-radius: 50%;
+  background: transparent !important;
+}
+.vjs-big-play-centered .vjs-big-play-button {
+  top: 45%;
+  left:55%;
+}
+.hole-bar{
+  right: 1%;
+  top: 1%;
+  position: absolute;
+  height: 7%;
+  z-index: 5;
+  /*padding-left: 0;*/
+  /*border-radius: 0.4em;*/
+  text-align: center;
+  background-image: url(<%= image_url "top-bar.png" %>);
+  background-size: 100% 100%;
+}
+.hole-bar ul{
+  display: inline-block;
+  white-space: nowrap;
+  list-style: none; 
+  /*white-space: nowrap;
+  display: inline-block;*/
+  margin: 10px 0 0 0;
+  width: 105%;
+  padding-left: 0;
+  /*padding-right: 17%;*/
+  text-align: center;
+  /*overflow: auto;*/
+}
+.hole-bar ul li {
+  display: inline-block;
+  /*display: inline-block;*/
+  color:white; 
+  width:auto;
+  /*float:right;*/
+  border-right: 5px solid #696969;
+  padding: 2% 4% 0.6% 4%;
+}
+#lastli {
+  border: 0;
+  padding-right: 10%;
+}
+body{
+  /*font-size: 2.5vw;*/
+  font-size: 18px;
+}
+.hole-bar ul li span {
+  font-size:1.2em;
+  font-family: 'Avenir',sans-serif;
+  font-weight: 900; 
+}
+.hole-bar ul li text {
+  font-size:1.6em;
+  font-family: 'RakerDisHvy',sans-serif;
+}
+.on-video {  
+    z-index: 5;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+    color: white;
+}
+
+  .previous{
+    /*margin:top right down left;*/
+    position: absolute;
+    left: 25px;
+    top: 45%;
+    height: 40px; 
+   }
+  .next{
+    position: absolute;
+    right: 25px;
+    top: 45%;
+    height: 40px; 
+  }
+
+  .flag:before {
+    content: url(<%= image_url "flag.png" %>);
+    transform: scale(.8);
+  }
+
+  .eye {
+    display:none;
+    /*display:block;*/
+    top: 2.8%;
+    position: absolute;
+    right: 9%;
+    height: 7%;
+    width: 6%;
+  }
+  .right-green {
+    display:none;
+  }
+  .upload {
+    display: none;
+    /*display:block;*/
+    top: 2.0%;
+    position: absolute;
+    right: 18%;
+    height: 6.5%;
+    width: 4.7%;
+  }
+
+  .logo {
+    display:block;
+    top: 0;
+    left: 1%;
+    position: absolute;
+    width: 11%;
+    height: 6%;
+    
+  }
+
+.on-video img {
+    min-width: 20%;
+    min-height: 20%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.video-js .vjs-control-bar {
+  background: transparent;
+  z-index: 2;
+}
+.video-js .vjs-play-progress, .video-js .vjs-volume-level {
+  background-color: #3CB371;
+}
+.vjs-menu-button-inline .vjs-menu{
+  top:-0.5em;
+}
+
+.video-js .vjs-load-progress, .video-js .vjs-slider{
+  background-color: white;
+}
+.video-js .vjs-play-progress:before, .video-js .vjs-volume-level:before{
+  color: #3CB371;
+}
+.video-js .vjs-control {
+  width:3.5em;
+}
+.video-js .vjs-control:before {
+  /*font-size: 25px;*/
+  font-size: 2.2em;
+  line-height: 1.4;
+}
+.video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
+  /*content: url(<%= image_url "flag.png" %>); */
+}
+.video-js .vjs-menu-button-inline:before {
+  width: 1.6em;
+}
+
+.vjs-playback-rate .vjs-playback-rate-value {
+  font-family: "RakerDisHvy";
+  font-size: 1.8em;
+  line-height: 1.9;
+}
+.vjs-playback-rate .vjs-playback-rate-value {
+      content: url(<%= image_url "settings.png" %>);
+      margin-left: 35px;
+      margin-top: 5px;
+      width: 45%;
+      height:70%;
+      /*font-size: 1.9em;
+      line-height: 1.2;*/
+}
+
+.vjs-menu li {
+  font-family: "RakerDisHvy";
+  font-size: 1.2em;
+}
+.video-js {
+  font-size: 0.55em;
+}
+
+.vjs-playlist {
+  left:0px ;
+  width:100%; 
+  overflow: hidden;
+  padding-top: 0.5%;
+  background-image:url(<%= image_url "hole-selector-background.png" %>);
+  background-size: 100% 100%; 
+}
+.playlist{
+  height:130%;
+  width: 90%;
+  float: left;
+  overflow: auto;
+}
+.playlist ul{
+  display: inline-block;
+  white-space: nowrap;
+  list-style: none; 
+  height: 100%;
+  width:100%;
+  margin: 0 0 0 0;
+  padding: 1% 1% 0 1%;
+}
+.playlist ul li {
+  display: inline-block;
+  padding-top: 0%;
+  color:#696969; 
+  /*width:5.4%;*/
+  margin-right: 1.25%;
+  margin-left: 1.25%;
+  text-align: center; 
+  /*float:left;*/
+  vertical-align: center;
+  cursor: pointer;
+  font-family: 'RakerDisHvy',sans-serif;
+  font-size: 1.6em;
+}
+
+.playlist ul li a{
+  color:#696969; 
+}
+.playlist ul li.active {
+  border-bottom: 4px solid green;
+}
+.playlist ul li.active a {
+  color:white; 
+}
+.hole-home {
+  float: left;
+  cursor: pointer;
+}
+.hole-home.active img{
+  content: url(<%= image_url "hole-home-active.png" %>);
+  /*background-size: 100% 100%;  */
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url(<%= asset_url "Avenir.ttc" %>);
+}
+@font-face {
+  font-family: 'RakerDisHvy';
+  src: url(<%= asset_url "RakerDisHvy.otf" %>);
+}
+  
+
+
+
+
+
+
+@media only screen and (min-width: 1600px) {
+    body {font-size: 44px;}
+    .player-container {width: 1600px;}
+    .video-js .vjs-big-play-button {
+      /*line-height: 1.70;*/
+    }
+    .hole-bar ul{
+      margin: 10px 0 0 0;
+      /*font-size: 16px;*/
+    }
+    .hole-bar ul li {
+      border-right: 5px solid #696969;
+      padding: 2% 4% 0.6% 4%;
+    }    
+    .hole-bar ul li span {
+      font-size:2.5em;
+    }
+    .hole-bar ul li text {
+      font-size:3.0em;
+    }
+    .vjs-playlist{
+      height: 80px;
+    }
+    
+    .playlist ul li {
+      font-size: 37px;
+      line-height: 35px;
+      margin-right: 1.50%;
+      margin-left: 1.7%;
+    }
+    .right-green {
+      display:none;
+    }
+    .playlist{
+      width: 94%;
+    }
+    .hole-home{
+      width:6%;
+      height: 100%;
+      padding-left: 45px;
+      margin-top: -4px;
+    }
+    .hole-home img {
+      
+      width: 50px;
+      height: 50px;
+      /*margin-top: -0.4%;*/
+      /*margin-left: 20px;*/
+    }
+
+    .video-js .vjs-control-bar {
+      height: 2.2em;
+    }
+    .flag:before {
+      transform: scale(.8);
+    }
+    .video-js .vjs-control:before {
+      /*font-size: 25px;*/
+      font-size: 2.0em;
+      line-height: 1.1;
+    }
+    .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
+      font-size: 3.0em;
+      line-height: 0.75;
+    }
+    .vjs-playback-rate .vjs-playback-rate-value {
+      margin-left: 35px;
+      margin-top: 5px;
+      width: 45%;
+      height:70%;
+      /*font-size: 1.9em;
+      line-height: 1.2;*/
+    }
+    .vjs-volume-bar.vjs-slider-horizontal {
+      margin-top: 18.5%;
+    }
+    .vjs-menu li {
+      font-size: 1.2em;
+    }
+    .hole-info-div{
+      width:1600px; 
+      position: absolute;
+      margin-top: 980px;
+    }
+    
+}
+
+
+@media only screen and (min-width: 1200px) and (max-width: 1599px) {
+    body {font-size: 30px;}
+    .player-container {width: 1200px;}
+    .video-js .vjs-big-play-button {
+      line-height: 1.70;
+    }
+    .hole-bar ul{
+      margin: 8px 0 0 0;
+      font-size: 10px;
+    }
+    .hole-bar ul li {
+      border-right: 2.5px solid #696969;
+      padding: 1.5% 4% 0 4%;
+    }    
+    
+    .hole-bar ul li span {
+      font-size:2.5em;
+    }
+    
+    .hole-bar ul li text {
+      font-size:3.0em;
+    }
+    .vjs-playlist {
+      left:0px ;
+      width:100%; 
+      height: 60px;
+      background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; 
+    }
+    
+    .playlist ul li {
+      font-size: 28px;
+      line-height: 30px;
+      margin-right: 5.5%;
+      margin-left: 1.0%;
+    }
+    .right-green {
+      float: left;
+      width: 10%;
+      display:block;
+      cursor: pointer;
+      margin-top: 2px;
+      text-align: center;
+    }
+    .right-green img {
+     width: 15px;
+     height:30px;
+    }
+    .hole-home {
+      width: 10%;
+      margin-top: -1px;
+      text-align: center;
+    }
+    .hole-home img {
+      width: 35px;
+      height: 35px;
+    }
+
+
+
+    .playlist{
+      float: left;
+      width: 80%;
+      /*background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; */
+      overflow: auto;
+    }
+    .video-js .vjs-control-bar {
+      /*height: 3em;*/
+    }
+    .flag:before {
+      transform: scale(.6);
+      margin-top: -3px;
+    }
+    .video-js .vjs-control:before {
+      /*font-size: 25px;*/
+      /*font-size: 2.0em;*/
+      /*line-height: 0.9;*/
+    }
+    .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
+      font-size: 3.0em;
+      line-height: 0.85;
+    }
+    .vjs-playback-rate .vjs-playback-rate-value {
+      margin-left: 22px;
+      margin-top: 7px;
+      width:30px;
+      height:30px;
+    }
+    .vjs-volume-bar.vjs-slider-horizontal {
+      margin-top: 22.5%;
+    }
+    /*.vjs-menu li {
+      font-size: 1.2em;
+    }*/
+    .hole-info-div{
+      width:1200px; 
+      position: absolute;
+      margin-top: 740px;
+    }
+    
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1199px) {
+    body {font-size: 30px;}
+    .player-container {width: 960px;}
+    .video-js .vjs-big-play-button {
+      line-height: 1.35;
+    }
+    .hole-bar{
+      height:47px;
+    }
+    .hole-bar ul{
+      margin: 7px 0 0 0;
+      font-size: 10px;
+    }
+    .hole-bar ul li {
+      border-right: 2.5px solid #696969;
+      padding: 1.5% 4% 0 4%;
+    }    
+    
+    .hole-bar ul li span {
+      font-size:2.5em;
+    }
+    
+    .hole-bar ul li text {
+      font-size:3.0em;
+    }
+    .vjs-playlist {
+      left:0px ;
+      width:100%; 
+      height: 60px;
+      background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; 
+    }
+    .playlist ul {
+      line-height: 47px;
+    }
+    
+    .playlist ul li {
+      font-size: 28px;
+      line-height: 30px;
+      margin-right: 6.0%;
+      margin-left: 3.0%;
+    }
+    .right-green {
+      float: left;
+      width: 10%;
+      display:block;
+      cursor: pointer;
+      margin-top: 2px;
+      text-align: center;
+    }
+    .right-green img {
+     width: 15px;
+     height:30px;
+    }
+    .hole-home {
+      width: 10%;
+      margin-top: -1px;
+      text-align: center;
+    }
+    .hole-home img {
+      width: 35px;
+      height: 35px;
+    }
+
+
+
+    .playlist{
+      float: left;
+      width: 80%;
+      /*background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; */
+      overflow: auto;
+    }
+    .video-js .vjs-control-bar {
+      /*height: 3em;*/
+    }
+    .flag:before {
+      transform: scale(.6);
+      margin-top: -3px;
+    }
+    .video-js .vjs-control:before {
+      /*font-size: 25px;*/
+      /*font-size: 2.0em;*/
+      /*line-height: 0.9;*/
+    }
+    .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
+      font-size: 3.0em;
+      line-height: 0.85;
+    }
+    .vjs-playback-rate .vjs-playback-rate-value {
+      margin-left: 22px;
+      margin-top: 7px;
+      width:30px;
+      height:30px;
+    }
+    .vjs-volume-bar.vjs-slider-horizontal {
+      margin-top: 22.5%;
+    }
+    /*.vjs-menu li {
+      font-size: 1.2em;
+    }*/
+    .hole-info-div{
+      width:960px; 
+      position: absolute;
+      margin-top: 600px;
+    }
+    
+}
+
+@media only screen and (min-width: 760px) and (max-width: 959px) {
+    body {font-size: 30px;}
+    .player-container {width: 760px;}
+    .video-js .vjs-big-play-button {
+      line-height: 1.06;
+    }
+    .logo {
+      display: none;
+    }
+    .hole-bar{
+      /*right:18%;*/
+      height:47px;
+      left: 15%;
+      right: 15%;
+
+    }
+    .hole-bar ul{
+      margin: 7px 0 0 0;
+      font-size: 10px;
+    }
+    .hole-bar ul li {
+      border-right: 2.5px solid #696969;
+      padding: 1.5% 4% 0 4%;
+    }    
+    
+    .hole-bar ul li span {
+      font-size:2.5em;
+    }
+    
+    .hole-bar ul li text {
+      font-size:3.0em;
+    }
+    .vjs-playlist {
+      left:0px ;
+      width:100%; 
+      height: 60px;
+      background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; 
+    }
+    .playlist ul {
+      line-height: 47px;
+    }
+    
+    .playlist ul li {
+      font-size: 28px;
+      line-height: 30px;
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-right: 7.0%;
+      margin-left: 5.0%;
+    }
+    .right-green {
+      float: left;
+      width: 10%;
+      display:block;
+      cursor: pointer;
+      margin-top: 2px;
+      text-align: center;
+    }
+    .right-green img {
+     width: 15px;
+     height:30px;
+    }
+    .hole-home {
+      width: 10%;
+      margin-top: -1px;
+      text-align: center;
+    }
+    .hole-home img {
+      width: 35px;
+      height: 35px;
+    }
+
+
+
+    .playlist{
+      float: left;
+      width: 80%;
+      /*background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; */
+      overflow: auto;
+    }
+    .video-js .vjs-control-bar {
+      /*height: 3em;*/
+    }
+    .flag:before {
+      transform: scale(.6);
+      margin-top: -3px;
+    }
+    .video-js .vjs-control:before {
+      /*font-size: 25px;*/
+      /*font-size: 2.0em;*/
+      /*line-height: 0.9;*/
+    }
+    .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
+      font-size: 3.0em;
+      line-height: 0.85;
+    }
+    .vjs-playback-rate .vjs-playback-rate-value {
+      margin-left: 22px;
+      margin-top: 7px;
+      width:30px;
+      height:30px;
+    }
+    .vjs-volume-bar.vjs-slider-horizontal {
+      margin-top: 22.5%;
+    }
+    /*.vjs-menu li {
+      font-size: 1.2em;
+    }-*/
+    .hole-info-div{
+      width:760px; 
+      position: absolute;
+      margin-top: 500px;
+    }
+
+    
+}
+
+@media only screen and (min-width: 480px) and (max-width: 759px) {
+    body {font-size: 25px;}
+    .player-container {width: 480px;}
+    .video-js .vjs-big-play-button {
+      /*margin-top: -30px;*/
+      height: 25%;
+      width: 15%;
+      line-height: 1.35;
+      font-size: 3.5em;
+    }
+    .logo {
+      display: none;
+    }
+
+    .previous{
+      /*margin:top right down left;*/
+      position: absolute;
+      left: 25px;
+      top: 40%;
+      height: 25px; 
+     }
+    .next{
+      position: absolute;
+      right: 25px;
+      top: 40%;
+      height: 25px; 
+    }
+
+    .hole-bar{
+      /*right:18%;*/
+      height:45px;
+      left: 0%;
+      right: 0%;
+    }
+    .hole-bar ul{
+      margin: 7px 0 0 0;
+      font-size: 8px;
+    }
+    .hole-bar ul li {
+      border-right: 2.5px solid #696969;
+      padding: 1.5% 4% 0 4%;
+    }    
+    
+    .hole-bar ul li span {
+      font-size:2.5em;
+    }
+    
+    .hole-bar ul li text {
+      font-size:3.0em;
+    }
+    .vjs-playlist {
+      left:0px ;
+      width:100%; 
+      height: 50px;
+      background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; 
+    }
+    .playlist ul {
+      line-height: 47px;
+    }
+    
+    .playlist ul li {
+      font-size: 28px;
+      line-height: 30px;
+      padding-left: 3%;
+      padding-right: 3%;
+      margin-right: 12.0%;
+      margin-left: 8.0%;
+    }
+    .right-green {
+      float: left;
+      width: 15%;
+      display:block;
+      cursor: pointer;
+      margin-top: 2px;
+      text-align: center;
+    }
+    .right-green img {
+     width: 10px;
+     height:25px;
+    }
+    .hole-home {
+      width: 15%;
+      margin-top: 2px;
+      text-align: center;
+    }
+    .hole-home img {
+      width: 35px;
+      height: 35px;
+    }
+
+    .playlist{
+      float: left;
+      width: 70%;
+      /*background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; */
+      overflow: auto;
+    }
+    .video-js .vjs-control-bar {
+      /*height: 3em;*/
+    }
+    .flag:before {
+      transform: scale(.5);
+      margin-top: -4px;
+    }
+    .video-js .vjs-control:before {
+      /*font-size: 25px;*/
+      /*font-size: 2.0em;*/
+      /*line-height: 0.9;*/
+    }
+    .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
+      font-size: 3.0em;
+      line-height: 0.85;
+    }
+    .vjs-playback-rate .vjs-playback-rate-value {
+      margin-left: 18px;
+      margin-top: 5px;
+      width:25px;
+      height:25px;
+    }
+    .vjs-volume-bar.vjs-slider-horizontal {
+      margin-top: 22.5%;
+    }
+    /*.vjs-menu li {
+      font-size: 1.2em;
+    }*/
+    .hole-info-div{
+      width:480px; 
+      position: absolute;
+      margin-top: 330px;
+    }
+    
+}
+
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+    body {font-size: 25px;}
+    .player-container {width: 320px;}
+    .video-js .vjs-big-play-button {
+      margin-top: -25px;
+      margin-left: -45px;
+      height: 65px;
+      width: 65px;
+      line-height: 1.3;
+      font-size: 3.5em;
+    }
+    .logo {
+      display: none;
+    }
+
+    .previous{
+      /*margin:top right down left;*/
+      position: absolute;
+      left: 25px;
+      top: 40%;
+      height: 25px; 
+     }
+    .next{
+      position: absolute;
+      right: 25px;
+      top: 40%;
+      height: 25px; 
+    }
+
+    .hole-bar{
+      /*right:18%;*/
+      height:40px;
+      left: 0%;
+      right: 0%;
+    }
+    .hole-bar ul{
+      margin: 7px 0 0 0;
+      font-size: 6px;
+    }
+    .hole-bar ul li {
+      border-right: 2.5px solid #696969;
+      padding: 1.5% 4% 0 4%;
+    }    
+    
+    .hole-bar ul li span {
+      font-size:2.5em;
+    }
+    
+    .hole-bar ul li text {
+      font-size:3.0em;
+    }
+    .vjs-playlist {
+      /*display: none;*/
+      left:0px ;
+      max-width: 320px;
+      width:100%; 
+      height: 40px;
+      background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; 
+    }
+    .playlist ul {
+      /*line-height: 47px;*/
+    }
+    
+    .playlist ul li {
+      font-size: 22px;
+      line-height: 30px;
+      padding-left: 1%;
+      padding-right: 1%;
+      margin-right: 18.0%;
+      margin-left: 18.0%;
+    }
+    .right-green {
+      float: left;
+      width: 15%;
+      display:block;
+      cursor: pointer;
+      /*margin-top: 2px;*/
+      text-align: center;
+    }
+    .right-green img {
+     width: 8px;
+     height:20px;
+    }
+    .hole-home {
+      width: 15%;
+      margin-top: -2px;
+      text-align: center;
+    }
+    .hole-home img {
+      width: 25px;
+      height: 25px;
+    }
+
+    .playlist{
+      float: left;
+      width: 70%;
+      height: 130%;
+      /*background-image:url(<%= image_url "hole-selector-background.png" %>);
+      background-size: 100% 100%; */
+      overflow: auto;
+    }
+    .video-js .vjs-control-bar {
+      /*height: 3em;*/
+    }
+    .flag:before {
+      transform: scale(.5);
+      margin-top: -4px;
+    }
+    .video-js .vjs-control:before {
+      /*font-size: 25px;*/
+      /*font-size: 2.0em;*/
+      /*line-height: 0.9;*/
+    }
+    .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
+      font-size: 3.0em;
+      line-height: 0.85;
+    }
+    .vjs-playback-rate .vjs-playback-rate-value {
+      margin-left: 18px;
+      margin-top: 5px;
+      width:25px;
+      height:25px;
+    }
+    .vjs-volume-bar.vjs-slider-horizontal {
+      margin-top: 22.5%;
+    }
+    /*.vjs-menu li {
+      font-size: 1.2em;
+    }*/
+    .hole-info-div{
+      width:320px; 
+      position: absolute;
+      margin-top: 230px;
+    }
+    
+}
+
+
+
+
+ 
+
+</style>
