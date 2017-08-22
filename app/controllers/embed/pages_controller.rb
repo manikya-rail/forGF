@@ -18,6 +18,8 @@ class Embed::PagesController < ApplicationController
     gon.description = []
 
     @job = "547"
+    
+    @course = Course.find(params[:id])
     @xh = @course.holes
     
     @holes = @course.holes.sort_by{ |m| m.hole_num }
