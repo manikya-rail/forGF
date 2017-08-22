@@ -53,14 +53,12 @@
             <div id="0" class="hole-home" onClick="select_video(this.id)"><%= image_tag "hole-home.png" %></div>
             <div  class="playlist">
               <ul id="playlist" >
-                <%= @holes%> 
-
-                <%# @holes.each do |hole| %> 
-                  <!-- <li id="<%#=hole.hole_num%>" onClick="select_video(this.id)"> -->
-                    <%#=link_to hole.hole_num, embed_hole_info_path(hole.id), remote: true
+                <% @holes.each do |hole| %> 
+                  <li id="<%=hole.hole_num%>" onClick="select_video(this.id)">
+                    <%=link_to hole.hole_num, embed_hole_info_path(hole.id), remote: true
                     %>
-                  <!-- </li> -->
-                <%# end %>
+                  </li>
+                <% end %>
                 
               </ul>
             </div>
