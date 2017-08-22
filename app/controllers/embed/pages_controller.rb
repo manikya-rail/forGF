@@ -16,6 +16,9 @@ class Embed::PagesController < ApplicationController
     gon.image = []
     gon.image_urls = []
     gon.description = []
+
+    @job = "547"
+    @xh = @course.holes
     
     @holes = @course.holes.sort_by{ |m| m.hole_num }
 
