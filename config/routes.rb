@@ -46,7 +46,7 @@ end
   root to: "admin/courses#new"
 
   namespace :embed do
-    resources :pages, only: :show, path: "" # -> domain.com/embed/1
+    # resources :pages, only: :show, path: "" # -> domain.com/embed/1
     get "show/:id", to: 'pages#show'
     get "display/:id", to: 'pages#display',as: 'display_info'
     get "hole/:id", to: 'pages#hole_by_hole',as: 'hole_info'
