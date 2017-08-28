@@ -51,6 +51,7 @@
 
           <div class="vjs-playlist">
             <div id="0" class="hole-home" onClick="select_video(this.id)"><%= image_tag "hole-home.png" %></div>
+            <div class="left-green"><%= image_tag "left-green.png" %></div>
             <div  class="playlist">
               <ul id="playlist" >
                 <% @holes.try(:each) do |hole| %> 
@@ -255,11 +256,17 @@ document.querySelector('.right-green').addEventListener('click', function() {
   // console.log ($( ".playlist ul" ).width());
   $('div.playlist').animate( { scrollLeft: '+=100' }, 500);
 });
-
-document.querySelector('.hole-home').addEventListener('click', function() {
+document.querySelector('.left-green').addEventListener('click', function() {
   // $( "div.playlist" ).scrollLeft( zx );
-  $('div.playlist').animate( { scrollLeft: '-=1000' }, 500);
+  // console.log ($( ".playlist ul" ).width());
+  $('div.playlist').animate( { scrollLeft: '-=100' }, 500);
 });
+
+
+// document.querySelector('.hole-home').addEventListener('click', function() {
+//   // $( "div.playlist" ).scrollLeft( zx );
+//   $('div.playlist').animate( { scrollLeft: '-=1000' }, 500);
+// });
 
 // document.getElementById(0).className += " active";
 
@@ -400,6 +407,9 @@ body{
     width: 6%;
   }
   .right-green {
+    display:none;
+  }
+  .left-green {
     display:none;
   }
   .upload {
@@ -588,6 +598,9 @@ body{
     .right-green {
       display:none;
     }
+    .left-green {
+      display:none;
+    }
     .playlist{
       width: 94%;
     }
@@ -691,6 +704,18 @@ body{
      width: 15px;
      height:30px;
     }
+    .left-green {
+      float: left;
+      width: 10%;
+      display:block;
+      cursor: pointer;
+      margin-top: 2px;
+      text-align: center;
+    }
+    .left-green img {
+     width: 15px;
+     height:30px;
+    }
     .hole-home {
       width: 10%;
       margin-top: -1px;
@@ -705,7 +730,7 @@ body{
 
     .playlist{
       float: left;
-      width: 80%;
+      width: 70%;
       /*background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%; */
       overflow: auto;
@@ -800,6 +825,18 @@ body{
      width: 15px;
      height:30px;
     }
+    .left-green {
+      float: left;
+      width: 10%;
+      display:block;
+      cursor: pointer;
+      margin-top: 2px;
+      text-align: center;
+    }
+    .left-green img {
+     width: 15px;
+     height:30px;
+    }
     .hole-home {
       width: 10%;
       margin-top: -1px;
@@ -814,7 +851,7 @@ body{
 
     .playlist{
       float: left;
-      width: 80%;
+      width: 70%;
       /*background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%; */
       overflow: auto;
@@ -918,6 +955,18 @@ body{
      width: 15px;
      height:30px;
     }
+    .left-green {
+      float: left;
+      width: 10%;
+      display:block;
+      cursor: pointer;
+      margin-top: 2px;
+      text-align: center;
+    }
+    .left-green img {
+     width: 15px;
+     height:30px;
+    }
     .hole-home {
       width: 10%;
       margin-top: -1px;
@@ -932,7 +981,7 @@ body{
 
     .playlist{
       float: left;
-      width: 80%;
+      width: 70%;
       /*background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%; */
       overflow: auto;
@@ -1055,6 +1104,18 @@ body{
      width: 10px;
      height:25px;
     }
+    .left-green {
+      float: left;
+      width: 15%;
+      display:block;
+      cursor: pointer;
+      margin-top: 2px;
+      text-align: center;
+    }
+    .left-green img {
+     width: 10px;
+     height:25px;
+    }
     .hole-home {
       width: 15%;
       margin-top: 2px;
@@ -1067,7 +1128,7 @@ body{
 
     .playlist{
       float: left;
-      width: 70%;
+      width: 55%;
       /*background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%; */
       overflow: auto;
@@ -1192,6 +1253,18 @@ body{
      width: 8px;
      height:20px;
     }
+    .left-green {
+      float: left;
+      width: 15%;
+      display:block;
+      cursor: pointer;
+      /*margin-top: 2px;*/
+      text-align: center;
+    }
+    .left-green img {
+     width: 8px;
+     height:20px;
+    }
     .hole-home {
       width: 15%;
       margin-top: -2px;
@@ -1204,7 +1277,7 @@ body{
 
     .playlist{
       float: left;
-      width: 70%;
+      width: 55%;
       height: 130%;
       /*background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%; */
