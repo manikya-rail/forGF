@@ -50,5 +50,6 @@ end
     get "show/:id", to: 'pages#show'
     get ":id", to: 'pages#display',as: 'display_info'
     get "hole/:id", to: 'pages#hole_by_hole',as: 'hole_info'
+    get "course/:id", to: 'pages#course_home',as: 'course_info'
   end
 end

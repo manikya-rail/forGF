@@ -50,7 +50,7 @@
           <div class = "lower-gradient"></div>
 
           <div class="vjs-playlist">
-            <div id="0" class="hole-home" onClick="select_video(this.id)"><%= image_tag "hole-home.png" %></div>
+            <div id="0" class="hole-home" onClick="select_video(this.id)"><%=link_to image_tag('hole-home.png'), embed_course_info_path(@course.id), remote: true %></div>
             <div class="left-green"><%= image_tag "left-green.png" %></div>
             <div  class="playlist">
               <ul id="playlist" >
