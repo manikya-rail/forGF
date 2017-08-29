@@ -47,6 +47,12 @@ class Admin::CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
+
+       if params[:images]
+        params[:images].each { |image|
+          @course.course_images.create(photo: image)
+        }
+      end
         format.html { redirect_to admin_holes_create_path(@course), notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
@@ -61,6 +67,11 @@ class Admin::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
+        if params[:images]
+          params[:images].each { |image|
+            @course.course_images.create(photo: image)
+          }
+        end
         format.html { redirect_to admin_courses_path, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else

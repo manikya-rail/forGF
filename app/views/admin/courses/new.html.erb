@@ -106,6 +106,16 @@
                 <%= f.file_field :score_card_image, class: 'check-field' %>
               </div>
             </div>
+
+            <div class="col-md-4">
+              <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
+              <div class="btn btn-success upload-btn">
+                <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field' %>
+              </div>
+            </div>
+
+
+              
         </div>
 
         <div class="col-md-12 course-info-row">

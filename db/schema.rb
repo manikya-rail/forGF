@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829081611) do
+ActiveRecord::Schema.define(version: 20170829091212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(version: 20170829081611) do
     t.boolean  "practice_range"
     t.boolean  "golf_boards"
     t.index ["course_id"], name: "index_amenities_on_course_id", using: :btree
+  end
+
+  create_table "course_images", force: :cascade do |t|
+    t.integer  "course_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.index ["course_id"], name: "index_course_images_on_course_id", using: :btree
   end
 
   create_table "course_users", force: :cascade do |t|
@@ -260,6 +271,7 @@ ActiveRecord::Schema.define(version: 20170829081611) do
     t.index ["score_card_id"], name: "index_yardages_on_score_card_id", using: :btree
   end
 
+  add_foreign_key "course_images", "courses"
   add_foreign_key "course_users", "courses"
   add_foreign_key "course_users", "users"
   add_foreign_key "courses", "lists"

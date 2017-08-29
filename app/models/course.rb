@@ -16,6 +16,8 @@ class Course < ApplicationRecord
      has_many :course_users
      has_many :users, through: :course_users
 
+     has_many :course_images, :dependent => :destroy
+
      accepts_nested_attributes_for :location, :allow_destroy => true
      accepts_nested_attributes_for :score_cards, :allow_destroy => true
      accepts_nested_attributes_for :holes, :allow_destroy => true
