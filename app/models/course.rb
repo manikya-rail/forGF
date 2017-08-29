@@ -40,6 +40,15 @@ class Course < ApplicationRecord
    # Validate the attached image is image/jpg, image/png, etc
    validates_attachment_content_type :cover, :content_type => /\Aimage\/.*\Z/
 
+   has_attached_file :score_card_image, styles: {
+     thumb: '100x100>',
+     square: '200x200#',
+     medium: '300x300>'
+   }
+
+   # Validate the attached image is image/jpg, image/png, etc
+   validates_attachment_content_type :score_card_image, :content_type => /\Aimage\/.*\Z/
+
    enum course_type: [ :is_public, :is_private, :is_semi_private ]
 
      def formated_location
