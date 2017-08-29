@@ -93,7 +93,7 @@ for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
 
 // 320, 480, 760, 960, 1200 and 1600px.
 var player = videojs('hole-vid', {
-  preload: true, inactivityTimeout: 0, controls: true, fluid:true,
+  preload: true, inactivityTimeout: 5000, controls: true, fluid:true,
   'playbackRates': [0.5, 1, 1.5, 2],
    controlBar: {
     children: {
