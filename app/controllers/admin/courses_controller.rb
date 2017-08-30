@@ -47,6 +47,12 @@ class Admin::CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
+
+        if params[:images]
+          params[:images].each { |image|
+            @course.course_images.create(photo: image)
+          }
+        end
         format.html { redirect_to admin_holes_create_path(@course), notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
@@ -61,6 +67,11 @@ class Admin::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
+        if params[:images]
+          params[:images].each { |image|
+            @course.course_images.create(photo: image)
+          }
+        end
         format.html { redirect_to admin_courses_path, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
@@ -88,7 +99,7 @@ class Admin::CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :total_par, :slope, :rating, :length, :number_of_tees, :architect, :resort_id, :network_id, :logo, :cover,
+      params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :total_par, :slope, :rating, :length, :number_of_tees, :architect, :resort_id, :network_id, :logo, :cover, :score_card_image, :video,
           amenities_attributes: [:id, :restaurants, :caddies, :carts, :practice_range, :golf_boards],
           location_attributes: [:id, :town,:state, :lat, :lng],
           score_cards_attributes: [:id, :tee_name, :color],

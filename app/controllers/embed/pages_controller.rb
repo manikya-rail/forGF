@@ -74,8 +74,12 @@ class Embed::PagesController < ApplicationController
 
   def hole_by_hole
     @hole=Hole.find(params[:id])
-    # @job = "698" 
   end
+
+  def course_home
+    @course=Course.find(params[:id])
+  end
+
 
 
     

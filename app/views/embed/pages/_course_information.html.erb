@@ -1,0 +1,657 @@
+
+  <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
+
+  <div class="row description">
+    <div class="col-md-7 about">
+      <div class="row">
+        <div class="col-md-6">
+          <h3><b>About The Course</b></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 bio">
+          <h4><%= @course.bio %></h4>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-5 specs">
+      <div class="row">
+        <div class="col-md-6">
+          <h3><b>Course Specs</b></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          
+          <div class="row">
+            <div class="col-md-12">
+              <span class="values"><h4>Holes: <%= @course.holes.count %></h4></span>
+            
+              <span class="values"><h4>Par: <%= @course.total_par %></h4></span>
+            
+              <span class="values"><h4>Slope: <%= @course.slope %></h4></span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <span class="values"><h4>Rating: <%= @course.rating %></h4></span>
+            
+              <span class="values"><h4>Yardages: <%= @course.length %></h4></span>
+            
+              <span class="values"><h4>Tee Boxes: <%= @course.score_cards.count %></h4></span>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div class="row description2">
+    <div class="col-md-7">
+      <div class="row">
+          <div class="col-md-12">
+            <h3><b>Amenities</b></h3>
+          </div>
+        </div>
+        <div class="row amenity-wrap">
+          <div class="col-md-12">
+            <div class="row">
+              <% @course.amenities.each do |amenity| %>
+
+                <% if amenity.restaurants %>
+                  <span class="amenity">
+                  <h4><%= image_tag "amenities/restaurant.png", class: 'practice-range' %>Restaurant</h4></span>
+                <% end %>
+
+                <% if amenity.caddies %>
+                  <span class="amenity">
+                  <h4><%= image_tag "amenities/caddies.png", class: 'caddies' %>Caddies</h4></span>
+                <% end %>
+
+                <% if amenity.carts %>
+                  <span class="amenity">
+                  <h4><%= image_tag "amenities/carts.png", class: 'carts' %>Carts</h4></span>
+                <% end %>
+
+                <% if amenity.golf_boards %>
+                  <span class="amenity">
+                  <h4><%= image_tag "amenities/golfboard.png", class: 'golfboard' %>Golfboards</h4></span>
+                <% end %>
+
+                <% if amenity.practice_range %>
+                  <span class="amenity pp">
+                  <h4><%= image_tag "amenities/practice-range.png", class: 'practice-range' %>Practice Range</h4></span>
+                <% end %>
+
+              <% end%>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+
+    <div class="col-md-5">
+      <div class="row">
+        <div class="col-md-12">
+          <h3><b>Architect</b></h3>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-12 architect">
+           <h4><%= @course.architect %></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+            
+
+  <div class="row slider">
+    <div class="col-md-12 st1">
+       <div class="btn-group btn-group-lg map-slecter">
+        <button type="button" class="btn" id="select_map">Score Card</button>
+        <button type="button" class="btn" id="select_photos">Photos</button>
+      </div> 
+      <ul id="map">
+        <li><%=image_tag @course.score_card_image.url %></li>
+      </ul>
+      <ul id="slider" class="bxslider">
+        <% @course.course_images.each do | courseimage | %>
+          <li><%=image_tag courseimage.photo.url %></li>
+        <% end%>
+      </ul>
+    </div>
+    <div class="col-md-12 st2"> 
+      <div class="row">
+        <div class="col-md-12">
+          <div class="divider">Map</div>
+          <%=image_tag @course.score_card_image.url %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="divider">Photos</div>
+          <ul id="slider" class="bxslider">
+            <% @course.course_images.each do | courseimage | %>
+              <li><%=image_tag courseimage.photo.url %></li>
+            <% end%>
+          </ul>
+         </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.bxslider').bxSlider({
+    mode: 'horizontal',
+    useCSS: false,
+    // infiniteLoop: false,
+    // hideControlOnEnd: true,
+    // // easing: 'easeOutElastic',
+    // speed: 2000,
+      pager: false,
+      nextText: '<%= image_tag "right.png" %>',
+      prevText: '<%= image_tag "left.png" %>'
+   });
+});
+
+$('#select_map').click(function (){
+  $('.bx-wrapper').hide();
+  // $('#slider').hide();
+  $('#select_photos').removeClass('selected');
+  $('#select_photos').addClass('non-selected');
+
+  $('#map').show();
+  $('#select_map').removeClass('non-selected');
+  $('#select_map').addClass('selected');
+
+  $('.bx-next').hide();
+  $('.bx-prev').hide();
+});
+
+$('#select_photos').click(function (){
+  $('#map').hide();
+  $('#select_map').removeClass('selected');
+  $('#select_map').addClass('non-selected');
+
+  $('.bx-wrapper').show();
+  // $('#slider').show();
+  $('#select_photos').removeClass('non-selected');
+  $('#select_photos').addClass('selected');
+
+  $('.bx-next').show();
+  $('.bx-prev').show();
+});
+
+$(document).ready(function() { $('#select_photos').trigger('click') });
+
+// $( window ).resize(function() {
+//   if($(document).width() >760) $('.map-slecter').addClass("btn-group-lg");
+//   else $('.map-slecter').removeClass("btn-group-lg");
+// });
+
+
+
+</script>
+<style type="text/css">
+.caddies{
+  width: 30px;
+  height: 40px;
+}
+.carts {
+  width: 40px;
+  height: 30px; 
+}
+.practice-range{
+  width: 50px;
+  height: 45px;
+}
+.golfboard {
+  width: 50px;
+  height: 35px;
+}
+.bio {
+  padding-right: 100px;
+}
+.architect {
+  padding-left: 30px;
+}
+.about{
+
+}
+
+.st2 {
+  display: none;
+}
+h3, h4 {
+  margin: 0;
+  margin-bottom: 5px;
+}
+.selected{
+  background: black;
+  color: white !important;
+}
+.non-selected{
+  background: white;
+  color: black;
+}
+.map-slecter {
+  position: absolute;
+  z-index: 11;
+  left:46%;
+  top:50px;
+}
+
+
+#map{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#map li img {
+  width: 100%;
+  height: 100%;
+}
+
+.bxslider {
+    list-style:none;
+    margin:0;
+    padding:0
+}
+
+.bxslider li img {
+  width: 100%;
+  height: 100%;
+}
+
+.bx-next {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+}
+.bx-prev {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+}
+.description {
+  padding-left: 50px;
+  font-family: 'Avenir', serif;
+}
+.description2 {
+  padding-left: 60px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-family: 'Avenir', serif;
+}
+.specs{
+  text-align: left;
+  /*padding-top: 30px;*/
+  /*padding-right: 60px;*/
+}
+.values{
+  display: inline-block;
+  width: 30%;
+}
+.amenity{
+  display: inline-block;
+  width: 23%;
+}
+.points h3 img {
+  padding-bottom: 5px;
+
+}
+.justify{
+  text-align: justify;
+}
+/*// 320, 480, 760, 960, 1200 and 1600px.*/
+      @media only screen and (min-width: 1600px) {
+        .description {
+          margin-top: 50px;
+          margin-bottom: 50px;
+          padding-left: 60px;
+        }
+
+
+      }
+
+      @media only screen and (max-width: 1599px) and (min-width: 1200px) {
+        .description {
+          margin-top: 30px;
+          margin-bottom: 30px;
+          padding-left: 60px;
+        }
+        .description h4{
+          font-size: 15px;
+        }
+        .description2 h4{
+          font-size: 15px;
+        }
+        .bx-next img, .bx-prev img {
+          height: 60%;
+          width: 60%;
+        }
+
+
+      }
+
+      @media only screen and (max-width: 1199px) and (min-width: 992px) {
+        .description {
+          margin-top: 30px;
+          margin-bottom: 30px;
+          padding-left: 60px;
+        }
+        .description h4{
+          font-size: 13px;
+        }
+        .description h3{
+          font-size: 17px;
+        }
+        .description2 h4{
+          font-size: 13px;
+        }
+        .description2 h3{
+          font-size: 17px;
+        }
+        /*.amenity{
+          display: table-cell;
+          display: inline-table;
+        }*/
+        .pp {
+          width:26%;
+        }
+        .bx-next img, .bx-prev img {
+          height: 60%;
+          width: 60%;
+        }
+
+      }
+
+      @media only screen and (max-width: 991px) and (min-width: 760px) {
+        .about{
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          border-bottom: 2px solid lightgrey;
+
+  
+        }
+        .description {
+          text-align: center;
+          margin-top: 30px;
+          margin-bottom: 40px;
+          padding-left: 40px;
+          margin-right: 30px;
+        }
+        .bio {
+          padding-right: 10px;
+        }
+        .bx-next img, .bx-prev img {
+          height: 60%;
+          width: 60%;
+        }
+         .specs {
+          text-align: center;
+          width: 100%;
+          display: table;
+          table-layout: fixed;
+          padding-right: 0;
+          padding-left: 0;
+          padding-bottom: 30px;
+          border-bottom: 2px solid lightgrey;
+          margin-bottom: -30px;
+        }
+        .amenity-wrap {
+         padding-bottom: 30px;
+        }
+
+        .description2 {
+          text-align: center;
+          padding-left: 0px;
+        }
+        .amenity{
+          display: inline-block;
+          width: 23%;
+          padding-bottom: 20px;
+        }
+
+        .points{
+          display: table-cell;
+        }
+        .map-slecter {
+          left:40%;
+          top:50px;
+        }
+
+
+
+      }
+
+      @media only screen and (max-width: 759px) and (min-width: 480px) {
+
+
+        .st2 {
+          display: block;
+        }
+        .st1{
+          display: none;
+        }
+        .st2 img{
+          width: 100%;
+          height: 100%;
+        }
+        .divider{
+          text-align: center;
+          width:100%; 
+          height: 45px;
+          font-size: 20px;
+          line-height: 2;
+          color: white;
+          background-image:url(<%= image_url "hole-selector-background.png" %>);
+          background-size: 100% 100%; 
+        }
+        .description {
+          margin-top: 30px;
+          margin-bottom: 40px;
+          padding-left: 50px;
+          padding-right: 50px;
+          text-align: center;
+        }
+        .about{
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          border-bottom: 1px solid lightgrey;
+        }
+        .bio {
+          padding-left: 0px;
+          padding-right: 0px;
+        }
+
+        .description2 {
+          margin-top: 30px;
+          padding-left: 50px;
+          padding-right: 50px;
+          text-align: center;
+        }
+        .specs {
+          padding-bottom: 30px;
+          border-bottom: 1px solid lightgrey;
+          margin-bottom: -20px;
+        }
+        
+        .amenity {
+          width:32%;
+        }
+        .pp {
+          width: 40%;
+        }
+        .amenity-wrap{
+          padding-bottom: 40px;
+        }
+        .description h4{
+          font-size: 13px;
+        }
+        .description h3{
+          font-size: 17px;
+        }
+        .description2 h4{
+          font-size: 13px;
+        }
+        .description2 h3{
+          font-size: 17px;
+        }
+        .bx-next img, .bx-prev img {
+          height: 60%;
+          width: 60%;
+        }
+        .specs {
+          text-align: center;
+          width: 100%;
+          display: table;
+          table-layout: fixed;
+          padding-right: 0;
+          padding-left: 0;
+        }
+
+        .points{
+          display: table-cell;
+        }
+
+        /*.map-slecter {
+          left:35%;
+          top:40px;
+        }*/
+        .map-slecter {
+          display: none;
+        }
+        .description h3 {
+          font-size: 18px;
+        }
+        .description h4 {
+          font-size: 13px;
+        }
+
+
+      }
+
+      @media only screen and (max-width: 479px) and (min-width: 320px) {
+        .st2 {
+          display: block;
+        }
+        .st1{
+          display: none;
+        }
+        .st2 img{
+          width: 100%;
+          height: 100%;
+        }
+
+        .divider{
+          text-align: center;
+          width:100%; 
+          height: 40px;
+          font-size: 20px;
+          line-height: 2;
+          color: white;
+          background-image:url(<%= image_url "hole-selector-background.png" %>);
+          background-size: 100% 100%; 
+        }
+        .description {
+          margin-top: 15px;
+          margin-bottom: 40px;
+          padding-left: 20px;
+          padding-right: 20px;
+          text-align: center;
+        }
+        .about{
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          border-bottom: 1px solid lightgrey;
+        }
+        .bio {
+          padding-left: 0px;
+          padding-right: 0px;
+        }
+        .specs {
+          padding-bottom: 20px;
+          border-bottom: 1px solid lightgrey;
+          margin-bottom: -20px;
+        }
+        .description2 {
+          margin-top: 30px;
+          padding-left: 50px;
+          padding-right: 50px;
+          text-align: center;
+        }
+        
+        .amenity {
+          /*width:47%;*/
+          display: inline-table;
+        }
+        .caddies{
+          width: 30px;
+          height: 40px;
+        }
+        .carts {
+          width: 40px;
+          height: 30px; 
+        }
+        .practice-range{
+          width: 35px;
+          height: 35px;
+        }
+        .golfboard {
+          width: 50px;
+          height: 35px;
+        }
+        .amenity-wrap{
+          padding-bottom: 40px;
+        }
+        .description h4{
+          font-size: 13px;
+        }
+        .description h3{
+          font-size: 17px;
+        }
+        .description2 h4{
+          font-size: 13px;
+        }
+        .description2 h3{
+          font-size: 17px;
+        }
+        .bx-next img, .bx-prev img {
+          height: 50%;
+          width: 50%;
+        }
+        .specs {
+          text-align: center;
+          width: 100%;
+          padding-right: 0;
+        }
+
+        .points{
+          /*display: table-cell;*/
+          display: inline-block;
+        }
+
+        /*.map-slecter {
+          left:35%;
+          top:40px;
+        }*/
+        .map-slecter {
+          display: none;
+        }
+
+        .description h3 {
+          font-size: 15px;
+        }
+        .description h4 {
+          font-size: 12px;
+        }
+      }
+
+</style>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817073712) do
+ActiveRecord::Schema.define(version: 20170830063128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(version: 20170817073712) do
     t.index ["course_id"], name: "index_amenities_on_course_id", using: :btree
   end
 
+  create_table "course_images", force: :cascade do |t|
+    t.integer  "course_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.index ["course_id"], name: "index_course_images_on_course_id", using: :btree
+  end
+
   create_table "course_users", force: :cascade do |t|
     t.integer  "course_id"
     t.integer  "user_id"
@@ -79,8 +90,8 @@ ActiveRecord::Schema.define(version: 20170817073712) do
     t.integer  "admin_id"
     t.integer  "resort_id"
     t.integer  "network_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -92,6 +103,14 @@ ActiveRecord::Schema.define(version: 20170817073712) do
     t.integer  "list_id"
     t.string   "number_of_tees"
     t.string   "architect"
+    t.string   "score_card_image_file_name"
+    t.string   "score_card_image_content_type"
+    t.integer  "score_card_image_file_size"
+    t.datetime "score_card_image_updated_at"
+    t.string   "video_file_name"
+    t.string   "video_content_type"
+    t.integer  "video_file_size"
+    t.datetime "video_updated_at"
     t.index ["admin_id"], name: "index_courses_on_admin_id", using: :btree
     t.index ["list_id"], name: "index_courses_on_list_id", using: :btree
     t.index ["network_id"], name: "index_courses_on_network_id", using: :btree
@@ -256,6 +275,7 @@ ActiveRecord::Schema.define(version: 20170817073712) do
     t.index ["score_card_id"], name: "index_yardages_on_score_card_id", using: :btree
   end
 
+  add_foreign_key "course_images", "courses"
   add_foreign_key "course_users", "courses"
   add_foreign_key "course_users", "users"
   add_foreign_key "courses", "lists"

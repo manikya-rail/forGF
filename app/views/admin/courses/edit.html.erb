@@ -91,7 +91,24 @@
               <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field' %>
             </div>
 
-            <div class="col-md-8"></div>
+            <div class="col-md-4">
+              <%= label_tag :score_card_image ,'Score Card',class:"col-md-12 zero-left-right-padd "%>
+              <%= f.file_field :score_card_image, class: 'btn btn-success upload-btn check-field' %>
+            </div>
+
+            <div class="col-md-4">
+              <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
+              <div class="btn btn-success upload-btn">
+                <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field' %>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <%= label_tag :video ,'Video',class:"col-md-12 zero-left-right-padd "%>
+              <div class="btn btn-success upload-btn">
+                <%= f.file_field :video, class: 'check-field' %>
+              </div>
+            </div>
 
         </div>
 
@@ -119,19 +136,21 @@
 
         <div class="col-md-12 course-info-row score-cards-wrapper">
             <%= label_tag :score_card ,'Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
-            <div class="col-md-8 score-card-wrapper dynamic-fields">
-
+            <div class="col-md-6 score-card-wrapper dynamic-fields">
               <%= f.fields_for :score_cards do |score_card_form| %>
                 <%= render 'admin/score_cards/form', s: score_card_form %>
               <% end %>
-
-
             </div>
 
-            <div class="col-md-4">
-
+            <div class="col-md-6">
             </div>
 
+        </div>
+        <div class="col-md-12 course-info-row">
+            <div class="col-md-2 form-group">
+              <%= label_tag :architect ,'Architect',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :architect, class:"col-md-12 form-control check-field", placeholder: "Architect" %>
+            </div>
         </div>
 
         <div class="col-md-12 course-info-row">

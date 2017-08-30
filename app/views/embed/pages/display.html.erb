@@ -50,7 +50,7 @@
           <div class = "lower-gradient"></div>
 
           <div class="vjs-playlist">
-            <div id="0" class="hole-home" onClick="select_video(this.id)"><%= image_tag "hole-home.png" %></div>
+            <div id="0" class="hole-home" onClick="select_video(this.id)"><%=link_to image_tag('hole-home.png'), embed_course_info_path(@course.id), remote: true %></div>
             <div class="left-green"><%= image_tag "left-green.png" %></div>
             <div  class="playlist">
               <ul id="playlist" >
@@ -93,7 +93,7 @@ for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
 
 // 320, 480, 760, 960, 1200 and 1600px.
 var player = videojs('hole-vid', {
-  preload: true, inactivityTimeout: 0, controls: true, fluid:true,
+  preload: true, inactivityTimeout: 5000, controls: true, fluid:true,
   'playbackRates': [0.5, 1, 1.5, 2],
    controlBar: {
     children: {
@@ -278,6 +278,10 @@ $(document).ready(function() { $('#1 a').trigger('click') });
 <!-- StyleSheet -->
 
 <style type="text/css">
+a:hover {
+  text-decoration: none;
+  background: none;
+}
 ::-webkit-scrollbar { 
     display: none; 
 }
@@ -552,7 +556,7 @@ body{
 
 @font-face {
   font-family: 'Avenir';
-  src: url(<%= asset_url "Avenir.ttc" %>);
+  src: url(<%= asset_url "Avenir.ttf" %>);
 }
 @font-face {
   font-family: 'RakerDisHvy';
@@ -701,7 +705,7 @@ body{
       text-align: center;
     }
     .right-green img {
-     width: 15px;
+     width: auto;
      height:30px;
     }
     .left-green {
@@ -713,7 +717,7 @@ body{
       text-align: center;
     }
     .left-green img {
-     width: 15px;
+     width: auto;
      height:30px;
     }
     .hole-home {
@@ -822,7 +826,7 @@ body{
       text-align: center;
     }
     .right-green img {
-     width: 15px;
+     width: auto;
      height:30px;
     }
     .left-green {
@@ -834,7 +838,7 @@ body{
       text-align: center;
     }
     .left-green img {
-     width: 15px;
+     width: auto;
      height:30px;
     }
     .hole-home {
@@ -952,7 +956,7 @@ body{
       text-align: center;
     }
     .right-green img {
-     width: 15px;
+     width: auto;
      height:30px;
     }
     .left-green {
@@ -964,7 +968,7 @@ body{
       text-align: center;
     }
     .left-green img {
-     width: 15px;
+     width: auto;
      height:30px;
     }
     .hole-home {
@@ -1101,7 +1105,7 @@ body{
       text-align: center;
     }
     .right-green img {
-     width: 10px;
+     width: auto;
      height:25px;
     }
     .left-green {
@@ -1113,7 +1117,7 @@ body{
       text-align: center;
     }
     .left-green img {
-     width: 10px;
+     width: auto;
      height:25px;
     }
     .hole-home {
@@ -1250,7 +1254,7 @@ body{
       text-align: center;
     }
     .right-green img {
-     width: 8px;
+     width: auto;
      height:20px;
     }
     .left-green {
@@ -1262,7 +1266,7 @@ body{
       text-align: center;
     }
     .left-green img {
-     width: 8px;
+     width: auto;
      height:20px;
     }
     .hole-home {

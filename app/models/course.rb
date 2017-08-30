@@ -16,6 +16,8 @@ class Course < ApplicationRecord
      has_many :course_users
      has_many :users, through: :course_users
 
+     has_many :course_images, :dependent => :destroy
+
      accepts_nested_attributes_for :location, :allow_destroy => true
      accepts_nested_attributes_for :score_cards, :allow_destroy => true
      accepts_nested_attributes_for :holes, :allow_destroy => true
@@ -39,6 +41,23 @@ class Course < ApplicationRecord
 
    # Validate the attached image is image/jpg, image/png, etc
    validates_attachment_content_type :cover, :content_type => /\Aimage\/.*\Z/
+
+   has_attached_file :score_card_image, styles: {
+     thumb: '100x100>',
+     square: '200x200#',
+     medium: '300x300>'
+   }
+
+   # Validate the attached image is image/jpg, image/png, etc
+   validates_attachment_content_type :score_card_image, :content_type => /\Aimage\/.*\Z/
+
+   has_attached_file :video, styles: {
+    :medium => {
+      :geometry => "640x480",
+      :format => 'mp4'
+    }}, :processors => [:transcoder]
+
+    validates_attachment_content_type :video, content_type: /\Avideo\/.*\Z/
 
    enum course_type: [ :is_public, :is_private, :is_semi_private ]
 
