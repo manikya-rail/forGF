@@ -64,7 +64,7 @@
 
                 <% if amenity.restaurants %>
                   <span class="amenity">
-                  <h4><%= image_tag "amenities/restaurant.png", class: 'practice-range' %>Restaurant</h4></span>
+                  <h4><%= image_tag "amenities/restaurant.png", class: 'restaurant' %>Restaurant</h4></span>
                 <% end %>
 
                 <% if amenity.caddies %>
@@ -214,6 +214,11 @@ $(document).ready(function() { $('#select_photos').trigger('click') });
 .golfboard {
   width: 50px;
   height: 35px;
+}
+.restaurant{
+  width: 25px;
+  height: Auto;
+  padding-right:5px; 
 }
 .bio {
   padding-right: 100px;
