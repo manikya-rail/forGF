@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829091212) do
+ActiveRecord::Schema.define(version: 20170830063128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,10 @@ ActiveRecord::Schema.define(version: 20170829091212) do
     t.string   "score_card_image_content_type"
     t.integer  "score_card_image_file_size"
     t.datetime "score_card_image_updated_at"
+    t.string   "video_file_name"
+    t.string   "video_content_type"
+    t.integer  "video_file_size"
+    t.datetime "video_updated_at"
     t.index ["admin_id"], name: "index_courses_on_admin_id", using: :btree
     t.index ["list_id"], name: "index_courses_on_list_id", using: :btree
     t.index ["network_id"], name: "index_courses_on_network_id", using: :btree
