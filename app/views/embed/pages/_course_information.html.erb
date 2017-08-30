@@ -62,9 +62,9 @@
             <div class="row">
               <% @course.amenities.each do |amenity| %>
 
-                <% if amenity.practice_range %>
+                <% if amenity.restaurants %>
                   <span class="amenity">
-                  <h4><%= image_tag "amenities/practice-range.png", class: 'practice-range' %>Practice Range</h4></span>
+                  <h4><%= image_tag "amenities/restaurant.png", class: 'practice-range' %>Restaurant</h4></span>
                 <% end %>
 
                 <% if amenity.caddies %>
@@ -80,6 +80,11 @@
                 <% if amenity.golf_boards %>
                   <span class="amenity">
                   <h4><%= image_tag "amenities/golfboard.png", class: 'golfboard' %>Golfboards</h4></span>
+                <% end %>
+
+                <% if amenity.practice_range %>
+                  <span class="amenity">
+                  <h4><%= image_tag "amenities/practice-range.png", class: 'practice-range' %>Practice Range</h4></span>
                 <% end %>
 
               <% end%>
