@@ -1,9 +1,9 @@
-<div class="col-md-3">
+<div class="col-md-4">
     <%= s.text_field :tee_name, class:" tee-name-field form-control inline check-field", placeholder: "Tee Name" , id:'tee-name-field' %>
 </div>
-<div class="col-md-3">
+<div class="col-md-4">
     <%= s.select(:color, ["Green", "Red", "White", "Blue", "Violet", "Gold", "Teal", "LightBlue", "Black"], options = {prompt: 'Color'}, {class:'dropdown-less-padd form-control inline check-field' ,style: 'margin-left:10px;'}) %>
 </div>
-<div class="col-md-3">
+<div class="col-md-4">
     <button type="button" class="btn btn-info btn-add inline" id='add-score-card' >+</button>
 </div>
