@@ -314,8 +314,9 @@ a:hover {
   height: 17%;
   font-size: 4em;
   line-height: 1.50;
-  border: 2px solid;
-  border-radius: 50%;
+  /*border: 2px solid;*/
+  /*border-radius: 50%;*/
+  border:none;
   background: transparent !important;
 }
 .vjs-big-play-centered .vjs-big-play-button {
@@ -474,6 +475,10 @@ body{
 .video-js .vjs-menu-button-inline:before {
   width: 1.6em;
 }
+.video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
+      content: url(<%= image_url "big-play.png" %>);
+      zoom:72%;
+}
 
 .vjs-playback-rate .vjs-playback-rate-value {
   font-family: "RakerDisHvy";
@@ -575,6 +580,9 @@ body{
     .video-js .vjs-big-play-button {
       /*line-height: 1.70;*/
     }
+    .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
+      zoom:100%;
+    }
     .hole-bar ul{
       margin: 10px 0 0 0;
       /*font-size: 16px;*/
@@ -665,6 +673,9 @@ body{
     .player-container {width: 1200px;}
     .video-js .vjs-big-play-button {
       line-height: 1.70;
+    }
+    .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
+      zoom:80%;
     }
     .hole-bar ul{
       margin: 8px 0 0 0;
@@ -780,6 +791,9 @@ body{
     .player-container {width: 960px;}
     .video-js .vjs-big-play-button {
       line-height: 1.35;
+    }
+    .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
+      zoom:65%;
     }
     .hole-bar{
       height:47px;
@@ -901,6 +915,9 @@ body{
     .player-container {width: 760px;}
     .video-js .vjs-big-play-button {
       line-height: 1.06;
+    }
+    .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
+      zoom:60%;
     }
     .logo {
       display: none;
@@ -1036,6 +1053,9 @@ body{
       width: 15%;
       line-height: 1.35;
       font-size: 3.5em;
+    }
+    .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
+      zoom:55%;
     }
     .logo {
       display: none;
@@ -1177,12 +1197,15 @@ body{
     body {font-size: 25px;}
     .player-container {width: 320px;}
     .video-js .vjs-big-play-button {
-      margin-top: -25px;
+      margin-top: -15px;
       margin-left: -45px;
       height: 65px;
       width: 65px;
       line-height: 1.3;
       font-size: 3.5em;
+    }
+    .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
+      zoom:40%;
     }
     .logo {
       display: none;
