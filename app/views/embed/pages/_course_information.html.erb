@@ -83,7 +83,7 @@
                 <% end %>
 
                 <% if amenity.practice_range %>
-                  <span class="amenity">
+                  <span class="amenity pp">
                   <h4><%= image_tag "amenities/practice-range.png", class: 'practice-range' %>Practice Range</h4></span>
                 <% end %>
 
@@ -340,7 +340,7 @@ h3, h4 {
 
       }
 
-      @media only screen and (max-width: 1199px) and (min-width: 960px) {
+      @media only screen and (max-width: 1199px) and (min-width: 992px) {
         .description {
           margin-top: 30px;
           margin-bottom: 30px;
@@ -358,6 +358,13 @@ h3, h4 {
         .description2 h3{
           font-size: 17px;
         }
+        /*.amenity{
+          display: table-cell;
+          display: inline-table;
+        }*/
+        .pp {
+          width:26%;
+        }
         .bx-next img, .bx-prev img {
           height: 60%;
           width: 60%;
@@ -365,7 +372,7 @@ h3, h4 {
 
       }
 
-      @media only screen and (max-width: 959px) and (min-width: 760px) {
+      @media only screen and (max-width: 991px) and (min-width: 760px) {
         .about{
           padding-bottom: 20px;
           margin-bottom: 20px;
@@ -479,6 +486,9 @@ h3, h4 {
         .amenity {
           width:32%;
         }
+        .pp {
+          width: 40%;
+        }
         .amenity-wrap{
           padding-bottom: 40px;
         }
@@ -579,7 +589,8 @@ h3, h4 {
         }
         
         .amenity {
-          width:47%;
+          /*width:47%;*/
+          display: inline-table;
         }
         .caddies{
           width: 30px;
