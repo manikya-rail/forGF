@@ -43,27 +43,10 @@
           </div>
           <br>
           <h4>Embedable Link For Videos</h4>
-          <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; " readonly>
-            <iframe src="<%= "#{request.base_url}/embed/#{@course.id}" %>" frameborder="0" width="100%" height="900px" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"> </iframe>
+          <textarea style="width:710px; height:90px; resize:none; padding: 10px; text-align: center; " readonly>
+            <iframe src="<%= "#{request.base_url}/embed/#{@course.id}" %>" frameborder="0" width="100%" height="150vw" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"> </iframe>
             <style type="text/css">
-                @media only screen and (min-width: 1600px) {
-                  iframe { width:1600px; height:1200px;}
-                }
-                @media only screen and (min-width: 1200px) and (max-width: 1599px) {
-                  iframe { width:1200px; height:900px;}
-                }
-                @media only screen and (min-width: 960px) and (max-width: 1199px) {
-                  iframe { width:960px; height:700px;}
-                }
-                @media only screen and (min-width: 760px) and (max-width: 959px) { 
-                  iframe { width:760px; height:700px;}
-                }
-                @media only screen and (min-width: 480px) and (max-width: 759px) {
-                  iframe { width:480px; height:900px;}
-                }
-                @media only screen and (min-width: 320px) and (max-width: 479px) { 
-                  iframe { width:320px; height:900px;}
-                }
+                @media only screen and (max-width: 760px) {iframe {height:200vw;}}           
             </style>
           </textarea>
           

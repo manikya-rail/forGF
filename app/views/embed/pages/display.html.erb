@@ -314,9 +314,9 @@ a:hover {
   height: 17%;
   font-size: 4em;
   line-height: 1.50;
-  /*border: 2px solid;*/
-  /*border-radius: 50%;*/
-  border:none;
+  border: 2px solid;
+  border-radius: 50%;
+  /*border:none;*/
   background: transparent !important;
 }
 .vjs-big-play-centered .vjs-big-play-button {
@@ -476,8 +476,8 @@ body{
   width: 1.6em;
 }
 .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
-      content: url(<%= image_url "big-play.png" %>);
-      zoom:72%;
+      /*content: url(<%= image_url "big-play.png" %>);*/
+      /*zoom:72%;*/
 }
 
 .vjs-playback-rate .vjs-playback-rate-value {
@@ -567,8 +567,6 @@ body{
   font-family: 'RakerDisHvy';
   src: url(<%= asset_url "RakerDisHvy.otf" %>);
 }
-  
-
 
 
 
@@ -581,7 +579,7 @@ body{
       /*line-height: 1.70;*/
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
-      zoom:100%;
+      /*zoom:100%;*/
     }
     .hole-bar ul{
       margin: 10px 0 0 0;
@@ -670,12 +668,12 @@ body{
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
     body {font-size: 30px;}
-    .player-container {width: 1200px;}
+    .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
       line-height: 1.70;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
-      zoom:80%;
+      /*zoom:80%;*/
     }
     .hole-bar ul{
       margin: 8px 0 0 0;
@@ -779,21 +777,21 @@ body{
       font-size: 1.2em;
     }*/
     .hole-info-div{
-      width:1200px; 
+      width:100vw; 
       position: absolute;
-      margin-top: 740px;
+      margin-top: 62vw;
     }
     
 }
 
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
     body {font-size: 30px;}
-    .player-container {width: 960px;}
+    .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
       line-height: 1.35;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
-      zoom:65%;
+      /*zoom:65%;*/
     }
     .hole-bar{
       height:47px;
@@ -903,21 +901,21 @@ body{
       font-size: 1.2em;
     }*/
     .hole-info-div{
-      width:960px; 
+      width:100vw; 
       position: absolute;
-      margin-top: 600px;
+      margin-top: 63vw;
     }
     
 }
 
 @media only screen and (min-width: 760px) and (max-width: 959px) {
     body {font-size: 30px;}
-    .player-container {width: 760px;}
+    .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
       line-height: 1.06;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
-      zoom:60%;
+      /*zoom:60%;*/
     }
     .logo {
       display: none;
@@ -1036,9 +1034,9 @@ body{
       font-size: 1.2em;
     }-*/
     .hole-info-div{
-      width:760px; 
+      width:100vw; 
       position: absolute;
-      margin-top: 500px;
+      margin-top: 63vw;
     }
 
     
@@ -1046,7 +1044,7 @@ body{
 
 @media only screen and (min-width: 480px) and (max-width: 759px) {
     body {font-size: 25px;}
-    .player-container {width: 480px;}
+    .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
       /*margin-top: -30px;*/
       height: 25%;
@@ -1055,7 +1053,7 @@ body{
       font-size: 3.5em;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
-      zoom:55%;
+      /*zoom:55%;*/
     }
     .logo {
       display: none;
@@ -1186,16 +1184,16 @@ body{
       font-size: 1.2em;
     }*/
     .hole-info-div{
-      width:480px; 
+      width:100vw; 
       position: absolute;
-      margin-top: 330px;
+      margin-top: 67vw;
     }
     
 }
 
-@media only screen and (min-width: 320px) and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
     body {font-size: 25px;}
-    .player-container {width: 320px;}
+    .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
       margin-top: -15px;
       margin-left: -45px;
@@ -1205,7 +1203,7 @@ body{
       font-size: 3.5em;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
-      zoom:40%;
+      /*zoom:40%;*/
     }
     .logo {
       display: none;
@@ -1250,7 +1248,8 @@ body{
     .vjs-playlist {
       /*display: none;*/
       left:0px ;
-      max-width: 320px;
+      min-width: 320px;
+      max-width: 479px;
       width:100%; 
       height: 40px;
       background-image:url(<%= image_url "hole-selector-background.png" %>);
@@ -1339,9 +1338,9 @@ body{
       font-size: 1.2em;
     }*/
     .hole-info-div{
-      width:320px; 
+      width:100vw; 
       position: absolute;
-      margin-top: 230px;
+      margin-top: 70vw;
     }
     
 }
