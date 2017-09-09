@@ -98,8 +98,8 @@ var player = videojs('hole-vid', {
    controlBar: {
     children: {
       'playToggle':{},
-      'volumeMenuButton':{},
-      'progressControl':{},      
+      'progressControl':{},
+      'volumeMenuButton':{},      
       'playbackRateMenuButton':{},
       // 'settingsMenuButton': {
       //     entries : [
@@ -278,6 +278,11 @@ $(document).ready(function() { $('#1 a').trigger('click') });
 <!-- StyleSheet -->
 
 <style type="text/css">
+.main-container {
+  /*border-image: url(<%= image_url "iframe-border.png" %>) 200 round;*/
+  /*border: 5px solid black;*/
+
+}
 a:hover {
   text-decoration: none;
   background: none;
@@ -310,19 +315,23 @@ a:hover {
   z-index: -1;
 }
 .video-js .vjs-big-play-button {
-  width: 10%;
-  height: 17%;
-  font-size: 4em;
-  line-height: 1.50;
-  border: 2px solid;
-  border-radius: 50%;
+  width: 15%;
+  height: 26.7%;
+  font-size: 0em;
+  border: 0px;
+  /*line-height: 1.50;*/
+  /*border: 2px solid;*/
+  /*border-radius: 50%;*/
   /*border:none;*/
   background: transparent !important;
+  background-image: url(<%= image_url "big-play.png" %>) !important;
+  background-size: 100% !important;
+  background-repeat: no-repeat !important;
 }
-.vjs-big-play-centered .vjs-big-play-button {
-  top: 45%;
-  left:55%;
-}
+/*.vjs-big-play-centered .vjs-big-play-button {
+  top: 44%;
+  left:42%;
+}*/
 .hole-bar{
   right: 1%;
   top: 1%;
@@ -354,7 +363,11 @@ a:hover {
   color:white; 
   width:auto;
   /*float:right;*/
-  border-right: 5px solid #696969;
+  border: solid transparent;
+  border-width: 0 5px 0 0;
+  border-image: url(<%= image_url "top-bar-divider.png" %>) 5 repeat;
+  /*border-right: 5px solid #696969;*/
+
   padding: 2% 4% 0.6% 4%;
 }
 #lastli {
@@ -367,8 +380,8 @@ body{
 }
 .hole-bar ul li span {
   font-size:1.2em;
-  font-family: 'Avenir',sans-serif;
-  font-weight: 900; 
+  font-family: 'RakerDisHvy',sans-serif;
+  font-weight: 400; 
 }
 .hole-bar ul li text {
   font-size:1.6em;
@@ -577,6 +590,10 @@ body{
     .player-container {width: 1600px;}
     .video-js .vjs-big-play-button {
       /*line-height: 1.70;*/
+      height: 180px;
+      width: 180px;
+      margin-top: -5%;
+      margin-left: -8%;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:100%;*/
@@ -587,7 +604,7 @@ body{
     }
     .hole-bar ul li {
       border-right: 5px solid #696969;
-      padding: 2% 4% 0.6% 4%;
+      /*padding: 2% 4% 0.6% 4%;*/
     }    
     .hole-bar ul li span {
       font-size:2.5em;
@@ -670,7 +687,11 @@ body{
     body {font-size: 30px;}
     .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
-      line-height: 1.70;
+      /*line-height: 1.70;*/
+      height: 140px;
+      width: 140px;
+      margin-top: -5%;
+      margin-left: -8%;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:80%;*/
@@ -681,7 +702,7 @@ body{
     }
     .hole-bar ul li {
       border-right: 2.5px solid #696969;
-      padding: 1.5% 4% 0 4%;
+      /*padding: 1.5% 4% 0 4%;*/
     }    
     
     .hole-bar ul li span {
@@ -788,7 +809,11 @@ body{
     body {font-size: 30px;}
     .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
-      line-height: 1.35;
+      /*line-height: 1.35;*/
+      height: 120px;
+      width: 120px;
+      margin-top: -4%;
+      margin-left: -8%;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:65%;*/
@@ -907,12 +932,20 @@ body{
     }
     
 }
-
-@media only screen and (min-width: 760px) and (max-width: 959px) {
+@media only screen and (min-width: 600px) and (max-width: 760px) {
+  .description {
+    margin-top: 50px;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 959px) {
     body {font-size: 30px;}
     .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
-      line-height: 1.06;
+      /*line-height: 1.06;*/
+      height: 100px;
+      width: 100px;
+      margin-top: -4%;
+      margin-left: -8%;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:60%;*/
@@ -1042,15 +1075,19 @@ body{
     
 }
 
-@media only screen and (min-width: 480px) and (max-width: 759px) {
+@media only screen and (min-width: 480px) and (max-width: 599px) {
     body {font-size: 25px;}
     .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
       /*margin-top: -30px;*/
-      height: 25%;
+      /*height: 25%;
       width: 15%;
       line-height: 1.35;
-      font-size: 3.5em;
+      font-size: 3.5em;*/
+      height: 85px;
+      width: 85px;
+      margin-top: -7%;
+      margin-left: -10%;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:55%;*/
@@ -1195,12 +1232,16 @@ body{
     body {font-size: 25px;}
     .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
-      margin-top: -15px;
+      /*margin-top: -15px;
       margin-left: -45px;
-      height: 65px;
-      width: 65px;
       line-height: 1.3;
       font-size: 3.5em;
+*/
+      height: 65px;
+      width: 65px;
+      margin-top: -6%;
+      margin-left: -10%;
+      
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:40%;*/
