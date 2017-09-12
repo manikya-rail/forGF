@@ -26,7 +26,7 @@
         <div class="col-md-12">
           
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 sp-rows">
               <span class="values"><h4>Holes: <%= @course.holes.count %></h4></span>
             
               <span class="values"><h4>Par: <%= @course.total_par %></h4></span>
@@ -36,7 +36,7 @@
           </div>
 
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 ">
               <span class="values"><h4>Rating: <%= @course.rating %></h4></span>
             
               <span class="values"><h4>Yardages: <%= @course.length %></h4></span>
@@ -200,25 +200,26 @@ $(document).ready(function() { $('#select_photos').trigger('click') });
 </script>
 <style type="text/css">
 .caddies{
-  width: 30px;
-  height: 40px;
+  /*width: 50px;*/
+  height: 50px;
 }
 .carts {
-  width: 40px;
-  height: 30px; 
+  /*width: 50px;*/
+  height: 50px; 
 }
 .practice-range{
-  width: 50px;
-  height: 45px;
+  /*width: 50px;*/
+  height: 50px;
 }
 .golfboard {
-  width: 50px;
-  height: 35px;
+  /*width: 50px;*/
+  height: 50px;
 }
 .restaurant{
-  width: 30px;
-  height: Auto;
-  padding-right:5px; 
+  /*width: 50px;*/
+  height: 50px;
+  /*height: Auto;*/
+  /*padding-right:5px; */
 }
 .bio {
   padding-right: 100px;
@@ -236,6 +237,9 @@ $(document).ready(function() { $('#select_photos').trigger('click') });
 h3, h4 {
   margin: 0;
   margin-bottom: 5px;
+}
+h4 img {
+  margin-right: 15px;
 }
 .selected{
   background: black;
@@ -299,6 +303,7 @@ h3, h4 {
   /*padding-top: 30px;*/
   /*padding-right: 60px;*/
 }
+
 .values{
   display: inline-block;
   width: 30%;
@@ -321,6 +326,10 @@ h3, h4 {
           margin-bottom: 50px;
           padding-left: 60px;
         }
+        .sp-rows {
+          margin-top: -12px;
+          height: 20px;
+        }
 
 
       }
@@ -340,6 +349,10 @@ h3, h4 {
         .bx-next img, .bx-prev img {
           height: 60%;
           width: 60%;
+        }
+        .sp-rows {
+          margin-top: -12px;
+          height: 20px;
         }
 
 
@@ -373,6 +386,10 @@ h3, h4 {
         .bx-next img, .bx-prev img {
           height: 60%;
           width: 60%;
+        }
+        .sp-rows {
+          margin-top: -12px;
+          height: 20px;
         }
 
       }

@@ -56,8 +56,7 @@
               <ul id="playlist" >
                 <% @holes.try(:each) do |hole| %> 
                   <li id="<%=hole.hole_num%>" onClick="select_video(this.id)">
-                    <%=link_to hole.hole_num, embed_hole_info_path(hole.id), remote: true
-                    %>
+                    <%=link_to hole.hole_num, embed_hole_info_path(hole.id), remote: true %>
                   </li>
                 <% end %>
                 
@@ -78,7 +77,6 @@
 <script type="text/javascript">
 
 
-var pw = player_width();
 
 var videoList = []
 
@@ -116,10 +114,14 @@ try {player.volume(1);} catch (e) {}
 player.playlist(videoList);
 
 document.querySelector('.previous').addEventListener('click', function() {
+  i = player.playlist.currentItem();
   player.playlist.previous();
+  $('#'+i+' a').trigger('click');
 });
 document.querySelector('.next').addEventListener('click', function() {
+  i = player.playlist.currentItem()+2;
   player.playlist.next();
+  $('#'+i+' a').trigger('click');
 });
 
 // document.querySelector('.flag').addEventListener('click', function() {
@@ -143,6 +145,21 @@ player.on("loadedmetadata",function () {
   barupdate();
   current_video();
 });
+
+player.on("userinactive",function () {
+  // $(".hole-bar").slideUp();
+  // $(".hole-bar").fadeOut();
+  $(".previous").fadeOut();
+  $(".next").fadeOut();
+  // $('.hole-bar').removeClass('show').addClass('hide');
+});
+player.on("useractive",function () {
+  $(".previous").fadeIn();
+  $(".next").fadeIn();
+  // $(".hole-bar").slideDown();
+  // $(".hole-bar").fadeIn();
+  // $('.hole-bar').removeClass('hide').addClass('show');
+});
 // window.onload=playlistui();
 
   
@@ -164,28 +181,6 @@ var FlagButton = videojs.extend(Button, {
 // Register the new component
 videojs.registerComponent('FlagButton', FlagButton);
 player.getChild('controlBar').addChild('FlagButton', {}, 4);
-
-
-
-
-function player_width(){
-  viewport = $(window).width();
-  viewport+=15;
-  console.log(viewport);
-  if (viewport>=1600)
-    return 1600;
-  else if (viewport >=1200)
-    return 1200;
-  else if (viewport >=960)
-    return 960;
-  else if (viewport >=760)
-    return 760;
-  else if (viewport >=480)
-    return 480;
-  else if (viewport >=320)
-    return 320;
-}
-
 
 
 function playlistui(){
@@ -244,6 +239,8 @@ function current_video(){
   for (i=0;i<18;i++){
     if (i===id){
       document.getElementById(i+1).className = "active";
+      // j=i+1;
+      // $('#'+j+' a').trigger('click');
     }
     else{
       document.getElementById(i+1).removeAttribute("class");
@@ -278,10 +275,24 @@ $(document).ready(function() { $('#1 a').trigger('click') });
 <!-- StyleSheet -->
 
 <style type="text/css">
+body {
+
+  height: auto;
+  overflow: auto;
+}
 .main-container {
+  /*min-height: 600px;*/
+  height: auto;
+  overflow: auto;
   /*border-image: url(<%= image_url "iframe-border.png" %>) 200 round;*/
   /*border: 5px solid black;*/
 
+}
+.player-container {
+  display: block;
+}
+.hole-info-div {
+  display: block;
 }
 a:hover {
   text-decoration: none;
@@ -336,16 +347,19 @@ a:hover {
   right: 1%;
   top: 1%;
   position: absolute;
-  height: 7%;
+  height: 50px;
   z-index: 5;
   /*padding-left: 0;*/
   /*border-radius: 0.4em;*/
   text-align: center;
   background-image: url(<%= image_url "top-bar.png" %>);
   background-size: 100% 100%;
+  /*display: block;*/
 }
+
 .hole-bar ul{
   display: inline-block;
+  /*display: table;*/
   white-space: nowrap;
   list-style: none; 
   /*white-space: nowrap;
@@ -359,7 +373,7 @@ a:hover {
 }
 .hole-bar ul li {
   display: inline-block;
-  /*display: inline-block;*/
+  /*display: table-cell;*/
   color:white; 
   width:auto;
   /*float:right;*/
@@ -443,7 +457,8 @@ body{
   .logo {
     display:block;
     top: 0;
-    left: 1%;
+    /*left: 1%;*/
+    left: 25px;
     position: absolute;
     width: 11%;
     height: 6%;
@@ -598,11 +613,19 @@ body{
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:100%;*/
     }
+    .hole-bar {
+      height: 65px;
+      right:25px;
+    }
     .hole-bar ul{
-      margin: 10px 0 0 0;
+      margin: 11px 0 0 0;
+      overflow: auto;
       /*font-size: 16px;*/
     }
     .hole-bar ul li {
+      padding-top: 15px;
+      padding-bottom: 4px;
+      /*margin-top: 5px;*/
       border-right: 5px solid #696969;
       /*padding: 2% 4% 0.6% 4%;*/
     }    
@@ -660,6 +683,9 @@ body{
       font-size: 3.0em;
       line-height: 0.75;
     }
+    .video-js .vjs-fullscreen-control {
+      margin-right: 10px;
+    }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 35px;
       margin-top: 5px;
@@ -695,6 +721,9 @@ body{
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:80%;*/
+    }
+    .hole-bar{
+      right:25px;
     }
     .hole-bar ul{
       margin: 8px 0 0 0;
@@ -770,6 +799,9 @@ body{
       overflow: auto;
     }
     .video-js .vjs-control-bar {
+      /*right: 25px;*/
+      /*margin-right: 500px;*/
+      /*width: 95%;*/
       /*height: 3em;*/
     }
     .flag:before {
@@ -781,9 +813,13 @@ body{
       /*font-size: 2.0em;*/
       /*line-height: 0.9;*/
     }
+
     .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
       font-size: 3.0em;
       line-height: 0.85;
+    }
+    .video-js .vjs-fullscreen-control {
+      margin-right: 10px;
     }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 22px;
@@ -820,6 +856,7 @@ body{
     }
     .hole-bar{
       height:47px;
+      right: 25px;
     }
     .hole-bar ul{
       margin: 7px 0 0 0;
@@ -912,6 +949,9 @@ body{
     .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
       font-size: 3.0em;
       line-height: 0.85;
+    }
+    .video-js .vjs-fullscreen-control {
+      margin-right: 10px;
     }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 22px;
@@ -1053,6 +1093,9 @@ body{
     .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
       font-size: 3.0em;
       line-height: 0.85;
+    }
+    .video-js .vjs-fullscreen-control {
+      margin-right: 10px;
     }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 22px;
@@ -1208,6 +1251,9 @@ body{
       font-size: 3.0em;
       line-height: 0.85;
     }
+      .video-js .vjs-fullscreen-control {
+      margin-right: 10px;
+    }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 18px;
       margin-top: 5px;
@@ -1267,12 +1313,14 @@ body{
     .hole-bar{
       /*right:18%;*/
       height:40px;
-      left: 0%;
-      right: 0%;
+      left: 12%;
+      right: 12%;
+      /*width: 80%;*/
     }
     .hole-bar ul{
       margin: 7px 0 0 0;
       font-size: 6px;
+      /*font-size: 1.7vw;*/
     }
     .hole-bar ul li {
       border-right: 2.5px solid #696969;
@@ -1365,6 +1413,9 @@ body{
     .video-js .vjs-fullscreen-control:before, .vjs-icon-fullscreen-enter:before {
       font-size: 3.0em;
       line-height: 0.85;
+    }
+    .video-js .vjs-fullscreen-control {
+      margin-right: 10px;
     }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 18px;
