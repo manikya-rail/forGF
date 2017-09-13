@@ -44,10 +44,7 @@
           <br>
           <h4>Embedable Link For Videos</h4>
           <textarea style="width:710px; height:90px; resize:none; padding: 10px; text-align: center; " readonly>
-            <iframe src="<%= "#{request.base_url}/embed/#{@course.id}" %>" width="100%"  allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" style="height:150vw; border:3px solid #f5f5f5;"> </iframe>
-            <style type="text/css">
-                @media only screen and (max-width: 760px) {iframe {height:220vw;}}           
-            </style>
+            <iframe src="<%= "#{request.base_url}/embed/#{@course.id}" %>" width="100%"  allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" style="height:100vh; border:3px solid #f5f5f5;"> </iframe>
           </textarea>
           
         </div>

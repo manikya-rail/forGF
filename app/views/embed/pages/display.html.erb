@@ -32,6 +32,7 @@
                 <li ><span>PAR</span> <text id="par">0</text></li>
                 <li ><text id="yard">0</text> <span>YDS</span> </li>
                 <li id="lastli" ><text id="mhcp">0</text><span>HCP</span> </li>
+                <!-- <li style="padding:0;" ><text id="mhcp"></text><span></span> </li> -->
               </ul>
             </div>
           
@@ -149,13 +150,21 @@ player.on("loadedmetadata",function () {
 player.on("userinactive",function () {
   // $(".hole-bar").slideUp();
   // $(".hole-bar").fadeOut();
+  
+  $(".hole-bar").animate({top: '-70px'});
+  $(".logo").animate({top: '-70px'});
   $(".previous").fadeOut();
   $(".next").fadeOut();
+  $(".vjs-control-bar").animate({bottom: '-70px'});
   // $('.hole-bar').removeClass('show').addClass('hide');
 });
 player.on("useractive",function () {
+
+  $(".hole-bar").animate({top: '1%'});
+  $(".logo").animate({top: '0'});
   $(".previous").fadeIn();
   $(".next").fadeIn();
+  $(".vjs-control-bar").animate({bottom: '1px'});
   // $(".hole-bar").slideDown();
   // $(".hole-bar").fadeIn();
   // $('.hole-bar').removeClass('hide').addClass('show');
@@ -229,12 +238,21 @@ function pos(num){
 }
 
 
+
 function select_video(id){
-  id-=1;
-  player.playlist.currentItem(id);
+  if (id==='0'){
+    $('#0').addClass("active");
+  }
+  else{
+    id-=1;
+    player.playlist.currentItem(id);
+  }
 }
+  
+
 
 function current_video(){
+  $('#0').removeClass("active");
   id = player.playlist.currentItem();
   for (i=0;i<18;i++){
     if (i===id){
@@ -270,6 +288,7 @@ document.querySelector('.left-green').addEventListener('click', function() {
 // trigger for forst ajax call
 $(document).ready(function() { $('#1 a').trigger('click') });
 
+
 </script>
 
 <!-- StyleSheet -->
@@ -282,17 +301,19 @@ body {
 }
 .main-container {
   /*min-height: 600px;*/
-  height: auto;
-  overflow: auto;
+  height: auto !important;
+  overflow: auto !important;
   /*border-image: url(<%= image_url "iframe-border.png" %>) 200 round;*/
   /*border: 5px solid black;*/
 
 }
 .player-container {
-  display: block;
+  display: block !important;
+  position: relative !important;
 }
 .hole-info-div {
-  display: block;
+  display: block !important;
+  position: relative !important;
 }
 a:hover {
   text-decoration: none;
@@ -382,11 +403,12 @@ a:hover {
   border-image: url(<%= image_url "top-bar-divider.png" %>) 5 repeat;
   /*border-right: 5px solid #696969;*/
 
-  padding: 2% 4% 0.6% 4%;
+  padding: 11px 20px 1px 20px;
 }
 #lastli {
   border: 0;
-  padding-right: 10%;
+  /*padding-right: 25px;*/
+  margin-right: 20px;
 }
 body{
   /*font-size: 2.5vw;*/
@@ -538,12 +560,15 @@ body{
   padding-top: 0.5%;
   background-image:url(<%= image_url "hole-selector-background.png" %>);
   background-size: 100% 100%; 
+  z-index: 5;
+  position: relative;
 }
 .playlist{
   height:130%;
   width: 90%;
   float: left;
   overflow: auto;
+  
 }
 .playlist ul{
   display: inline-block;
@@ -702,8 +727,8 @@ body{
     }
     .hole-info-div{
       width:1600px; 
-      position: absolute;
-      margin-top: 980px;
+      /*position: absolute;*/
+      /*margin-top: 980px;*/
     }
     
 }
@@ -835,8 +860,8 @@ body{
     }*/
     .hole-info-div{
       width:100vw; 
-      position: absolute;
-      margin-top: 62vw;
+      /*position: absolute;*/
+      /*margin-top: 62vw;*/
     }
     
 }
@@ -864,7 +889,7 @@ body{
     }
     .hole-bar ul li {
       border-right: 2.5px solid #696969;
-      padding: 1.5% 4% 0 4%;
+      padding: 8px 20px 1px 20px;
     }    
     
     .hole-bar ul li span {
@@ -967,8 +992,8 @@ body{
     }*/
     .hole-info-div{
       width:100vw; 
-      position: absolute;
-      margin-top: 63vw;
+      /*position: absolute;
+      margin-top: 63vw;*/
     }
     
 }
@@ -1010,7 +1035,7 @@ body{
     }
     .hole-bar ul li {
       border-right: 2.5px solid #696969;
-      padding: 1.5% 4% 0 4%;
+      padding: 8px 20px 1px 20px;
     }    
     
     .hole-bar ul li span {
@@ -1115,8 +1140,8 @@ body{
     }-*/
     .hole-info-div{
       width:100vw; 
-      position: absolute;
-      margin-top: 63vw;
+      /*position: absolute;
+      margin-top: 63vw;*/
     }
 
     
@@ -1169,7 +1194,7 @@ body{
     }
     .hole-bar ul li {
       border-right: 2.5px solid #696969;
-      padding: 1.5% 4% 0 4%;
+      padding: 7px 20px 1px 20px;
     }    
     
     .hole-bar ul li span {
@@ -1272,8 +1297,8 @@ body{
     }*/
     .hole-info-div{
       width:100vw; 
-      position: absolute;
-      margin-top: 67vw;
+      /*position: absolute;
+      margin-top: 67vw;*/
     }
     
 }
@@ -1317,18 +1342,18 @@ body{
     .hole-bar{
       /*right:18%;*/
       height:40px;
-      left: 12%;
-      right: 12%;
+      left: 10%;
+      right: 10%;
       /*width: 80%;*/
     }
     .hole-bar ul{
-      margin: 7px 0 0 0;
+      margin: 6px 0 0 0;
       font-size: 6px;
       /*font-size: 1.7vw;*/
     }
     .hole-bar ul li {
       border-right: 2.5px solid #696969;
-      padding: 1.5% 4% 0 4%;
+      padding: 6px 15px 0px 15px;
     }    
     
     .hole-bar ul li span {
@@ -1435,8 +1460,9 @@ body{
     }*/
     .hole-info-div{
       width:100vw; 
-      position: absolute;
-      margin-top: 70vw;
+      margin-top: 30px;
+      /*position: absolute;
+      margin-top: 70vw;*/
     }
     
 }
