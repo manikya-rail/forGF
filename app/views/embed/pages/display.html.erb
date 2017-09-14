@@ -315,10 +315,10 @@ body {
   display: block !important;
   position: relative !important;
 }
-a:hover {
+/*a:hover {
   text-decoration: none;
   background: none;
-}
+}*/
 ::-webkit-scrollbar { 
     display: none; 
 }
@@ -593,7 +593,10 @@ body{
   font-family: 'RakerDisHvy',sans-serif;
   font-size: 1.6em;
 }
-
+.playlist ul li a:link, .playlist ul li a:hover, .playlist ul li a:visited, .playlist ul li a:active {
+  text-decoration: none;
+  background: none;
+} 
 .playlist ul li a{
   color:#696969; 
 }
@@ -1005,6 +1008,13 @@ body{
     left: 10% !important;
     right: 10% !important;
   }
+  .hole-bar ul li {
+    padding: 9px 15px 1px 15px !important;
+  }
+  .hole-bar ul {
+    font-size: 9px !important;
+  }
+
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
     body {font-size: 30px;}
@@ -1353,7 +1363,7 @@ body{
     }
     .hole-bar ul li {
       border-right: 2.5px solid #696969;
-      padding: 6px 15px 0px 15px;
+      padding: 6px 8px 0px 8px;
     }    
     
     .hole-bar ul li span {
