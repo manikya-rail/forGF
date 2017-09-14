@@ -38,7 +38,7 @@
           
           
           
-          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered"></video>
+          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" playsinline></video>
           
           <div class="previous on-video"> <%= image_tag "left.png" %> </div>
           <div class="next on-video"><%= image_tag "right.png" %></div>
@@ -151,12 +151,14 @@ player.on("loadedmetadata",function () {
 player.on("userinactive",function () {
   // $(".hole-bar").slideUp();
   // $(".hole-bar").fadeOut();
+  if (!player.paused()){
+    $(".hole-bar").animate({top: '-70px'});
+    $(".logo").animate({top: '-70px'});
+    $(".previous").fadeOut();
+    $(".next").fadeOut();
+    $(".vjs-control-bar").animate({bottom: '-70px'});
+  }
   
-  $(".hole-bar").animate({top: '-70px'});
-  $(".logo").animate({top: '-70px'});
-  $(".previous").fadeOut();
-  $(".next").fadeOut();
-  $(".vjs-control-bar").animate({bottom: '-70px'});
   // $('.hole-bar').removeClass('show').addClass('hide');
 });
 player.on("useractive",function () {
@@ -365,6 +367,7 @@ body {
   background-image: url(<%= image_url "big-play.png" %>) !important;
   background-size: 100% !important;
   background-repeat: no-repeat !important;
+  -webkit-appearance: none !important;
 }
 /*.vjs-big-play-centered .vjs-big-play-button {
   top: 44%;
