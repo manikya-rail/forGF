@@ -67,6 +67,7 @@
           </div>
         </div>
       </div>
+      <div class = "hider"> </div>
 
       <div class="hole-info-div">
         <div id="holeinfo" class="holeinfo"></div>
@@ -314,6 +315,11 @@ body {
 .hole-info-div {
   display: block !important;
   position: relative !important;
+  z-index: 4;
+  background: white;
+}
+.hider {
+  display: none;
 }
 /*a:hover {
   text-decoration: none;
@@ -1169,7 +1175,7 @@ body{
       height: 85px;
       width: 85px;
       margin-top: -7%;
-      margin-left: -10%;
+      margin-left: -8%;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:55%;*/
@@ -1309,6 +1315,10 @@ body{
       width:100vw; 
       /*position: absolute;
       margin-top: 67vw;*/
+
+    }
+    .hider {
+      display:block; position: relative; height:10px; width:100%; background:white; z-index:7;
     }
     
 }
@@ -1325,7 +1335,7 @@ body{
       height: 65px;
       width: 65px;
       margin-top: -6%;
-      margin-left: -10%;
+      margin-left: -8%;
       
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
@@ -1470,9 +1480,12 @@ body{
     }*/
     .hole-info-div{
       width:100vw; 
-      margin-top: 30px;
+      margin-top: 10px;
       /*position: absolute;
       margin-top: 70vw;*/
+    }
+    .hider {
+      display:block; position: relative; height:30px; width:100%; background:white; z-index:7;
     }
     
 }
