@@ -93,7 +93,7 @@ for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
 
 // 320, 480, 760, 960, 1200 and 1600px.
 var player = videojs('hole-vid', {
-  preload: true, inactivityTimeout: 5000, controls: true, fluid:true,
+  preload: false, inactivityTimeout: 5000, controls: true, fluid:true,
   'playbackRates': [0.5, 1, 1.5, 2],
    controlBar: {
     children: {
@@ -114,16 +114,17 @@ var player = videojs('hole-vid', {
 try {player.volume(1);} catch (e) {}
 
 player.playlist(videoList);
+player.playlist.autoadvance(0);
 
 document.querySelector('.previous').addEventListener('click', function() {
-  i = player.playlist.currentItem();
+  // i = player.playlist.currentItem();
   player.playlist.previous();
-  $('#'+i+' a').trigger('click');
+  // $('#'+i+' a').trigger('click');
 });
 document.querySelector('.next').addEventListener('click', function() {
-  i = player.playlist.currentItem()+2;
+  // i = player.playlist.currentItem()+2;
   player.playlist.next();
-  $('#'+i+' a').trigger('click');
+  // $('#'+i+' a').trigger('click');
 });
 
 // document.querySelector('.flag').addEventListener('click', function() {
@@ -260,8 +261,8 @@ function current_video(){
   for (i=0;i<18;i++){
     if (i===id){
       document.getElementById(i+1).className = "active";
-      // j=i+1;
-      // $('#'+j+' a').trigger('click');
+      j=i+1;
+      $('#'+j+' a').trigger('click');
     }
     else{
       document.getElementById(i+1).removeAttribute("class");
@@ -323,10 +324,10 @@ body {
 .hider {
   display: none;
 }
-/*a:hover {
+a:hover {
   text-decoration: none;
   background: none;
-}*/
+}
 ::-webkit-scrollbar { 
     display: none; 
 }
@@ -618,6 +619,9 @@ body{
 .hole-home {
   float: left;
   cursor: pointer;
+}
+.hole-home a:hover {
+  background: none;
 }
 .hole-home.active img{
   content: url(<%= image_url "hole-home-active.png" %>);
