@@ -135,7 +135,7 @@ h3, h4 {
 .map-slecter {
   position: absolute;
   z-index: 11;
-  left:46%;
+  left:44%;
   top:50px;
 }
 
@@ -155,6 +155,9 @@ h3, h4 {
     margin:0;
     padding:0
 }
+.st1 {
+  padding: 0;
+}
 
 .bxslider li img {
   width: 100%;
@@ -172,11 +175,13 @@ h3, h4 {
   top: 50%;
 }
 .description {
+  width: 100%;
   padding-left: 50px;
   font-family: 'Avenir',sans-serif;
     /*font-family: 'RakerDisHvy',sans-serif;*/
 
   font-weight: 400;
+  margin: 0;
   
 }
 .yards{
@@ -194,6 +199,10 @@ h3, h4 {
 }
 .justify{
   text-align: justify;
+}
+.slider {
+  margin: 0;
+  padding: 0;
 }
 /*// 320, 480, 760, 960, 1200 and 1600px.*/
       @media only screen and (min-width: 1600px) {
@@ -277,6 +286,7 @@ h3, h4 {
           margin-bottom: 40px;
           padding-left: 50px;
           padding-right: 50px;
+          /*margin-right: 0;*/
         }
         .bx-next img, .bx-prev img {
           height: 60%;
@@ -314,7 +324,15 @@ h3, h4 {
       @media only screen and (max-width: 759px) and (min-width: 480px) {
         .st2 {
           display: block;
+          padding: 0;
         }
+        .st2 .row {
+          margin: 0;
+        }
+        .st2 .row .col-md-12{
+          padding: 0;
+        }
+
         .st1{
           display: none;
         }
@@ -390,6 +408,7 @@ h3, h4 {
       @media only screen and (max-width: 479px) {
         .st2 {
           display: block;
+          padding: 0;
         }
         .st1{
           display: none;
@@ -398,7 +417,12 @@ h3, h4 {
           width: 100%;
           height: 100%;
         }
-
+        .st2 .row {
+          margin: 0;
+        }
+        .st2 .row .col-md-12{
+          padding: 0;
+        }
         .divider{
           text-align: center;
           width:100%; 
