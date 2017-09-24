@@ -162,7 +162,7 @@ player.on("userinactive",function () {
     $(".next").fadeOut();
     $(".vjs-control-bar").animate({bottom: '-70px'});
     $(".upper-gradient").animate({top: '-=70px'});
-    $(".lower-gradient").animate({bottom: '-=60px'}).hide();
+    $(".lower-gradient").animate({bottom: '0px'});
 
   }
   
@@ -177,7 +177,9 @@ player.on("useractive",function () {
     $(".next").fadeIn();
     $(".vjs-control-bar").animate({bottom: '1px'});
     $(".upper-gradient").animate({top: '+=70px'});
-    $(".lower-gradient").show().animate({bottom: '+=60px'});
+    xx = $(".vjs-playlist").outerHeight();
+    // xx-=2;
+    $(".lower-gradient").show().animate({bottom: xx+'px'});
   }
   // $(".hole-bar").slideDown();
   // $(".hole-bar").fadeIn();
@@ -370,9 +372,9 @@ a:hover {
   text-decoration: none;
   background: none;
 }
-/*::-webkit-scrollbar { 
+::-webkit-scrollbar { 
     display: none; 
-}*/
+}
 .player-container{
   position: absolute;
   /*width: 97%;*/
@@ -1352,6 +1354,7 @@ div:focus {
     .playlist{
       float: left;
       width: 55%;
+      height: 140%;
       /*background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%; */
       overflow: auto;
@@ -1521,10 +1524,11 @@ div:focus {
     .playlist{
       float: left;
       width: 55%;
-      height: 130%;
+      height: 145%;
       /*background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%; */
       overflow: auto;
+      overflow-y: hidden;
     }
     .video-js .vjs-control-bar {
       /*height: 3em;*/
