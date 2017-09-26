@@ -316,9 +316,10 @@ document.querySelector('.left-green').addEventListener('click', function() {
 
 // document.getElementById(0).className += " active";
 
-// trigger for forst ajax call
+// trigger for first ajax call
 $(document).ready(function() { $('#1 a').trigger('click') });
 
+// Pgae Refresher for safari cache
 $(window).bind("pageshow", function(event) {
     if (event.originalEvent.persisted) {
         window.location.reload() 
@@ -1405,7 +1406,7 @@ div:focus {
 @media only screen and (max-width: 479px) {
     body {font-size: 25px;}
     /*.player-container {width: 100vw;}*/
-    .player-container {width: 100%;}
+    .player-container {width: 100vw;}
     .video-js .vjs-big-play-button {
       /*margin-top: -15px;
       margin-left: -45px;
