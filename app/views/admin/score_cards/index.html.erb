@@ -16,9 +16,10 @@
       <tr>
         <td><%= score_card.tee_name %></td>
         <td><%= score_card.color %></td>
-        <td><%= link_to 'Show', score_card %></td>
-        <td><%= link_to 'Edit', edit_score_card_path(score_card) %></td>
-        <td><%= link_to 'Destroy', score_card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= score_card.course_id %></td>
+        <td><%= link_to 'Show', admin_score_card_path(score_card) %></td>
+        <td><%= link_to 'Edit', edit_admin_score_card_path(score_card) %></td>
+        <td><%= link_to 'Destroy', admin_score_card_path(score_card), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New Score Card', new_score_card_path %>
+<%= link_to 'New Score Card', new_admin_score_card_path %>
