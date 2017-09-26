@@ -44,7 +44,8 @@
                 <td><%= course.try(:formated_location) %></td>
                 <td><%= course.try(:course_type) %></td>
                 <td><%= course.try(:amenities_list) %></td>
-                <td><%= link_to 'Edit', edit_admin_course_path(course) %></td>
+                <td><%= link_to 'Edit', edit_admin_course_path(course) %> | <%= link_to 'Destroy',admin_course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                
               </tr>
             <% end %>
           </tbody>

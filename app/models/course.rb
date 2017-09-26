@@ -3,17 +3,17 @@ class Course < ApplicationRecord
      include PgSearch
      pg_search_scope :search_by_name, :against => [:name]
 
-     has_many :amenities
-     has_many :holes
-     has_one :location
+     has_many :amenities, :dependent => :destroy
+     has_many :holes, :dependent => :destroy
+     has_one :location, :dependent => :destroy
 
      belongs_to :network
      belongs_to :resort
 
-     has_many :score_cards
+     has_many :score_cards, :dependent => :destroy
      belongs_to :admin
-     has_many :reviews
-     has_many :course_users
+     has_many :reviews, :dependent => :destroy
+     has_many :course_users, :dependent => :destroy
      has_many :users, through: :course_users
 
      has_many :course_images, :dependent => :destroy
