@@ -1,6 +1,6 @@
 class Admin::VideosController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_video, only: [:show]
+  before_action :set_video, only: [:show, :destroy]
 
   def create
     @video = Video.create(video_params)
@@ -22,6 +22,16 @@ class Admin::VideosController < ApplicationController
 
   def show
     gon.video = @video
+  end
+
+  # DELETE /courses/1
+  # DELETE /courses/1.json
+  def destroy
+    @video.destroy
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'Video was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
 

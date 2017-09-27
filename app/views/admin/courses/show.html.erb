@@ -74,7 +74,7 @@
                 <td><%= "Hole " + hole.try(:hole_num).to_s  %></td>
                 <%if hole.video.present?%>
                   <td><%#=link_to hole.try(:video).try(:video_file_name), admin_video_path(hole.video)%>
-                  <%=link_to "Add Tag", admin_video_path(hole.video)%>
+                  <%=link_to "Add Tag", admin_video_path(hole.video)%> | <%= link_to 'Destroy', admin_video_path(hole.video), method: :delete, data: { confirm: 'Are you sure?' } %>
                 </td>
                 <%else%>
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-vid-upl-modal" %> >Upload Video</button></td>
