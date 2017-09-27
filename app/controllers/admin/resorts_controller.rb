@@ -45,7 +45,7 @@ class Admin::ResortsController < ApplicationController
   def update
     respond_to do |format|
       if @resort.update(resort_params)
-        format.html { redirect_to @resort, notice: 'Resort was successfully updated.' }
+        format.html { redirect_to admin_resorts_path, notice: 'Resort was successfully updated.' }
         format.json { render :show, status: :ok, location: @resort }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class Admin::ResortsController < ApplicationController
   def destroy
     @resort.destroy
     respond_to do |format|
-      format.html { redirect_to resorts_url, notice: 'Resort was successfully destroyed.' }
+      format.html { redirect_to admin_resorts_url, notice: 'Resort was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

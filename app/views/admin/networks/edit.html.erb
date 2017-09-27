@@ -1,6 +1,29 @@
 <h1>Editing Network</h1>
 
-<%= render 'form', network: @network %>
+<%#= render 'form', network: @network %>
+<%= form_for(@network, url: {controller: 'networks', action: 'update'}, method: "put" ) do |form|%>
+  <% if @network.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@network.errors.count, "error") %> prohibited this network from being saved:</h2>
 
-<%= link_to 'Show', @network %> |
-<%= link_to 'Back', networks_path %>
+      <ul>
+      <% @network.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :network_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<%#= link_to 'Show', @network %> |
+<%= link_to 'Back', admin_networks_path %>
