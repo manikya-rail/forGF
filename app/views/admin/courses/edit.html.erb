@@ -136,14 +136,18 @@
 
         <div class="col-md-12 course-info-row score-cards-wrapper">
             <%= label_tag :score_card ,'Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
-            <div class="col-md-6 score-card-wrapper dynamic-fields">
+            <!-- <div class="col-md-7 score-card-wrapper dynamic-fields"> -->
               <%= f.fields_for :score_cards do |score_card_form| %>
+              <div class="col-md-7 score-card-wrapper dynamic-fields">
                 <%= render 'admin/score_cards/form', s: score_card_form %>
+              </div>
               <% end %>
-            </div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-info btn-add inline" id='add-score-card' >+</button>
+              </div>
+            <!-- </div> -->
 
-            <div class="col-md-6">
-            </div>
+            
 
         </div>
         <div class="col-md-12 course-info-row">
@@ -175,6 +179,8 @@
 
 
 $('#add-score-card').click(function() {
+  if ($('.score-card-wrapper').length) {
+
     var clonedField = $('.score-card-wrapper').first().clone();
     var teeNameField = clonedField.find('#tee-name-field');
     var colorField = clonedField.find('#course_score_cards_attributes_0_color');
@@ -186,6 +192,31 @@ $('#add-score-card').click(function() {
     teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
     colorField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][color]' );
     clonedField.appendTo($('.score-cards-wrapper'))
+  }
+  else{
+    $('.score-cards-wrapper').append(''+
+      '<div class="col-md-7 score-card-wrapper dynamic-fields">'+
+        '<div class="col-md-4">'+
+          '<input class=" tee-name-field form-control inline check-field" placeholder="Tee Name" id="tee-name-field" type="text" value="t3" name="course[score_cards_attributes][0][tee_name]">'+
+        '</div>'+
+        '<div class="col-md-4">'+
+          '<select class="dropdown-less-padd form-control inline check-field" style="margin-left:10px;" name="course[score_cards_attributes][0][color]" id="course_score_cards_attributes_0_color"><'+'option value="Green">Green</option>'+
+            '<option value="Red">Red</option>'+
+            '<option value="White">White</option>'+
+            '<option value="Blue">Blue</option>'+
+            '<option value="Violet">Violet</option>'+
+            '<option value="Gold">Gold</option>'+
+            '<option selected="selected" value="Teal">Teal</option>'+
+            '<option value="LightBlue">LightBlue</option>'+
+            '<option value="Black">Black</option></select>'+
+        '</div>'+
+        '<div class="col-md-2">'+
+          '<input name="course[score_cards_attributes][0][_destroy]" type="hidden" value="0"><input type="checkbox" value="1" name="course[score_cards_attributes][0][_destroy]" id="course_score_cards_attributes_0__destroy">'+
+          '<label for="course_score_cards_attributes_0__destroy">Remove</label>'+
+        '</div>'+
+      '</div>');
+    
+  }
 
   });
 </script>

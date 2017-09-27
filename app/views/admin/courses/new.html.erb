@@ -46,6 +46,7 @@
             <div class="col-md-4">
               <%= select_tag('resort', options_for_select(Resort.all.pluck(:name, :id)), options = {prompt: 'Resort', class:'dropdown-padd dropdown form-control inline ' , style: 'width:50%;' , name: 'course[resort_id]'}) %>
               <button type="button" class="btn btn-info btn-add inline" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
+              <%= link_to "Edit List", admin_resorts_path %>
 
 
 
@@ -54,6 +55,7 @@
             <div class="col-md-4">
               <%= select_tag('network',options_for_select(Network.all.pluck(:name, :id)), options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;' , name: 'course[network_id]'}) %>
               <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
+              <%= link_to "Edit List", admin_networks_path %>
 
 
             </div>
@@ -163,6 +165,10 @@
               <%= f.fields_for :score_cards do |score_card_form| %>
                 <%= render 'admin/score_cards/form', s: score_card_form %>
               <% end %>
+
+              <div class="col-md-2">
+                <button type="button" class="btn btn-info btn-add inline" id='add-score-card' >+</button>
+              </div>
 
 
             </div>

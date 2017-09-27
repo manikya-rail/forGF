@@ -44,7 +44,7 @@ class Admin::NetworksController < ApplicationController
   def update
     respond_to do |format|
       if @network.update(network_params)
-        format.html { redirect_to @network, notice: 'Network was successfully updated.' }
+        format.html { redirect_to admin_networks_path, notice: 'Network was successfully updated.' }
         format.json { render :show, status: :ok, location: @network }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class Admin::NetworksController < ApplicationController
   def destroy
     @network.destroy
     respond_to do |format|
-      format.html { redirect_to networks_url, notice: 'Network was successfully destroyed.' }
+      format.html { redirect_to admin_networks_url, notice: 'Network was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
