@@ -1,5 +1,5 @@
 class Admin::HolesController < ApplicationController
-  before_action :set_hole, only: [:show, :edit, :update, :destroy, :remove_image, :remove_map, :remove_hole_image]
+  before_action :set_hole, only: [:show, :edit, :update, :destroy, :remove_image, :remove_map]
 
   # GET /holes
   # GET /holes.json
