@@ -10,6 +10,7 @@ namespace :admin do
   resources :locations
   resources :courses
   resources :ads
+  # resources :videos
   get "users/index"
   get "courses/holes/:id", to: 'courses#holes',as: 'holes_create'
   post "videos/create", to: 'videos#create' ,as: 'video_create'
@@ -17,10 +18,14 @@ namespace :admin do
   post "tags/:video_id/save" ,to: 'tags#create', as: 'create_tag'
   delete "tags/:id" ,to: 'tags#destroy', as: 'delete_tag'
   post "holes/add_image" ,to: 'holes#add_image', as: 'add_image'
+  put "holes/image/:id" ,to: 'holes#remove_image', as: 'remove_image'
   post "holes/add_map" ,to: 'holes#add_map', as: 'add_map'
+  put "holes/map/:id" ,to: 'holes#remove_map', as: 'remove_map'
   post "holes/add_hole_image" ,to: 'holes#add_hole_image', as: 'add_hole_image'
+  delete "holes/gallery/:id" ,to: 'holes#remove_hole_image', as: 'remove_hole_image'
   post "ads/add_image" ,to: 'ads#add_image', as: 'upload_image'
   post "holes/add_yardages" ,to: 'holes#add_yardages', as: 'add_yardages'
+  delete "videos/:id" ,to: 'videos#destroy', as: 'delete_video'
 
 end
 
