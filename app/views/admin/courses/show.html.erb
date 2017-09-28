@@ -79,13 +79,13 @@
                 <%else%>
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-vid-upl-modal" %> >Upload Video</button></td>
                 <%end%>
-                <% if hole.image.present? %>
-                  <td><%= link_to hole.image_file_name, hole.image.url %></td>
+                <% if hole.image.exists? %>
+                  <td><%#= link_to hole.image_file_name, hole.image.url %><%= link_to 'view', hole.image.url %> | <%= link_to 'Destroy', admin_remove_image_path(hole), method: :put, data: { confirm: 'Are you sure?' } %></td>
                 <% else %>
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal" %> >Upload Cover</button></td>
                 <% end %>
-                 <% if hole.map.present? %>
-                  <td><%= link_to hole.map_file_name, hole.map.url %></td>
+                 <% if hole.map.exists? %>
+                  <td><%#= link_to hole.map_file_name, hole.map.url %><%= link_to 'View', hole.map.url %> | <%= link_to 'Destroy', admin_remove_map_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></td>
                 <% else %>
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-map-upl-modal" %> >Upload Map</button></td>
                 <% end %>

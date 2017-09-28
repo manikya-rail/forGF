@@ -1,5 +1,5 @@
 class Admin::HolesController < ApplicationController
-  before_action :set_hole, only: [:show, :edit, :update, :destroy]
+  before_action :set_hole, only: [:show, :edit, :update, :destroy, :remove_image, :remove_map, :remove_hole_image]
 
   # GET /holes
   # GET /holes.json
@@ -71,6 +71,16 @@ class Admin::HolesController < ApplicationController
     end
   end
 
+  # put /holes/1
+  # put /holes/1.json
+  def remove_image
+    @hole.image.destroy
+    respond_to do |format|
+      format.html { redirect_to :back , notice: 'Image was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   def add_map
     @hole = Hole.find(params[:hole][:hole_id])
 
@@ -78,6 +88,16 @@ class Admin::HolesController < ApplicationController
       redirect_to admin_course_path(@hole.course), notice: 'Map was successfully uploaded.'
     else
       redirect_to admin_course_path(@hole.course), notice: 'Map not uploaded.'
+    end
+  end
+
+  # put /holes/1
+  # put /holes/1.json
+  def remove_map
+    @hole.map.destroy
+    respond_to do |format|
+      format.html { redirect_to :back , notice: 'Map was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
@@ -117,6 +137,20 @@ class Admin::HolesController < ApplicationController
     else
         redirect_to admin_course_path(@hole.course), notice: 'Images not uploaded.'
     end
+  end
+
+  # put /holes/1
+  # put /holes/1.json
+  def remove_hole_image
+    @holeimage = HoleImage.find(params[:id])
+    @hole=@holeimage.hole
+    if @holeimage.destroy
+      respond_to do |format|
+        format.html { redirect_to admin_course_path(@hole.course) , notice: 'Gallery image was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    end
+
   end
 
   private

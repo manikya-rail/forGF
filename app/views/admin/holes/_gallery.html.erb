@@ -6,6 +6,7 @@
 		        <%=image_tag holeimage.image.url(:thumb) %>
 		      </a>
 		    </div>
+		    <%= link_to 'Destroy', admin_remove_hole_image_path(holeimage), method: :delete, data: { confirm: 'Are you sure?' } %>
 	  	</div>
 	<% end%>
 </div>
