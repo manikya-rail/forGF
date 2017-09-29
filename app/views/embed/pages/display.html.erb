@@ -28,7 +28,7 @@
           
             <div class="hole-bar">
               <ul >
-                <li ><text id="hole">0</text>&nbsp;<span id="hole-num">0</span></li>
+                <li id="firstli" ><text id="hole">0</text>&nbsp;<span id="hole-num">0</span></li>
                 <li ><span>PAR</span>&nbsp;&nbsp;<text id="par">0</text></li>
                 <li ><text id="yard">0</text>&nbsp;&nbsp;<span>YDS</span></li>
                 <li id="lastli" ><text id="mhcp">0</text>&nbsp;<span>HCP</span></li>
@@ -1123,13 +1123,17 @@ div:focus {
 
     }
     .hole-bar ul{
+      display: table;
+      width: 100%;
       margin: 7px 0 0 0;
       font-size: 10px;
     }
     .hole-bar ul li {
+      display: table-cell;
+      text-align: center;
       border-right: 2.5px solid #696969;
       padding: 8px 20px 1px 20px;
-    }    
+    }      
     
     .hole-bar ul li span {
       font-size:2.5em;
@@ -1288,10 +1292,14 @@ div:focus {
       right: 0%;
     }
     .hole-bar ul{
+      display: table;
+      width: 100%;
       margin: 7px 0 0 0;
       font-size: 8px;
     }
     .hole-bar ul li {
+      display: table-cell;
+      text-align: center;
       border-right: 2.5px solid #696969;
       padding: 7px 20px 1px 20px;
     }    
@@ -1457,14 +1465,23 @@ div:focus {
       /*width: 80%;*/
     }
     .hole-bar ul{
+      display: table;
+      width: 100%;
       margin: 6px 0 0 0;
       font-size: 6px;
       /*font-size: 1.7vw;*/
     }
     .hole-bar ul li {
+      display: table-cell;
+      text-align: center;
       border-right: 2.5px solid #696969;
       /*padding: 6px 8px 0px 8px;*/
-      padding: 6px 4% 0px 4%;
+      padding: 6px 3px 0px 3px;
+    }
+    #firstli {
+      padding: 6px 3px 0px 3px;
+      /*width: 20%;*/
+      text-align: center;
     }    
     
     .hole-bar ul li span {
