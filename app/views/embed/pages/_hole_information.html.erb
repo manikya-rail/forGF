@@ -3,7 +3,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
 
   <div class="row description">
-    <div class="col-md-7">
+    <div class="col-md-12">
       <div class="row">
         <div class="col-md-6">
           <h3><b><%= @hole.hole_num %><%= @hole.hole_num==1 ? 'st' : @hole.hole_num==2 ? 'nd' : @hole.hole_num==3 ? 'rd' : 'th' %> Hole, Par <%= @hole.par%></b></h3>
@@ -16,7 +16,7 @@
       </div>
     </div>
     
-    <div class="col-md-5 yards">
+    <div class="col-md-6 yards">
       <% @hole.course.score_cards.each do |tee| %>
         <span class="points">
           <!-- <h3><b><%#= @hole.hole_num %> Hole</b></h3> -->
@@ -210,10 +210,17 @@ h3, h4 {
           margin-top: 50px;
           margin-bottom: 50px;
           padding-left: 60px;
+          padding-right: 25px;
         }
         .yards {
           padding-top: 0px;
-          margin-top: -30px;
+          margin-top: 0px;
+          text-align: left;
+        }
+        .points {
+          width: auto;
+          padding-right: 60px;
+
         }
 
         .points h3{
@@ -232,10 +239,16 @@ h3, h4 {
           margin-top: 30px;
           margin-bottom: 30px;
           padding-left: 60px;
+          padding-right: 25px;
         }
          .yards {
           padding-top: 0px;
-          margin-top: -15px;
+          margin-top: 0px;
+          text-align: left;
+        }
+        .points {
+          width: auto;
+          padding-right: 60px;
         }
         .bx-next img, .bx-prev img {
           height: 60%;
@@ -258,10 +271,17 @@ h3, h4 {
           margin-top: 30px;
           margin-bottom: 30px;
           padding-left: 60px;
+          padding-right: 25px;
         }
        .yards {
           padding-top: 0px;
-          margin-top: -15px;
+          margin-top: 0px;
+          text-align: left;
+          width: 100%;
+        }
+        .points {
+          width: auto;
+          padding-right: 60px;
         }
         .bx-next img, .bx-prev img {
           height: 60%;
