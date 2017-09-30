@@ -1,5 +1,7 @@
 <%= Gon::Base.render_data %>
 <%#= csrf_meta_tags %>
+<script type="text/javascript" src="http://davidjbradshaw.com/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script> 
+
 
 <!-- Linkers -->
 
@@ -150,8 +152,12 @@ function flag_control(){
 player.on("loadedmetadata",function () {
   barupdate();
   current_video();
-  // player.trigger('useractive');
+  player.trigger('useractive');
+  setTimeout(trg, 5000);
 });
+function trg () {
+  player.trigger('userinactive');
+}
 
 player.on("userinactive",function () {
   if (!player.paused()){
@@ -165,6 +171,11 @@ player.on("useractive",function () {
     showBars();
   }
 });
+
+player.on ("error",function () {
+    // alert(player.error.message);
+    // player.playlist.next();
+  });
 
 function hideBars(){
     $(".hole-bar").animate({top: '-70px'});
@@ -187,7 +198,7 @@ function showBars(){
     // xx-=2;
     $(".lower-gradient").show().animate({bottom: xx+'px'});
 }
-  
+
 /* ADD flag */
 var Button = videojs.getComponent('Button');
 

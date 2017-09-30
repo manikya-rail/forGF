@@ -3,7 +3,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
 
   <div class="row description">
-    <div class="col-md-7 about">
+    <div class="col-md-12 about">
       <div class="row">
         <div class="col-md-6">
           <h3><b>About The Course</b></h3>
@@ -16,7 +16,7 @@
       </div>
     </div>
     
-    <div class="col-md-5 specs">
+    <div class="col-md-12 specs">
       <div class="row">
         <div class="col-md-6">
           <h3><b>Course Specs</b></h3>
@@ -32,16 +32,17 @@
               <span class="values"><h4>Par: <%= @course.total_par %></h4></span>
             
               <span class="values"><h4>Slope: <%= @course.slope %></h4></span>
-            </div>
-          </div>
+            <!-- </div> -->
+          <!-- </div>
 
-          <div class="row">
-            <div class="col-md-12 ">
+          <div class="row"> -->
+            <!-- <div class="col-md-6 "> -->
               <span class="values"><h4>Rating: <%= @course.rating %></h4></span>
             
               <span class="values"><h4>Yardages: <%= @course.length %></h4></span>
             
-              <span class="values"><h4>Tee Boxes: <%= @course.score_cards.count %></h4></span>
+              <!-- <span class="values"><h4>Tee Boxes: <%= @course.score_cards.count %></h4></span> -->
+              <span class="values"><h4>Architect: <%= @course.architect %></h4></span>
             </div>
           </div>
 
@@ -51,7 +52,7 @@
     </div>  
   </div>
   <div class="row description2">
-    <div class="col-md-7">
+    <div class="col-md-12">
       <div class="row">
           <div class="col-md-12">
             <h3><b>Amenities</b></h3>
@@ -83,7 +84,7 @@
                 <% end %>
 
                 <% if amenity.practice_range %>
-                  <span class="amenity pp">
+                  <span class="amenity pp ">
                   <h4><%= image_tag "amenities/practice-range.png", class: 'practice-range' %>Practice Range</h4></span>
                 <% end %>
 
@@ -94,7 +95,7 @@
       </div>
    
 
-    <div class="col-md-5">
+    <!-- <div class="col-md-5">
       <div class="row">
         <div class="col-md-12">
           <h3><b>Architect</b></h3>
@@ -106,7 +107,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
  </div>
             
 
@@ -337,9 +338,23 @@ h4 img {
           margin-bottom: 50px;
           padding-left: 60px;
         }
+        .specs {
+          margin-top: 20px;
+        }
         .sp-rows {
-          margin-top: -12px;
-          height: 20px;
+          margin-top: -30px;
+          height: 20px;       
+        }
+        .values {
+          width: auto;
+          padding-right: 50px;
+        }
+        .values h4 {
+          font-weight: normal;
+        }
+        .amenity {
+          width: auto;
+          padding-right: 70px;
         }
 
 
@@ -355,7 +370,7 @@ h4 img {
           font-size: 15px;
         }*/
         .description2 h4{
-          font-size: 15px;
+          font-size: 18px;
         }
         .bx-next img, .bx-prev img {
           height: 60%;
@@ -367,7 +382,21 @@ h4 img {
         }
         .pp {
           width: 26%;
-
+        }
+        .specs {
+          margin-top: 20px;
+        }
+        .values {
+          width: auto;
+          padding-right: 50px;
+        }
+        .values h4 {
+          font-weight: normal;
+        }
+        .amenity {
+          width: auto;
+          padding-right: 80px;
+          padding-left: 10px;
         }
 
 
@@ -383,13 +412,13 @@ h4 img {
           font-size: 13px;
         }*/
         .description h3{
-          font-size: 17px;
+          font-size: 20px;
         }
         .description2 h4{
-          font-size: 13px;
+          font-size: 18px;
         }
         .description2 h3{
-          font-size: 17px;
+          font-size: 20px;
         }
         /*.amenity{
           display: table-cell;
@@ -405,6 +434,21 @@ h4 img {
         .sp-rows {
           margin-top: -12px;
           height: 20px;
+        }
+        .specs {
+          margin-top: 20px;
+        }
+        .values {
+          width: auto;
+          padding-right: 50px;
+        }
+        .values h4 {
+          font-weight: normal;
+        }
+        .amenity {
+          width: auto;
+          padding-right: 40px;
+          padding-left: 10px;
         }
 
       }
