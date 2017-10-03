@@ -25,7 +25,7 @@
     <div class = "main-container"> 
       <div class= "player-container">
         <div class = "upper-gradient"></div>
-        <div class="vplayer">
+        <div class="vplayer" id="vplayer">
           
           
             <div class="hole-bar">
@@ -152,8 +152,9 @@ function flag_control(){
 player.on("loadedmetadata",function () {
   barupdate();
   current_video();
-  player.trigger('useractive');
-  setTimeout(trg, 5000);
+  // $('#video').trigger('mousemove');
+  // player.trigger('useractive');
+  // setTimeout(trg, 5000);
 });
 function trg () {
   player.trigger('userinactive');
@@ -184,7 +185,8 @@ function hideBars(){
     $(".next").fadeOut();
     $(".vjs-control-bar").animate({bottom: '-70px'});
     $(".upper-gradient").animate({top: '-70px'});
-    $(".lower-gradient").animate({bottom: '0px'});
+    // $(".lower-gradient").animate({bottom: '0px'});
+    $(".lower-gradient").slideUp(300);
 }
 
 function showBars(){
@@ -194,9 +196,11 @@ function showBars(){
     $(".next").fadeIn();
     $(".vjs-control-bar").animate({bottom: '1px'});
     $(".upper-gradient").animate({top: '0px'});
-    xx = $(".vjs-playlist").outerHeight();
-    // xx-=2;
-    $(".lower-gradient").show().animate({bottom: xx+'px'});
+    // xx = $(".vjs-playlist").outerHeight();
+    // // xx-=2;
+    // $(".lower-gradient").show().animate({bottom: xx+'px'});
+    $(".lower-gradient").slideDown(500);
+
 }
 
 /* ADD flag */
@@ -475,7 +479,7 @@ a:hover {
 #lastli {
   border: 0;
   /*padding-right: 25px;*/
-  margin-right: 20px;
+  margin-right: 5px;
 }
 body{
   /*font-size: 2.5vw;*/
@@ -718,6 +722,9 @@ div:focus {
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:100%;*/
     }
+    #firstli {
+      margin-left: 5px;
+    }
     .hole-bar {
       height: 65px;
       right:25px;
@@ -831,6 +838,9 @@ div:focus {
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:80%;*/
+    }
+    #firstli {
+      margin-left: 5px;
     }
     .hole-bar{
       right:25px;
