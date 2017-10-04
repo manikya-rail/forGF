@@ -5,7 +5,8 @@ class Admin::CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    # @courses = Course.all
+    @courses = Course.order("id DESC")
   end
 
   # GET /courses/1
