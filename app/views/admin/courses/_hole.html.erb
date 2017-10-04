@@ -1,4 +1,4 @@
-<%= f.fields_for :holes, f.object.holes.order(:hole_num) do |hole| %>
+<%= f.fields_for :holes, f.object.holes.sort_by{ |m| m.hole_num } do |hole| %>
     <div class="col-md-2 hole" id="hole_num_<%="#{hole.index + 1}"%>">
         <div class="col-md-12 zero-left-right-padd whole-num" style="color:green">
             <%="Hole #{hole.index + 1 }"%>
