@@ -190,6 +190,7 @@ $('#select_photos').click(function (){
 });
 
 $(document).ready(function() { $('#select_photos').trigger('click') });
+$(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
 
 // $( window ).resize(function() {
 //   if($(document).width() >760) $('.map-slecter').addClass("btn-group-lg");
