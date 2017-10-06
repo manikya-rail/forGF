@@ -59,7 +59,7 @@ class Embed::PagesController < ApplicationController
     @holes.each do |hole|
         gon.hole_num << hole.hole_num if hole.video.present?
         gon.videos << hole.video  if hole.video.present?
-        gon.videos_urls << hole.video.video  if hole.video.present?
+        gon.videos_urls << hole.video.video.url if hole.video.present?
         # hole.video.present? ? (gon.videos_urls << hole.video.video) : (gon.videos_urls << "http://s3-us-west-2.amazonaws.com/fore92/courses/videos/000/000/012/original/missing.mp4?1506746983")
         gon.tags << hole.video.tags  if hole.video.present?
         gon.par << hole.par if hole.video.present?
