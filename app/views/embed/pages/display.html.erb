@@ -75,7 +75,7 @@
         <div id="holeinfo" class="holeinfo"></div>
       </div>
       <div class="signature">
-        <center><%= image_tag "signature.png" %></center>
+        <center><%= link_to image_tag("signature.png"), "http://foreflyovers.com", target: :_blank %></center>
       </div>
     </div>
 
@@ -92,7 +92,8 @@ for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
     sources: [{
       src: gon.videos_urls[i],
       type: 'video/mp4'
-    }]
+    }],
+    poster: gon.image_urls[i]
   });
 }
 
@@ -361,6 +362,12 @@ html,body
   overflow: auto;
   max-width: 100vw;
 }*/
+.signature {
+  width: 100%;
+}
+.signature img {
+  width: 400px;
+}
 .main-container {
   /*min-height: 600px;*/
   height: auto !important;
@@ -1447,6 +1454,8 @@ div:focus {
     /*.player-container {width: 100vw;}*/
     .player-container {width: 100vw;}
     .main-container {width: 100vw;}
+        .signature img {width: 90%;}
+
     
     .video-js .vjs-big-play-button {
       /*margin-top: -15px;
