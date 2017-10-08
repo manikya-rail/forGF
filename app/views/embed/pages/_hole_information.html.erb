@@ -32,14 +32,18 @@
         <button type="button" class="btn" id="select_map">Map</button>
         <button type="button" class="btn" id="select_photos">Photos</button>
       </div> 
-      <ul id="map">
-        <li><%=image_tag @hole.map.url %></li>
-      </ul>
-      <ul id="slider" class="bxslider">
-        <% @hole.hole_image.each do | holeimage | %>
-          <li><%=image_tag holeimage.image.url %></li>
-        <% end%>
-      </ul>
+      <div id="11">
+        <ul id="map">
+          <li><%=image_tag @hole.map.url %></li>
+        </ul>
+      </div>
+      <div id="22">
+        <ul id="slider" class="bxslider">
+          <% @hole.hole_image.each do | holeimage | %>
+            <li><%=image_tag holeimage.image.url %></li>
+          <% end%>
+        </ul>
+      </div>
     </div>
     <div class="col-md-12 st2"> 
       <div class="row">
@@ -51,7 +55,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="divider">Photos</div>
-          <ul id="slider" class="bxslider">
+          <ul id="slider1" class="bxslider">
             <% @hole.hole_image.each do | holeimage | %>
               <li><%=image_tag holeimage.image.url %></li>
             <% end%>
@@ -62,8 +66,10 @@
   </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-  $('.bxslider').bxSlider({
+$(document).ready(sliderInitializer);
+
+function sliderInitializer (){
+  var slider = $('.bxslider').bxSlider({
     mode: 'horizontal',
     useCSS: false,
     // infiniteLoop: false,
@@ -74,10 +80,16 @@ $(document).ready(function(){
       nextText: '<%= image_tag "right.png" %>',
       prevText: '<%= image_tag "left.png" %>'
    });
-});
+  return slider;
+}
 
 $('#select_map').click(function (){
-  $('.bx-wrapper').hide();
+  // $('.st1 .bx-wrapper').hide();
+  // $('#22').hide();
+  $('#22').invisible();
+  // $(".st1 .bx-wrapper").invisible();
+
+  // $('#slider li').hide();
   // $('#slider').hide();
   $('#select_photos').removeClass('selected');
   $('#select_photos').addClass('non-selected');
@@ -86,8 +98,8 @@ $('#select_map').click(function (){
   $('#select_map').removeClass('non-selected');
   $('#select_map').addClass('selected');
 
-  $('.bx-next').hide();
-  $('.bx-prev').hide();
+  // $('.bx-next').hide();
+  // $('.bx-prev').hide();
 });
 
 $('#select_photos').click(function (){
@@ -95,17 +107,45 @@ $('#select_photos').click(function (){
   $('#select_map').removeClass('selected');
   $('#select_map').addClass('non-selected');
 
-  $('.bx-wrapper').show();
-  // $('#slider').show();
+
   $('#select_photos').removeClass('non-selected');
   $('#select_photos').addClass('selected');
 
-  $('.bx-next').show();
-  $('.bx-prev').show();
+  // $('.st1 .bx-wrapper').show();
+  // $('#22').show();
+  $('#22').visible();
+  // slider.reload();
+  // slider.reload();
+  // reloadSlider();
+  // $(".st1 .bx-wrapper").visible();
+  // slider.reload();
+  // sliderInitializer();
+  // $('#slider').show();
+  // $('#slider li').show();
+  // sliderInitializer();
+  // $('#select_photos').removeClass('non-selected');
+  // $('#select_photos').addClass('selected');
+
+  // $('.bx-next').show();
+  // $('.bx-prev').show();
 });
 
-$(document).ready(function() { $('#select_photos').trigger('click') });
-$(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
+(function($) {
+    $.fn.invisible = function() {
+        return this.each(function() {
+            $(this).css("visibility", "hidden");
+        });
+    };
+    $.fn.visible = function() {
+        return this.each(function() {
+            $(this).css("visibility", "visible");
+        });
+    };
+}(jQuery));
+
+$(document).ready(function() { $('#select_map').trigger('click') });
+// $(document).ready(function() { $('#select_photos').trigger('click') });
+// $(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
 
 // $( window ).resize(function() {
 //   if($(document).width() >760) $('.map-slecter').addClass("btn-group-lg");
@@ -145,6 +185,10 @@ h3, h4 {
   list-style: none;
   margin: 0;
   padding: 0;
+  position: absolute;
+}
+#slider{
+  position: absolute;
 }
 #map li img {
   width: 100%;
