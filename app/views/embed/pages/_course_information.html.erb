@@ -162,7 +162,7 @@ $(document).ready(function(){
 });
 
 $('#select_map').click(function (){
-  $('.bx-wrapper').hide();
+  $('.st1 .bx-wrapper').invisible();
   // $('#slider').hide();
   $('#select_photos').removeClass('selected');
   $('#select_photos').addClass('non-selected');
@@ -171,8 +171,8 @@ $('#select_map').click(function (){
   $('#select_map').removeClass('non-selected');
   $('#select_map').addClass('selected');
 
-  $('.bx-next').hide();
-  $('.bx-prev').hide();
+  // $('.bx-next').hide();
+  // $('.bx-prev').hide();
 });
 
 $('#select_photos').click(function (){
@@ -180,17 +180,32 @@ $('#select_photos').click(function (){
   $('#select_map').removeClass('selected');
   $('#select_map').addClass('non-selected');
 
-  $('.bx-wrapper').show();
+  $('.st1 .bx-wrapper').visible();
   // $('#slider').show();
   $('#select_photos').removeClass('non-selected');
   $('#select_photos').addClass('selected');
 
-  $('.bx-next').show();
-  $('.bx-prev').show();
+  // $('.bx-next').show();
+  // $('.bx-prev').show();
 });
 
-$(document).ready(function() { $('#select_photos').trigger('click') });
-$(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
+
+(function($) {
+    $.fn.invisible = function() {
+        return this.each(function() {
+            $(this).css("visibility", "hidden");
+        });
+    };
+    $.fn.visible = function() {
+        return this.each(function() {
+            $(this).css("visibility", "visible");
+        });
+    };
+}(jQuery));
+
+$(document).ready(function() { $('#select_map').trigger('click') });
+// $(document).ready(function() { $('#select_photos').trigger('click') });
+// $(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
 
 // $( window ).resize(function() {
 //   if($(document).width() >760) $('.map-slecter').addClass("btn-group-lg");
@@ -268,6 +283,10 @@ h4 img {
   list-style: none;
   margin: 0;
   padding: 0;
+  position: absolute;
+}
+#slider {
+  position: absolute;
 }
 #map li img {
   width: 100%;
