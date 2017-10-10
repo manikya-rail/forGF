@@ -88,13 +88,23 @@
 var videoList = []
 
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
-  videoList.push({
+  if (i==0){ // setting poster for only first video
+    videoList.push({
     sources: [{
       src: gon.videos_urls[i],
       type: 'video/mp4'
     }],
     poster: gon.image_urls[i]
   });
+
+  }else{ // Playlist videos
+    videoList.push({
+      sources: [{
+        src: gon.videos_urls[i],
+          type: 'video/mp4'
+      }]
+    });
+  }
 }
 
 // 320, 480, 760, 960, 1200 and 1600px.
@@ -149,16 +159,29 @@ function flag_control(){
 }
 
 
+var timer;
 
 player.on("loadedmetadata",function () {
   barupdate();
   current_video();
+
+  barShow();
+  
+  
   // $('#video').trigger('mousemove');
   // player.trigger('useractive');
   // setTimeout(trg, 5000);
 });
-function trg () {
-  player.trigger('userinactive');
+function barShow(){
+  if (!player.paused()){
+    showBars();
+    // $(".hole-bar").animate({top: '1%'});
+    timer = setTimeout(function(){barHide()}, 5000);
+  }
+}
+function barHide(){
+  hideBars();
+  // $(".hole-bar").animate({top: '-70px'});
 }
 
 player.on("userinactive",function () {
@@ -171,6 +194,7 @@ player.on("useractive",function () {
 
   if (!player.paused()){
     showBars();
+    clearTimeout(timer);
   }
 });
 
@@ -366,7 +390,7 @@ html,body
   width: 100%;
 }
 .signature img {
-  width: 400px;
+  width: 250px;
 }
 .main-container {
   /*min-height: 600px;*/
@@ -1454,7 +1478,7 @@ div:focus {
     /*.player-container {width: 100vw;}*/
     .player-container {width: 100vw;}
     .main-container {width: 100vw;}
-        .signature img {width: 90%;}
+        /*.signature img {width: 90%;}*/
 
     
     .video-js .vjs-big-play-button {
