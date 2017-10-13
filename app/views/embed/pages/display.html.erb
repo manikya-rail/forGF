@@ -192,10 +192,10 @@ player.on("userinactive",function () {
 
 player.on("useractive",function () {
 
-  if (!player.paused()){
+  // if (!player.paused()){
     showBars();
     clearTimeout(timer);
-  }
+  // }
 });
 
 player.on ("error",function () {
