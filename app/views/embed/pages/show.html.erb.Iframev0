@@ -3,10 +3,10 @@
 
 <!-- Linkers -->
 
-<link href="//vjs.zencdn.net/5.19/video-js.min.css" rel="stylesheet">
+<link href="//vjs.zencdn.net/6.2.8/video-js.min.css" rel="stylesheet">
 <link href="http://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/stylesheets/videojs-playlist-ui.vertical.css" rel="stylesheet">
 
-<script src="//vjs.zencdn.net/5.19/video.min.js"></script>
+<script src="//vjs.zencdn.net/6.2.8/video.min.js"></script>
 <script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 <script src="http://rawgit.com/zealot128/Photo-Gallery/405996ca46b450acb9a66a9b164bafc30dc06d38/vendor/assets/javascripts/videojs-playlist-ui.js"></script>
 
