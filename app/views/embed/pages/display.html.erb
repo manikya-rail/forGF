@@ -1,19 +1,19 @@
 <%= Gon::Base.render_data %>
 <%#= csrf_meta_tags %>
-<script type="text/javascript" src="http://davidjbradshaw.com/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script> 
+<script type="text/javascript" src="http://davidjbradshaw.com/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
 
 
 <!-- Linkers -->
 
-<link href="//vjs.zencdn.net/5.20/video-js.min.css" rel="stylesheet">
+<link href="//vjs.zencdn.net/6.2.8/video-js.min.css" rel="stylesheet">
 <!-- <link href="https://cdn.rawgit.com/samsol6/Triphitrip-WEBAPP/modeling-user/lib/vjs/videojs-settings-menu.css" rel="stylesheet"> -->
 
-<script src="//vjs.zencdn.net/5.20/video.min.js"></script>
+<script src="//vjs.zencdn.net/6.2.8/video.min.js"></script>
 <script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 <!-- <script src="https://cdn.rawgit.com/samsol6/Triphitrip-WEBAPP/modeling-user/lib/vjs/videojs-settings-menu.min.js"></script> -->
 
 <!-- Fonts -->
- <link href="https://fonts.googleapis.com/css?family=Economica" rel="stylesheet"> 
+ <link href="https://fonts.googleapis.com/css?family=Economica" rel="stylesheet">
 
 <!-- slider -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
@@ -21,13 +21,13 @@
 
 <!-- Body -->
 
- 
-    <div class = "main-container"> 
+
+    <div class = "main-container">
       <div class= "player-container">
         <div class = "upper-gradient"></div>
         <div class="vplayer" id="vplayer">
-          
-          
+
+
             <div class="hole-bar">
               <ul >
                 <li id="firstli" ><text id="hole">0</text>&nbsp;<span id="hole-num">0</span></li>
@@ -37,17 +37,17 @@
                 <!-- <li style="padding:0;" ><text id="mhcp"></text><span></span> </li> -->
               </ul>
             </div>
-          
-          
-          
+
+
+
           <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" playsinline></video>
-          
+
           <div class="previous on-video"> <%= image_tag "left.png" %> </div>
           <div class="next on-video"><%= image_tag "right.png" %></div>
           <!-- <div class="flag on-video"><%= image_tag "flag.png" %></div> -->
           <!-- <div class="eye on-video"><%= image_tag "eye.png" %></div> -->
-          
-          
+
+
           <!-- <div class="upload on-video"><%= image_tag "upload.png" %></div> -->
           <div class="logo on-video"><%= link_to image_tag("logo.png"), "http://foreflyovers.com", target: :_blank %> </div>
           <div class = "lower-gradient"></div>
@@ -57,12 +57,12 @@
             <div class="left-green"><%= image_tag "left-green.png" %></div>
             <div  class="playlist">
               <ul id="playlist" >
-                <% @holes.try(:each) do |hole| %> 
+                <% @holes.try(:each) do |hole| %>
                   <li id="<%=hole.hole_num%>" onClick="select_video(this.id)">
                     <%=link_to hole.hole_num, embed_hole_info_path(hole.id), remote: true %>
                   </li>
                 <% end %>
-                
+
               </ul>
             </div>
             <div class="right-green"><%= image_tag "right-green.png" %></div>
@@ -115,7 +115,7 @@ var player = videojs('hole-vid', {
     children: {
       'playToggle':{},
       'progressControl':{},
-      'volumeMenuButton':{},      
+      'volumeMenuButton':{},
       'playbackRateMenuButton':{},
       // 'settingsMenuButton': {
       //     entries : [
@@ -145,7 +145,7 @@ document.querySelector('.next').addEventListener('click', function() {
 
 // document.querySelector('.flag').addEventListener('click', function() {
 //   flag_control();
-  
+
 // });
 
 function flag_control(){
@@ -166,8 +166,8 @@ player.on("loadedmetadata",function () {
   current_video();
 
   barShow();
-  
-  
+
+
   // $('#video').trigger('mousemove');
   // player.trigger('useractive');
   // setTimeout(trg, 5000);
@@ -260,7 +260,7 @@ function playlistui(){
 
 function barupdate(){
   var hole = player.playlist.currentItem();
-  
+
   document.getElementById('hole').innerHTML = leftPad(hole+1,1);
   document.getElementById('hole-num').innerHTML = pos(hole+1);
   document.getElementById('par').innerHTML = leftPad(gon.par[hole],1);
@@ -304,7 +304,7 @@ function select_video(id){
     player.playlist.currentItem(id);
   }
 }
-  
+
 $(document).ready(function(){
     $(".right-green").click(function(){
         // alert($(".playlist").scrollLeft() + " px");
@@ -362,7 +362,7 @@ $(document).ready(function() { $('#1 a').trigger('click') });
 // Pgae Refresher for safari cache
 $(window).bind("pageshow", function(event) {
     if (event.originalEvent.persisted) {
-        window.location.reload() 
+        window.location.reload()
     }
 });
 
@@ -378,7 +378,7 @@ html,body
     height: auto;
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden !important; 
+    overflow-x: hidden !important;
 }
 /*body {
 
@@ -419,8 +419,8 @@ a:hover {
   text-decoration: none;
   background: none;
 }
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+    display: none;
 }
 .player-container{
   position: absolute;
@@ -442,7 +442,7 @@ a:hover {
   /*margin-top: -4%;*/
   background: linear-gradient(rgba(64,64,64,0), rgba(0,0,0,0.7));
   position: absolute;
-  z-index: 0; 
+  z-index: 0;
 }
 .vplayer{
   z-index: -1;
@@ -484,7 +484,7 @@ a:hover {
   display: inline-block;
   /*display: table;*/
   white-space: nowrap;
-  list-style: none; 
+  list-style: none;
   /*white-space: nowrap;
   display: inline-block;*/
   margin: 10px 0 0 0;
@@ -497,7 +497,7 @@ a:hover {
 .hole-bar ul li {
   display: inline-block;
   /*display: table-cell;*/
-  color:white; 
+  color:white;
   width:auto;
   /*float:right;*/
   border: solid transparent;
@@ -522,13 +522,13 @@ body{
 .hole-bar ul li span {
   font-size:1.2em;
   font-family: 'RakerDisHvy',sans-serif;
-  font-weight: 400; 
+  font-weight: 400;
 }
 .hole-bar ul li text {
   font-size:1.6em;
   font-family: 'RakerDisHvy',sans-serif;
 }
-.on-video {  
+.on-video {
     z-index: 5;
     background-color: transparent;
     cursor: pointer;
@@ -542,13 +542,13 @@ body{
     position: absolute;
     left: 25px;
     top: 45%;
-    height: 40px; 
+    height: 40px;
    }
   .next{
     position: absolute;
     right: 25px;
     top: 45%;
-    height: 40px; 
+    height: 40px;
   }
 
   .flag:before {
@@ -589,7 +589,7 @@ body{
     position: absolute;
     width: 11%;
     height: 6%;
-    
+
   }
 
 .on-video img {
@@ -666,11 +666,11 @@ div:focus {
 
 .vjs-playlist {
   left:0px ;
-  width:100%; 
+  width:100%;
   overflow: hidden;
   padding-top: 0.5%;
   background-image:url(<%= image_url "hole-selector-background.png" %>);
-  background-size: 100% 100%; 
+  background-size: 100% 100%;
   z-index: 5;
   position: relative;
 }
@@ -679,12 +679,12 @@ div:focus {
   width: 90%;
   float: left;
   overflow: auto;
-  
+
 }
 .playlist ul{
   display: inline-block;
   white-space: nowrap;
-  list-style: none; 
+  list-style: none;
   height: 100%;
   width:100%;
   margin: 0 0 0 0;
@@ -693,11 +693,11 @@ div:focus {
 .playlist ul li {
   display: inline-block;
   padding-top: 0%;
-  color:#696969; 
+  color:#696969;
   /*width:5.4%;*/
   margin-right: 1.25%;
   margin-left: 1.25%;
-  text-align: center; 
+  text-align: center;
   /*float:left;*/
   vertical-align: center;
   cursor: pointer;
@@ -707,15 +707,15 @@ div:focus {
 .playlist ul li a:link, .playlist ul li a:hover, .playlist ul li a:visited, .playlist ul li a:active {
   text-decoration: none;
   background: none;
-} 
+}
 .playlist ul li a{
-  color:#696969; 
+  color:#696969;
 }
 .playlist ul li.active {
   border-bottom: 4px solid green;
 }
 .playlist ul li.active a {
-  color:white; 
+  color:white;
 }
 .hole-home {
   float: left;
@@ -774,7 +774,7 @@ div:focus {
       /*margin-top: 5px;*/
       border-right: 5px solid #696969;
       /*padding: 2% 4% 0.6% 4%;*/
-    }    
+    }
     .hole-bar ul li span {
       font-size:2.5em;
     }
@@ -787,7 +787,7 @@ div:focus {
     .lower-gradient {
       bottom:80px;
     }
-    
+
     .playlist ul li {
       font-size: 37px;
       line-height: 35px;
@@ -810,7 +810,7 @@ div:focus {
       margin-top: -4px;
     }
     .hole-home img {
-      
+
       width: 50px;
       height: 50px;
       /*margin-top: -0.4%;*/
@@ -850,11 +850,11 @@ div:focus {
       font-size: 1.2em;
     }
     .hole-info-div{
-      width:1600px; 
+      width:1600px;
       /*position: absolute;*/
       /*margin-top: 980px;*/
     }
-    
+
 }
 
 
@@ -886,26 +886,26 @@ div:focus {
     .hole-bar ul li {
       border-right: 2.5px solid #696969;
       /*padding: 1.5% 4% 0 4%;*/
-    }    
-    
+    }
+
     .hole-bar ul li span {
       font-size:2.5em;
     }
-    
+
     .hole-bar ul li text {
       font-size:3.0em;
     }
     .vjs-playlist {
       left:0px ;
-      width:100%; 
+      width:100%;
       height: 60px;
       background-image:url(<%= image_url "hole-selector-background.png" %>);
-      background-size: 100% 100%; 
+      background-size: 100% 100%;
     }
     .lower-gradient {
       bottom: 60px;
     }
-    
+
     .playlist ul li {
       font-size: 28px;
       line-height: 30px;
@@ -991,11 +991,11 @@ div:focus {
       font-size: 1.2em;
     }*/
     .hole-info-div{
-      width:100vw; 
+      width:100vw;
       /*position: absolute;*/
       /*margin-top: 62vw;*/
     }
-    
+
 }
 
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
@@ -1025,21 +1025,21 @@ div:focus {
     .hole-bar ul li {
       border-right: 2.5px solid #696969;
       padding: 8px 20px 1px 20px;
-    }    
-    
+    }
+
     .hole-bar ul li span {
       font-size:2.5em;
     }
-    
+
     .hole-bar ul li text {
       font-size:3.0em;
     }
     .vjs-playlist {
       left:0px ;
-      width:100%; 
+      width:100%;
       height: 60px;
       background-image:url(<%= image_url "hole-selector-background.png" %>);
-      background-size: 100% 100%; 
+      background-size: 100% 100%;
     }
     .lower-gradient {
       bottom: 60px;
@@ -1047,7 +1047,7 @@ div:focus {
     .playlist ul {
       line-height: 47px;
     }
-    
+
     .playlist ul li {
       font-size: 28px;
       line-height: 30px;
@@ -1129,11 +1129,11 @@ div:focus {
       font-size: 1.2em;
     }*/
     .hole-info-div{
-      width:100vw; 
+      width:100vw;
       /*position: absolute;
       margin-top: 63vw;*/
     }
-    
+
 }
 @media only screen and (min-width: 600px) and (max-width: 760px) {
   .description {
@@ -1188,21 +1188,21 @@ div:focus {
       text-align: center;
       border-right: 2.5px solid #696969;
       padding: 8px 20px 1px 20px;
-    }      
-    
+    }
+
     .hole-bar ul li span {
       font-size:2.5em;
     }
-    
+
     .hole-bar ul li text {
       font-size:3.0em;
     }
     .vjs-playlist {
       left:0px ;
-      width:100%; 
+      width:100%;
       height: 60px;
       background-image:url(<%= image_url "hole-selector-background.png" %>);
-      background-size: 100% 100%; 
+      background-size: 100% 100%;
     }
     .lower-gradient {
       bottom: 60px;
@@ -1210,7 +1210,7 @@ div:focus {
     .playlist ul {
       line-height: 47px;
     }
-    
+
     .playlist ul li {
       font-size: 28px;
       line-height: 30px;
@@ -1294,12 +1294,12 @@ div:focus {
       font-size: 1.2em;
     }-*/
     .hole-info-div{
-      width:100vw; 
+      width:100vw;
       /*position: absolute;
       margin-top: 63vw;*/
     }
 
-    
+
 }
 
 @media only screen and (min-width: 480px) and (max-width: 599px) {
@@ -1331,13 +1331,13 @@ div:focus {
       position: absolute;
       left: 25px;
       top: 40%;
-      height: 25px; 
+      height: 25px;
      }
     .next{
       position: absolute;
       right: 25px;
       top: 40%;
-      height: 25px; 
+      height: 25px;
     }
 
     .hole-bar{
@@ -1357,21 +1357,21 @@ div:focus {
       text-align: center;
       border-right: 2.5px solid #696969;
       padding: 7px 20px 1px 20px;
-    }    
-    
+    }
+
     .hole-bar ul li span {
       font-size:2.5em;
     }
-    
+
     .hole-bar ul li text {
       font-size:3.0em;
     }
     .vjs-playlist {
       left:0px ;
-      width:100%; 
+      width:100%;
       height: 50px;
       background-image:url(<%= image_url "hole-selector-background.png" %>);
-      background-size: 100% 100%; 
+      background-size: 100% 100%;
     }
     .lower-gradient {
       bottom: 50px;
@@ -1379,7 +1379,7 @@ div:focus {
     .playlist ul {
       line-height: 47px;
     }
-    
+
     .playlist ul li {
       font-size: 28px;
       line-height: 30px;
@@ -1462,7 +1462,7 @@ div:focus {
       font-size: 1.2em;
     }*/
     .hole-info-div{
-      width:100vw; 
+      width:100vw;
       /*position: absolute;
       margin-top: 67vw;*/
 
@@ -1470,7 +1470,7 @@ div:focus {
     .hider {
       display:block; position: relative; height:10px; width:100%; background:white; z-index:7;
     }
-    
+
 }
 
 @media only screen and (max-width: 479px) {
@@ -1480,7 +1480,7 @@ div:focus {
     .main-container {width: 100vw;}
         /*.signature img {width: 90%;}*/
 
-    
+
     .video-js .vjs-big-play-button {
       /*margin-top: -15px;
       margin-left: -45px;
@@ -1491,7 +1491,7 @@ div:focus {
       width: 65px;
       margin-top: -6%;
       margin-left: -9%;
-      
+
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:40%;*/
@@ -1505,13 +1505,13 @@ div:focus {
       position: absolute;
       left: 25px;
       top: 40%;
-      height: 25px; 
+      height: 25px;
      }
     .next{
       position: absolute;
       right: 25px;
       top: 40%;
-      height: 25px; 
+      height: 25px;
     }
 
     .hole-bar{
@@ -1539,22 +1539,22 @@ div:focus {
       padding: 6px 3px 0px 3px;
       /*width: 20%;*/
       text-align: center;
-    }    
-    
+    }
+
     .hole-bar ul li span {
       font-size:2.5em;
     }
-    
+
     .hole-bar ul li text {
       font-size:3.0em;
     }
     .vjs-playlist {
       /*display: none;*/
       left:0px ;
-      width:100%; 
+      width:100%;
       height: 40px;
       background-image:url(<%= image_url "hole-selector-background.png" %>);
-      background-size: 100% 100%; 
+      background-size: 100% 100%;
     }
     .lower-gradient {
       bottom: 40px;
@@ -1562,7 +1562,7 @@ div:focus {
     .playlist ul {
       /*line-height: 47px;*/
     }
-    
+
     .playlist ul li {
       font-size: 22px;
       line-height: 30px;
@@ -1646,7 +1646,7 @@ div:focus {
       font-size: 1.2em;
     }*/
     .hole-info-div{
-      width:100vw; 
+      width:100vw;
       margin-top: 10px;
       /*position: absolute;
       margin-top: 70vw;*/
@@ -1654,12 +1654,12 @@ div:focus {
     .hider {
       display:block; position: relative; height:30px; width:100%; background:white; z-index:7;
     }
-    
+
 }
 
 
 
 
- 
+
 
 </style>
