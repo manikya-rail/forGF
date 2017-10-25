@@ -17,7 +17,7 @@ class Admin::CoursesController < ApplicationController
     gon.tags = []
     @course.holes.sort_by{ |m| m.hole_num }.each do |hole|
       gon.videos << hole.video if hole.video.present?
-      gon.videos_urls << hole.video.video if hole.video.present?
+      gon.videos_urls << hole.video.video.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if hole.video.present?
       gon.tags << hole.video.tags if hole.video.present?
     end
   end

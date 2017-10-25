@@ -18,26 +18,24 @@ class Embed::PagesController < ApplicationController
     gon.description = []
 
     @job = "547"
-    
+
     @course = Course.find(params[:id])
     @xh = @course.holes
-    
+
     @holes = @course.holes.sort_by{ |m| m.hole_num }
 
     @holes.each do |hole|
-        gon.hole_num << hole.hole_num if hole.video.present?
-        gon.videos << hole.video  if hole.video.present?
-        gon.videos_urls << hole.video.video  if hole.video.present?
-        gon.tags << hole.video.tags  if hole.video.present?
-        gon.par << hole.par if hole.video.present?
-        gon.yard << hole.yards if hole.video.present?
-        gon.mhcp << hole.mhcp if hole.video.present?
-        gon.image << hole.image_file_name if hole.video.present?
-        gon.image_urls << hole.image.url if hole.video.present?
-        gon.description << hole.description if hole.video.present?
-
+      gon.hole_num << hole.hole_num if hole.video.present?
+      gon.videos << hole.video  if hole.video.present?
+      gon.videos_urls << hole.video.video if hole.video.present?
+      gon.tags << hole.video.tags  if hole.video.present?
+      gon.par << hole.par if hole.video.present?
+      gon.yard << hole.yards if hole.video.present?
+      gon.mhcp << hole.mhcp if hole.video.present?
+      gon.image << hole.image_file_name if hole.video.present?
+      gon.image_urls << hole.image.url if hole.video.present?
+      gon.description << hole.description if hole.video.present?
     end
-
   end
 
   def display
@@ -51,25 +49,22 @@ class Embed::PagesController < ApplicationController
     gon.image = []
     gon.image_urls = []
     gon.description = []
-    
+
     @course = Course.find(params[:id])
-    
+
     @holes = @course.holes.sort_by{ |m| m.hole_num }
 
     @holes.each do |hole|
-        gon.hole_num << hole.hole_num if hole.video.present?
-        gon.videos << hole.video  if hole.video.present?
-        gon.videos_urls << hole.video.video.url if hole.video.present?
-        # hole.video.present? ? (gon.videos_urls << hole.video.video) : (gon.videos_urls << "http://s3-us-west-2.amazonaws.com/fore92/courses/videos/000/000/012/original/missing.mp4?1506746983")
-        gon.tags << hole.video.tags  if hole.video.present?
-        gon.par << hole.par if hole.video.present?
-        gon.yard << hole.yards if hole.video.present?
-        gon.mhcp << hole.mhcp if hole.video.present?
-        gon.image << hole.image_file_name if hole.video.present?
-        gon.image_urls << hole.image.url if hole.video.present?
-
+      gon.hole_num << hole.hole_num if hole.video.present?
+      gon.videos << hole.video  if hole.video.present?
+      gon.videos_urls << hole.video.video.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if hole.video.present?
+      gon.tags << hole.video.tags  if hole.video.present?
+      gon.par << hole.par if hole.video.present?
+      gon.yard << hole.yards if hole.video.present?
+      gon.mhcp << hole.mhcp if hole.video.present?
+      gon.image << hole.image_file_name if hole.video.present?
+      gon.image_urls << hole.image.url if hole.video.present?
     end
-
   end
 
   def hole_by_hole
@@ -82,8 +77,8 @@ class Embed::PagesController < ApplicationController
 
 
 
-    
-  def awesome_embed     
+
+  def awesome_embed
   end
 
   private
