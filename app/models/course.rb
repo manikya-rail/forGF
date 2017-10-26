@@ -51,11 +51,12 @@ class Course < ApplicationRecord
    # Validate the attached image is image/jpg, image/png, etc
    validates_attachment_content_type :score_card_image, :content_type => /\Aimage\/.*\Z/
 
-   has_attached_file :video, styles: {
+  has_attached_file :video, styles: {
     :medium => {
-      :geometry => "640x480",
+      :geometry => "1920x1080",
       :format => 'mp4'
-    }}, :processors => [:transcoder]
+    }
+  }, :processors => [:transcoder]
 
     validates_attachment_content_type :video, content_type: /\Avideo\/.*\Z/
 
