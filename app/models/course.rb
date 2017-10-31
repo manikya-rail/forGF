@@ -55,6 +55,10 @@ class Course < ApplicationRecord
     :medium => {
       :geometry => "1920x1080",
       :format => 'mp4'
+    },
+    :mobile => {
+      :geometry => "750x422>",
+      :format => 'mp4'
     }
   }, :processors => [:transcoder]
 
