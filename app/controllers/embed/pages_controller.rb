@@ -54,10 +54,11 @@ class Embed::PagesController < ApplicationController
 
     @holes = @course.holes.sort_by{ |m| m.hole_num }
 
+    resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
     @holes.each do |hole|
       gon.hole_num << hole.hole_num if hole.video.present?
       gon.videos << hole.video  if hole.video.present?
-      gon.videos_urls << hole.video.video.url(:medium).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if hole.video.present?
+      gon.videos_urls << hole.video.video.url(resolution).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if hole.video.present?
       gon.tags << hole.video.tags  if hole.video.present?
       gon.par << hole.par if hole.video.present?
       gon.yard << hole.yards if hole.video.present?

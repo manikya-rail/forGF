@@ -101,7 +101,7 @@ for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
     videoList.push({
       sources: [{
         src: gon.videos_urls[i],
-          type: 'video/mp4'
+        type: 'video/mp4'
       }]
     });
   }
@@ -111,7 +111,8 @@ for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
 var player = videojs('hole-vid', {
   preload: 'metadata', inactivityTimeout: 5000, controls: true, fluid:true,
   'playbackRates': [0.5, 1, 1.5, 2],
-   controlBar: {
+  abr: {enable: true},
+  controlBar: {
     children: {
       'playToggle':{},
       'progressControl':{},
@@ -124,7 +125,8 @@ var player = videojs('hole-vid', {
       //     ]
       //   },
       'fullscreenToggle':{}
-    } }
+    }
+  }
 });
 
 try {player.volume(1);} catch (e) {}
