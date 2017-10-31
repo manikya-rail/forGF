@@ -554,8 +554,13 @@ body{
   }
 
   .flag:before {
-    content: url(<%= image_url "flag.png" %>);
-    transform: scale(.8);
+    content: '';
+    background: url(<%= image_url "flag.png" %>) no-repeat;
+    width: 35px;
+    height: 40px;
+    display: inline-block;
+    background-size: 31px;
+    margin-left: -15px;
   }
 
   .eye {
@@ -982,9 +987,9 @@ div:focus {
     }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 22px;
-      margin-top: 7px;
-      width:30px;
-      height:30px;
+      margin-top: 14px;
+      width: 20px;
+      height: 20px;
     }
     .vjs-volume-bar.vjs-slider-horizontal {
       margin-top: 22.5%;
@@ -1120,9 +1125,9 @@ div:focus {
     }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 22px;
-      margin-top: 7px;
-      width:30px;
-      height:30px;
+      margin-top: 14px;
+      width: 20px;
+      height: 20px;
     }
     .vjs-volume-bar.vjs-slider-horizontal {
       margin-top: 22.5%;
@@ -1285,9 +1290,9 @@ div:focus {
     }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 22px;
-      margin-top: 7px;
-      width:30px;
-      height:30px;
+      margin-top: 14px;
+      width: 20px;
+      height: 20px;
     }
     .vjs-volume-bar.vjs-slider-horizontal {
       margin-top: 22.5%;
@@ -1453,9 +1458,9 @@ div:focus {
     }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 18px;
-      margin-top: 5px;
-      width:25px;
-      height:25px;
+      margin-top: 14px;
+      width: 20px;
+      height: 20px;
     }
     .vjs-volume-bar.vjs-slider-horizontal {
       margin-top: 22.5%;
@@ -1637,9 +1642,9 @@ div:focus {
     }
     .vjs-playback-rate .vjs-playback-rate-value {
       margin-left: 18px;
-      margin-top: 5px;
-      width:25px;
-      height:25px;
+      margin-top: 14px;
+      width: 20px;
+      height: 20px;
     }
     .vjs-volume-bar.vjs-slider-horizontal {
       margin-top: 22.5%;
