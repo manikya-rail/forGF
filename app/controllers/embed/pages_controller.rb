@@ -64,7 +64,7 @@ class Embed::PagesController < ApplicationController
       gon.yard << hole.yards if hole.video.present?
       gon.mhcp << hole.mhcp if hole.video.present?
       gon.image << hole.image_file_name if hole.video.present?
-      gon.image_urls << hole.image.url if hole.video.present?
+      gon.image_urls << hole.image.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if hole.video.present?
     end
   end
 

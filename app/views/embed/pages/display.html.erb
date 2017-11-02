@@ -88,23 +88,13 @@
 var videoList = []
 
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
-  if (i==0){ // setting poster for only first video
-    videoList.push({
+  videoList.push({
     sources: [{
       src: gon.videos_urls[i],
       type: 'video/mp4'
     }],
     poster: gon.image_urls[i]
   });
-
-  }else{ // Playlist videos
-    videoList.push({
-      sources: [{
-        src: gon.videos_urls[i],
-        type: 'video/mp4'
-      }]
-    });
-  }
 }
 
 // 320, 480, 760, 960, 1200 and 1600px.
