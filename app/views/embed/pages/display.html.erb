@@ -157,24 +157,15 @@ player.on("loadedmetadata",function () {
   barupdate();
   current_video();
 
-  barShow();
-
-
+  if (!player.paused()){
+    showBars();
+    // $(".hole-bar").animate({top: '1%'});
+    timer = setTimeout(function(){hideBars()}, 5000);
+  }
   // $('#video').trigger('mousemove');
   // player.trigger('useractive');
   // setTimeout(trg, 5000);
 });
-function barShow(){
-  if (!player.paused()){
-    showBars();
-    // $(".hole-bar").animate({top: '1%'});
-    timer = setTimeout(function(){barHide()}, 5000);
-  }
-}
-function barHide(){
-  hideBars();
-  // $(".hole-bar").animate({top: '-70px'});
-}
 
 player.on("userinactive",function () {
   if (!player.paused()){
@@ -183,7 +174,6 @@ player.on("userinactive",function () {
 });
 
 player.on("useractive",function () {
-
   // if (!player.paused()){
     showBars();
     clearTimeout(timer);
@@ -217,8 +207,17 @@ function showBars(){
     // // xx-=2;
     // $(".lower-gradient").show().animate({bottom: xx+'px'});
     $(".lower-gradient").slideDown(500);
-
 }
+
+$('.player-container').hover(
+  function(){
+    showBars();
+  }, function(){
+    if (!player.paused()){
+      hideBars();
+    }
+  }
+);
 
 /* ADD flag */
 var Button = videojs.getComponent('Button');
