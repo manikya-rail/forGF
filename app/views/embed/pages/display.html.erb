@@ -49,7 +49,7 @@
 
 
           <!-- <div class="upload on-video"><%= image_tag "upload.png" %></div> -->
-          <div class="logo on-video"><%= link_to image_tag("logo.png"), "http://foreflyovers.com", target: :_blank %> </div>
+          <div class="logo on-video"><%= link_to image_tag(logo_on_video(@course)), hyperlink_on_video(@course), target: :_blank %> </div>
           <div class = "lower-gradient"></div>
 
           <div class="vjs-playlist">
@@ -582,8 +582,8 @@ body{
     /*left: 1%;*/
     left: 25px;
     position: absolute;
-    width: 11%;
-    height: 6%;
+    max-width: 150px;
+    height: 70px;
 
   }
 

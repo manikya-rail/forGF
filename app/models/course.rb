@@ -33,6 +33,9 @@ class Course < ApplicationRecord
     # Validate the attached image is image/jpg, image/png, etc
     validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
 
+    has_attached_file :transparent_logo, styles: { medium: '150x150>' }
+    validates_attachment_content_type :transparent_logo, :content_type => /\Aimage\/.*\Z/
+
     has_attached_file :cover, styles: {
      thumb: '100x100>',
      square: '200x200#',

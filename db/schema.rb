@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830063128) do
+ActiveRecord::Schema.define(version: 20171103105601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,11 @@ ActiveRecord::Schema.define(version: 20170830063128) do
     t.string   "video_content_type"
     t.integer  "video_file_size"
     t.datetime "video_updated_at"
+    t.string   "transparent_logo_file_name"
+    t.string   "transparent_logo_content_type"
+    t.integer  "transparent_logo_file_size"
+    t.datetime "transparent_logo_updated_at"
+    t.string   "logo_hyperlink"
     t.index ["admin_id"], name: "index_courses_on_admin_id", using: :btree
     t.index ["list_id"], name: "index_courses_on_list_id", using: :btree
     t.index ["network_id"], name: "index_courses_on_network_id", using: :btree

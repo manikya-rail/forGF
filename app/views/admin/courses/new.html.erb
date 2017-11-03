@@ -89,7 +89,7 @@
 
         <div class="col-md-12 course-info-row">
             <div class="col-md-4">
-              <%= label_tag :logo ,'Logo',class:"col-md-12 zero-left-right-padd"%>
+              <%= label_tag :logo ,'Logo (Color)',class:"col-md-12 zero-left-right-padd"%>
               <div class="btn btn-success upload-btn">
                 <%= f.file_field :logo, class: 'check-field' %>
               </div>
@@ -103,9 +103,17 @@
             </div>
 
             <div class="col-md-4">
-              <%= label_tag :score_card_image ,'Score Card',class:"col-md-12 zero-left-right-padd "%>
+              <%= label_tag :score_card_image, 'Score Card', class: "col-md-12 zero-left-right-padd" %>
               <div class="btn btn-success upload-btn">
                 <%= f.file_field :score_card_image, class: 'check-field' %>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <%= label_tag :transparent_logo, 'Logo (Transparent Background)', class: "col-md-12 zero-left-right-padd" %>
+              <div class="btn btn-success upload-btn">
+                <%= f.file_field :transparent_logo, class: 'check-field' %>
+                <%= f.text_field :logo_hyperlink, class: "col-md-12 form-control contact-info check-field", placeholder: "Hyperlink" %>
               </div>
             </div>
 
@@ -124,7 +132,7 @@
             </div>
 
 
-              
+
         </div>
 
         <div class="col-md-12 course-info-row">
@@ -178,7 +186,7 @@
             </div>
 
         </div>
-      </div>  
+      </div>
         <div class="col-md-12 course-info-row course-holes-info" hidden>
           <%=render :partial => 'hole' , locals: {f: f } %>
         </div>
