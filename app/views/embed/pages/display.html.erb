@@ -198,7 +198,7 @@ function hideBars(){
 
 function showBars(){
     $(".hole-bar").animate({top: '1%'});
-    $(".logo").animate({top: '0'});
+    $(".logo").animate({top: '25px'});
     $(".previous").fadeIn();
     $(".next").fadeIn();
     $(".vjs-control-bar").animate({bottom: '1px'});
@@ -578,7 +578,7 @@ body{
 
   .logo {
     display:block;
-    top: 0;
+    top: 25px;
     /*left: 1%;*/
     left: 25px;
     position: absolute;
@@ -588,10 +588,11 @@ body{
   }
 
 .on-video img {
-    min-width: 20%;
-    min-height: 20%;
-    max-width: 100%;
-    max-height: 100%;
+  min-width: 20%;
+  min-height: 20%;
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: top;
 }
 
 .video-js .vjs-control-bar {
@@ -746,10 +747,10 @@ div:focus {
     .main-container {width: 1600px;}
     .video-js .vjs-big-play-button {
       /*line-height: 1.70;*/
-      height: 180px;
-      width: 180px;
-      margin-top: -5%;
-      margin-left: -8%;
+      height: 140px;
+      width: 140px;
+      margin-top: -70px;
+      margin-left: -70px;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:100%;*/
@@ -868,6 +869,9 @@ div:focus {
       font-family: Avenir;
       font-size: 18px;
     }
+    .previous{
+      margin-top: -20px;
+    }
 }
 
 
@@ -878,10 +882,10 @@ div:focus {
     /*.player-container {width: 100%;}*/
     .video-js .vjs-big-play-button {
       /*line-height: 1.70;*/
-      height: 140px;
-      width: 140px;
-      margin-top: -5%;
-      margin-left: -8%;
+      height: 100px;
+      width: 100px;
+      margin-top: -50px;
+      margin-left: -50px;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:80%;*/
@@ -1023,6 +1027,9 @@ div:focus {
       font-family: Avenir;
       font-size: 18px;
     }
+    .previous{
+      margin-top: -10px;
+    }
 }
 
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
@@ -1033,10 +1040,10 @@ div:focus {
 
     .video-js .vjs-big-play-button {
       /*line-height: 1.35;*/
-      height: 120px;
-      width: 120px;
-      margin-top: -5%;
-      margin-left: -6%;
+      height: 80px;
+      width: 80px;
+      margin-top: -40px;
+      margin-left: -40px;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:65%;*/
@@ -1175,22 +1182,9 @@ div:focus {
       font-family: Avenir;
       font-size: 18px;
     }
-}
-@media only screen and (min-width: 600px) and (max-width: 760px) {
-  .description {
-    margin-top: 50px;
-  }
-  .hole-bar{
-    left: 10% !important;
-    right: 10% !important;
-  }
-  .hole-bar ul li {
-    padding: 9px 15px 1px 15px !important;
-  }
-  .hole-bar ul {
-    font-size: 9px !important;
-  }
-
+    .previous, .next{
+      margin-top: -16px;
+     }
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
     body {font-size: 30px;}
@@ -1200,10 +1194,10 @@ div:focus {
 
     .video-js .vjs-big-play-button {
       /*line-height: 1.06;*/
-      height: 100px;
-      width: 100px;
-      margin-top: -4%;
-      margin-left: -8%;
+      height: 60px;
+      width: 60px;
+      margin-top: -30px;
+      margin-left: -30px;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:60%;*/
@@ -1347,9 +1341,36 @@ div:focus {
       /*position: absolute;
       margin-top: 63vw;*/
     }
-
-
 }
+@media only screen and (min-width: 760px) and (max-width: 959px) {
+  .previous, .next{
+    width: 15px;
+    height: 28px;
+    margin-top: -17px;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 760px) {
+  .description {
+    margin-top: 50px;
+  }
+  .hole-bar{
+    left: 10% !important;
+    right: 10% !important;
+  }
+  .hole-bar ul li {
+    padding: 9px 15px 1px 15px !important;
+  }
+  .hole-bar ul {
+    font-size: 9px !important;
+  }
+  .previous, .next{
+    width: 13px;
+    height: 24px;
+    margin-top: -22px;
+  }
+}
+
 
 @media only screen and (min-width: 480px) and (max-width: 599px) {
     body {font-size: 25px;}
@@ -1363,10 +1384,10 @@ div:focus {
       width: 15%;
       line-height: 1.35;
       font-size: 3.5em;*/
-      height: 85px;
-      width: 85px;
-      margin-top: -7%;
-      margin-left: -9%;
+      height: 40px;
+      width: 40px;
+      margin-top: -20px;
+      margin-left: -20px;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:55%;*/
@@ -1375,18 +1396,10 @@ div:focus {
       display: none;
     }
 
-    .previous{
-      /*margin:top right down left;*/
-      position: absolute;
-      left: 25px;
-      top: 40%;
-      height: 25px;
-     }
-    .next{
-      position: absolute;
-      right: 25px;
-      top: 40%;
-      height: 25px;
+    .previous, .next{
+      height: 18px;
+      width: 10px;
+      margin-top: -18px;
     }
 
     .hole-bar{
@@ -1545,10 +1558,10 @@ div:focus {
       line-height: 1.3;
       font-size: 3.5em;
 */
-      height: 65px;
-      width: 65px;
-      margin-top: -6%;
-      margin-left: -9%;
+      height: 25px;
+      width: 25px;
+      margin-top: -12.5px;
+      margin-left: -12.5px;
 
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
@@ -1556,20 +1569,6 @@ div:focus {
     }
     .logo {
       display: none;
-    }
-
-    .previous{
-      /*margin:top right down left;*/
-      position: absolute;
-      left: 25px;
-      top: 40%;
-      height: 25px;
-     }
-    .next{
-      position: absolute;
-      right: 25px;
-      top: 40%;
-      height: 25px;
     }
 
     .hole-bar{
@@ -1718,10 +1717,29 @@ div:focus {
     }
 
 }
+@media only screen and (min-width: 350px) and (max-width: 479px) {
+  .previous, .next{
+    height: 15px;
+    width: 8px;
+    margin-top: -14px;
+  }
+}
 
+@media only screen and (min-width: 250px) and (max-width: 349px) {
+  .previous, .next{
+    height: 11px;
+    width: 6px;
+    margin-top: -15px;
+  }
+}
 
-
-
+@media only screen and (max-width: 249px) {
+  .previous, .next{
+    height: 11px;
+    width: 6px;
+    margin-top: -17px;
+  }
+}
 
 
 </style>
