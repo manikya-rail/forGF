@@ -192,8 +192,8 @@ function hideBars(){
     $(".next").fadeOut();
     $(".vjs-control-bar").animate({bottom: '-70px'});
     $(".upper-gradient").animate({top: '-70px'});
-    // $(".lower-gradient").animate({bottom: '0px'});
-    $(".lower-gradient").slideUp(300);
+    $(".lower-gradient").animate({bottom: '0px'});
+    // $(".lower-gradient").slideUp(300);
 }
 
 function showBars(){
@@ -203,10 +203,10 @@ function showBars(){
     $(".next").fadeIn();
     $(".vjs-control-bar").animate({bottom: '1px'});
     $(".upper-gradient").animate({top: '0px'});
-    // xx = $(".vjs-playlist").outerHeight();
-    // // xx-=2;
-    // $(".lower-gradient").show().animate({bottom: xx+'px'});
-    $(".lower-gradient").slideDown(500);
+    xx = $(".vjs-playlist").outerHeight();
+    xx-=2;
+    $(".lower-gradient").animate({bottom: xx+'px'});
+    // $(".lower-gradient").slideDown(500);
 }
 
 $('.player-container').hover(
@@ -887,7 +887,7 @@ div:focus {
       height: 100px;
       width: 100px;
       margin-top: -50px;
-      margin-left: -50px;
+      margin-left: -55px;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:80%;*/
@@ -1235,9 +1235,6 @@ div:focus {
       background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%;
     }
-    .lower-gradient {
-      bottom: 60px;
-    }
     .playlist ul {
       line-height: 47px;
     }
@@ -1344,6 +1341,15 @@ div:focus {
     height: 28px;
     margin-top: -17px;
   }
+  .lower-gradient {
+    bottom: 60px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .upper-gradient, .lower-gradient{
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 760px) {
@@ -1380,10 +1386,10 @@ div:focus {
       width: 15%;
       line-height: 1.35;
       font-size: 3.5em;*/
-      height: 40px;
-      width: 40px;
-      margin-top: -20px;
-      margin-left: -20px;
+      height: 50px;
+      width: 50px;
+      margin-top: -25px;
+      margin-left: -25px;
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:55%;*/
@@ -1430,9 +1436,6 @@ div:focus {
       height: 50px;
       background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%;
-    }
-    .lower-gradient {
-      bottom: 50px;
     }
     .playlist ul {
       line-height: 47px;
@@ -1553,10 +1556,10 @@ div:focus {
       line-height: 1.3;
       font-size: 3.5em;
 */
-      height: 36px;
-      width: 36px;
-      margin-top: -18px;
-      margin-left: -18px;
+      height: 55px;
+      width: 55px;
+      margin-top: -27.5px;
+      margin-left: -27.5px;
 
     }
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
@@ -1607,9 +1610,6 @@ div:focus {
       height: 40px;
       background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%;
-    }
-    .lower-gradient {
-      bottom: 40px;
     }
     .playlist ul {
       /*line-height: 47px;*/
@@ -1710,16 +1710,12 @@ div:focus {
     .hider {
       display:block; position: relative; height:30px; width:100%; background:white; z-index:7;
     }
-
 }
 @media only screen and (min-width: 350px) and (max-width: 479px) {
   .previous, .next{
     height: 18px;
     width: 10px;
     margin-top: -15px;
-  }
-  .upper-gradient, .lower-gradient{
-    height: 60px;
   }
 }
 
@@ -1729,9 +1725,6 @@ div:focus {
     width: 8px;
     margin-top: -17px;
   }
-  .upper-gradient, .lower-gradient{
-    height: 50px;
-  }
 }
 
 @media only screen and (max-width: 249px) {
@@ -1739,9 +1732,6 @@ div:focus {
     height: 11px;
     width: 6px;
     margin-top: -17px;
-  }
-  .upper-gradient, .lower-gradient{
-    height: 30px;
   }
 }
 
