@@ -308,12 +308,14 @@ $(document).ready(function(){
 function scrollTo(a){
   // currPos = $(".playlist").scrollLeft();
   liWidth = $(".playlist ul li").outerWidth(true);
+  // liWidth = 100;
   scrollValue = a*liWidth;
   $('.playlist').animate( { scrollLeft: scrollValue }, 500);
 
 }
 
 function current_video(){
+  $firstElement = 0;
   $('#0').removeClass("active");
   id = player.playlist.currentItem();
   for (i=0;i<18;i++){
@@ -322,7 +324,6 @@ function current_video(){
       j=i+1;
       $('#'+j+' a').trigger('click');
       scrollTo(i);
-      $firstElement = i+1
     }
     else{
       document.getElementById(i+1).removeAttribute("class");
@@ -331,69 +332,63 @@ function current_video(){
 }
 
 document.querySelector('.right-green').addEventListener('click', function() {
-
-  // $( "div.playlist" ).scrollLeft( zx );
-  // console.log ($( ".playlist ul" ).width());
-
-  if(screen.width <= 480){
+  var nextActiveId;
+  if($(window).width() < 350){
+    nextActiveId = $firstElement + 1;
+  }
+  else if($(window).width() >= 350 && $(window).width() < 480){
+    nextActiveId = $firstElement + 2;
+  }
+  else if($(window).width() >= 480 && $(window).width() < 600){
     nextActiveId = $firstElement + 3;
-    if($("#playlist").find("#"+nextActiveId).size() != 0){
-      scrollTo(nextActiveId);
-      $firstElement = nextActiveId
-    }
   }
-  else if(screen.width > 480 && screen.width < 960){
+  else if($(window).width() >= 600 && $(window).width() < 760){
+    nextActiveId = $firstElement + 5;
+  }
+  else if($(window).width() >= 760 && $(window).width() < 960){
     nextActiveId = $firstElement + 6;
-    if($("#playlist").find("#"+nextActiveId).size() != 0){
-      scrollTo(nextActiveId);
-      $firstElement = nextActiveId
-    }
   }
-  else if(screen.width >= 960){
+  else if($(window).width() >= 960 && $(window).width() < 1200){
     nextActiveId = $firstElement + 9;
-    if($("#playlist").find("#"+nextActiveId).size() != 0){
-      scrollTo(nextActiveId);
-      $firstElement = nextActiveId
-    }
+  }
+  else if($(window).width() >= 1200){
+    nextActiveId = $firstElement + 10;
+  }
+  if(nextActiveId == 0 || $("#playlist").find("#"+nextActiveId).size() != 0){
+    scrollTo(nextActiveId);
+    $firstElement = nextActiveId
   }
 });
 document.querySelector('.left-green').addEventListener('click', function() {
-  // $( "div.playlist" ).scrollLeft( zx );
-  // console.log ($( ".playlist ul" ).width());
-  if(screen.width <= 480){
+  var nextActiveId;
+  if($(window).width() < 350){
+    nextActiveId = $firstElement - 1;
+  }
+  else if($(window).width() >= 350 && $(window).width() < 480){
+    nextActiveId = $firstElement - 2;
+  }
+  else if($(window).width() >= 480 && $(window).width() < 600){
     nextActiveId = $firstElement - 3;
-    if($("#playlist").find("#"+nextActiveId).size() != 0){
-      if(nextActiveId == 1){
-        scrollTo(nextActiveId-1);
-      }else{
-        scrollTo(nextActiveId);
-      }
-      $firstElement = nextActiveId
-    }
   }
-  else if(screen.width > 480 && screen.width < 960){
+  else if($(window).width() >= 600 && $(window).width() < 760){
+    nextActiveId = $firstElement - 5;
+  }
+  else if($(window).width() >= 760 && $(window).width() < 960){
     nextActiveId = $firstElement - 6;
-    if($("#playlist").find("#"+nextActiveId).size() != 0){
-      if(nextActiveId == 1){
-        scrollTo(nextActiveId-1);
-      }else{
-        scrollTo(nextActiveId);
-      }
-      $firstElement = nextActiveId
-    }
   }
-  else if(screen.width >= 960){
+  else if($(window).width() >= 960 && $(window).width() < 1200){
     nextActiveId = $firstElement - 9;
-    if($("#playlist").find("#"+nextActiveId).size() != 0){
-      if(nextActiveId == 1){
-        scrollTo(nextActiveId-1);
-      }else{
-        scrollTo(nextActiveId);
-      }
-      $firstElement = nextActiveId
-    }
   }
-  // $('div.playlist').animate( { scrollLeft: '-=100' }, 500);
+  else if($(window).width() >= 1200){
+    nextActiveId = $firstElement - 10;
+  }
+  if (nextActiveId < 0){
+    nextActiveId = 0
+  }
+  if(nextActiveId == 0 || $("#playlist").find("#"+nextActiveId).size() != 0){
+    scrollTo(nextActiveId);
+    $firstElement = nextActiveId
+  }
 });
 
 
