@@ -10,6 +10,8 @@
 
 <script src="//vjs.zencdn.net/6.2.8/video.min.js"></script>
 <script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
+
+
 <!-- <script src="https://cdn.rawgit.com/samsol6/Triphitrip-WEBAPP/modeling-user/lib/vjs/videojs-settings-menu.min.js"></script> -->
 
 <!-- Fonts -->
@@ -62,7 +64,6 @@
                     <%=link_to hole.hole_num, embed_hole_info_path(hole.id), remote: true %>
                   </li>
                 <% end %>
-
               </ul>
             </div>
             <div class="right-green"><%= image_tag "right-green.png" %></div>
@@ -297,6 +298,7 @@ function select_video(id){
 }
 
 $(document).ready(function(){
+
     $(".right-green").click(function(){
         // alert($(".playlist").scrollLeft() + " px");
         // alert($(".playlist ul li").outerWidth(true) + " px");
@@ -307,7 +309,6 @@ function scrollTo(a){
   // currPos = $(".playlist").scrollLeft();
   liWidth = $(".playlist ul li").outerWidth(true);
   scrollValue = a*liWidth;
-  // $('.playlist').animate( { scrollLeft: '0' }, 0);
   $('.playlist').animate( { scrollLeft: scrollValue }, 500);
 
 }
@@ -321,6 +322,7 @@ function current_video(){
       j=i+1;
       $('#'+j+' a').trigger('click');
       scrollTo(i);
+      $firstElement = i+1
     }
     else{
       document.getElementById(i+1).removeAttribute("class");
@@ -329,14 +331,69 @@ function current_video(){
 }
 
 document.querySelector('.right-green').addEventListener('click', function() {
+
   // $( "div.playlist" ).scrollLeft( zx );
   // console.log ($( ".playlist ul" ).width());
-  $('div.playlist').animate( { scrollLeft: '+=100' }, 500);
+
+  if(screen.width <= 480){
+    nextActiveId = $firstElement + 3;
+    if($("#playlist").find("#"+nextActiveId).size() != 0){
+      scrollTo(nextActiveId);
+      $firstElement = nextActiveId
+    }
+  }
+  else if(screen.width > 480 && screen.width < 960){
+    nextActiveId = $firstElement + 6;
+    if($("#playlist").find("#"+nextActiveId).size() != 0){
+      scrollTo(nextActiveId);
+      $firstElement = nextActiveId
+    }
+  }
+  else if(screen.width >= 960){
+    nextActiveId = $firstElement + 9;
+    if($("#playlist").find("#"+nextActiveId).size() != 0){
+      scrollTo(nextActiveId);
+      $firstElement = nextActiveId
+    }
+  }
 });
 document.querySelector('.left-green').addEventListener('click', function() {
   // $( "div.playlist" ).scrollLeft( zx );
   // console.log ($( ".playlist ul" ).width());
-  $('div.playlist').animate( { scrollLeft: '-=100' }, 500);
+  if(screen.width <= 480){
+    nextActiveId = $firstElement - 3;
+    if($("#playlist").find("#"+nextActiveId).size() != 0){
+      if(nextActiveId == 1){
+        scrollTo(nextActiveId-1);
+      }else{
+        scrollTo(nextActiveId);
+      }
+      $firstElement = nextActiveId
+    }
+  }
+  else if(screen.width > 480 && screen.width < 960){
+    nextActiveId = $firstElement - 6;
+    if($("#playlist").find("#"+nextActiveId).size() != 0){
+      if(nextActiveId == 1){
+        scrollTo(nextActiveId-1);
+      }else{
+        scrollTo(nextActiveId);
+      }
+      $firstElement = nextActiveId
+    }
+  }
+  else if(screen.width >= 960){
+    nextActiveId = $firstElement - 9;
+    if($("#playlist").find("#"+nextActiveId).size() != 0){
+      if(nextActiveId == 1){
+        scrollTo(nextActiveId-1);
+      }else{
+        scrollTo(nextActiveId);
+      }
+      $firstElement = nextActiveId
+    }
+  }
+  // $('div.playlist').animate( { scrollLeft: '-=100' }, 500);
 });
 
 
@@ -379,6 +436,7 @@ html,body
 }*/
 .signature {
   width: 100%;
+  background: transparent !important;
 }
 .signature img {
   width: 70px;
@@ -780,10 +838,11 @@ div:focus {
       /*padding: 2% 4% 0.6% 4%;*/
     }
     .hole-bar ul li span {
-      font-size:2.5em;
+      font-size:2.2em;
+      font-family: 'Avenir-Heavy';
     }
     .hole-bar ul li text {
-      font-size:3.0em;
+      font-size:2.8em;
     }
     .vjs-playlist{
       height: 80px;
@@ -882,7 +941,6 @@ div:focus {
     }
 }
 
-
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
     body {font-size: 30px;}
     .player-container {width: 100vw;}
@@ -914,11 +972,12 @@ div:focus {
     }
 
     .hole-bar ul li span {
-      font-size:2.5em;
+      font-size:2.2em;
+      font-family: 'Avenir-Heavy';
     }
 
     .hole-bar ul li text {
-      font-size:3.0em;
+      font-size:2.8em;
     }
     .vjs-playlist {
       left:0px ;
@@ -1073,11 +1132,12 @@ div:focus {
     }
 
     .hole-bar ul li span {
-      font-size:2.5em;
+      font-size:2.2em;
+      font-family: 'Avenir-Heavy';
     }
 
     .hole-bar ul li text {
-      font-size:3.0em;
+      font-size:2.8em;
     }
     .vjs-playlist {
       left:0px ;
@@ -1240,11 +1300,12 @@ div:focus {
     }
 
     .hole-bar ul li span {
-      font-size:2.5em;
+      font-size:2.2em;
+      font-family: 'Avenir-Heavy';
     }
 
     .hole-bar ul li text {
-      font-size:3.0em;
+      font-size:2.8em;
     }
     .vjs-playlist {
       left:0px ;
@@ -1367,6 +1428,23 @@ div:focus {
   }
   .next{
     right: 33px;
+  }
+  .hole-bar{
+    left: 41%;
+    right: 3%;
+  }
+  .logo{
+    top: 25px;
+    display: block;
+    max-width: 123px;
+  }
+  .hole-bar ul li span {
+    font-size:2.2em;
+    font-family: 'Avenir-Heavy';
+  }
+
+  .hole-bar ul li text {
+    font-size:2.8em;
   }
 }
 

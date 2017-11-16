@@ -6,12 +6,12 @@
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-6">
-          <h3><b><%= @hole.hole_num %><%= @hole.hole_num==1 ? 'st' : @hole.hole_num==2 ? 'nd' : @hole.hole_num==3 ? 'rd' : 'th' %> Hole, Par <%= @hole.par%></b></h3>
+          <h3><b class="hole_title"><%= @hole.hole_num %><%= @hole.hole_num==1 ? 'st' : @hole.hole_num==2 ? 'nd' : @hole.hole_num==3 ? 'rd' : 'th' %> Hole, Par <%= @hole.par%></b></h3>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <h4><%= @hole.description %></h4>
+          <h4 class="hole_description"><%= @hole.description %></h4>
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@
         <span class="points">
           <!-- <h3><b><%#= @hole.hole_num %> Hole</b></h3> -->
           <% yard = @hole.yardages.find_by(score_card_id: tee.id)%>
-          <h3><%= image_tag "tees/#{tee.color}.png" %><b> <%= yard.present? ? yard.yards : 'N/A' %> YDS</b></h3>
+          <h3><%= image_tag "tees/#{tee.color}.png" %><b class="yard_title"> <%= yard.present? ? yard.yards : 'N/A' %> YDS</b></h3>
         </span>
       <%end%>
     </div>
@@ -280,6 +280,18 @@ h3 {
           height: 35px;
           padding-right: 20px;
         }
+        .hole_title {
+          font-size: 18px;
+          font-family: Avenir Heavy;
+        }
+        .hole_description{
+          font-size: 16px;
+          font-family: Avenir Book;
+        }
+        .yard_title{
+          font-size: 16px;
+          font-family: Raker Bold;
+        }
       }
 
       @media only screen and (max-width: 1599px) and (min-width: 1200px) {
@@ -307,8 +319,20 @@ h3 {
           font-size: 17px;
         }
         .points h3 img{
-          height: 30px;
+          height: 25px;
           padding-right: 10px;
+        }
+        .hole_title {
+          font-size: 18px;
+          font-family: Avenir Heavy;
+        }
+        .hole_description{
+          font-size: 16px;
+          font-family: Avenir Book;
+        }
+        .yard_title{
+          font-size: 16px;
+          font-family: Raker Bold;
         }
       }
 
@@ -338,8 +362,20 @@ h3 {
           font-size: 17px;
         }
         .points h3 img{
-          height: 30px;
+          height: 25px;
           padding-right: 10px;
+        }
+        .hole_title {
+          font-size: 18px;
+          font-family: Avenir Heavy;
+        }
+        .hole_description{
+          font-size: 16px;
+          font-family: Avenir Book;
+        }
+        .yard_title{
+          font-size: 16px;
+          font-family: Raker Bold;
         }
       }
 
@@ -371,13 +407,22 @@ h3 {
           font-size: 18px;
         }
         .points h3 img{
-          height: 30px;
+          height: 25px;
           padding-right: 10px;
           margin-top: -3px;
         }
-
-
-
+        .hole_title {
+          font-size: 18px;
+          font-family: Avenir Heavy;
+        }
+        .hole_description{
+          font-size: 16px;
+          font-family: Avenir Book;
+        }
+        .yard_title{
+          font-size: 16px;
+          font-family: Raker Bold;
+        }
       }
 
       @media only screen and (max-width: 759px) and (min-width: 480px) {
