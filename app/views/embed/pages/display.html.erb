@@ -430,6 +430,17 @@ html,body
   overflow: auto;
   max-width: 100vw;
 }*/
+@font-face {
+  font-family: 'Raker-Bold';
+  src: url(<%= asset_url 'Raker-Bold.eot' %>);
+  src: url(<%= asset_url 'Raker-Bold.eot?#iefix' %>) format('embedded-opentype'),
+      url(<%= asset_url 'Raker-Bold.woff2' %>) format('woff2'),
+      url(<%= asset_url 'Raker-Bold.woff' %>) format('woff'),
+      url(<%= asset_url 'Raker-Bold.ttf' %>) format('truetype'),
+      url(<%= asset_url 'Raker-Bold.svg#Raker-Bold' %>) format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
 .signature {
   width: 100%;
   background: transparent !important;
@@ -570,7 +581,7 @@ body{
 }
 .hole-bar ul li span {
   font-size:1.2em;
-  font-family: 'RakerDisHvy',sans-serif;
+  font-family: 'Avenir-Heavy',sans-serif;
   font-weight: 400;
 }
 .hole-bar ul li text {
@@ -835,7 +846,6 @@ div:focus {
     }
     .hole-bar ul li span {
       font-size:2.2em;
-      font-family: 'Avenir-Heavy';
     }
     .hole-bar ul li text {
       font-size:2.8em;
@@ -969,7 +979,6 @@ div:focus {
 
     .hole-bar ul li span {
       font-size:2.2em;
-      font-family: 'Avenir-Heavy';
     }
 
     .hole-bar ul li text {
@@ -1129,7 +1138,6 @@ div:focus {
 
     .hole-bar ul li span {
       font-size:2.2em;
-      font-family: 'Avenir-Heavy';
     }
 
     .hole-bar ul li text {
@@ -1297,7 +1305,6 @@ div:focus {
 
     .hole-bar ul li span {
       font-size:2.2em;
-      font-family: 'Avenir-Heavy';
     }
 
     .hole-bar ul li text {
@@ -1444,7 +1451,7 @@ div:focus {
 
 @media only screen and (min-width: 600px) and (max-width: 760px) {
   .description {
-    margin-top: 50px;
+    padding-top: 50px;
   }
   .hole-bar{
     left: 10% !important;
@@ -1527,7 +1534,6 @@ div:focus {
 
     .hole-bar ul li span {
       font-size:2.5em;
-      font-family: 'Avenir-Heavy';
     }
 
     .hole-bar ul li text {
@@ -1701,7 +1707,6 @@ div:focus {
 
     .hole-bar ul li span {
       font-size:2.5em;
-      font-family: 'Avenir-Heavy';
     }
 
     .hole-bar ul li text {
