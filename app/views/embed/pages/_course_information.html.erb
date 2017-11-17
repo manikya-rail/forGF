@@ -6,7 +6,7 @@
     <div class="col-md-12 about">
       <div class="row">
         <div class="col-md-6">
-          <h3><b class="hole_title">About the Course</b></h3>
+          <h3><b class="home_title">About the Course</b></h3>
         </div>
       </div>
       <div class="row">
@@ -19,7 +19,7 @@
     <div class="col-md-12 specs">
       <div class="row">
         <div class="col-md-6">
-          <h3><b class="hole_title">Course Specs</b></h3>
+          <h3><b class="home_title">Course Specs</b></h3>
         </div>
       </div>
       <div class="row">
@@ -50,65 +50,46 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row description2">
-    <div class="col-md-12">
-      <div class="row">
-          <div class="col-md-12">
-            <h3><b class="hole_title">Amenities</b></h3>
-          </div>
-        </div>
-        <div class="row amenity-wrap">
-          <div class="col-md-12">
-            <div class="row">
-              <% @course.amenities.each do |amenity| %>
-
-                <% if amenity.restaurants %>
-                  <span class="amenity">
-                  <h4 class="hole_description"><%= image_tag "amenities/restaurant.png", class: 'restaurant' %>Restaurant</h4></span>
-                <% end %>
-
-                <% if amenity.caddies %>
-                  <span class="amenity">
-                  <h4 class="hole_description"><%= image_tag "amenities/caddies.png", class: 'caddies' %>Caddies</h4></span>
-                <% end %>
-
-                <% if amenity.carts %>
-                  <span class="amenity">
-                  <h4 class="hole_description"><%= image_tag "amenities/carts.png", class: 'carts' %>Carts</h4></span>
-                <% end %>
-
-                <% if amenity.golf_boards %>
-                  <span class="amenity">
-                  <h4 class="hole_description"><%= image_tag "amenities/golfboard.png", class: 'golfboard' %>Golfboards</h4></span>
-                <% end %>
-
-                <% if amenity.practice_range %>
-                  <span class="amenity pp ">
-                  <h4 class="hole_description"><%= image_tag "amenities/practice-range.png", class: 'practice-range' %>Practice Range</h4></span>
-                <% end %>
-
-              <% end%>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-    <!-- <div class="col-md-5">
+    <div class="col-md-12 description2">
       <div class="row">
         <div class="col-md-12">
-          <h3><b>Architect</b></h3>
+          <h3><b class="home_title">Amenities</b></h3>
         </div>
+      </div>
+      <div class="row amenity-wrap">
+        <div class="col-md-12">
+          <div class="row">
+            <% @course.amenities.each do |amenity| %>
+              <% if amenity.restaurants %>
+                <span class="amenity">
+                <h4 class="hole_description"><%= image_tag "amenities/restaurant.png", class: 'restaurant' %>Restaurant</h4></span>
+              <% end %>
 
-        <div class="row">
-          <div class="col-md-12 architect">
-           <h4><%= @course.architect %></h4>
+              <% if amenity.caddies %>
+                <span class="amenity">
+                <h4 class="hole_description"><%= image_tag "amenities/caddies.png", class: 'caddies' %>Caddies</h4></span>
+              <% end %>
+
+              <% if amenity.carts %>
+                <span class="amenity">
+                <h4 class="hole_description"><%= image_tag "amenities/carts.png", class: 'carts' %>Carts</h4></span>
+              <% end %>
+
+              <% if amenity.golf_boards %>
+                <span class="amenity">
+                <h4 class="hole_description"><%= image_tag "amenities/golfboard.png", class: 'golfboard' %>Golfboards</h4></span>
+              <% end %>
+
+              <% if amenity.practice_range %>
+                <span class="amenity pp ">
+                <h4 class="hole_description"><%= image_tag "amenities/practice-range.png", class: 'practice-range' %>Practice Range</h4></span>
+              <% end %>
+            <% end%>
           </div>
         </div>
       </div>
-    </div> -->
- </div>
+    </div>
+  </div>
 
 
   <div class="row slider">
@@ -129,7 +110,7 @@
     <div class="col-md-12 st2">
       <div class="row">
         <div class="col-md-12">
-          <div class="divider">Map</div>
+          <div class="divider">Scorecard</div>
           <%=image_tag @course.score_card_image.url %>
         </div>
       </div>
@@ -324,9 +305,6 @@ h4 img {
 }
 .description2 {
   width: 100%;
-  padding-left: 60px;
-  margin-top: 50px;
-  margin-bottom: 50px;
   font-family: 'Avenir', serif;
 }
 .specs{
@@ -488,8 +466,6 @@ h4 img {
           padding-bottom: 20px;
           margin-bottom: 20px;
           border-bottom: 2px solid lightgrey;
-
-
         }
         .description {
           text-align: center;
@@ -512,9 +488,9 @@ h4 img {
           table-layout: fixed;
           padding-right: 0;
           padding-left: 0;
-          padding-bottom: 30px;
+          padding-bottom: 20px;
           border-bottom: 2px solid lightgrey;
-          margin-bottom: -30px;
+          margin-bottom: 20px;
         }
         .amenity-wrap {
          padding-bottom: 30px;
@@ -537,14 +513,25 @@ h4 img {
           left:37%;
           top:50px;
         }
-
-
-
+        .about h3, .specs h3, .description2 h3{
+          min-height: 25px;
+        }
+        .home_title {
+          left: 50%;
+          position: absolute;
+        }
+        .about .home_title {
+          margin-left: -75px;
+        }
+        .specs .home_title {
+          margin-left: -56px;
+        }
+        .description2 .home_title {
+          margin-left: -42px;
+        }
       }
 
       @media only screen and (max-width: 759px) and (min-width: 480px) {
-
-
         .st2 {
           display: block;
           padding: 0;
@@ -581,7 +568,7 @@ h4 img {
           padding-right: 50px;
           text-align: center;
         }
-        .about{
+        .about, .specs{
           padding-bottom: 20px;
           margin-bottom: 20px;
           border-bottom: 1px solid lightgrey;
@@ -590,19 +577,12 @@ h4 img {
           padding-left: 0px;
           padding-right: 0px;
         }
-
         .description2 {
           margin-top: 30px;
           padding-left: 50px;
           padding-right: 50px;
           text-align: center;
         }
-        .specs {
-          padding-bottom: 30px;
-          border-bottom: 1px solid lightgrey;
-          margin-bottom: -20px;
-        }
-
         .amenity {
           width:32%;
         }
@@ -633,7 +613,6 @@ h4 img {
           padding-right: 0;
           padding-left: 0;
         }
-
         .points{
           display: table-cell;
         }
@@ -651,8 +630,22 @@ h4 img {
         .description h4 {
           font-size: 14px;
         }
-
-
+        .about h3, .specs h3, .description2 h3{
+          min-height: 25px;
+        }
+        .home_title {
+          left: 50%;
+          position: absolute;
+        }
+        .about .home_title {
+          margin-left: -75px;
+        }
+        .specs .home_title {
+          margin-left: -56px;
+        }
+        .description2 .home_title {
+          margin-left: -42px;
+        }
       }
 
       @media only screen and (max-width: 479px) {
@@ -777,16 +770,30 @@ h4 img {
         .description h4 {
           font-size: 13px;
         }
-        .hole_title {
+        .home_title {
           font-family: Avenir-Heavy;
+          left: 50%;
+          position: absolute;
+        }
+        .about .home_title {
+          margin-left: -62.5px;
+        }
+        .specs .home_title {
+          margin-left: -47px;
+        }
+        .description2 .home_title {
+          margin-left: -35px;
         }
         .hole_description{
           font-family: Avenir-Book;
         }
+        .about h3, .specs h3, .description2 h3{
+          min-height: 25px;
+        }
       }
 
       @media only screen and (min-width: 480px) {
-        .hole_title {
+        .home_title {
           font-size: 18px;
           font-family: Avenir-Heavy;
         }
