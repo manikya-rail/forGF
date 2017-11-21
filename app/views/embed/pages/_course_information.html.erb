@@ -1,7 +1,6 @@
 
   <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
-
   <div class="row description">
     <div class="col-md-12 about">
       <div class="row">
@@ -53,13 +52,13 @@
         <div class="col-md-12">
           <% @course.amenities.each do |amenity| %>
             <% if amenity.restaurants %>
-              <span class="amenity">
-              <h4 class="hole_description"><%= image_tag "amenities/restaurant.png", class: 'restaurant' %>Restaurant</h4></span>
+                <span class="amenity">
+                <h4 class="hole_description"><%= image_tag "amenities/restaurant.png", class: 'restaurant' %>Restaurant</h4></span>
             <% end %>
 
             <% if amenity.caddies %>
-              <span class="amenity">
-              <h4 class="hole_description"><%= image_tag "amenities/caddies.png", class: 'caddies' %>Caddies</h4></span>
+                <span class="amenity">
+                <h4 class="hole_description"><%= image_tag "amenities/caddies.png", class: 'caddies' %>Caddies</h4></span>
             <% end %>
 
             <% if amenity.carts %>
@@ -86,8 +85,8 @@
   <div class="row slider">
     <div class="col-md-12 st1">
        <div class="btn-group btn-group-lg map-slecter">
-        <button type="button" class="btn" id="select_map">Scorecard</button>
         <button type="button" class="btn" id="select_photos">Photos</button>
+        <button type="button" class="btn" id="select_map">Scorecard</button>
       </div>
       <ul id="map">
         <li><%=image_tag @course.score_card_image.url %></li>
@@ -175,7 +174,7 @@ $('#select_photos').click(function (){
     };
 }(jQuery));
 
-$(document).ready(function() { $('#select_map').trigger('click') });
+$(document).ready(function() { $('#select_photos').trigger('click') });
 // $(document).ready(function() { $('#select_photos').trigger('click') });
 // $(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
 
@@ -491,8 +490,8 @@ h4 img {
           margin-left: -42px;
         }
       }
-
       @media only screen and (max-width: 759px) and (min-width: 480px) {
+        
         .st2 {
           display: block;
           padding: 0;

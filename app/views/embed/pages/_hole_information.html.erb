@@ -29,8 +29,8 @@
   <div class="row slider">
     <div class="col-md-12 st1">
        <div class="btn-group btn-group-lg map-slecter">
-        <button type="button" class="btn" id="select_map">Map</button>
         <button type="button" class="btn" id="select_photos">Photos</button>
+        <button type="button" class="btn" id="select_map">Map</button>
       </div>
       <div id="11">
         <ul id="map">
@@ -143,7 +143,7 @@ $('#select_photos').click(function (){
     };
 }(jQuery));
 
-$(document).ready(function() { $('#select_map').trigger('click') });
+$(document).ready(function() { $('#select_photos').trigger('click') });
 // $(document).ready(function() { $('#select_photos').trigger('click') });
 // $(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
 
