@@ -1,6 +1,10 @@
 
-  <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
+  
+
+  <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>-->
+
+
   <div class="row description">
     <div class="col-md-12 about">
       <div class="row">
@@ -51,61 +55,56 @@
       <div class="row amenity-wrap">
         <div class="col-md-12">
 
-      <div class="carousel carousel-showsixmoveone slide" id="carousel123">
-        <div class="carousel-inner">
+
+
+      <div class="responsive">
          <% @course.amenities.each do |amenity| %>
 
            <% if amenity.restaurants %>
              <div class="item active">
-              <div class="col-md-2 col-sm-3 col-xs-3">
                 <span class="amenity">
-                <h4 class="hole_description"><%= image_tag "amenities/restaurant.png", class: 'restaurant' %>Restaurant</h4></span>
-               </div>
+                  <%= image_tag "amenities/restaurant.png", class: 'restaurant' %>
+                <h4 class="hole_description">Restaurant</h4></span>
              </div>
             <% end %>
 
             <% if amenity.caddies %>
             <div class="item">
-              <div class="col-md-2 col-sm-3 col-xs-3">
                 <span class="amenity">
-                <h4 class="hole_description"><%= image_tag "amenities/caddies.png", class: 'caddies' %>Caddies</h4></span>
-              </div>
+                  <%= image_tag "amenities/caddies.png", class: 'caddies' %>
+                <h4 class="hole_description">Caddies</h4></span>
             </div>
             <% end %>
 
+           
+
             <% if amenity.carts %>
             <div class="item">
-             <div class="col-md-2 col-sm-3 col-xs-3">
               <span class="amenity">
-              <h4 class="hole_description"><%= image_tag "amenities/carts.png", class: 'carts' %>Carts</h4></span>
-              </div>
+              <%= image_tag "amenities/carts.png", class: 'carts' %>
+              <h4 class="hole_description">Carts</h4></span>
             </div>
             <% end %>
 
             <% if amenity.golf_boards %>
             <div class="item">
-             <div class="col-md-2 col-sm-3 col-xs-3">
               <span class="amenity">
-              <h4 class="hole_description"><%= image_tag "amenities/golfboard.png", class: 'golfboard' %>Golfboards</h4></span>
-              </div>
+                <%= image_tag "amenities/golfboard.png", class: 'golfboard' %>
+              <h4 class="hole_description">Golfboards</h4></span>
             </div>
             <% end %>
 
             <% if amenity.practice_range %>
             <div class="item">
-             <div class="col-md-2 col-sm-3 col-xs-3">
-              <span class="amenity pp ">
-              <h4 class="hole_description"><%= image_tag "amenities/practice-range.png", class: 'practice-range' %>Practice Range</h4></span>
-            </div>
+              <span class="amenity">
+                <%= image_tag "amenities/practice-range.png", class: 'practice-range' %>
+              <h4 class="hole_description">Practice Range</h4></span>
             </div>
             <% end %>
 
             <% end%>
 
 
-        </div>
-        <a class="left carousel-control" href="#carousel123" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-        <a class="right carousel-control" href="#carousel123" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
       </div>
 
 
@@ -165,6 +164,39 @@ $(document).ready(function(){
    });
 
 
+  $('.responsive').slick({
+    dots: false,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+});
+
 });
 
 $('#select_map').click(function (){
@@ -209,33 +241,6 @@ $('#select_photos').click(function (){
     };
 }(jQuery));
 
-(function(){
-  // setup your carousels as you normally would using JS
-  // or via data attributes according to the documentation
-  // https://getbootstrap.com/javascript/#carousel
-  $('#carousel123').carousel({ interval:false, wrap: false });
-  $('#carouselABC').carousel({ interval: false, wrap: false});
-}());
-
-(function(){
-  $('.carousel-showsixmoveone .item').each(function(){
-    var itemToClone = $(this);
-
-    for (var i=1;i<6;i++) {
-      itemToClone = itemToClone.next();
-
-      // wrap around if at end of item collection
-      if (!itemToClone.length) {
-        itemToClone = $(this).siblings(':first');
-      }
-
-      // grab item, clone, add marker class, add to collection
-      itemToClone.children(':first-child').clone()
-        .addClass("cloneditem-"+(i))
-        .appendTo($(this));
-    }
-  });
-}());
 
 $(document).ready(function() { $('#select_photos').trigger('click') });
 // $(document).ready(function() { $('#select_photos').trigger('click') });
@@ -371,11 +376,18 @@ h4 img {
     width: 30%;
     vertical-align: text-top;
 }
-.amenity{
-  display: inline-block;
-  width: 23%;
+.amenity {
+    width: 100%;
+    padding-right: 0px;
+    display: inline-flex;
+    padding-right: 0px;
 }
-.amenity img { height: 30px; }
+.amenity img {
+    height: 30px;
+    display: inline-block;
+    float: left;
+    margin-right: 15px;
+}
 .points h3 img {
   padding-bottom: 5px;
 
@@ -387,107 +399,25 @@ h4 img {
   margin: 0;
   padding: 0;
 }
-
-/**---Carousel----**/
-.carousel-showsixmoveone .carousel-control {
-  width: 4%;
-  background-image: none;
+.slick-prev, .slick-next {
+    width: 20px;
+    height: 30px !important;
 }
-.carousel-showsixmoveone .carousel-control.left {
-  margin-left: 15px;
+.slick-prev:before, .slick-next:before,
+.slick-dots {
+    display:none !important;
 }
-.carousel-showsixmoveone .carousel-control.right {
-  margin-right: 15px;
+.slick-next, .slick-next:hover, .slick-next:focus {
+    background: url(http://localhost:3000/assets/right-green-6b38305b51fcaed2d6c882c4704b0fb8e70257fb8ded731c75532911760b59e7.png) no-repeat;
+    right: -19px;
 }
-.carousel-showsixmoveone .cloneditem-1,
-.carousel-showsixmoveone .cloneditem-2,
-.carousel-showsixmoveone .cloneditem-3,
-.carousel-showsixmoveone .cloneditem-4,
-.carousel-showsixmoveone .cloneditem-5 {
-  display: none;
+.slick-prev,.slick-prev:focus, .slick-prev:hover {
+    background: url(http://localhost:3000/assets/left-green-dd2d8dfb7ebeaccfcece7f3e3cf6efd4ab2e7e7e0086fcf8330f2df971e215cb.png) no-repeat;
+    left: -19px;
 }
-@media all and (min-width: 768px) {
-  .carousel-showsixmoveone .carousel-inner > .active.left,
-  .carousel-showsixmoveone .carousel-inner > .prev {
-    left: -33.333%;
-  }
-  .carousel-showsixmoveone .carousel-inner > .active.right,
-  .carousel-showsixmoveone .carousel-inner > .next {
-    left: 33.333%;
-  }
-  .carousel-showsixmoveone .carousel-inner > .left,
-  .carousel-showsixmoveone .carousel-inner > .prev.right,
-  .carousel-showsixmoveone .carousel-inner > .active {
-    left: 0;
-  }
-  .carousel-showsixmoveone .carousel-inner .cloneditem-1,
-  .carousel-showsixmoveone .carousel-inner .cloneditem-2 {
-    display: block;
-  }
+.slick-track {
+    margin-left: 0px !important;
 }
-@media all and (min-width: 768px) and (transform-3d), all and (min-width: 768px) and (-webkit-transform-3d) {
-  .carousel-showsixmoveone .carousel-inner > .item.active.right,
-  .carousel-showsixmoveone .carousel-inner > .item.next {
-    -webkit-transform: translate3d(33.333%, 0, 0);
-            transform: translate3d(33.333%, 0, 0);
-    left: 0;
-  }
-  .carousel-showsixmoveone .carousel-inner > .item.active.left,
-  .carousel-showsixmoveone .carousel-inner > .item.prev {
-    -webkit-transform: translate3d(-33.333%, 0, 0);
-            transform: translate3d(-33.333%, 0, 0);
-    left: 0;
-  }
-  .carousel-showsixmoveone .carousel-inner > .item.left,
-  .carousel-showsixmoveone .carousel-inner > .item.prev.right,
-  .carousel-showsixmoveone .carousel-inner > .item.active {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-    left: 0;
-  }
-}
-@media all and (min-width: 992px) {
-  .carousel-showsixmoveone .carousel-inner > .active.left,
-  .carousel-showsixmoveone .carousel-inner > .prev {
-    left: -16.666%;
-  }
-  .carousel-showsixmoveone .carousel-inner > .active.right,
-  .carousel-showsixmoveone .carousel-inner > .next {
-    left: 16.666%;
-  }
-  .carousel-showsixmoveone .carousel-inner > .left,
-  .carousel-showsixmoveone .carousel-inner > .prev.right,
-  .carousel-showsixmoveone .carousel-inner > .active {
-    left: 0;
-  }
-  .carousel-showsixmoveone .carousel-inner .cloneditem-3,
-  .carousel-showsixmoveone .carousel-inner .cloneditem-4,
-  .carousel-showsixmoveone .carousel-inner .cloneditem-5 {
-    display: block;
-  }
-}
-@media all and (min-width: 992px) and (transform-3d), all and (min-width: 992px) and (-webkit-transform-3d) {
-  .carousel-showsixmoveone .carousel-inner > .item.active.right,
-  .carousel-showsixmoveone .carousel-inner > .item.next {
-    -webkit-transform: translate3d(16.666%, 0, 0);
-            transform: translate3d(16.666%, 0, 0);
-    left: 0;
-  }
-  .carousel-showsixmoveone .carousel-inner > .item.active.left,
-  .carousel-showsixmoveone .carousel-inner > .item.prev {
-    -webkit-transform: translate3d(-16.666%, 0, 0);
-            transform: translate3d(-16.666%, 0, 0);
-    left: 0;
-  }
-  .carousel-showsixmoveone .carousel-inner > .item.left,
-  .carousel-showsixmoveone .carousel-inner > .item.prev.right,
-  .carousel-showsixmoveone .carousel-inner > .item.active {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-    left: 0;
-  }
-}
-/**---Carousel----**/
 
 
 
@@ -507,10 +437,6 @@ h4 img {
         }
         .values h4 {
           font-weight: normal;
-        }
-        .amenity {
-          width: auto;
-          padding-right: 70px;
         }
 
 
@@ -541,10 +467,6 @@ h4 img {
         }
         .values h4 {
           font-weight: normal;
-        }
-        .amenity {
-          width: auto;
-          padding-right: 80px;
         }
       }
 
@@ -580,15 +502,22 @@ h4 img {
         .values h4 {
           font-weight: normal;
         }
-        .amenity {
-          width: auto;
-          padding-right: 40px;
-        }
         .map-slecter {
           left: 40%;
         }
 
       }
+
+@media only screen and (max-width: 1024px) {
+      .amenity img {
+          float: none; 
+          margin-right: 0px;
+      }
+      .amenity {
+          display: block;
+          text-align: center;
+      }
+}
 
       @media only screen and (max-width: 991px) and (min-width: 760px) {
         .about{
@@ -628,11 +557,7 @@ h4 img {
           text-align: center;
           padding-left: 0px;
         }
-        .amenity{
-          display: inline-block;
-          width: 23%;
-          padding-bottom: 20px;
-        }
+
 
         .points{
           display: table-cell;
@@ -703,9 +628,6 @@ h4 img {
         .bio {
           padding-left: 0px;
           padding-right: 0px;
-        }
-        .amenity {
-          width:32%;
         }
         .pp {
           width: 40%;
@@ -826,10 +748,6 @@ h4 img {
           text-align: center;
         }
 
-        .amenity {
-          /*width:47%;*/
-          display: inline-table;
-        }
         .caddies{
           /*width: 30px;*/
           height: 40px;
