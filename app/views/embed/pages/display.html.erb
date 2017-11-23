@@ -159,14 +159,14 @@ function flag_control(){
 var timer;
 
 player.on("loadedmetadata",function () {
+  
   barupdate();
   current_video();
-
-  if (!player.paused()){
+  // if (!player.paused()){
     showBars();
     // $(".hole-bar").animate({top: '1%'});
     timer = setTimeout(function(){hideBars()}, 5000);
-  }
+  // }
   // $('#video').trigger('mousemove');
   // player.trigger('useractive');
   // setTimeout(trg, 5000);
@@ -207,6 +207,7 @@ function showBars(){
     $(".previous").fadeIn();
     $(".next").fadeIn();
     $(".vjs-control-bar").animate({bottom: '1px'});
+    $(".vjs-control-bar").css({opacity: '1'});
     $(".upper-gradient").animate({top: '0px'});
     xx = $(".vjs-playlist").outerHeight();
     xx-=2;
