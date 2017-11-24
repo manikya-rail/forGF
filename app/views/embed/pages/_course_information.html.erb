@@ -42,7 +42,7 @@
           <span class="values"><h4 class="hole_description"><b>Yards:</b> <%= @course.length %></h4></span>
 
           <!-- <span class="values"><h4>Tee Boxes: <%= @course.score_cards.count %></h4></span> -->
-          <span class="values"><h4 class="hole_description"><b>Architect:</b> <%= @course.architect %></h4></span>
+          <span class="values"><h4 class="hole_description"><b>Architect:</b> <span class="text-nowrap"><%= @course.architect %></span></h4></span>
         </div>
       </div>
     </div>
@@ -183,15 +183,15 @@ $(document).ready(function(){
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
+          slidesToShow: 3,
+          slidesToScroll: 1
         }
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToShow: 2,
+          slidesToScroll: 2
         }
       }
     ]
@@ -827,6 +827,12 @@ h4 img {
         }
         .about h3, .specs h3, .description2 h3{
           min-height: 25px;
+        }
+        .slick-next, .slick-next:hover, .slick-next:focus {
+            right: -45px;
+        }
+        .slick-prev, .slick-prev:focus, .slick-prev:hover {
+            left: -45px;
         }
       }
 
