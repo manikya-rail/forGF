@@ -22,9 +22,9 @@
 
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
-
-<script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
-<script src="https://raw.githubusercontent.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-3.0.1.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
  
@@ -90,9 +90,7 @@
 <!-- JavaScript -->
 
 <script type="text/javascript">
-console.log('hii1');
-$('#playlist').draggable();
-console.log('hii2');
+
 var videoList = []
 
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
@@ -408,7 +406,13 @@ document.querySelector('.left-green').addEventListener('click', function() {
 // document.getElementById(0).className += " active";
 
 // trigger for first ajax call
-$(document).ready(function() { $('#1 a').trigger('click') });
+$(document).ready(function() { 
+
+  $('#1 a').trigger('click') 
+    console.log('hii1');
+$('#playlist').draggable();
+console.log('hii2');
+});
 
 // Pgae Refresher for safari cache
 $(window).bind("pageshow", function(event) {
