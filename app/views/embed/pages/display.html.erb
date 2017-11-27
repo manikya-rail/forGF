@@ -25,7 +25,7 @@
 
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
- 
+
 <!-- Body -->
 
 
@@ -158,7 +158,7 @@ function flag_control(){
 var timer;
 
 player.on("loadedmetadata",function () {
-  
+
   barupdate();
   current_video();
   // if (!player.paused()){
@@ -404,9 +404,9 @@ document.querySelector('.left-green').addEventListener('click', function() {
 // document.getElementById(0).className += " active";
 
 // trigger for first ajax call
-$(document).ready(function() { 
+$(document).ready(function() {
 
-  $('#1 a').trigger('click') 
+  $('#1 a').trigger('click')
 
 });
 
@@ -459,6 +459,7 @@ html,body
 .main-container {
   /*min-height: 600px;*/
   height: auto !important;
+  overflow: auto !important;
   max-width: 100% !important;
   /*border-image: url(<%= image_url "iframe-border.png" %>) 200 round;*/
   /*border: 5px solid black;*/
@@ -820,7 +821,6 @@ div:focus {
 
 @media only screen and (min-width: 1600px) {
     body {font-size: 44px;}
-    .player-container {width: 1600px;}
     .main-container {width: 1600px;}
     .video-js .vjs-big-play-button {
       /*line-height: 1.70;*/
@@ -956,9 +956,7 @@ div:focus {
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
     body {font-size: 30px;}
-    .player-container {width: 100vw;}
     .main-container {width: 100vw;}
-    /*.player-container {width: 100%;}*/
     .video-js .vjs-big-play-button {
       /*line-height: 1.70;*/
       height: 140px;
@@ -1116,8 +1114,6 @@ div:focus {
 
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
     body {font-size: 30px;}
-    .player-container {width: 100vw;}
-    /*.player-container {width: 100%;}*/
     .main-container {width: 100vw;}
 
     .video-js .vjs-big-play-button {
@@ -1273,8 +1269,6 @@ div:focus {
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
     body {font-size: 30px;}
-    /*.player-container {width: 100vw;}*/
-    .player-container {width: 100vw;}
     .main-container {width: 100vw;}
 
     .video-js .vjs-big-play-button {
@@ -1492,8 +1486,6 @@ div:focus {
 
 @media only screen and (min-width: 480px) and (max-width: 599px) {
     body {font-size: 25px;}
-    /*.player-container {width: 100vw;}*/
-    .player-container {width: 100vw;}
     .main-container {width: 100vw;}
 
     .video-js .vjs-big-play-button {
@@ -1666,8 +1658,6 @@ div:focus {
 
 @media only screen and (max-width: 479px) {
     body {font-size: 25px;}
-    /*.player-container {width: 100vw;}*/
-    .player-container {width: 100vw;}
     .main-container {width: 100vw;}
         /*.signature img {width: 90%;}*/
 
