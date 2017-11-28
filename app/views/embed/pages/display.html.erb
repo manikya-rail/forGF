@@ -1303,9 +1303,12 @@ div:focus {
       display: table-cell;
       text-align: center;
       border-right: 2.5px solid #696969;
-      padding: 8px 20px 1px 20px;
+      padding: 7px 20px 1px 20px;
     }
-
+    .hole-bar ul li text, .hole-bar ul li span{
+      position: relative;
+      top: 1px;
+    }
     .hole-bar ul li span {
       font-size:2.2em;
     }
@@ -1458,7 +1461,11 @@ div:focus {
     right: 10% !important;
   }
   .hole-bar ul li {
-    padding: 9px 15px 1px 15px !important;
+    padding: 8px 15px 1px 15px !important;
+  }
+  .hole-bar ul li text, .hole-bar ul li span{
+    position: relative;
+    top: 1px;
   }
   .hole-bar ul {
     font-size: 9px !important;
@@ -1528,7 +1535,7 @@ div:focus {
       display: table-cell;
       text-align: center;
       border-right: 2.5px solid #696969;
-      padding: 7px 20px 1px 20px;
+      padding: 6px 20px 1px 20px;
     }
 
     .hole-bar ul li span {
@@ -1537,6 +1544,11 @@ div:focus {
 
     .hole-bar ul li text {
       font-size:3.0em;
+    }
+
+    .hole-bar ul li text, .hole-bar ul li span{
+      position: relative;
+      top: 1px;
     }
     .vjs-playlist {
       left:0px ;
@@ -1690,6 +1702,8 @@ div:focus {
       /*font-size: 1.7vw;*/
     }
     .hole-bar ul li {
+      top: 0.5px;
+      position: relative;
       display: table-cell;
       text-align: center;
       border-right: 2.5px solid #696969;
