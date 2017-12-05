@@ -31,6 +31,8 @@
     background-color: #16A476 !important;
 }
 
+.upload-btn.check-field{height: 60px;}
+
 .whole-num{
     color: #16A476;
 }
@@ -68,4 +70,129 @@ table th{
 }
 .container{
     margin-top: 10%;
+}
+.course-logo-image{
+    width: 50px;
+    float: right;
+    margin-top: -54px;
+    margin-left: 230px;
+    position: absolute;
+}
+.course-transparent-logo-image{
+    width: 50px;
+    height: 50px;
+    float: right;
+    margin-top: -59px;
+    left: 2px;
+    position: relative;
+    z-index: 1
+}
+.close-cross{
+    text-align: center;
+    width: 20px;
+    position: absolute;
+    top: 22px;
+    color: red;
+    left: 283px;
+    z-index: 100;
+    cursor: pointer;
+    background: #eee;
+    border-radius: 50%;
+    border: 1px solid #666;
+    height: 20px;
+}
+.trans-cross{
+    text-align: center;
+    width: 20px;
+    position: absolute;
+    top: 23px;
+    color: red;
+    left: 284px;
+    z-index: 100;
+    cursor: pointer;
+    background: #eee;
+    border-radius: 50%;
+    border: 1px solid #666;
+    height: 20px;
+}
+.course-photo-images{
+    width: 50px;
+    height: 50px;
+    margin-top: 9px;
+    position: relative;
+    left: -9px;
+    z-index: 1;
+}
+.close-photos{
+    position: relative;
+    text-align: center;
+    top: -21px;
+    left: 47px;
+    color: red;
+    z-index: 100;
+    background: #eee;
+    border-radius: 50%;
+    border: 1px solid #666;
+    cursor: pointer;
+    width: 20px;
+    display: inline-block;
+}
+.photo-division{
+    display: inline-block;
+}
+.course-create-image{
+    width: 50px;
+    float: right;
+    margin-top: -64px;
+    margin-left: 84px;
+    position: absolute;
+}
+.photos-collection{
+    width: 300px;
+    overflow-x: scroll;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+.upload-btn .check-field{
+    height: 60px;
+}
+.photos-collection .uploaded-photo-image{
+    margin:0px;
+    padding: 0px;
+    position: relative;
+}
+.photos-collection .image-division {
+    width: 62px;
+    position: relative;
+    height: 60px;
+    margin: 0;
+    left: 0;
+    right: 0;
+    float: left;
+}
+.photos-collection span.close-cross {
+    left: initial;
+    right: -8px;
+    top: -8px;
+}
+.temp-photos-collection .upload-division .close-cross{
+    left: initial;
+    right: 1px;
+    top: -9px;
+
+}
+.temp-photos-collection .upload-division {
+    width: 62px;
+    position: relative;
+    height: 60px;
+    margin: 0;
+    left: 0;
+    right: 0;
+    float: left;
+}
+.edit-temp-uploaded-photos{
+    margin:0px;
+    padding: 0px;
+    position: relative;
+    width: 50px;
 }

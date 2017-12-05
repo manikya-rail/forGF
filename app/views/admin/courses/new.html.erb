@@ -90,49 +90,78 @@
         <div class="col-md-12 course-info-row">
             <div class="col-md-4">
               <%= label_tag :logo ,'Logo (Color)',class:"col-md-12 zero-left-right-padd"%>
+              <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
-                <%= f.file_field :logo, class: 'check-field' %>
+                <div class="logo-label">
+                  <%= f.file_field :logo, class: 'check-field logo-field' %>
+                </div>
+                <div class="logo image-division">
+                  <span class="close-cross hide">&times;</span>
+                  <%= image_tag("", class: "uploaded-logo-image course-create-image hide") %>
+                </div>
               </div>
             </div>
 
             <div class="col-md-4">
               <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
+              <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
-                <%= f.file_field :cover, class: 'check-field' %>
+                <div class="cover-label">
+                  <%= f.file_field :cover, class: 'check-field cover-field' %>
+                </div>
+                <div class="cover image-division">
+                  <span class="close-cross hide">&times;</span>
+                  <%= image_tag("", class: "uploaded-cover-image course-create-image hide") %>
+                </div>
               </div>
             </div>
 
             <div class="col-md-4">
               <%= label_tag :score_card_image, 'Score Card', class: "col-md-12 zero-left-right-padd" %>
+              <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
-                <%= f.file_field :score_card_image, class: 'check-field' %>
+                <div class="score-label">
+                  <%= f.file_field :score_card_image, class: 'check-field score-card-field' %>
+                </div>
+                <div class="score image-division">
+                  <span class="close-cross hide">&times;</span>
+                  <%= image_tag("", class: "uploaded-score-image course-create-image hide") %>
+                </div>
               </div>
             </div>
 
             <div class="col-md-4">
               <%= label_tag :transparent_logo, 'Logo (Transparent Background)', class: "col-md-12 zero-left-right-padd" %>
+              <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
-                <%= f.file_field :transparent_logo, class: 'check-field' %>
+                <div class="trans-label">
+                  <%= f.file_field :transparent_logo, class: 'check-field trans-logo-field' %>
+                </div>
+                <div class="trans image-division">
+                  <span class="close-cross hide">&times;</span>
+                  <%= image_tag("", class: "uploaded-trans-image course-create-image hide") %>
+                </div>
                 <%= f.text_field :logo_hyperlink, class: "col-md-12 form-control contact-info check-field", placeholder: "Hyperlink" %>
               </div>
             </div>
 
             <div class="col-md-4">
               <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
+              <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
-                <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field' %>
+                <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field course-photos-field' %>
+                <div class="photos-collection">
+                </div>
               </div>
             </div>
 
             <div class="col-md-4">
               <%= label_tag :video ,'Video',class:"col-md-12 zero-left-right-padd "%>
+              <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
                 <%= f.file_field :video, class: 'check-field' %>
               </div>
             </div>
-
-
-
         </div>
 
         <div class="col-md-12 course-info-row">
@@ -386,26 +415,6 @@ checkFields();
     }
   });
 
-  // $('#add-resorts').click(function() {
-
-  //   var clonedField = $('#resort-name-field').clone();
-  //   var resortNameFieldLen = $('.resort-name-field').length ;
-  //   clonedField.removeAttr( "id" )
-  //   clonedField.attr('name', 'course[resorts_attributes][' + resortNameFieldLen + '][name]' );
-
-  //   clonedField.appendTo($('#resort-name-field').parent('div'))
-
-  // });
-
-  // $('#add-networks').click(function() {
-  //   var clonedField = $('#network-name-field').clone();
-  //   clonedField.removeAttr( "id" )
-  //   var networkNameFieldLen = $('.network-name-field').length ;
-  //   clonedField.attr('name', 'course[networks_attributes][' + networkNameFieldLen + '][name]' );
-  //   clonedField.appendTo($('#network-name-field').parent('div'))
-
-  // });
-
   $('#add-score-card').click(function() {
     var clonedField = $('.score-card-wrapper').first().clone();
     var teeNameField = clonedField.find('#tee-name-field');
@@ -427,6 +436,14 @@ checkFields();
   });
 
   $( "#create-course-btn" ).hide();
-
-
+  
+  $(document).on("click", '.close-cross', function() {
+    $(this).removeClass('show');
+    $(this).addClass('hide');
+    PhotosDivision = $(this).closest('.image-division');
+    UploadBtn = $(PhotosDivision).closest('.upload-btn');
+    $(UploadBtn).find('.check-field').val("");
+    $(PhotosDivision).find(".course-create-image").removeClass('show');
+    $(PhotosDivision).find(".course-create-image").addClass('hide');
+  });
 </script>

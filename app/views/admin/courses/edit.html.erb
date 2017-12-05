@@ -81,38 +81,89 @@
         </div>
 
         <div class="col-md-12 course-info-row">
-            <div class="col-md-4">
+            <div class="col-md-4 logo-first-row-photos bucket">
               <%= label_tag :logo ,'Logo (Color)',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.file_field :logo, class: 'btn btn-success upload-btn check-field' %>
+              <div class="logo-label">
+                <%= f.file_field :logo, class: 'btn btn-success upload-btn check-field logo-field' %>
+              </div>
+              <div class="logo image-division">
+                <% logo_file_name = Course.find(params[:id]).logo%>
+                <% if logo_file_name.exists? %>
+                  <span class="close-cross">&times;</span>
+                  <img src="<%= logo_file_name.url %>" class="course-logo-image cimage" id="<%=params[:id]%>" name="logo">
+                <% end %>
+              </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 cover-first-row-photos bucket">
               <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
-              <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field' %>
+              <div class="cover-label">
+                <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field cover-field' %>
+                <% cover_file_name = Course.find(params[:id]).cover%>
+              </div>
+              <div class="cover image-division">
+               <% if cover_file_name.exists? %>
+                <span class="close-cross">&times;</span>
+                <img src="<%=cover_file_name.url%>" class="course-logo-image cimage" id="<%=params[:id]%>" name="cover">
+               <% end %>
+              </div> 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 score-first-row-photos bucket">
               <%= label_tag :score_card_image ,'Score Card',class:"col-md-12 zero-left-right-padd "%>
-              <%= f.file_field :score_card_image, class: 'btn btn-success upload-btn check-field' %>
+              <div class="score-label">
+                <%= f.file_field :score_card_image, class: 'btn btn-success upload-btn check-field score-card-field' %>
+                <% score_card_file_name = Course.find(params[:id]).score_card_image%>
+              </div>
+              <div class="score image-division">
+               <% if score_card_file_name.exists? %>
+                 <span class="close-cross">&times;</span>
+                 <img src="<%=score_card_file_name.url%>" class="course-logo-image cimage" id="<%=params[:id]%>" name="score_card" >
+               <% end %>
+              </div>
             </div>
+            <div class="clearfix"></div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 trans-second-row-photos bucket">
               <%= label_tag :transparent_logo, 'Logo (Transparent Background)', class: "col-md-12 zero-left-right-padd" %>
+              <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
-                <%= f.file_field :transparent_logo, class: 'check-field' %>
+               <div class="trans-label">
+                 <%= f.file_field :transparent_logo, class: 'check-field upload-btn trans-logo-field' %>
+                 <% translogo_file_name = Course.find(params[:id]).transparent_logo%>
+               </div>
+                <div class="trans image-division">
+                  <% if translogo_file_name.exists? %>
+                    <span class="close-cross">&times;</span>
+                    <img src="<%= translogo_file_name.url %>" class="course-transparent-logo-image cimage" id="<%= params[:id] %>" name="transparent">
+                  <% end %>
+                </div>
                 <%= f.text_field :logo_hyperlink, class: "col-md-12 form-control contact-info check-field", placeholder: "Hyperlink" %>
               </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 second-row-photos">
               <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
+              <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
-                <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field' %>
+                <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field course-photos-field' %>
+                <% course_photo_url = Course.find(params[:id]).course_images%>
+                <div class="temp-photos-collection">
+                </div>
+                <div class="photos-collection">
+                 <% course_photo_url.each do |course_photo|%>
+                  <div class="photo-division">
+                    <span class="close-photos">&times;</span>
+                    <img src="<%=course_photo.photo.url%>" class="course-photo-images" id="<%=course_photo.id%>">
+                  </div>
+                 <% end %>
+                </div>
               </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 second-row-photos">
               <%= label_tag :video ,'Video',class:"col-md-12 zero-left-right-padd "%>
+              <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
                 <%= f.file_field :video, class: 'check-field' %>
               </div>
@@ -226,5 +277,63 @@ $('#add-score-card').click(function() {
 
   }
 
+  });
+
+$('.close-photos').click(function() {
+   Closephotos = $(this)
+   PhotosDivision = $(this).closest('.photo-division');
+   ImageSrc = $(PhotosDivision).find(".course-photo-images").attr('src');
+   CourseId = $(PhotosDivision).find(".course-photo-images").attr('id'); 
+   $.ajax({
+     type: "POST",
+     url: '/admin/courses/remove_course_image',
+     data: {
+       image_source: ImageSrc,
+       course_id: CourseId
+     },
+     complete: function(response) {
+       $(Closephotos).addClass('hide');
+       $(PhotosDivision).find(".course-photo-images").addClass('hide');
+     }
+   })
+});
+
+$('.close-cross').click(function() {
+   Closephotos = $(this)
+   PhotosDivision = $(this).closest('.image-division');
+   ImageSrc = $(PhotosDivision).find(".cimage").attr('src');
+   CourseId = $(PhotosDivision).find(".cimage").attr('id');
+   Name = $(PhotosDivision).find(".cimage").attr('name');
+   $.ajax({
+     type: "POST",
+     url: '/admin/courses/remove_course_image',
+     data: {
+       image_source: ImageSrc,
+       course_id: CourseId,
+       for: Name
+     },
+     complete: function(response) {
+       $(Closephotos).remove();
+       $(PhotosDivision).find(".cimage").remove();
+     }
+   })
+});
+
+  $(document).on("click", '.temp-photos-collection .upload-division .close-cross', function() {
+    $(this).removeClass('show');
+    $(this).addClass('hide');
+    PhotosDivision = $(this).closest('.upload-division');
+    TempCollection = $(PhotosDivision).closest('.temp-photos-collection');
+    UploadBtn = $(TempCollection).closest('.upload-btn');
+    $(PhotosDivision).find(".edit-temp-uploaded-photos").removeClass('show');
+    $(PhotosDivision).find(".edit-temp-uploaded-photos").addClass('hide');
+  });
+
+  $(document).on("click", '.close-cross', function() {
+    imageDiv = $(this).closest('.image-division');
+    bucket = $(imageDiv).closest('.bucket')
+    $(bucket).find('.upload-btn').val('');
+    $(imageDiv).find('.close-cross').remove();
+    $(imageDiv).find('.cimage').remove();
   });
 </script>

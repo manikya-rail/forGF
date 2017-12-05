@@ -93,6 +93,27 @@ class Admin::CoursesController < ApplicationController
     end
   end
 
+  def remove_course_image
+    if params[:for].present?
+       course = Course.find(params[:course_id]) 
+       if params[:for] == "logo"
+         course.logo = nil
+         course.save
+       elsif params[:for] == "transparent"
+         course.transparent_logo = nil
+         course.save
+       elsif params[:for] == "cover"
+         course.cover = nil
+         course.save
+       elsif params[:for] == "score_card"
+         course.score_card_image = nil
+         course.save
+       end
+    else
+     CourseImage.find(params[:course_id]).delete
+    end 
+    render :json => {status: 'success'}, :layout => false
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
