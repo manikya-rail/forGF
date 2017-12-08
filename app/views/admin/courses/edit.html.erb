@@ -168,7 +168,13 @@
                 <%= f.file_field :video, class: 'check-field' %>
               </div>
             </div>
+        </div>
 
+        <div class="col-md-12 course-info-row">
+          <div class="col-md-2 form-group">
+            <%= label_tag :color_selector ,'Color Selector',class:"col-md-12 zero-left-right-padd"%>
+            <%= f.text_field :color_selector, class:"col-md-12 form-control check-field", placeholder: "Color Selector" %>
+          </div>
         </div>
 
         <div class="col-md-12 course-info-row">

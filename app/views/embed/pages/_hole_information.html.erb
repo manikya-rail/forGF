@@ -1,7 +1,6 @@
 
   <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
-
   <div class="row description">
     <div class="col-md-12">
       <div class="row">
@@ -29,8 +28,8 @@
   <div class="row slider">
     <div class="col-md-12 st1">
        <div class="btn-group btn-group-lg map-slecter">
-        <button type="button" class="btn" id="select_photos">Photos</button>
-        <button type="button" class="btn" id="select_map">Map</button>
+        <button type="button" class="btn" id="select_map" color="<%=color_selector(@course_color)%>">Map</button>
+        <button type="button" class="btn" id="select_photos" color="<%=color_selector(@course_color)%>">Photos</button>
       </div>
       <div id="11">
         <ul id="map">
@@ -84,6 +83,7 @@ function sliderInitializer (){
 }
 
 $('#select_map').click(function (){
+  bgColor=$(this).attr('color');
   // $('.st1 .bx-wrapper').hide();
   // $('#22').hide();
   $('#22').invisible();
@@ -93,23 +93,28 @@ $('#select_map').click(function (){
   // $('#slider').hide();
   $('#select_photos').removeClass('selected');
   $('#select_photos').addClass('non-selected');
+  $('#select_photos').css({"background-color":"white"});
 
   $('#map').show();
   $('#select_map').removeClass('non-selected');
   $('#select_map').addClass('selected');
+  $('#select_map').css({"background-color":bgColor});
 
   // $('.bx-next').hide();
   // $('.bx-prev').hide();
 });
 
 $('#select_photos').click(function (){
+  bgColor=$(this).attr('color');
   $('#map').hide();
   $('#select_map').removeClass('selected');
   $('#select_map').addClass('non-selected');
+  $('#select_map').css({"background-color":"white"});
 
 
   $('#select_photos').removeClass('non-selected');
   $('#select_photos').addClass('selected');
+  $('#select_photos').css({"background-color":bgColor});
 
   // $('.st1 .bx-wrapper').show();
   // $('#22').show();
@@ -143,8 +148,7 @@ $('#select_photos').click(function (){
     };
 }(jQuery));
 
-$(document).ready(function() { $('#select_photos').trigger('click') });
-// $(document).ready(function() { $('#select_photos').trigger('click') });
+$(document).ready(function() { $('#select_map').trigger('click') });
 // $(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
 
 // $( window ).resize(function() {

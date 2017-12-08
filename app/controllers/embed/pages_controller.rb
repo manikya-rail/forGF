@@ -69,11 +69,12 @@ class Embed::PagesController < ApplicationController
   end
 
   def hole_by_hole
-    @hole=Hole.find(params[:id])
+    @hole = Hole.find(params[:id])
+    @course_color = Course.find(@hole.course_id).color_selector
   end
 
   def course_home
-    @course=Course.find(params[:id])
+    @course = Course.find(params[:id])
   end
 
 
