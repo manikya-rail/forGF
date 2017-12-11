@@ -30,7 +30,7 @@
 
 
     <div class = "main-container">
-      <div class= "player-container">
+      <div class= "player-container" progress-color="<%=color_selector(@course.color_selector)%>">
         <div class = "upper-gradient"></div>
         <div class="vplayer" id="vplayer">
 
@@ -217,6 +217,11 @@ function showBars(){
   showPlayerActions();
 }
 
+function progressColor(color){
+ $('.vjs-play-progress').css({"background-color":color});
+ $('.vjs-play-progress').css({"color":color});
+}
+
 function showPlayerActions(){
   $(".logo").animate({top: '25px'});
   $(".previous").fadeIn();
@@ -232,7 +237,9 @@ function showPlayerActions(){
 
 $('.player-container').hover(
   function(){
+    bgcolor = $(this).attr('progress-color');
     showBars();
+    progressColor(bgcolor);
   }, function(){
     if (!player.paused()){
       hideBars();
@@ -722,9 +729,9 @@ div:focus {
 .video-js .vjs-load-progress, .video-js .vjs-slider{
   background-color: white;
 }
-.video-js .vjs-play-progress:before, .video-js .vjs-volume-level:before{
+/*.video-js .vjs-play-progress:before, .video-js .vjs-volume-level:before{
   color: #3CB371;
-}
+}*/
 .video-js .vjs-control {
   width:3.5em;
 }
