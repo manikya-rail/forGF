@@ -447,7 +447,9 @@ $(document).ready(function() {
 
 // Pgae Refresher for safari cache
 $(window).bind("pageshow", function() {
+  alert('pageshow');
   if (event.persisted) {
+    alert('persisted');
     window.location.reload();
   }
   setTimeout(function(){
