@@ -448,12 +448,10 @@ $(document).ready(function() {
 // Pgae Refresher for safari cache
 $(window).bind("pageshow", function(event) {
   if (event.originalEvent.persisted) {
-    window.location.reload();
     var iframe = document.getElementById('fore_videos_iframe');
     iframe.src = iframe.src;
   }
 });
-
 
 </script>
 
