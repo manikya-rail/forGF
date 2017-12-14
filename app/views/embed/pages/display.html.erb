@@ -446,10 +446,14 @@ $(document).ready(function() {
 });
 
 // Pgae Refresher for safari cache
-$(window).bind("pageshow", function(event) {
-  var iframe = document.getElementById('fore_videos_iframe');
-  iframe.src = iframe.src;
+$(window).bind("pageshow", function() {
+  if (event.persisted) {
+    setTimeout(function(){
+      window.location.reload();
+    },500);
+  }
 });
+
 
 </script>
 
