@@ -447,11 +447,13 @@ $(document).ready(function() {
 
 // Pgae Refresher for safari cache
 $(window).bind("pageshow", function() {
-  setTimeout(function(){
+  if (event.persisted) {
     window.location.reload();
+  }
+  setTimeout(function(){
     var iframe = document.getElementById('fore_videos_iframe');
     iframe.src = iframe.src;
-  },2000);
+  }, 500);
 });
 
 
