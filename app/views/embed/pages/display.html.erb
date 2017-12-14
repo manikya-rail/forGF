@@ -449,8 +449,10 @@ $(document).ready(function() {
 $(window).bind("pageshow", function() {
   alert('pageshow');
   if (window.location.href.indexOf('reload')==-1) {
+    alert('first');
     window.location.replace(window.location.href+'?reload');
   }else if(event.persisted){
+    alert('persisted');
     window.location.replace(window.location.href+'?reload');
   }
 });
