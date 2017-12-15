@@ -55,6 +55,7 @@ end
     # resources :pages, only: :show, path: "" # -> domain.com/embed/1
     get "show/:id", to: 'pages#show'
     get ":id", to: 'pages#display',as: 'display_info'
+    get "dis2/:id", to: 'pages#dis2'
     get "hole/:id", to: 'pages#hole_by_hole',as: 'hole_info'
     get "course/:id", to: 'pages#course_home',as: 'course_info'
   end
