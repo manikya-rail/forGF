@@ -438,6 +438,9 @@ $(document).ready(function() {
 // Pgae Refresher for safari cache
 $(document).ready(function(){
   setTimeout(function () {
+    if (window.location.href.includes('dis2')){
+      debugger
+    }
     // window.location.replace(window.location.href+'?reload');
     var iframe = document.getElementById('fore_videos_iframe');
     iframe.src = iframe.src;
