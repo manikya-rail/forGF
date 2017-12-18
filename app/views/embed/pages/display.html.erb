@@ -126,6 +126,7 @@ var player = videojs('hole-vid', {
       'playToggle':{},
       'progressControl':{},
       'volumeMenuButton':{},
+      'volumePanel': {inline: false},
       'playbackRateMenuButton':{},
       // 'settingsMenuButton': {
       //     entries : [
@@ -206,6 +207,7 @@ function hideBars(){
     $(".logo").animate({top: '-70px'});
     $(".previous").fadeOut();
     $(".next").fadeOut();
+    $(".video-js .vjs-volume-control").fadeOut();
     $(".vjs-control-bar").animate({bottom: '-70px'});
     $(".upper-gradient").animate({top: '-70px'});
     $(".lower-gradient").animate({bottom: '0px'});
@@ -220,12 +222,14 @@ function showBars(){
 function progressColor(color){
  $('.vjs-play-progress').css({"background-color":color});
  $('.vjs-play-progress').css({"color":color});
+ $('.video-js .vjs-volume-level').css({"background-color":color})
 }
 
 function showPlayerActions(){
   $(".logo").animate({top: '25px'});
   $(".previous").fadeIn();
   $(".next").fadeIn();
+  $(".video-js .vjs-volume-control").fadeIn();
   $(".vjs-control-bar").animate({bottom: '1px'});
   $(".vjs-control-bar").css({opacity: '1'});
   $(".upper-gradient").animate({top: '0px'});
@@ -423,6 +427,14 @@ document.querySelector('.left-green').addEventListener('click', function() {
   }
 });
 
+if($(window).width() >= 600){
+  $('.left-green svg, .right-green svg').attr('width', '19px');
+}else if($(window).width() < 600 && $(window).width() >= 480){
+  $('.left-green svg, .right-green svg').attr('width', '14px');
+}else{
+  $('.left-green svg, .right-green svg').attr('width', '12px');
+}
+
 // document.querySelector('.hole-home').addEventListener('click', function() {
 //   // $( "div.playlist" ).scrollLeft( zx );
 //   $('div.playlist').animate( { scrollLeft: '-=1000' }, 500);
@@ -432,7 +444,9 @@ document.querySelector('.left-green').addEventListener('click', function() {
 
 // trigger for first ajax call
 $(document).ready(function() {
+
   $('#1 a').trigger('click')
+
 });
 
 // Pgae Refresher for safari cache
@@ -1517,12 +1531,6 @@ div:focus {
   }
 }
 
-@media only screen and (min-width: 600px) {
-  .left-green svg, .right-green svg{
-    width: 19px;
-  }
-}
-
 
 @media only screen and (min-width: 480px) and (max-width: 599px) {
     body {font-size: 25px;}
@@ -1700,9 +1708,6 @@ div:focus {
     .hider {
       display:block; position: relative; width:100%; background:white; z-index:7;
     }
-  .left-green svg, .right-green svg{
-    width: 14px;
-  }
 }
 
 @media only screen and (max-width: 479px) {
@@ -1870,9 +1875,6 @@ div:focus {
     .hider {
       display:block; position: relative; width:100%; background:white; z-index:7;
     }
-  .left-green svg, .right-green svg{
-    width: 12px;
-  }
 }
 @media only screen and (min-width: 350px) and (max-width: 479px) {
   .previous, .next{
