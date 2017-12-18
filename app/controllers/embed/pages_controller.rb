@@ -2,6 +2,7 @@ class Embed::PagesController < ApplicationController
   before_action :set_course, only: [:show]
   # after_filter :allow_iframe, only: [:show, :awesome_embed]
   after_action :set_version_header
+  before_action :set_cache_headers, only: [:display]
   # layout "embed", only: [:show]
   layout "embed"
 
@@ -93,5 +94,9 @@ class Embed::PagesController < ApplicationController
         response.set_header("X-Frame-Options", "ALLOWALL")
     end
 
-
+  def set_cache_headers
+    response.headers["Cache-Control"] = "no-cache, no-store"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
 end
