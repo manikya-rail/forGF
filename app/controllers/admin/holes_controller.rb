@@ -1,5 +1,5 @@
 class Admin::HolesController < ApplicationController
-  before_action :set_hole, only: [:show, :edit, :update, :destroy, :remove_image, :remove_map]
+  before_action :set_hole, only: [:show, :edit, :update, :destroy, :remove_image, :remove_map, :remove_logo_image]
 
   # GET /holes
   # GET /holes.json
@@ -60,10 +60,27 @@ class Admin::HolesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def add_logo_image
+    @hole = Hole.find(params[:hole][:hole_id])
+
+    if @hole.update(hole_params)
+      redirect_to admin_course_path(@hole.course), notice: 'Image was successfully uploaded.'
+    else
+      redirect_to admin_course_path(@hole.course), notice: 'Image not uploaded.'
+    end
+  end
+
+  def remove_logo_image
+    @hole.logo_image.destroy
+    respond_to do |format|
+      format.html { redirect_to :back , notice: 'Image was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
 
   def add_image
     @hole = Hole.find(params[:hole][:hole_id])
-
     if @hole.update(hole_params)
       redirect_to admin_course_path(@hole.course), notice: 'Image was successfully uploaded.'
     else
@@ -161,7 +178,7 @@ class Admin::HolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hole_params
-      params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :image, :map)
+      params.require(:hole).permit(:par, :yards, :mhcp, :whcp, :image, :map, :logo_image)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

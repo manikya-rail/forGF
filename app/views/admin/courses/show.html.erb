@@ -72,6 +72,7 @@
               <th>VIDEO</th>
               <th>Cover</th>
               <th>Map</th>
+              <th>Logo</th>
               <th>Gallery</th>
               <th>Yardages</th>
             </tr>
@@ -93,11 +94,17 @@
                 <% else %>
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal" %> >Upload Cover</button></td>
                 <% end %>
-                 <% if hole.map.exists? %>
+                <% if hole.map.exists? %>
                   <td><%#= link_to hole.map_file_name, hole.map.url %><%= link_to 'View', hole.map.url %> | <%= link_to 'Destroy', admin_remove_map_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></td>
                 <% else %>
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-map-upl-modal" %> >Upload Map</button></td>
                 <% end %>
+                <% if hole.logo_image.exists? %>
+                  <td><%#= link_to hole.map_file_name, hole.map.url %><%= link_to 'View', hole.logo_image.url %> | <%= link_to 'Destroy', admin_remove_logo_image_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></td>
+                <% else %>
+                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-logo-image-upl-modal" %> >Upload Logo</button></td>
+                <% end %>
+               
 
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-hole-image-upl-modal" %> >Upload Image</button></td>
 
@@ -118,6 +125,7 @@
     <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
     <%=render :partial => 'admin/holes/hole_image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
     <%=render :partial => 'admin/holes/map_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
+    <%=render :partial => 'admin/holes/logo_image_upload_modal' , locals: {hole: hole,  hole_num:hole.hole_num} %>
     <%=render :partial => 'admin/holes/yardages_update_modal' , locals: {hole: hole,  hole_num:hole.hole_num} %>
   <%end%>
 

@@ -866,6 +866,12 @@ div:focus {
     #firstli {
       margin-left: 5px;
     }
+    .vjs-volume-panel{
+      top: -11px !important;
+    }
+    .vjs-play-control{
+      top: -9px !important;
+    }
     .hole-bar {
       height: 65px;
       right:25px;
@@ -1732,10 +1738,15 @@ div:focus {
     .video-js .vjs-big-play-button:before, .video-js .vjs-play-control:before, .vjs-icon-play:before {
       /*zoom:40%;*/
     }
+    .vjs-playback-rate{
+        left: -17px;
+    }
+    .vjs-fullscreen-control{
+      left: -17px;
+    }
     .logo {
       display: none;
     }
-
     .hole-bar{
       /*right:18%;*/
       height:40px;
@@ -1892,6 +1903,7 @@ div:focus {
   .next{
     right: 25px;
   }
+
 }
 
 @media only screen and (min-width: 250px) and (max-width: 349px) {
@@ -1908,6 +1920,17 @@ div:focus {
   }
 }
 
+@media only screen and (max-width: 300px) {
+ .vjs-playback-rate{
+    left: -33px !important;
+  }
+  .vjs-fullscreen-control{
+    left: -35px !important;
+  }
+  .vjs-control-bar .flag{
+     left: -7px !important;
+  }
+}
 @media only screen and (max-width: 249px) {
   .previous, .next{
     height: 24px;
