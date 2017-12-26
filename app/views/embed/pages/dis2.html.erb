@@ -11,7 +11,7 @@
 <script type="text/javascript">
   $(window).bind("pageshow", function() {
     var iframe = $(document).find('div.fore-test-iframe iframe');
-    iframe.src = iframe.attr('src');
+    $('iframe').attr("src", $('div.fore-test-iframe iframe').attr("src"));
   });
 </script>
 
