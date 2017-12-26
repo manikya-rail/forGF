@@ -23,26 +23,13 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
 
-<script type="text/javascript">
-  function displayreload() {
-    debugger
-    alert('function is running above if');
-     if ($(document).find('.vplayer')[0] == undefined){
-      alert('function is running');
-      window.location.reload();
-     }
-    // var iframe = $(document).find('div.fore-test-iframe iframe');
-    // var iframeSrc = $('iframe').attr('src');
-    // $('iframe')[0].setAttribute('src', iframeSrc);
-    // $('iframe')[0].contentWindow.location.reload(true);
-  };
-</script>
+
 <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
 
 <!-- Body -->
 
 
-    <div class = "main-container" onload="displayreload()">
+    <div class = "main-container">
       <div class= "player-container" progress-color="<%=color_selector(@course.color_selector)%>">
         <div class = "upper-gradient"></div>
         <div class="vplayer" id="vplayer">
