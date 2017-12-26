@@ -10,10 +10,13 @@
 <script type="text/javascript" src="http://d1s5na5d5z3eyp.cloudfront.net/assets/iframeResizer.min.js"></script>
 <script type="text/javascript">
   $(window).bind("pageshow", function() {
-    var iframe = $(document).find('div.fore-test-iframe iframe');
-    var iframeSrc = $('iframe').attr('src');
-    $('iframe')[0].setAttribute('src', iframeSrc);
-    $('iframe')[0].contentWindow.location.reload(true);
+  	 if ($(document).find('.vplayer')[0] == undefined){
+  	 	window.location.reload();
+  	 }
+    // var iframe = $(document).find('div.fore-test-iframe iframe');
+    // var iframeSrc = $('iframe').attr('src');
+    // $('iframe')[0].setAttribute('src', iframeSrc);
+    // $('iframe')[0].contentWindow.location.reload(true);
   });
 </script>
 
