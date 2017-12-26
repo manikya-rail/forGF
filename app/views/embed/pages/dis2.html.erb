@@ -10,7 +10,9 @@
 <script type="text/javascript" src="http://d1s5na5d5z3eyp.cloudfront.net/assets/iframeResizer.min.js"></script>
 <script type="text/javascript">
   $(window).bind("pageshow", function() {
+  	alert('function is running above if');
   	 if ($(document).find('.vplayer')[0] == undefined){
+  	 	alert('function is running');
   	 	window.location.reload();
   	 }
     // var iframe = $(document).find('div.fore-test-iframe iframe');
