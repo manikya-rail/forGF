@@ -10,8 +10,8 @@
 <script type="text/javascript" src="http://d1s5na5d5z3eyp.cloudfront.net/assets/iframeResizer.min.js"></script>
 <script type="text/javascript">
   $(window).bind("pageshow", function() {
-    var iframe = $(document).find('div.fore-test-iframe iframe');
-    $('iframe').attr("src", $('div.fore-test-iframe iframe').attr("src"));
+    var iframe = $(document).find('div.fore-test-iframe iframe').attr('src');
+    $('iframe').attr("src", iframe);
   });
 </script>
 
