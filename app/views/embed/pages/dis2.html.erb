@@ -8,13 +8,13 @@
   $(window).bind("load", function(event) {
     if (event.originalEvent.persisted) {
       window.location.reload()
+    } 
+    var iframe = $(document).find('div.fore-test-iframe iframe');
+    iframeContent = $(iframe).contents().hasClass('.player-container');
+    if (iframeContent == false){
+      alert('inside iframeCContent')
+      window.location.reload()
     }
-  });  
-  var iframe = $(document).find('div.fore-test-iframe iframe');
-  iframeContent = $(iframe).contents().find('.player-container');
-  if (iframeContent == undefined){
-    alert('inside iframeCContent')
-    window.location.reload()
-  }
+  });
 </script>
 
