@@ -10,9 +10,11 @@
       window.location.reload()
     }
   });  
-  debugger  
   var iframe = $(document).find('div.fore-test-iframe iframe');
   iframeContent = $(iframe).contents().find('.player-container');
-  alert(iframeContent);
+  if (iframeContent == undefined){
+    alert('inside iframeCContent')
+    window.location.reload()
+  }
 </script>
 
