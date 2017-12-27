@@ -10,8 +10,9 @@
       window.location.reload()
     } 
     var iframe = $(document).find('div.fore-test-iframe iframe');
-    iframeContent = $(iframe).contents().hasClass('.player-container');
-    if (iframeContent == false){
+    iframeContent = $(iframe)[0].contents().hasClass('.player-container');
+    ifrContent = $(iframeContent)[0].contents().hasClass('.player-container');
+    if (ifrContent == false){
       alert('inside iframeCContent')
       window.location.reload()
     }
