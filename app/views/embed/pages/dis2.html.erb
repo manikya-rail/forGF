@@ -9,10 +9,7 @@
     if (event.originalEvent.persisted) {
       window.location.reload()
     } 
-    var iframe = $(document).find('div.fore-test-iframe iframe');
-    iframeContent = $(iframe)[0];
-    ifrContent = $(iframeContent).contents().hasClass('.player-container');
-    if (ifrContent == false){
+    if ($('.player-container')[0] == undefined ){
       alert('inside iframeCContent')
       window.location.reload()
     }
