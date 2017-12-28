@@ -6,10 +6,10 @@
 <script type="text/javascript">iFrameResize({log: true, enablePublicMethods: true });</script>
 <script type="text/javascript">
   $(window).bind("load", function(event) {
+    alert(event.originalEvent.persisted)
     if (event.originalEvent.persisted) {
       window.location.reload()
     }
-    debugger
   });
 </script>
 
