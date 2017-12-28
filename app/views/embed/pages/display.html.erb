@@ -440,6 +440,12 @@ $(document).ready(function() {
 
 });
 
+// Pgae Refresher for safari cache
+$(window).bind("pageshow", function() {
+  if(event.persisted){
+    window.location.reload();
+  }
+});
 
 
 </script>
