@@ -4,14 +4,15 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://d1s5na5d5z3eyp.cloudfront.net/assets/iframeResizer.min.js"></script>
 <script type="text/javascript">iFrameResize({log: true, enablePublicMethods: true });</script>
-<script>
-  $(window).bind("load", function(event) {
+<script type="text/javascript">
+  $(window).bind("pageshow", function(event) {
     if (event.originalEvent.persisted) {
-     alert("event persisted")
-     window.location.reload()
+      window.location.reload()
     }
+  });
+  jQuery(function($) {
     var iframe = $(document).find('div.fore-test-iframe iframe');
     iframe.src = iframe.attr('src');   
-  });  
-</script>  
+  });
+</script>
 
