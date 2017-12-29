@@ -782,6 +782,8 @@ div:focus {
   width: 90%;
   float: left;
   overflow: auto;
+  overflow-y: scroll !important;
+  -webkit-overflow-scrolling:touch;
 
 }
 .playlist ul{
@@ -790,6 +792,7 @@ div:focus {
   list-style: none;
   height: 100%;
   width:100%;
+  overflow-y: hidden; 
   margin: 0 0 0 0;
   padding: 1% 1% 0 1%;
 }
@@ -1843,8 +1846,7 @@ div:focus {
       /*background-image:url(<%= image_url "hole-selector-background.png" %>);
       background-size: 100% 100%; */
       overflow: auto;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling:touch;
+      overflow-y: hidden;
     }
     .video-js .vjs-control-bar {
       /*height: 3em;*/
