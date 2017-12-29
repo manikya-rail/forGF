@@ -7,16 +7,12 @@
 <script type="text/javascript">iFrameResize({log: true, enablePublicMethods: true });</script>
 <script type="text/javascript">
   $(window).bind("load", function(event) {
-    var iframe = $(document).find('div.fore-test-iframe iframe');
-    iframeContent = $('iframe').html();
-    alert(iframeContent);
     if (event.originalEvent.persisted) {
       window.location.reload()
     }
+    var iframe = $(document).find('div.fore-test-iframe iframe');
+    iframeContent = $('iframe').contents().find('video').html();
+    alert(iframeContent);
+    iframe.src = iframe.attr('src');   
   });
-  // jQuery(function($) {
-  //   var iframe = $(document).find('div.fore-test-iframe iframe');
-  //   iframe.src = iframe.attr('src');   
-  // });
 </script>
-
