@@ -16,6 +16,7 @@
   });
   jQuery(function($) {
     var iframe = $(document).find('div.fore-test-iframe iframe');
-    iframe.src = iframe.attr('src');   
+    iframeContent = $('iframe').contents().find('video').html();
+    alert(iframeContent);
   });
 </script>
