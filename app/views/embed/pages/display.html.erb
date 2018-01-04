@@ -104,6 +104,7 @@
 
 <script type="text/javascript">
 
+$(document).ready(function() {
 var videoList = []
 
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
@@ -435,24 +436,12 @@ document.querySelector('.left-green').addEventListener('click', function() {
 // document.getElementById(0).className += " active";
 
 // trigger for first ajax call
-$(document).ready(function() {
 
   $('#1 a').trigger('click')
 
 });
 
 // Pgae Refresher for safari cache
- $(window).bind("load", function(){
-  iframeLength = $(".vplayer").children('video').length;
-  console.log(iframeLength + "iframe length")
-  alert("hii");
-  if (iframeLength != 0){  
-    window.location.reload();
-  }
-  if (event.originalEvent.persisted) {
-    window.location.reload();
-  }
-});
 
 
 </script>
