@@ -444,10 +444,11 @@ $(document).ready(function() {
 
 // Pgae Refresher for safari cache
 $(window).bind("load", function(){
+  alert("hii");
+  var video = $('.main-container');
   $('video').onloadeddata(function(){
     iframeLength = $(".vplayer").children('video').length;
     console.log(iframeLength + "iframe length")
-    alert("hii");
     if (iframeLength != 0){  
       window.location.reload();
     }
