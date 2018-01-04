@@ -47,7 +47,8 @@
 
 
 
-          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" playsinline></video>
+          <video id="hole-vid" src= "http://d1s5na5d5z3eyp.cloudfront.net/videos/videos/000/000/075/medium/Hole_5_Final.mp4?1509440048"
+          class="video-js vjs-default-skin vjs-big-play-centered" playsinline></video>
 
           <div class="previous on-video"> <%= image_tag "left.png" %> </div>
           <div class="next on-video"><%= image_tag "right.png" %></div>
@@ -109,7 +110,7 @@ var videoList = []
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
   videoList.push({
     sources: [{
-      src: gon.videos_urls[i],
+      src: "http://d1s5na5d5z3eyp.cloudfront.net/videos/videos/000/000/075/medium/Hole_5_Final.mp4?1509440048",
       type: 'video/mp4'
     }],
     poster: gon.image_urls[i]
