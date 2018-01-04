@@ -48,6 +48,29 @@
 
 
           <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" playsinline></video>
+          <script type="text/javascript">
+            var player = videojs('hole-vid', {
+            controls: true, fluid:true,
+            'playbackRates': [0.5, 1, 1.5, 2],
+            abr: {enable: true},
+            controlBar: {
+              children: {
+                'playToggle':{},
+                'progressControl':{},
+                'volumeMenuButton':{},
+                'volumePanel': {inline: false},
+                'playbackRateMenuButton':{},
+                // 'settingsMenuButton': {
+                //     entries : [
+                //       'subtitlesButton',
+                //       'playbackRateMenuButton'
+                //     ]
+                //   },
+                'fullscreenToggle':{}
+              }
+            }
+          });
+          </script>
 
           <div class="previous on-video"> <%= image_tag "left.png" %> </div>
           <div class="next on-video"><%= image_tag "right.png" %></div>
@@ -443,20 +466,20 @@ $(document).ready(function() {
 });
 
 // Pgae Refresher for safari cache
-$(window).bind("load", function(){
-  alert("hii");
-  var video = $('.main-container');
-  $('video').onloadeddata(function(){
-    iframeLength = $(".vplayer").children('video').length;
-    console.log(iframeLength + "iframe length")
-    if (iframeLength != 0){  
-      window.location.reload();
-    }
-    if (event.originalEvent.persisted) {
-      window.location.reload();
-    }
-  });
-});
+// $(window).bind("load", function(){
+//   alert("hii");
+//   var video = $('.main-container');
+//   $('video').onloadeddata(function(){
+//     iframeLength = $(".vplayer").children('video').length;
+//     console.log(iframeLength + "iframe length")
+//     if (iframeLength != 0){  
+//       window.location.reload();
+//     }
+//     if (event.originalEvent.persisted) {
+//       window.location.reload();
+//     }
+//   });
+// });
 
 
 </script>
