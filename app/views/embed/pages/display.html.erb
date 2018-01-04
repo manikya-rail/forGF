@@ -442,12 +442,12 @@ $(document).ready(function() {
 });
 
 // Pgae Refresher for safari cache
-$(window).bind("pageshow", function() {
+ $(window).bind("load", function(){
   var iframe = $(document).find('div.fore-test-iframe iframe');
   iframeLength = $(iframe).contents().find(".video-js").length;
   console.log(iframeLength + "iframe length")
   iframe.src = iframe.attr('src');
-  alert("hello");
+  alert("hii");
   if (iframeLength == 0){  
     window.location.reload();
   }
