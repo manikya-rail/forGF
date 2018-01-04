@@ -104,7 +104,6 @@
 
 <script type="text/javascript">
 
-$(document).ready(function() {
 var videoList = []
 
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
@@ -141,7 +140,8 @@ var player = videojs('hole-vid', {
 });
 
 try {player.volume(1);} catch (e) {}
-
+console.log("player"+player)
+console.log("videoList"+videoList)
 player.playlist(videoList);
 player.playlist.autoadvance(0);
 
@@ -436,12 +436,25 @@ document.querySelector('.left-green').addEventListener('click', function() {
 // document.getElementById(0).className += " active";
 
 // trigger for first ajax call
+$(document).ready(function() {
 
   $('#1 a').trigger('click')
 
 });
 
 // Pgae Refresher for safari cache
+
+ $('video').load(function(){
+  iframeLength = $(".vplayer").children('video').length;
+  console.log(iframeLength + "iframe length")
+  alert("hii");
+  if (iframeLength != 0){  
+    window.location.reload();
+  }
+  if (event.originalEvent.persisted) {
+    window.location.reload();
+  }
+});
 
 
 </script>
