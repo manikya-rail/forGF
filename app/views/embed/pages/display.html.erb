@@ -443,10 +443,10 @@ $(document).ready(function() {
 
 // Pgae Refresher for safari cache
  $(window).bind("load", function(){
-  iframeLength = $(".vjs-poster").length;
+  iframeLength = $(".vplayer").children('video').length;
   console.log(iframeLength + "iframe length")
   alert("hii");
-  if (iframeLength == 0){  
+  if (iframeLength != 0){  
     window.location.reload();
   }
   if (event.originalEvent.persisted) {
