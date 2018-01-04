@@ -444,7 +444,7 @@ $(document).ready(function() {
 
 // Pgae Refresher for safari cache
 $(window).bind("load", function(){
-  $('video').loadeddata(function(){
+  $('video').onloadeddata(function(){
     iframeLength = $(".vplayer").children('video').length;
     console.log(iframeLength + "iframe length")
     alert("hii");
