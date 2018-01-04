@@ -447,7 +447,10 @@ $(window).bind("pageshow", function() {
   iframeLength = $(iframe).contents().find(".video-js").length;
   console.log(iframeLength + "iframe length")
   iframe.src = iframe.attr('src');
-  alert("hello")
+  alert("hello");
+  if (iframeLength == 0){  
+    window.location.reload();
+  }
   if (event.originalEvent.persisted) {
     window.location.reload();
   }
