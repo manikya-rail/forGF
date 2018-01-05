@@ -442,23 +442,11 @@ $(document).ready(function() {
 
 });
 
-if ($('.player-container .vplayer').children('video').length > 0){
-  alert("kaam ho gaya");
-}
-
 // Page Refresher for safari cache
 $(window).bind("load", function(){
-  var video = $('.main-container');
-  $('video').onloadeddata(function(){
-    iframeLength = $(".vplayer").children('video').length;
-    console.log(iframeLength + "iframe length")
-    if (iframeLength != 0){  
-      window.location.reload();
-    }
-    if (event.originalEvent.persisted) {
-      window.location.reload();
-    }
-  });
+  if (event.originalEvent.persisted) {
+    window.location.reload();
+  }
 });
 
 
