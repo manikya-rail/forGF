@@ -444,7 +444,39 @@ $(document).ready(function() {
 });
 
 // Page Refresher for safari cache
-$(window).bind("load", function(){
+$(document).ready(function() {
+  alert("document is ready")
+  videoLength = $('.main-conatiner .vplayer').children('video').length
+  if ( videoLength != 0){
+    alert("inside videolength")
+    var player = videojs('hole-vid', {
+  controls: true, fluid:true,
+  'playbackRates': [0.5, 1, 1.5, 2],
+  abr: {enable: true},
+  controlBar: {
+    children: {
+      'playToggle':{},
+      'progressControl':{},
+      'volumeMenuButton':{},
+      'volumePanel': {inline: false},
+      'playbackRateMenuButton':{},
+      // 'settingsMenuButton': {
+      //     entries : [
+      //       'subtitlesButton',
+      //       'playbackRateMenuButton'
+      //     ]
+      //   },
+      'fullscreenToggle':{}
+    }
+  }
+});
+
+try {player.volume(1);} catch (e) {}
+console.log("player"+player)
+console.log("videoList"+videoList)
+player.playlist(videoList);
+player.playlist.autoadvance(0);
+  } 
   if (event.originalEvent.persisted) {
     window.location.reload();
   }
