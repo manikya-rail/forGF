@@ -445,7 +445,6 @@ $(document).ready(function() {
 
 // Page Refresher for safari cache
 $(document).ready(function() {
-  alert("document is ready")
   videoLength = $('.main-conatiner .vplayer').children('video').length
   if ( videoLength != 0){
     alert("inside videolength")
@@ -476,7 +475,7 @@ console.log("player"+player)
 console.log("videoList"+videoList)
 player.playlist(videoList);
 player.playlist.autoadvance(0);
-  } 
+  }
   if (event.originalEvent.persisted) {
     window.location.reload();
   }
@@ -825,7 +824,7 @@ div:focus {
   white-space: nowrap;
   list-style: none;
   height: 100%;
-  width:100%; 
+  width:100%;
   margin: 0 0 0 0;
   padding: 1% 1% 0 1%;
 }
