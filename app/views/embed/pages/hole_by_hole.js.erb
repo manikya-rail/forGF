@@ -1,1 +1,27 @@
 $('#holeinfo').empty().append('<%= j render("hole_information") %>')
+alert("done")
+var player = videojs('hole-vid', {
+  controls: true, fluid:true,
+  'playbackRates': [0.5, 1, 1.5, 2],
+  abr: {enable: true},
+  controlBar: {
+    children: {
+      'playToggle':{},
+      'progressControl':{},
+      'volumeMenuButton':{},
+      'volumePanel': {inline: false},
+      'playbackRateMenuButton':{},
+      // 'settingsMenuButton': {
+      //     entries : [
+      //       'subtitlesButton',
+      //       'playbackRateMenuButton'
+      //     ]
+      //   },
+      'fullscreenToggle':{}
+    }
+  }
+});
+
+try {player.volume(1);} catch (e) {}
+console.log("player"+player)
+player.playlist.autoadvance(0);
