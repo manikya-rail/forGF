@@ -433,80 +433,7 @@ document.querySelector('.left-green').addEventListener('click', function() {
 
 // document.getElementById(0).className += " active";
 
-// trigger for first ajax call
-$(document).ready(function() {
-  videoLength = $('.video-js').contents().length
-  alert(videoLength)
-  if (videoLength == 0){
-    alert("working")
-    var player = videojs('hole-vid', {
-      controls: true, fluid:true,
-      'playbackRates': [0.5, 1, 1.5, 2],
-      abr: {enable: true},
-      controlBar: {
-        children: {
-          'playToggle':{},
-          'progressControl':{},
-          'volumeMenuButton':{},
-          'volumePanel': {inline: false},
-          'playbackRateMenuButton':{},
-          // 'settingsMenuButton': {
-          //     entries : [
-          //       'subtitlesButton',
-          //       'playbackRateMenuButton'
-          //     ]
-          //   },
-          'fullscreenToggle':{}
-        }
-      }
-    });
-
-    try {player.volume(1);} catch (e) {}
-    console.log("player"+player)
-    player.playlist.autoadvance(0);
-    $('#1 a').trigger('click')
-  }else{
-     alert("not working")
-     $('#1 a').trigger('click')
-  }
-
-});
-
 // Page Refresher for safari cache
-$(document).ready(function() {
-  videoLength = $('.main-conatiner .vplayer').children('video').length
-  if ( videoLength != 0){
-    alert("inside videolength")
-    var player = videojs('hole-vid', {
-      controls: true,
-      fluid:true,
-      'playbackRates': [0.5, 1, 1.5, 2],
-      abr: {enable: true},
-      controlBar: {
-        children: {
-          'playToggle':{},
-          'progressControl':{},
-          'volumeMenuButton':{},
-          'volumePanel': {inline: false},
-          'playbackRateMenuButton':{},
-          // 'settingsMenuButton': {
-          //     entries : [
-          //       'subtitlesButton',
-          //       'playbackRateMenuButton'
-          //     ]
-          //   },
-          'fullscreenToggle':{}
-        }
-      }
-    });
-
-    try {player.volume(1);} catch (e) {}
-    console.log("player"+player)
-    console.log("videoList"+videoList)
-    player.playlist(videoList);
-    player.playlist.autoadvance(0);
-  }
-});
 
 $(window).bind("load", function(){
   if (event.originalEvent.persisted) {
@@ -2013,3 +1940,12 @@ div:focus {
 }
 
 </style>
+
+<script type="text/javascript">
+  // trigger for first ajax call
+  $(document).ready(function() {
+
+    $('#1 a').trigger('click')
+
+  });
+</script>
