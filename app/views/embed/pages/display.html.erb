@@ -67,6 +67,48 @@
               L0.439,14.785c-0.586-0.586-0.586-1.535,0-2.121L12.664,0.439z"/>
              </svg>
             </div>
+            <script type="text/javascript">
+              var videoList = []
+
+              for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
+                videoList.push({
+                  sources: [{
+                    src: gon.videos_urls[i],
+                    type: 'video/mp4'
+                  }],
+                  poster: gon.image_urls[i]
+                });
+              }
+              console.log(gon.videos_urls.length + "++++++++++++++gon video length+++++++++")
+              // 320, 480, 760, 960, 1200 and 1600px.
+              var player = videojs('hole-vid', {
+                controls: true, fluid:true,
+                'playbackRates': [0.5, 1, 1.5, 2],
+                abr: {enable: true},
+                controlBar: {
+                  children: {
+                    'playToggle':{},
+                    'progressControl':{},
+                    'volumeMenuButton':{},
+                    'volumePanel': {inline: false},
+                    'playbackRateMenuButton':{},
+                    // 'settingsMenuButton': {
+                    //     entries : [
+                    //       'subtitlesButton',
+                    //       'playbackRateMenuButton'
+                    //     ]
+                    //   },
+                    'fullscreenToggle':{}
+                  }
+                }
+              });
+
+              try {player.volume(1);} catch (e) {}
+              console.log("player"+player)
+              console.log("videoList"+videoList)
+              player.playlist(videoList);
+              player.playlist.autoadvance(0);
+            </script>
             <div  class="playlist">
               <ul id="playlist" >
                 <% @holes.try(:each) do |hole| %>
@@ -101,47 +143,6 @@
 <!-- JavaScript -->
 
 <script type="text/javascript">
-
-var videoList = []
-
-for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
-  videoList.push({
-    sources: [{
-      src: gon.videos_urls[i],
-      type: 'video/mp4'
-    }],
-    poster: gon.image_urls[i]
-  });
-}
-console.log(gon.videos_urls.length + "++++++++++++++gon video length+++++++++")
-// 320, 480, 760, 960, 1200 and 1600px.
-var player = videojs('hole-vid', {
-  controls: true, fluid:true,
-  'playbackRates': [0.5, 1, 1.5, 2],
-  abr: {enable: true},
-  controlBar: {
-    children: {
-      'playToggle':{},
-      'progressControl':{},
-      'volumeMenuButton':{},
-      'volumePanel': {inline: false},
-      'playbackRateMenuButton':{},
-      // 'settingsMenuButton': {
-      //     entries : [
-      //       'subtitlesButton',
-      //       'playbackRateMenuButton'
-      //     ]
-      //   },
-      'fullscreenToggle':{}
-    }
-  }
-});
-
-try {player.volume(1);} catch (e) {}
-console.log("player"+player)
-console.log("videoList"+videoList)
-player.playlist(videoList);
-player.playlist.autoadvance(0);
 
 document.querySelector('.previous').addEventListener('click', function() {
   // i = player.playlist.currentItem();
