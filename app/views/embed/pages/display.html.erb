@@ -45,7 +45,7 @@
 
 
 
-          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" playsinline></video>
+          <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered" playsinline style="display:none;"></video>
 
           <div class="previous on-video"> <%= image_tag "left.png" %> </div>
           <div class="next on-video"><%= image_tag "right.png" %></div>
@@ -1944,8 +1944,7 @@ div:focus {
 <script type="text/javascript">
   // trigger for first ajax call
   $(document).ready(function() {
-
     $('#1 a').trigger('click')
-
+    $('video').css({"display": "visible"});
   });
 </script>
