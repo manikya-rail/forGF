@@ -435,8 +435,40 @@ document.querySelector('.left-green').addEventListener('click', function() {
 
 // trigger for first ajax call
 $(document).ready(function() {
+  videoLength = $('.video-js').contents().length
+  alert(videoLength)
+  if (videoLength == 0){
+    alert("working")
+    var player = videojs('hole-vid', {
+      controls: true, fluid:true,
+      'playbackRates': [0.5, 1, 1.5, 2],
+      abr: {enable: true},
+      controlBar: {
+        children: {
+          'playToggle':{},
+          'progressControl':{},
+          'volumeMenuButton':{},
+          'volumePanel': {inline: false},
+          'playbackRateMenuButton':{},
+          // 'settingsMenuButton': {
+          //     entries : [
+          //       'subtitlesButton',
+          //       'playbackRateMenuButton'
+          //     ]
+          //   },
+          'fullscreenToggle':{}
+        }
+      }
+    });
 
-  $('#1 a').trigger('click')
+    try {player.volume(1);} catch (e) {}
+    console.log("player"+player)
+    player.playlist.autoadvance(0);
+    $('#1 a').trigger('click')
+  }else{
+     alert("not working")
+     $('#1 a').trigger('click')
+  }
 
 });
 
