@@ -1,4 +1,5 @@
 $('#holeinfo').empty().append('<%= j render("hole_information") %>')
+$('video').removeClass('hide');
 var player = videojs('hole-vid', {
   controls: true, fluid:true,
   'playbackRates': [0.5, 1, 1.5, 2],
