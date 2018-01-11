@@ -324,6 +324,7 @@ function pos(num){
 
 function select_video(id){
   // bgColor=$(this).attr('color');
+  console.log(id + "id inside the select video function")
   $.cookie("hole_num", id)
   if (id==='0'){
     $('#0').addClass("active");
