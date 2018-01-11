@@ -1,28 +1,30 @@
 $('#holeinfo').empty().append('<%= j render("hole_information") %>')
-var player = videojs('hole-vid', {
-  controls: true, fluid:true,
-  'playbackRates': [0.5, 1, 1.5, 2],
-  abr: {enable: true},
-  controlBar: {
-    children: {
-      'playToggle':{},
-      'progressControl':{},
-      'volumeMenuButton':{},
-      'volumePanel': {inline: false},
-      'playbackRateMenuButton':{},
-      // 'settingsMenuButton': {
-      //     entries : [
-      //       'subtitlesButton',
-      //       'playbackRateMenuButton'
-      //     ]
-      //   },
-      'fullscreenToggle':{}
+if ($.cookie("hole_num") == 1 || $.cookie("hole_num") == 0){
+  var player = videojs('hole-vid', {
+    controls: true, fluid:true,
+    'playbackRates': [0.5, 1, 1.5, 2],
+    abr: {enable: true},
+    controlBar: {
+      children: {
+        'playToggle':{},
+        'progressControl':{},
+        'volumeMenuButton':{},
+        'volumePanel': {inline: false},
+        'playbackRateMenuButton':{},
+        // 'settingsMenuButton': {
+        //     entries : [
+        //       'subtitlesButton',
+        //       'playbackRateMenuButton'
+        //     ]
+        //   },
+        'fullscreenToggle':{}
+      }
     }
-  }
-});
+  });
 
-try {player.volume(1);} catch (e) {}
-console.log("player"+player)
-console.log("videoList"+videoList)
-player.playlist(videoList);
-player.playlist.autoadvance(0);
+  try {player.volume(1);} catch (e) {}
+  console.log("player"+player)
+  console.log("videoList"+videoList)
+  player.playlist(videoList);
+  player.playlist.autoadvance(0);
+}
