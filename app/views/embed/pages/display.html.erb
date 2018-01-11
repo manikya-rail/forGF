@@ -10,6 +10,8 @@
 <script src="//vjs.zencdn.net/6.2.8/video.min.js"></script>
 <script src="http://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <!-- <script src="https://cdn.rawgit.com/samsol6/Triphitrip-WEBAPP/modeling-user/lib/vjs/videojs-settings-menu.min.js"></script> -->
 
 <!-- Fonts -->
@@ -319,6 +321,7 @@ function pos(num){
 
 function select_video(id){
   // bgColor=$(this).attr('color');
+  $.cookie("hole_num", id)
   if (id==='0'){
     $('#0').addClass("active");
     $('#0').css({"border-bottom":bgColor});
