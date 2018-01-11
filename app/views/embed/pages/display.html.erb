@@ -25,10 +25,6 @@
 
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
-<script> 
- $.cookie("hole_num", 1)
- console.log($.cookie("hole_num", 1) + "hole number initialised")
-</script>
 <!-- Body -->
 
 
@@ -76,7 +72,7 @@
               <ul id="playlist" >
                 <% @holes.try(:each) do |hole| %>
                   <li id="<%=hole.hole_num%>" color="<%=color_selector(@course.color_selector)%>" onClick="select_video(this.id,this.color)">
-                    <%=link_to hole.hole_num, embed_hole_info_path(hole.id), remote: true %>
+                    <%=link_to hole.hole_num, embed_hole_info_path(hole.id, hole_num: hole.hole_num), remote: true %>
                   </li>
                 <% end %>
               </ul>
@@ -324,8 +320,6 @@ function pos(num){
 
 function select_video(id){
   // bgColor=$(this).attr('color');
-  console.log(id + "id inside the select video function")
-  $.cookie("hole_num", id)
   if (id==='0'){
     $('#0').addClass("active");
     $('#0').css({"border-bottom":bgColor});
