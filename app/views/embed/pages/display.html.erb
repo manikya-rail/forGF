@@ -26,8 +26,8 @@
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
 <script> 
- $.cookie("hole_num", 1)
- console.log($.cookie("hole_num", 1) + "hole number initialised")
+ <% session[:hole_num] = 1 %>
+ console.log(<%=session[:hole_num]%> + "session variable initialised")
 </script>
 <!-- Body -->
 
@@ -324,8 +324,7 @@ function pos(num){
 
 function select_video(id){
   // bgColor=$(this).attr('color');
-  console.log(id + "id inside the select video function")
-  $.cookie("hole_num", id)
+ <% session[:hole_num] = id %>
   if (id==='0'){
     $('#0').addClass("active");
     $('#0').css({"border-bottom":bgColor});
