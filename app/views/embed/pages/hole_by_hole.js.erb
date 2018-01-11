@@ -1,4 +1,5 @@
 $('#holeinfo').empty().append('<%= j render("hole_information") %>')
+console.log($.cookie("hole_num"))
 if ($.cookie("hole_num") == 1 || $.cookie("hole_num") == 0){
   var player = videojs('hole-vid', {
     controls: true, fluid:true,
