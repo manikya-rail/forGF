@@ -39,81 +39,302 @@ $('#holeinfo').empty().append('<%= j render("hole_information") %>')
   player.playlist(videoList);
   player.playlist.autoadvance(0);
 
-  var timer;
+ document.querySelector('.previous').addEventListener('click', function() {
+   // i = player.playlist.currentItem();
+   player.playlist.previous();
+   // $('#'+i+' a').trigger('click');
+ });
+ document.querySelector('.next').addEventListener('click', function() {
+   // i = player.playlist.currentItem()+2;
+   player.playlist.next();
+   // $('#'+i+' a').trigger('click');
+ });
 
-  player.on("loadedmetadata",function () {
-    barupdate();
-    current_video();
-    if($(window).width() < 760 && player.paused()){
-      showPlayerActions();
-    }else{
-      showBars();
-    }
-    timer = setTimeout(function(){hideBars()}, 5000);
-  });
-  function hideBars(){
-      $(".hole-bar").animate({top: '-70px'});
-      $(".logo").animate({top: '-70px'});
-      $(".previous").fadeOut();
-      $(".next").fadeOut();
-      $(".video-js .vjs-volume-control").fadeOut();
-      $(".vjs-control-bar").animate({bottom: '-70px'});
-      $(".upper-gradient").animate({top: '-70px'});
-      $(".lower-gradient").animate({bottom: '0px'});
-      // $(".lower-gradient").slideUp(300);
-  }
+ // document.querySelector('.flag').addEventListener('click', function() {
+ //   flag_control();
 
-  function showBars(){
-    $(".hole-bar").animate({top: '1%'});
-    showPlayerActions();
-  }
+ // });
 
-  function progressColor(color){
-   $('.vjs-play-progress').css({"background-color":color});
-   $('.vjs-play-progress').css({"color":color});
-   $('.video-js .vjs-volume-level').css({"background-color":color})
-  }
+ function flag_control(){
+   for (var i = 0, len = gon.videos.length; i < len; i++) {
+     if (gon.tags[i].length > 0) {
+       if (player.currentSrc().includes(gon.videos[i].video_file_name) && gon.videos[i].id == gon.tags[i][0].video_id) {
+         player.currentTime(gon.tags[i][0].time);
+       }
+     }
+   }
+ }
 
-  function showPlayerActions(){
-    $(".logo").animate({top: '25px'});
-    $(".previous").fadeIn();
-    $(".next").fadeIn();
-    $(".video-js .vjs-volume-control").fadeIn();
-    $(".vjs-control-bar").animate({bottom: '1px'});
-    $(".vjs-control-bar").css({opacity: '1'});
-    $(".upper-gradient").animate({top: '0px'});
-    xx = $(".vjs-playlist").outerHeight();
-    xx-=2;
-    $(".lower-gradient").animate({bottom: xx+'px'});
-    // $(".lower-gradient").slideDown(500);
-  }
-  function barupdate(){
-  var hole = player.playlist.currentItem();
 
-  document.getElementById('hole').innerHTML = leftPad(hole+1,1);
-  document.getElementById('hole-num').innerHTML = pos(hole+1);
-  document.getElementById('par').innerHTML = leftPad(gon.par[hole],1);
-  document.getElementById('yard').innerHTML = leftPad(gon.yard[hole],1);
-  document.getElementById('mhcp').innerHTML = leftPad(gon.mhcp[hole],1);
- 
-  }
-  function current_video(){
-    $firstElement = 0;
-    $('#0').removeClass("active");
-    id = player.playlist.currentItem();
-    for (i=0;i<18;i++){
-      if (i===id){
-        document.getElementById(i+1).className = "active";
-        bgColor=document.getElementById(i+1).getAttribute('color')
-        document.getElementById(i+1).setAttribute("style", "border-bottom: 4px solid "+ bgColor + " ");
-        j=i+1;
-        $('#'+j+' a').trigger('click');
-        scrollTo(i);
-      }
-      else{
-        document.getElementById(i+1).removeAttribute("class");
-        document.getElementById(i+1).removeAttribute("style");
-      }
-    }
-  }
+ var timer;
+
+ player.on("loadedmetadata",function () {
+   barupdate();
+   current_video();
+   if($(window).width() < 760 && player.paused()){
+     showPlayerActions();
+   }else{
+     showBars();
+   }
+   timer = setTimeout(function(){hideBars()}, 5000);
+ });
+
+ player.on("userinactive",function () {
+   if (!player.paused()){
+     hideBars();
+   }
+ });
+
+ player.on("useractive",function () {
+   // if (!player.paused()){
+     showBars();
+     clearTimeout(timer);
+   // }
+ });
+
+ player.on ("error",function () {
+     // alert(player.error.message);
+     // player.playlist.next();
+   });
+
+ function hideBars(){
+     $(".hole-bar").animate({top: '-70px'});
+     $(".logo").animate({top: '-70px'});
+     $(".previous").fadeOut();
+     $(".next").fadeOut();
+     $(".video-js .vjs-volume-control").fadeOut();
+     $(".vjs-control-bar").animate({bottom: '-70px'});
+     $(".upper-gradient").animate({top: '-70px'});
+     $(".lower-gradient").animate({bottom: '0px'});
+     // $(".lower-gradient").slideUp(300);
+ }
+
+ function showBars(){
+   $(".hole-bar").animate({top: '1%'});
+   showPlayerActions();
+ }
+
+ function progressColor(color){
+  $('.vjs-play-progress').css({"background-color":color});
+  $('.vjs-play-progress').css({"color":color});
+  $('.video-js .vjs-volume-level').css({"background-color":color})
+ }
+
+ function showPlayerActions(){
+   $(".logo").animate({top: '25px'});
+   $(".previous").fadeIn();
+   $(".next").fadeIn();
+   $(".video-js .vjs-volume-control").fadeIn();
+   $(".vjs-control-bar").animate({bottom: '1px'});
+   $(".vjs-control-bar").css({opacity: '1'});
+   $(".upper-gradient").animate({top: '0px'});
+   xx = $(".vjs-playlist").outerHeight();
+   xx-=2;
+   $(".lower-gradient").animate({bottom: xx+'px'});
+   // $(".lower-gradient").slideDown(500);
+ }
+
+ $('.player-container').hover(
+   function(){
+     bgcolor = $(this).attr('progress-color');
+     showBars();
+     progressColor(bgcolor);
+   }, function(){
+     if (!player.paused()){
+       hideBars();
+     }
+   }
+ );
+
+ /* ADD flag */
+ var Button = videojs.getComponent('Button');
+
+ var FlagButton = videojs.extend(Button, {
+   constructor: function() {
+     Button.apply(this, arguments);
+     this.addClass('flag');
+     this.controlText("Flag");
+   },
+
+   handleClick: function() {
+     flag_control();
+   }
+ });
+
+ // Register the new component
+ videojs.registerComponent('FlagButton', FlagButton);
+ player.getChild('controlBar').addChild('FlagButton', {}, 3);
+
+
+ function playlistui(){
+   // for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
+
+     // document.getElementById('playlist').innerHTML = '<li id="'+0+'" class="hole-home" onClick="select_video(this.id)"></li>';
+
+     for (var i = 1, len = 19; i < len; i++) {
+       document.getElementById('playlist').innerHTML += '<li id="'+i+'" onClick="select_video(this.id)">'+i+'</li>';
+     }
+ }
+
+ function barupdate(){
+   var hole = player.playlist.currentItem();
+
+   document.getElementById('hole').innerHTML = leftPad(hole+1,1);
+   document.getElementById('hole-num').innerHTML = pos(hole+1);
+   document.getElementById('par').innerHTML = leftPad(gon.par[hole],1);
+   document.getElementById('yard').innerHTML = leftPad(gon.yard[hole],1);
+   document.getElementById('mhcp').innerHTML = leftPad(gon.mhcp[hole],1);
+
+ }
+
+ function leftPad(number, targetLength) {
+     var output = number + '';
+     while (output.length < targetLength) {
+         output = '0' + output;
+     }
+     return output;
+ }
+
+ function pos(num){
+   switch (num) {
+     default:
+         return "TH";
+         break;
+     case 1:
+         return "ST";
+         break;
+     case 2:
+         return "ND";
+         break;
+     case 3:
+         return "RD";
+   }
+ }
+
+
+
+ function select_video(id){
+   // bgColor=$(this).attr('color');
+   if (id==='0'){
+     $('#0').addClass("active");
+     $('#0').css({"border-bottom":bgColor});
+   }
+   else{
+     id-=1;
+     player.playlist.currentItem(id);
+   }
+ }
+
+ $(document).ready(function(){
+
+     $(".right-green").click(function(){
+         // alert($(".playlist").scrollLeft() + " px");
+         // alert($(".playlist ul li").outerWidth(true) + " px");
+     });
+ });
+
+ function scrollTo(a){
+   // currPos = $(".playlist").scrollLeft();
+   liWidth = $(".playlist ul li").outerWidth(true);
+   // liWidth = 100;
+   scrollValue = a*liWidth;
+   $('.playlist').animate( { scrollLeft: scrollValue }, 500);
+
+ }
+
+ function current_video(){
+   $firstElement = 0;
+   $('#0').removeClass("active");
+   id = player.playlist.currentItem();
+   for (i=0;i<18;i++){
+     if (i===id){
+       document.getElementById(i+1).className = "active";
+       bgColor=document.getElementById(i+1).getAttribute('color')
+       document.getElementById(i+1).setAttribute("style", "border-bottom: 4px solid "+ bgColor + " ");
+       j=i+1;
+       $('#'+j+' a').trigger('click');
+       scrollTo(i);
+     }
+     else{
+       document.getElementById(i+1).removeAttribute("class");
+       document.getElementById(i+1).removeAttribute("style");
+     }
+   }
+ }
+
+ document.querySelector('.right-green').addEventListener('click', function() {
+   var nextActiveId;
+   if($(window).width() < 350){
+     nextActiveId = $firstElement + 1;
+   }
+   else if($(window).width() >= 350 && $(window).width() < 480){
+     nextActiveId = $firstElement + 2;
+   }
+   else if($(window).width() >= 480 && $(window).width() < 600){
+     nextActiveId = $firstElement + 3;
+   }
+   else if($(window).width() >= 600 && $(window).width() < 760){
+     nextActiveId = $firstElement + 5;
+   }
+   else if($(window).width() >= 760 && $(window).width() < 960){
+     nextActiveId = $firstElement + 6;
+   }
+   else if($(window).width() >= 960 && $(window).width() < 1200){
+     nextActiveId = $firstElement + 9;
+   }
+   else if($(window).width() >= 1200){
+     nextActiveId = $firstElement + 10;
+   }
+   if(nextActiveId == 0 || $("#playlist").find("#"+nextActiveId).size() != 0){
+     scrollTo(nextActiveId);
+     $firstElement = nextActiveId
+   }
+ });
+ document.querySelector('.left-green').addEventListener('click', function() {
+   var nextActiveId;
+   if($(window).width() < 350){
+     nextActiveId = $firstElement - 1;
+   }
+   else if($(window).width() >= 350 && $(window).width() < 480){
+     nextActiveId = $firstElement - 2;
+   }
+   else if($(window).width() >= 480 && $(window).width() < 600){
+     nextActiveId = $firstElement - 3;
+   }
+   else if($(window).width() >= 600 && $(window).width() < 760){
+     nextActiveId = $firstElement - 5;
+   }
+   else if($(window).width() >= 760 && $(window).width() < 960){
+     nextActiveId = $firstElement - 6;
+   }
+   else if($(window).width() >= 960 && $(window).width() < 1200){
+     nextActiveId = $firstElement - 9;
+   }
+   else if($(window).width() >= 1200){
+     nextActiveId = $firstElement - 10;
+   }
+   if (nextActiveId < 0){
+     nextActiveId = 0
+   }
+   if(nextActiveId == 0 || $("#playlist").find("#"+nextActiveId).size() != 0){
+     scrollTo(nextActiveId);
+     $firstElement = nextActiveId
+   }
+ });
+
+ // document.querySelector('.hole-home').addEventListener('click', function() {
+ //   // $( "div.playlist" ).scrollLeft( zx );
+ //   $('div.playlist').animate( { scrollLeft: '-=1000' }, 500);
+ // });
+
+ // document.getElementById(0).className += " active";
+
+ // Page Refresher for safari cache
+
+ $(window).bind("load", function(){
+   if (event.originalEvent.persisted) {
+     window.location.reload();
+   }
+ });
+
 <% end %>
