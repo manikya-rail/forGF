@@ -38,4 +38,82 @@ $('#holeinfo').empty().append('<%= j render("hole_information") %>')
   console.log("videoList"+videoList)
   player.playlist(videoList);
   player.playlist.autoadvance(0);
+
+  var timer;
+
+  player.on("loadedmetadata",function () {
+    barupdate();
+    current_video();
+    if($(window).width() < 760 && player.paused()){
+      showPlayerActions();
+    }else{
+      showBars();
+    }
+    timer = setTimeout(function(){hideBars()}, 5000);
+  });
+  function hideBars(){
+      $(".hole-bar").animate({top: '-70px'});
+      $(".logo").animate({top: '-70px'});
+      $(".previous").fadeOut();
+      $(".next").fadeOut();
+      $(".video-js .vjs-volume-control").fadeOut();
+      $(".vjs-control-bar").animate({bottom: '-70px'});
+      $(".upper-gradient").animate({top: '-70px'});
+      $(".lower-gradient").animate({bottom: '0px'});
+      // $(".lower-gradient").slideUp(300);
+  }
+
+  function showBars(){
+    $(".hole-bar").animate({top: '1%'});
+    showPlayerActions();
+  }
+
+  function progressColor(color){
+   $('.vjs-play-progress').css({"background-color":color});
+   $('.vjs-play-progress').css({"color":color});
+   $('.video-js .vjs-volume-level').css({"background-color":color})
+  }
+
+  function showPlayerActions(){
+    $(".logo").animate({top: '25px'});
+    $(".previous").fadeIn();
+    $(".next").fadeIn();
+    $(".video-js .vjs-volume-control").fadeIn();
+    $(".vjs-control-bar").animate({bottom: '1px'});
+    $(".vjs-control-bar").css({opacity: '1'});
+    $(".upper-gradient").animate({top: '0px'});
+    xx = $(".vjs-playlist").outerHeight();
+    xx-=2;
+    $(".lower-gradient").animate({bottom: xx+'px'});
+    // $(".lower-gradient").slideDown(500);
+  }
+  function barupdate(){
+  var hole = player.playlist.currentItem();
+
+  document.getElementById('hole').innerHTML = leftPad(hole+1,1);
+  document.getElementById('hole-num').innerHTML = pos(hole+1);
+  document.getElementById('par').innerHTML = leftPad(gon.par[hole],1);
+  document.getElementById('yard').innerHTML = leftPad(gon.yard[hole],1);
+  document.getElementById('mhcp').innerHTML = leftPad(gon.mhcp[hole],1);
+ 
+  }
+  function current_video(){
+    $firstElement = 0;
+    $('#0').removeClass("active");
+    id = player.playlist.currentItem();
+    for (i=0;i<18;i++){
+      if (i===id){
+        document.getElementById(i+1).className = "active";
+        bgColor=document.getElementById(i+1).getAttribute('color')
+        document.getElementById(i+1).setAttribute("style", "border-bottom: 4px solid "+ bgColor + " ");
+        j=i+1;
+        $('#'+j+' a').trigger('click');
+        scrollTo(i);
+      }
+      else{
+        document.getElementById(i+1).removeAttribute("class");
+        document.getElementById(i+1).removeAttribute("style");
+      }
+    }
+  }
 <% end %>
