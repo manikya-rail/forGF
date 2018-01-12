@@ -116,15 +116,17 @@ $('#holeinfo').empty().append('<%= j render("hole_information") %>')
       }
     }
   }
-  $('.player-container').hover(
-    function(){
-      bgcolor = $(this).attr('progress-color');
-      showBars();
-      progressColor(bgcolor);
-    }, function(){
-      if (!player.paused()){
-        hideBars();
-      }
+  player.on("userinactive",function () {
+    if (!player.paused()){
+      hideBars();
     }
-  );
+  });
+
+  player.on("useractive",function () {
+    // if (!player.paused()){
+      showBars();
+      clearTimeout(timer);
+    // }
+  });
+
 <% end %>
