@@ -52,16 +52,6 @@
             <script type="text/javascript" src="http://d1s5na5d5z3eyp.cloudfront.net/assets/iframeResizer.min.js"></script>
             <script type="text/javascript">
               iFrameResize({log: true, enablePublicMethods: true });
-              $(window).bind("pageshow", function(event) {
-                if (event.originalEvent.persisted) {
-                  window.location.reload();
-                }
-                var iframe = $(document).find('div.fore-test-iframe iframe');
-                iframe.src = iframe.attr('src');
-              });
-              if ($('.player-container .vplayer').children('video').length > 0){
-                window.location.reload();
-              }
             </script>
           </textarea>
         </div>
