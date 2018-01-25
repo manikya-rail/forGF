@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 course_specs">
           <span class="values"><h4 class="hole_description"><b>Holes:</b> <%= @course.holes.count %></h4></span>
 
           <span class="values"><h4 class="hole_description"><b>Par:</b> <%= @course.total_par %></h4></span>
@@ -256,131 +256,153 @@
       </ul>
     </div>
     <div class="col-md-12 st2">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="divider">Scorecard</div>
-          <%=image_tag @course.score_card_image.url %>
-        </div>
+      <div class="divider">
+        <button type="button" class="btn" id="hole-map" color="<%=color_selector(@course.color_selector)%>">Scorecard</button>
+        <button type="button" class="btn" id="hole-photos" color="<%=color_selector(@course.color_selector)%>">Photos</button>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="divider">Photos</div>
-          <ul id="slider" class="bxslider">
-            <% @course.course_images.each do | courseimage | %>
-              <li><%=image_tag courseimage.photo.url %></li>
-            <% end%>
-          </ul>
-         </div>
+      <div id="33">
+        <ul id="map">
+          <li><%=image_tag @course.score_card_image.url %></li>
+        </ul>
+      </div>
+      <div id="44">
+        <ul id="slider" class="bxslider">
+          <% @course.course_images.each do | courseimage | %>
+            <li><%=image_tag courseimage.photo.url %></li>
+          <% end%>
+        </ul>
       </div>
     </div>
   </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-  $('.bxslider').bxSlider({
-    mode: 'horizontal',
-    useCSS: false,
-    // infiniteLoop: false,
-    // hideControlOnEnd: true,
-    // // easing: 'easeOutElastic',
-    // speed: 2000,
-      pager: false,
-      nextText: '<%= image_tag "right.png" %>',
-      prevText: '<%= image_tag "left.png" %>'
-   });
+  $(document).ready(function(){
+    $('.bxslider').bxSlider({
+      mode: 'horizontal',
+      useCSS: false,
+      // infiniteLoop: false,
+      // hideControlOnEnd: true,
+      // // easing: 'easeOutElastic',
+      // speed: 2000,
+        pager: false,
+        nextText: '<%= image_tag "right.png" %>',
+        prevText: '<%= image_tag "left.png" %>'
+     });
+  });
+
+  $('#select_map').click(function (){
+    bgColor=$(this).attr('color');
+    $('.st1 .bx-wrapper').invisible();
+    // $('#slider').hide();
+    $('#select_photos').removeClass('selected');
+    $('#select_photos').addClass('non-selected');
+    $('#select_photos').css({"background-color":"white"});
+
+    $('#map').show();
+    $('#select_map').removeClass('non-selected');
+    $('#select_map').addClass('selected');
+    $('#select_map').css({"background-color":bgColor});
+
+    // $('.bx-next').hide();
+    // $('.bx-prev').hide();
+  });
+
+  $('#select_photos').click(function (){
+    bgColor=$(this).attr('color');
+    $('#map').hide();
+    $('#select_map').removeClass('selected');
+    $('#select_map').addClass('non-selected');
+    $('#select_map').css({"background-color":"white"});
+
+    $('.st1 .bx-wrapper').visible();
+    // $('#slider').show();
+    $('#select_photos').removeClass('non-selected');
+    $('#select_photos').addClass('selected');
+    $('#select_photos').css({"background-color":bgColor});
+    // $('.bx-next').show();
+    // $('.bx-prev').show();
+  });
+
+  $('#hole-map').click(function (){
+    bgColor=$(this).attr('color');
+    // $('.st1 .bx-wrapper').hide();
+    // $('#22').hide();
+    $('#44').invisible();
+    // $(".st1 .bx-wrapper").invisible();
+
+    // $('#slider li').hide();
+    // $('#slider').hide();
+    $('#hole-photos').removeClass('set');
+    $('#hole-photos').addClass('unset');
+    $('#hole-photos').css({"border-bottom": "4px solid black"});
+    // $('#hole-photos').css({"background-color":"white"});
+
+    $('#map').show();
+    $('#hole-map').removeClass('unset');
+    $('#hole-map').addClass('set');
+    $('#hole-map').css({"border-bottom": "4px solid" + bgColor});
+
+    // $('.bx-next').hide();
+    // $('.bx-prev').hide();
+  });
+
+  $('#hole-photos').click(function (){
+    bgColor=$(this).attr('color');
+    $('#map').hide();
+    $('#hole-map').removeClass('set');
+    $('#hole-map').addClass('unset');
+    $('#hole-map').css({"border-bottom": "4px solid black"});
+    // $('#hole-map').css({"background-color":"white"});
 
 
-  $('.responsive').slick({
-    dots: false,
-    infinite: false,
-    speed: 300,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      }
-    ]
-});
+    $('#hole-photos').removeClass('unset');
+    $('#hole-photos').addClass('set');
+    $('#hole-photos').css({"border-bottom": "4px solid" + bgColor});
 
-});
+    // $('.st1 .bx-wrapper').show();
+    // $('#22').show();
+    $('#44').visible();
+    // slider.reload();
+    // slider.reload();
+    // reloadSlider();
+    // $(".st1 .bx-wrapper").visible();
+    // slider.reload();
+    // sliderInitializer();
+    // $('#slider').show();
+    // $('#slider li').show();
+    // sliderInitializer();
+    // $('#select_photos').removeClass('non-selected');
+    // $('#select_photos').addClass('selected');
 
-$('#select_map').click(function (){
-  bgColor=$(this).attr('color');
-  $('.st1 .bx-wrapper').invisible();
-  // $('#slider').hide();
-  $('#select_photos').removeClass('selected');
-  $('#select_photos').addClass('non-selected');
-  $('#select_photos').css({"background-color":"white"});
+    // $('.bx-next').show();
+    // $('.bx-prev').show();
+  });
 
-  $('#map').show();
-  $('#select_map').removeClass('non-selected');
-  $('#select_map').addClass('selected');
-  $('#select_map').css({"background-color":bgColor});
-
-  // $('.bx-next').hide();
-  // $('.bx-prev').hide();
-});
-
-$('#select_photos').click(function (){
-  bgColor=$(this).attr('color');
-  $('#map').hide();
-  $('#select_map').removeClass('selected');
-  $('#select_map').addClass('non-selected');
-  $('#select_map').css({"background-color":"white"});
-
-  $('.st1 .bx-wrapper').visible();
-  // $('#slider').show();
-  $('#select_photos').removeClass('non-selected');
-  $('#select_photos').addClass('selected');
-  $('#select_photos').css({"background-color":bgColor});
-  // $('.bx-next').show();
-  // $('.bx-prev').show();
-});
+  (function($) {
+      $.fn.invisible = function() {
+          return this.each(function() {
+              $(this).css("visibility", "hidden");
+          });
+      };
+      $.fn.visible = function() {
+          return this.each(function() {
+              $(this).css("visibility", "visible");
+          });
+      };
+  }(jQuery));
 
 
-(function($) {
-    $.fn.invisible = function() {
-        return this.each(function() {
-            $(this).css("visibility", "hidden");
-        });
-    };
-    $.fn.visible = function() {
-        return this.each(function() {
-            $(this).css("visibility", "visible");
-        });
-    };
-}(jQuery));
+  $(document).ready(function() { 
+    $('#select_photos').trigger('click');
+    $('#hole-map').trigger('click');
+  });
+  // $(document).ready(function() { $('#select_photos').trigger('click') });
+  // $(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
 
-
-$(document).ready(function() { $('#select_photos').trigger('click') });
-// $(document).ready(function() { $('#select_photos').trigger('click') });
-// $(document).ready(function() { setTimeout (function() { $('#select_map').trigger('click') }, 500)});
-
-// $( window ).resize(function() {
-//   if($(document).width() >760) $('.map-slecter').addClass("btn-group-lg");
-//   else $('.map-slecter').removeClass("btn-group-lg");
-// });
+  // $( window ).resize(function() {
+  //   if($(document).width() >760) $('.map-slecter').addClass("btn-group-lg");
+  //   else $('.map-slecter').removeClass("btn-group-lg");
+  // });
 
 
 
@@ -450,8 +472,18 @@ h4 img {
   left:42%;
   top:50px;
 }
-
-
+.set{
+  color: white !important;
+  line-height: 20px;
+  outline: none !important;
+  background: black;
+  height: 100%;
+}
+.unset{
+  opacity: 0.4;
+  background: black;
+  height: 100%;
+}
 #map{
   list-style: none;
   margin: 0;
@@ -503,7 +535,7 @@ h4 img {
 }
 
 .values {
-    display: inline-block;
+    display: inline-table !important;
     width: 30%;
     vertical-align: text-top;
 }
@@ -519,9 +551,24 @@ h4 img {
     float: left;
     margin-right: 15px;
 }
+.amenity h4{
+  margin: 5px 0px 0px 7px !important;
+}
 .points h3 img {
   padding-bottom: 5px;
 
+}
+.responsive{
+  display: inline-flex;
+}
+.item{
+  width: auto;
+  padding-right: 50px
+}
+.course_specs{
+  overflow-x: auto;
+  display: inline-flex;
+  -webkit-overflow-scrolling: touch;
 }
 .justify{
   text-align: justify;
@@ -600,7 +647,16 @@ h4 img {
           font-weight: normal;
         }
       }
-
+      @media (max-width: 1199px) {
+        .amenity{
+          display: inline-flex !important;
+        }
+      }
+      @media (max-width: 991px) {
+        .amenity{
+          display: block !important;
+        }
+      }
       @media only screen and (max-width: 1199px) and (min-width: 992px) {
         .description {
           padding-top: 30px;
@@ -651,6 +707,34 @@ h4 img {
 }
 
       @media only screen and (max-width: 991px) and (min-width: 760px) {
+        .st2 {
+          display: block;
+          padding: 0;
+        }
+        .st2 .row {
+          margin: 0;
+        }
+        .st2 .row .col-md-12{
+          padding: 0;
+        }
+        .st1{
+          display: none;
+        }
+
+        .st2 img{
+          width: 100%;
+          height: 100%;
+        }
+        .divider{
+          text-align: center;
+          width:100%;
+          height: 45px;
+          font-size: 20px;
+          line-height: 2;
+          color: white;
+          background-image:url(<%= image_url "hole-selector-background.png" %>);
+          background-size: 100% 100%;
+        }
         .about{
           padding-bottom: 20px;
           margin-bottom: 20px;
@@ -685,7 +769,7 @@ h4 img {
         .amenity-wrap {
          padding-bottom: 30px;
         }
-
+         
         .description2 {
           text-align: center;
           padding-left: 0px;
@@ -715,6 +799,27 @@ h4 img {
         }
         .description2 .home_title {
           margin-left: -42px;
+        }
+        .responsive{
+          overflow-x: auto;
+          display: inline-flex;
+          white-space: nowrap;
+          width: 85%;
+          -webkit-overflow-scrolling: touch;
+        }
+        .item{
+          display: inline-table;
+          width: 145px;
+          margin-left: 42px;
+        }
+        .amenity h4{
+          padding-bottom: 20px;
+        }
+        #hole-map, #hole-photos{
+          width: 50%;
+          margin-left:-5px;
+          font-size:20px;
+          /*background: black;*/
         }
       }
       @media only screen and (max-width: 759px) and (min-width: 480px) {
@@ -768,6 +873,9 @@ h4 img {
         }
         .amenity-wrap{
           padding-bottom: 40px;
+        }
+        .amenity h4{
+          padding-bottom: 20px;
         }
         .description h4{
           font-size: 14px;
@@ -823,6 +931,33 @@ h4 img {
         .description2 .home_title {
           margin-left: -42px;
         }
+        #hole-map, #hole-photos{
+          width: 50%;
+          margin-left:-5px;
+          font-size:20px;
+          /*background: black;*/
+        }
+        .responsive{
+          overflow-x: auto;
+          display: inline-flex;
+          white-space: nowrap;
+          width:90%;
+          margin-left: 4px;
+        }
+        .item{
+          display: inline-table;
+          width: 138px;
+        }
+        .description2{
+              padding-left: 0px;
+              padding-right: 0px;
+        }
+        .amenity-wrap{
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        /*.divider .unset{ border-bottom: 4px solid transparent !important; line-height: 20px;}*/
+
       }
 
       @media only screen and (max-width: 479px) {
@@ -847,7 +982,7 @@ h4 img {
         .divider{
           text-align: center;
           width:100%;
-          height: 40px;
+          height: 45px;
           font-size: 20px;
           line-height: 2;
           color: white;
@@ -900,6 +1035,9 @@ h4 img {
         }
         .amenity-wrap{
           padding-bottom: 40px;
+        }
+        .amenity h4{
+          padding-bottom: 20px;
         }
         .description h4{
           font-size: 13px;
@@ -967,6 +1105,34 @@ h4 img {
         .slick-prev, .slick-prev:focus, .slick-prev:hover {
             left: -45px;
         }
+        #hole-map, #hole-photos{
+          width: 50%;
+          margin-left:-5px;
+          font-size:20px;
+          /*background: black;*/
+        }
+        .responsive{
+          overflow-x: auto;
+          display: inline-flex;
+          white-space: nowrap;
+          width: 100%;
+        }
+        .item{
+          display: inline-table;
+          width: 110px;
+        }
+        .description2{
+              padding-left: 0px;
+              padding-right: 0px;
+        }
+        .amenity-wrap{
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        /*.divider .unset{
+            border-bottom: 4px solid transparent !important;
+            line-height: 20px;
+        }*/
       }
 
       @media only screen and (min-width: 480px) {
