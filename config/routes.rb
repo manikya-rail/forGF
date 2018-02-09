@@ -60,5 +60,6 @@ end
     get "dis2/:id", to: 'pages#dis2'
     get "hole/:id", to: 'pages#hole_by_hole',as: 'hole_info'
     get "course/:id", to: 'pages#course_home',as: 'course_info'
+    post "pages/update_tee_scorecard", to: 'pages#update_tee_scorecard'
   end
 end

@@ -18,34 +18,6 @@
         </div>
       </div>
     </div>
-
-    <div class="col-md-12 specs">
-      <div class="row">
-        <div class="col-md-6">
-          <h3><b class="home_title">Course Specs</b></h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 course_specs">
-          <span class="values"><h4 class="hole_description"><b>Holes:</b> <%= @course.holes.count %></h4></span>
-
-          <span class="values"><h4 class="hole_description"><b>Par:</b> <%= @course.total_par %></h4></span>
-
-          <span class="values"><h4 class="hole_description"><b>Slope:</b> <%= @course.slope %></h4></span>
-        <!-- </div> -->
-      <!-- </div>
-
-      <div class="row"> -->
-        <!-- <div class="col-md-6 "> -->
-          <span class="values"><h4 class="hole_description"><b>Rating:</b> <%= @course.rating %></h4></span>
-
-          <span class="values"><h4 class="hole_description"><b>Yards:</b> <%= @course.length %></h4></span>
-
-          <!-- <span class="values"><h4>Tee Boxes: <%= @course.score_cards.count %></h4></span> -->
-          <span class="values"><h4 class="hole_description"><b>Architect:</b> <span class="text-nowrap"><%= @course.architect %></span></h4></span>
-        </div>
-      </div>
-    </div>
     <div class="col-md-12 description2">
       <div class="row">
         <div class="col-md-12">
@@ -239,42 +211,51 @@
     </div>
   </div>
 
-
   <div class="row slider">
     <div class="col-md-12 st1">
-       <div class="btn-group btn-group-lg map-slecter">
-        <button type="button" class="btn" id="select_photos" color="<%=color_selector(@course.color_selector)%>">Photos</button>
-        <button type="button" class="btn" id="select_map" color="<%=color_selector(@course.color_selector)%>">Scorecard</button>
+      <div class="row">
+        <div class="col-md-6">
+          <h3><b class="home_title">Scorecard</b></h3>
+        </div>
       </div>
-      <ul id="map">
-        <li><%=image_tag @course.score_card_image.url %></li>
-      </ul>
+      <div id="cover-scorecard">
+        <div id="map-desk" class="map-scorecard row">
+          <!-- <li><%=image_tag @course.score_card_image.url %></li> -->
+          <div class="stat-container">
+            <div class="col-xs-5 col-sm-3 col-md-2 select-container">
+             <div class="btn-group">
+                 <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %><span><%=@teename[0][0]%></span>
+                   <i class="caret"></i>
+                 </button>
+                   <ul class="dropdown-menu">
+                    <% @teename.each do |teename|%>
+                     <li class="tees" value="<%=teename[1]%>" course_id="<%=@course.id%>">
+                       <%= image_tag "tees/#{teename[2]}.png" %><span><%=teename[0]%></span>
+                     </li>
+                    <% end %>
+                   </ul>
+               </div>
+            </div>
+            <ul class="scorecard">
+              <%= render 'course_specs' %>
+            </ul>
+            <div class="actual-scorecard">
+              <a href= "#" data-toggle="modal" data-target="#modal_scorecard" style="color:<%=color_selector(@course.color_selector)%>">View Actual Scorecard</a>
+            </div>
+          </div>
+          <div id="scorecard_updated">          
+            <%= render 'scorecard_updated_data' %>
+          </div>
+        </div>
+      </div>
       <ul id="slider" class="bxslider">
         <% @course.course_images.each do | courseimage | %>
           <li><%=image_tag courseimage.photo.url %></li>
         <% end%>
       </ul>
     </div>
-    <div class="col-md-12 st2">
-      <div class="divider">
-        <button type="button" class="btn" id="hole-map" color="<%=color_selector(@course.color_selector)%>">Scorecard</button>
-        <button type="button" class="btn" id="hole-photos" color="<%=color_selector(@course.color_selector)%>">Photos</button>
-      </div>
-      <div id="33">
-        <ul id="map">
-          <li><%=image_tag @course.score_card_image.url %></li>
-        </ul>
-      </div>
-      <div id="44">
-        <ul id="slider" class="bxslider">
-          <% @course.course_images.each do | courseimage | %>
-            <li><%=image_tag courseimage.photo.url %></li>
-          <% end%>
-        </ul>
-      </div>
-    </div>
   </div>
-
 <script type="text/javascript">
   $(document).ready(function(){
     $('.bxslider').bxSlider({
@@ -288,20 +269,39 @@
         nextText: '<%= image_tag "right.png" %>',
         prevText: '<%= image_tag "left.png" %>'
      });
+    RowBgColor = $('.tee-rows').attr('color');
+    $('.tee-rows td').css({"color":RowBgColor});
+  });
+  
+  $(".tees").click(function(){
+     ImageSrc = $(this).children().attr('src');
+     TeeName = $(this).text().replace(/\s/g, '');
+     $('.tee-dropdown .img_preview').attr('src', ImageSrc);
+     $('.tee-dropdown span').text(TeeName);
+     scoreCard = $(this).val();
+     courseId = $(this).attr('course_id');
+     $.ajax("/embed/pages/update_tee_scorecard", {
+       type: "POST",
+       data: {
+         sid: scoreCard,
+         cid: courseId
+       },
+     })
   });
 
   $('#select_map').click(function (){
     bgColor=$(this).attr('color');
-    $('.st1 .bx-wrapper').invisible();
+    $('.st1 .bx-wrapper').css({"display":"none"});
     // $('#slider').hide();
     $('#select_photos').removeClass('selected');
     $('#select_photos').addClass('non-selected');
     $('#select_photos').css({"background-color":"white"});
 
-    $('#map').show();
+    $('#map-desk').show();
     $('#select_map').removeClass('non-selected');
     $('#select_map').addClass('selected');
     $('#select_map').css({"background-color":bgColor});
+    $('#actual-map').css({"display": "none"});
 
     // $('.bx-next').hide();
     // $('.bx-prev').hide();
@@ -309,19 +309,25 @@
 
   $('#select_photos').click(function (){
     bgColor=$(this).attr('color');
-    $('#map').hide();
+    $('#map-desk').hide();
     $('#select_map').removeClass('selected');
     $('#select_map').addClass('non-selected');
     $('#select_map').css({"background-color":"white"});
 
-    $('.st1 .bx-wrapper').visible();
+    $('.st1 .bx-wrapper').css({"display":"block"});
     // $('#slider').show();
     $('#select_photos').removeClass('non-selected');
     $('#select_photos').addClass('selected');
     $('#select_photos').css({"background-color":bgColor});
+    $('#actual-map').css({"display": "none"});
     // $('.bx-next').show();
     // $('.bx-prev').show();
   });
+  // $('.actual-scorecard').click(function (){
+  //   $('#map-desk').hide();
+  //   $('.st1 .bx-wrapper').css({"display":"none"});
+  //   $('#actual-map').css({"display": "block"});
+  // });
 
   $('#hole-map').click(function (){
     bgColor=$(this).attr('color');
@@ -408,6 +414,70 @@
 
 </script>
 <style type="text/css">
+.modal_scorecard_image{
+  width: 100%;
+}
+#actual-map{
+  display:none;
+}
+.stat-container{
+  margin-left: 160px;
+}
+.topborder{
+  margin-left: 160px;
+  border-top: solid 1px #e5e5e5;
+  min-height: 30px;
+  margin-top: 10px;
+}
+.score-specs{
+  width: 100%;
+  padding: 0 10px;
+  color: #777;
+  margin-top: 10px;
+}
+.table tr{
+  line-height: 2.5;
+}
+.rowstart{
+  text-align: center;
+  font-weight: 700;
+  line-height: 3;
+  width: 3%;
+}
+.rowcolumns{
+  width: 3%;
+  text-align: center;
+  min-width: 30px;
+}
+.scorecard{
+  display: inline-block;
+  width: 400px;
+  margin-bottom: 0px;
+  vertical-align: inherit;
+}
+.scorecard li{
+  border-right: solid 1px #e5e5e5;
+  display: table-cell;
+  text-align: center;
+  width: 90px;
+}
+.scorecard li span{
+  font-size: 18px;
+  border-bottom: none;
+  font-weight: 700px;
+  color: #777;
+}
+.scorecard li p{
+  font-size: 12px;
+  margin-top: 0px;
+  margin-bottom: 0px !important;
+  color: #a29e9e;
+}
+#teename {
+  display: block !important;
+  border: 0px;
+  box-shadow: none;
+}
 .caddies{
   /*width: 50px;*/
   height: 35px;
@@ -484,11 +554,49 @@ h4 img {
   background: black;
   height: 100%;
 }
-#map{
+.map-scorecard{
+    width: 100%;
+    margin: auto;
+    position: relative;
+    padding: 0px 26px;
+    margin-bottom: 5px;
+}
+.actual-scorecard {
+    padding: 0px 20px;
+    text-align: right;
+    font-weight: 600;
+    width: 558px;
+    display: inline-block;
+    vertical-align: super;
+    font-size: 15px;
+}
+.map-scorecard .stat-container {
+    margin-left: 0px;
+    clear: both;
+    padding-top: 20px;
+    border-top: solid 1px #e5e5e5;
+    width: 100%;
+}
+/*table.score-specs tr:first-child td {
+    color: rgb(11, 132, 165);
+}*/
+table.score-specs tr:nth-child(2) td  {
+  background: #f6f6f6;
+}
+.map-scorecard .topborder {
+    margin-left: 0px;
+    padding: 9px;
+    border-bottom: solid 1px #e5e5e5;
+}
+#actual-map{
   list-style: none;
   margin: 0;
   padding: 0;
   position: absolute;
+}
+#actual-map li img{
+  width: 100%;
+  height: 100%;
 }
 #slider {
   position: absolute;
@@ -574,8 +682,12 @@ h4 img {
   text-align: justify;
 }
 .slider {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+}
+.slider h3 {
+  padding-left: 45px;
 }
 .slick-prev, .slick-next {
     width: 20px;
@@ -596,7 +708,55 @@ h4 img {
 .slick-track {
     margin-left: 0px !important;
 }
+.select-container {
+    width: 210px;
+}
+#scorecard_updated {
+  width: 100%;
+}
+#cover-scorecard {
+  width: 100%;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.dropdown-menu li{
+  padding: 6px 0px;
+}
 
+.dropdown-menu li img{
+  width: 36px;
+  padding: 0px 10px;
+}
+.stat-container .btn-group .dropdown-toggle img{
+  width: 21px;
+  padding-right: 5px;
+  vertical-align: sub;
+}
+.stat-container .btn-group .dropdown-toggle{
+  width: 170px;
+  border: none;
+  color: #777;text-transform: uppercase;
+}
+.stat-container .btn-group .dropdown-menu{
+    max-height: 200px;
+    overflow: auto;
+}
+.modal-dialog {
+    max-width: 75%;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%) !important;
+}
+.bx-wrapper {
+  position: relative;
+}
+.bx-controls {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}
 
 
 /*// 320, 480, 760, 960, 1200 and 1600px.*/
@@ -618,6 +778,12 @@ h4 img {
         }
 
 
+      }
+
+      @media only screen and (max-width: 1360px) {
+        .map-scorecard {
+          width: 1297px;
+        }
       }
 
       @media only screen and (max-width: 1599px) and (min-width: 1200px) {
@@ -657,6 +823,12 @@ h4 img {
           display: block !important;
         }
       }
+      @media only screen and (min-width: 1199px) {
+          .modal-dialog {
+              transform: translateY(-56%) !important;
+          }
+      }
+
       @media only screen and (max-width: 1199px) and (min-width: 992px) {
         .description {
           padding-top: 30px;
@@ -704,6 +876,35 @@ h4 img {
           display: block;
           text-align: center;
       }
+      .map-scorecard .stat-container {
+          border-top: 0px;
+      }
+      .map-scorecard .topborder {
+          border: 0px;
+          margin-top: 0px;
+          padding-top: 0px;
+      }
+      /*.bx-controls-direction {
+        height: 55px;
+        margin-top: 0%;
+      }*/
+      .slider h3 {
+        padding-left: 72px;
+        border-top: 1px solid #e5e5e5;
+        padding-top: 20px;
+        width: 100%;
+        margin-bottom: 30px;
+      }
+      .slider h3 b.home_title{
+        margin-left: -40px;
+      }
+      .slider .row > .col-md-6 {
+          clear: both;
+          padding: 0px 30px;
+      }
+      .score-specs {
+          margin-top: 0px;
+      }
 }
 
       @media only screen and (max-width: 991px) and (min-width: 760px) {
@@ -716,9 +917,6 @@ h4 img {
         }
         .st2 .row .col-md-12{
           padding: 0;
-        }
-        .st1{
-          display: none;
         }
 
         .st2 img{
@@ -822,6 +1020,13 @@ h4 img {
           /*background: black;*/
         }
       }
+      @media only screen and (max-width: 759px) {
+
+        .modal-dialog {
+            transform: translate(-53%, -50%) !important;
+            left: 50%;
+        }
+      }
       @media only screen and (max-width: 759px) and (min-width: 480px) {
 
         .st2 {
@@ -833,9 +1038,6 @@ h4 img {
         }
         .st2 .row .col-md-12{
           padding: 0;
-        }
-        .st1{
-          display: none;
         }
 
         .st2 img{
@@ -957,16 +1159,17 @@ h4 img {
             -webkit-overflow-scrolling: touch;
         }
         /*.divider .unset{ border-bottom: 4px solid transparent !important; line-height: 20px;}*/
-
+        .course_specs .values.architect-value {
+          width:50%;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
       }
 
       @media only screen and (max-width: 479px) {
         .st2 {
           display: block;
           padding:0;
-        }
-        .st1{
-          display: none;
         }
         .st2 img{
           width: 100%;
@@ -1034,7 +1237,7 @@ h4 img {
           height: 40px;
         }
         .amenity-wrap{
-          padding-bottom: 40px;
+          padding-bottom: 16px;
         }
         .amenity h4{
           padding-bottom: 20px;
@@ -1054,6 +1257,9 @@ h4 img {
         .bx-next img, .bx-prev img {
           height: 50%;
           width: 50%;
+        }
+        .bx-prev, .bx-next {
+            margin-top: -15px;
         }
         .specs {
           text-align: center;
@@ -1117,6 +1323,9 @@ h4 img {
           white-space: nowrap;
           width: 100%;
         }
+        .hole-info-div {
+            overflow-x: hidden;
+        }
         .item{
           display: inline-table;
           width: 110px;
@@ -1133,6 +1342,25 @@ h4 img {
             border-bottom: 4px solid transparent !important;
             line-height: 20px;
         }*/
+
+        .scorecard{
+          padding: 0;
+          margin: 0;
+        }
+        .stat-container .select-container{
+          padding: 0;
+          width: auto;
+        }
+        .stat-container .btn-group .dropdown-toggle{
+          padding: 6px 0px;
+        }
+        .map-scorecard{
+          padding-left: 0px;
+        }
+        .scorecard li{
+          width: auto;
+          padding: 0px 10px;
+        }
       }
 
       @media only screen and (min-width: 480px) {

@@ -92,7 +92,7 @@ class Admin::CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   def remove_course_image
     if params[:for].present?
        course = Course.find(params[:course_id]) 
@@ -125,7 +125,7 @@ class Admin::CoursesController < ApplicationController
       params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :color_selector, :total_par, :slope, :rating, :length, :number_of_tees, :architect, :resort_id, :network_id, :logo, :cover, :score_card_image, :video, :transparent_logo, :logo_hyperlink,
           amenities_attributes: [:id, :restaurants, :caddies, :carts, :practice_range, :golf_boards],
           location_attributes: [:id, :town,:state, :lat, :lng],
-          score_cards_attributes: [:id, :tee_name, :color, :_destroy],
+          score_cards_attributes: [:id, :tee_name, :color, :rating, :slope, :_destroy],
           holes_attributes: [:id, :par, :yards, :mhcp, :whcp, :description, :hole_num]
         )
     end

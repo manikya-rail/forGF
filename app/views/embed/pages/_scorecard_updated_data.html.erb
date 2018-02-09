@@ -1,0 +1,55 @@
+<div class="topborder">
+  <div class="mobile-scroll">
+    <table class="score-specs">
+      <tbody>
+        <tr class="tee-rows" color="<%=color_selector(@course.color_selector)%>">
+          <td class="rowstart">TEE</td>
+          <% 18.times do |t| %>
+           <%t+=1%>
+           <td class="rowcolumns"><%=t%></td>
+           <%if t == 9 %>
+            <td class="rowstart">OUT</td>
+           <% end %>
+          <% end %>
+          <td class="rowstart">IN</td>
+          <td class="rowstart">TOT</td>
+        </tr>
+        <tr>
+          <td class="rowstart">YDS</td>
+          <% @yards.each_with_index do |yard,index| %>
+           <% if index == 9 %>
+             <% out_total = @yards.first(9).sum() %>
+             <td class="rowcolumns"><%=out_total%></td>
+           <% end %>
+           <td class="rowcolumns"><%=yard%></td>
+          <% end %>
+          <% in_total = @yards.last(9).sum() %>
+          <td class="rowcolumns"><%=in_total%></td>
+          <td class="rowcolumns"><%=@yards.sum()%></td>
+        </tr>
+        <tr>
+          <td class="rowstart">PAR</td>
+          <% @par.each_with_index do |par,index| %>
+           <% if index == 9 %>
+             <% out_total = @par.first(9).sum() %>
+             <td class="rowcolumns"><%=out_total%></td>
+           <% end %>
+           <td class="rowcolumns"><%=par%></td>
+          <% end %>
+          <% in_total = @par.last(9).sum() %>
+          <td class="rowcolumns"><%=in_total%></td>
+          <td class="rowcolumns"><%=@par.sum()%></td>
+        </tr>
+        <tr>
+          <td class="rowstart">HCP</td>
+          <% @mhcp.each_with_index do |mhcp,index| %>
+           <% if index == 9 %>
+             <td class="rowcolumns"></td>
+           <% end %>
+           <td class="rowcolumns"><%=mhcp%></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

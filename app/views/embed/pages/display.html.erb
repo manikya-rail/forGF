@@ -1,4 +1,18 @@
 <%= Gon::Base.render_data %>
+<head> 
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)
+    [0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-110941307-1', 'auto') ; 
+
+    ga('send', 'pageview');
+
+  </script>
+</head>
 <%#= csrf_meta_tags %>
 <script type="text/javascript" src="http://davidjbradshaw.com/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
 
@@ -53,7 +67,7 @@
 
 
           <!-- <div class="upload on-video"><%= image_tag "upload.png" %></div> -->
-          <div class="logo on-video"><%= link_to image_tag(logo_on_video(@course)), hyperlink_on_video(@course), target: :_blank %> </div>
+          <div class="logo on-video"><%= link_to image_tag(logo_on_video(@course)), hyperlink_on_video(@course), target: :_blank %></div>
           <div class = "lower-gradient"></div>
 
           <div class="vjs-playlist">
@@ -69,7 +83,7 @@
             <div  class="playlist">
               <ul id="playlist" >
                 <% @holes.try(:each) do |hole| %>
-                  <li id="<%=hole.hole_num%>" color="<%=color_selector(@course.color_selector)%>" onClick="select_video(this.id,this.color)">
+                  <li id="<%=hole.hole_num%>" class= "hole-number" hole_image= "<%= hole.logo_image.present? ? hole.logo_image.url : logo_on_video(@course)%>" color="<%=color_selector(@course.color_selector)%>" onClick="select_video(this.id,this.color);ga('send','event','videos','Play',this.id);">
                     <%=link_to hole.hole_num, embed_hole_info_path(hole.id, hole_num: hole.hole_num), remote: true %>
                   </li>
                 <% end %>
@@ -88,7 +102,7 @@
         </div>
       </div>
       <div class = "hider"> </div>
-
+      <%=render :partial => 'admin/score_cards/scorecard_modal'%>
       <div class="hole-info-div">
         <div id="holeinfo" class="holeinfo"></div>
       </div>
@@ -145,8 +159,10 @@
   player.playlist(videoList);
   player.playlist.autoadvance(0);
 
-  
-
+  $(".hole-number").click(function(){
+    logoImage = $(this).attr('hole_image');
+    $('.logo a img').attr('src', logoImage)
+  })
 </script>
 <%= render 'display_file_full_js' %>
 
@@ -190,6 +206,7 @@ html,body
   /*min-height: 600px;*/
   height: auto !important;
   overflow: auto !important;
+  overflow-x: hidden !important;
   max-width: 100% !important;
   /*border-image: url(<%= image_url "iframe-border.png" %>) 200 round;*/
   /*border: 5px solid black;*/
@@ -199,6 +216,9 @@ html,body
 .player-container {
   display: block !important;
   position: relative !important;
+}
+#modal_scorecard{
+  z-index: 99999;
 }
 .hole-info-div {
   display: block !important;
@@ -1623,7 +1643,31 @@ div:focus {
   .next{
     right: 25px;
   }
-
+  .vjs-volume-panel{
+    margin-right: -4px !important;
+  }
+  .vjs-playback-rate{
+    margin-right: -19px !important;
+  }
+  .vjs-fullscreen-control{
+/*    margin-right: -19px !important;*/
+    left: 5px !important;
+  }
+  .video-js .vjs-volume-panel.vjs-volume-panel-vertical{
+    width: 3.5em;
+  }
+  .video-js .vjs-volume-panel.vjs-volume-panel-vertical > .vjs-mute-control{ 
+    padding-left: 0px;
+    padding-right: 0px;
+    width: auto;
+  }
+  .video-js .vjs-control {
+    padding-left: .5em;
+    padding-right: .5em;
+  }
+  .video-js .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical{
+    left: -0.5em;
+  }
 }
 
 @media only screen and (min-width: 250px) and (max-width: 349px) {
@@ -1638,6 +1682,16 @@ div:focus {
   .next{
     right: 17px;
   }
+  .vjs-volume-panel{
+    margin-right: -4px !important;
+  }
+  .vjs-playback-rate{
+    margin-right: -19px !important;
+  }
+  .vjs-fullscreen-control{
+/*    margin-right: -19px !important;*/
+    left: 6px !important;
+  }
 }
 
 @media only screen and (max-width: 300px) {
@@ -1645,7 +1699,7 @@ div:focus {
     left: -33px !important;
   }
   .vjs-fullscreen-control{
-    left: -35px !important;
+    left: -15px !important;
   }
   .vjs-control-bar .flag{
     left: -7px !important;

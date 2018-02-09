@@ -4,6 +4,12 @@
 <div class="col-md-4">
     <%= s.select(:color, ["Green", "Red", "White", "Blue", "Violet", "Gold", "Teal", "LightBlue", "Black"], options = {prompt: 'Color'}, {class:'dropdown-less-padd form-control inline check-field' ,style: 'margin-left:10px;'}) %>
 </div>
+<div class="col-md-4">
+    <%= s.text_field :rating, class:" rating-field form-control inline check-field", placeholder: "Rating" , id:'rating-name-field' %>
+</div>
+<div class="col-md-4">
+    <%= s.text_field :slope, class:" slope-field form-control inline check-field", placeholder: "Slope" , id:'slope-field' %>
+</div>
 <div class="col-md-2">
     <%= s.check_box :_destroy %>
     <%= s.label :_destroy, "Remove" %>
