@@ -14,7 +14,7 @@
           <td class="rowstart">IN</td>
           <td class="rowstart">TOT</td>
         </tr>
-        <tr>
+        <tr class="updated-rows">
           <td class="rowstart">YDS</td>
           <% @yards.each_with_index do |yard,index| %>
            <% if index == 9 %>
@@ -27,7 +27,7 @@
           <td class="rowcolumns"><%=in_total%></td>
           <td class="rowcolumns"><%=@yards.sum()%></td>
         </tr>
-        <tr>
+        <tr class="updated-rows">
           <td class="rowstart">PAR</td>
           <% @par.each_with_index do |par,index| %>
            <% if index == 9 %>
@@ -40,7 +40,7 @@
           <td class="rowcolumns"><%=in_total%></td>
           <td class="rowcolumns"><%=@par.sum()%></td>
         </tr>
-        <tr>
+        <tr class="updated-rows">
           <td class="rowstart">HCP</td>
           <% @mhcp.each_with_index do |mhcp,index| %>
            <% if index == 9 %>

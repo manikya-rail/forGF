@@ -213,19 +213,21 @@
 
   <div class="row slider">
     <div class="col-md-12 st1">
-      <div class="row">
+      <div class="row scorecard-row">
         <div class="col-md-6">
-          <h3><b class="home_title">Scorecard</b></h3>
+          <h3 style="display:inline-block;"><b class="home_title">Scorecard</b></h3>
+          <div class="actual-scorecard">
+            <a href= "#" data-toggle="modal" data-target="#modal_scorecard" style="text-decoration:none;font-family: Avenir;font-size: 14px;color:<%=color_selector(@course.color_selector)%>">View</a>
+          </div>
         </div>
       </div>
-      <div id="cover-scorecard">
         <div id="map-desk" class="map-scorecard row">
           <!-- <li><%=image_tag @course.score_card_image.url %></li> -->
           <div class="stat-container">
             <div class="col-xs-5 col-sm-3 col-md-2 select-container">
              <div class="btn-group">
                  <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %><span><%=@teename[0][0]%></span>
+                   <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %><span class="teename-caret"><%=@teename[0][0]%></span>
                    <i class="caret"></i>
                  </button>
                    <ul class="dropdown-menu">
@@ -240,10 +242,10 @@
             <ul class="scorecard">
               <%= render 'course_specs' %>
             </ul>
-            <div class="actual-scorecard">
-              <a href= "#" data-toggle="modal" data-target="#modal_scorecard" style="color:<%=color_selector(@course.color_selector)%>">View Actual Scorecard</a>
-            </div>
           </div>
+        </div>
+
+        <div id="cover-scorecard">
           <div id="scorecard_updated">          
             <%= render 'scorecard_updated_data' %>
           </div>
@@ -423,17 +425,18 @@
 .stat-container{
   margin-left: 160px;
 }
-.topborder{
-  margin-left: 160px;
-  border-top: solid 1px #e5e5e5;
-  min-height: 30px;
-  margin-top: 10px;
+.topborder {
+    margin-left: 27px;
+    min-height: 30px;
+    margin-top: 10px;
+    margin-right: 27px;
 }
 .score-specs{
   width: 100%;
   padding: 0 10px;
   color: #777;
   margin-top: 10px;
+  border-top: solid 1px #e5e5e5;
 }
 .table tr{
   line-height: 2.5;
@@ -452,7 +455,7 @@
 .scorecard{
   display: inline-block;
   width: 400px;
-  margin-bottom: 0px;
+  margin: 7px 0 0 -64px;
   vertical-align: inherit;
 }
 .scorecard li{
@@ -462,13 +465,15 @@
   width: 90px;
 }
 .scorecard li span{
-  font-size: 18px;
+  font-size: 16px;
   border-bottom: none;
   font-weight: 700px;
   color: #777;
+  font-family: Avenir-heavy;
 }
 .scorecard li p{
   font-size: 12px;
+  font-family: Avenir;
   margin-top: 0px;
   margin-bottom: 0px !important;
   color: #a29e9e;
@@ -516,6 +521,10 @@
 .st1 {
   padding: 0;
 }
+.row.slider .col-md-12.st1 {
+    position: relative;
+    z-index: 99;
+}
 h3, h4 {
   margin: 0;
   margin-bottom: 5px;
@@ -562,13 +571,11 @@ h4 img {
     margin-bottom: 5px;
 }
 .actual-scorecard {
-    padding: 0px 20px;
-    text-align: right;
-    font-weight: 600;
-    width: 558px;
+    padding: 0px 17px;
+    font-weight: 300;
     display: inline-block;
-    vertical-align: super;
-    font-size: 15px;
+    vertical-align: baseline;
+    font-size: 12px;
 }
 .map-scorecard .stat-container {
     margin-left: 0px;
@@ -576,6 +583,12 @@ h4 img {
     padding-top: 20px;
     border-top: solid 1px #e5e5e5;
     width: 100%;
+}
+.score-specs tbody > tr:first-child td {
+  padding-top: 20px;
+}
+.score-specs tbody > tr:last-child td {
+  padding-bottom: 10px;
 }
 /*table.score-specs tr:first-child td {
     color: rgb(11, 132, 165);
@@ -667,6 +680,7 @@ table.score-specs tr:nth-child(2) td  {
 
 }
 .responsive{
+  padding-top: 15px;
   display: inline-flex;
 }
 .item{
@@ -718,9 +732,12 @@ table.score-specs tr:nth-child(2) td  {
   width: 100%;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
+  position: relative;
+  z-index: 99;
 }
 .dropdown-menu li{
   padding: 6px 0px;
+  cursor: pointer;
 }
 
 .dropdown-menu li img{
@@ -757,8 +774,18 @@ table.score-specs tr:nth-child(2) td  {
     bottom: 0px;
     width: 100%;
 }
-
-
+.tee-rows td, .rowstart{
+  font-family: Avenir-heavy;
+  font-size: 14px;
+}
+.updated-rows .rowcolumns{
+  font-family: Avenir;
+  font-size: 14px;
+}
+.mobile-scroll {
+    border-bottom: solid 1px #e5e5e5;
+    margin-bottom: 5px;
+}
 /*// 320, 480, 760, 960, 1200 and 1600px.*/
       @media only screen and (min-width: 1600px) {
         .description {
@@ -905,6 +932,22 @@ table.score-specs tr:nth-child(2) td  {
       .score-specs {
           margin-top: 0px;
       }
+        
+      .rowcolumns {
+          min-width: 58px;
+      }
+      .description2 {
+          border-bottom: solid 1px #e5e5e5;
+          padding-bottom: 30px;
+      }
+      .slider h3 {
+        width: auto;
+        border-top: 0px;
+        margin-bottom: 0px;
+      }
+      .description {
+          margin-bottom: 0px;
+      }
 }
 
       @media only screen and (max-width: 991px) and (min-width: 760px) {
@@ -1007,7 +1050,7 @@ table.score-specs tr:nth-child(2) td  {
         }
         .item{
           display: inline-table;
-          width: 145px;
+          width: 130px;
           margin-left: 42px;
         }
         .amenity h4{
@@ -1019,6 +1062,15 @@ table.score-specs tr:nth-child(2) td  {
           font-size:20px;
           /*background: black;*/
         }
+        .scorecard-row h3{
+          position: static !important;
+        }
+        .scorecard-row .actual-scorecard{
+          padding: 0px 50px;
+          position: absolute;
+          top: 25px;
+          right: 0;
+        }
       }
       @media only screen and (max-width: 759px) {
 
@@ -1026,9 +1078,21 @@ table.score-specs tr:nth-child(2) td  {
             transform: translate(-53%, -50%) !important;
             left: 50%;
         }
+        .slider h3 {
+          margin-bottom: 30px;
+        }
+      }
+      @media only screen and (max-width: 768px) {
+        
+        .scorecard-row h3 {
+            margin-bottom: 30px;
+            display: block !important;
+        }
       }
       @media only screen and (max-width: 759px) and (min-width: 480px) {
-
+        .teename-caret{
+          display:none;
+        }
         .st2 {
           display: block;
           padding: 0;
@@ -1078,6 +1142,7 @@ table.score-specs tr:nth-child(2) td  {
         }
         .amenity h4{
           padding-bottom: 20px;
+          margin: 5px 0px 0px 4px !important;
         }
         .description h4{
           font-size: 14px;
@@ -1164,9 +1229,21 @@ table.score-specs tr:nth-child(2) td  {
           white-space: nowrap;
           text-overflow: ellipsis;
         }
+        .scorecard-row h3{
+          position: static !important;
+        }
+        .scorecard-row .actual-scorecard{
+          padding: 0px 50px;
+          position: absolute;
+          top: 25px;
+          right: 0;
+        }
       }
 
       @media only screen and (max-width: 479px) {
+        .teename-caret{
+          display:none;
+        }
         .st2 {
           display: block;
           padding:0;
@@ -1241,6 +1318,7 @@ table.score-specs tr:nth-child(2) td  {
         }
         .amenity h4{
           padding-bottom: 20px;
+          margin: 5px 0px 0px 4px !important;
         }
         .description h4{
           font-size: 13px;
@@ -1289,6 +1367,7 @@ table.score-specs tr:nth-child(2) td  {
           font-family: Avenir-Heavy;
           left: 50%;
           position: absolute;
+          font-size: 15px !important;
         }
         .about .home_title {
           margin-left: -62.5px;
@@ -1297,7 +1376,7 @@ table.score-specs tr:nth-child(2) td  {
           margin-left: -47px;
         }
         .description2 .home_title {
-          margin-left: -35px;
+          margin-left: -42px;
         }
         .hole_description{
           font-family: Avenir-Book;
@@ -1353,6 +1432,7 @@ table.score-specs tr:nth-child(2) td  {
         }
         .stat-container .btn-group .dropdown-toggle{
           padding: 6px 0px;
+          width: 109px;
         }
         .map-scorecard{
           padding-left: 0px;
@@ -1360,6 +1440,15 @@ table.score-specs tr:nth-child(2) td  {
         .scorecard li{
           width: auto;
           padding: 0px 10px;
+        }
+        .scorecard-row h3{
+          position: static !important;
+        }
+        .scorecard-row .actual-scorecard{
+          padding: 0px 50px;
+          position: absolute;
+          top: 25px;
+          right: 0;
         }
       }
 
@@ -1371,6 +1460,11 @@ table.score-specs tr:nth-child(2) td  {
         .hole_description{
           font-size: 16px;
           font-family: Avenir-Book;
+        }
+      }
+      @media (max-width: 400px) {
+        .item {
+          width: 87px;
         }
       }
 
