@@ -55,6 +55,11 @@ class Admin::CoursesController < ApplicationController
             @course.course_images.create(photo: image)
           }
         end
+        if params[:score_images]
+          params[:score_images].each { |image|
+            @course.scorecard_images.create(photo: image)
+          }
+        end
         format.html { redirect_to admin_holes_create_path(@course), notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
@@ -72,6 +77,11 @@ class Admin::CoursesController < ApplicationController
         if params[:images]
           params[:images].each { |image|
             @course.course_images.create(photo: image)
+          }
+        end
+        if params[:score_images]
+          params[:score_images].each { |image|
+            @course.scorecard_images.create(photo: image)
           }
         end
         format.html { redirect_to admin_courses_path, notice: 'Course was successfully updated.' }
@@ -122,7 +132,7 @@ class Admin::CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :color_selector, :total_par, :slope, :rating, :length, :number_of_tees, :architect, :resort_id, :network_id, :logo, :cover, :score_card_image, :video, :transparent_logo, :logo_hyperlink,
+      params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :color_selector, :total_par, :slope, :rating, :length, :number_of_tees, :architect, :resort_id, :network_id, :logo, :cover, :video, :transparent_logo, :logo_hyperlink,
           amenities_attributes: [:id, :restaurants, :caddies, :carts, :practice_range, :golf_boards],
           location_attributes: [:id, :town,:state, :lat, :lng],
           score_cards_attributes: [:id, :tee_name, :color, :rating, :slope, :_destroy],

@@ -1,11 +1,75 @@
 <div class="modal fade" id="modal_scorecard" role="dialog">
-  <div class="modal-dialog">
-  
+  <div class="slideshows">
+    <div class="prev-image"> <%= image_tag "left.png"%> </div>
+    <div class="next-image"><%= image_tag "right.png"%></div>
+  </div>
+  <ul class="modal-dialog gallery">
     <!-- Modal content-->
-    <div class="modal-content">
-        <%=image_tag @course.score_card_image.url, class: "modal_scorecard_image" %>
-    </div>
-    
+    <% if @course.scorecard_images.exists? %>
+        <% @course.scorecard_images.each do |image| %>
+          <li class="modal-content">
+              <%=image_tag image.photo.url, class: "modal_scorecard_image" %>
+          </li>
+      <% end %>
+    <% else %>
+         <li class="modal-content">
+            <div class="no-content"><%=image_tag "no-image.jpg", class: "modal_scorecard_image" , alt: "No image"%></div>
+        </li>
+    <% end %>
   </div>
 </div>
-  
+<script type="text/javascript">
+        var speed = 100;
+
+    $(".prev-image").click(function() {
+        var now = $(this).parent().next("ul.gallery").children(":visible"),
+            last = $(this).parent().next("ul.gallery").children(":last"),
+            prev = now.prev();
+            prev = prev.index() == -1 ? last : prev;
+        now.fadeOut(speed, function() {prev.fadeIn(speed);});
+    });
+
+    $(".next-image").click(function() {
+        var now = $(this).parent().next("ul.gallery").children(':visible'),
+            first = $(this).parent().next("ul.gallery").children(':first'),
+            next = now.next();
+            next = next.index() == -1 ? first : next;
+        now.fadeOut(speed, function() {next.fadeIn(speed);});
+    });
+</script>
+<style>
+ .prev-image{
+    /*margin:top right down left;*/
+    position: absolute;
+    left: 25px;
+    top: 45%;
+    height: 40px;
+    display: flex;
+    width: 70px;
+    height: 70px;
+    margin-left: -25px;
+    margin-right: -25px;
+    align-items: center;
+    justify-content: center;
+   }
+ .next-image{
+    position: absolute;
+    right: 25px;
+    top: 45%;
+    height: 40px;
+    display: flex;
+    width: 70px;
+    height: 70px;
+    margin-left: -25px;
+    margin-right: -25px;
+    align-items: center;
+    justify-content: center;
+  }
+ .gallery li {
+  display:none; 
+   list-style:none;
+ }
+ .gallery li:first-child {
+  display:block;
+ }
+</style>

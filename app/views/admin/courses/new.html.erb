@@ -117,11 +117,11 @@
             </div>
 
             <div class="col-md-4">
-              <%= label_tag :score_card_image, 'Score Card', class: "col-md-12 zero-left-right-padd" %>
+              <%= label_tag :score_card_image, 'Score Cards', class: "col-md-12 zero-left-right-padd" %>
               <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
                 <div class="score-label">
-                  <%= f.file_field :score_card_image, class: 'check-field score-card-field' %>
+                  <%= file_field_tag "score_images[]", type: :file, multiple: true, class: 'check-field score-card-field' %>
                 </div>
                 <div class="score image-division">
                   <span class="close-cross hide">&times;</span>
@@ -223,7 +223,7 @@
 
         </div>
       </div>
-        <div class="col-md-12 course-info-row course-holes-info" hidden>
+        <div class="col-md-12 course-info-row course-holes-info">
           <%=render :partial => 'hole' , locals: {f: f } %>
         </div>
         <div class="text-center">

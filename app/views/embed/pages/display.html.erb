@@ -83,7 +83,7 @@
             <div  class="playlist">
               <ul id="playlist" >
                 <% @holes.try(:each) do |hole| %>
-                  <li id="<%=hole.hole_num%>" class= "hole-number" hole_image= "<%= hole.logo_image.present? ? hole.logo_image.url : logo_on_video(@course)%>" color="<%=color_selector(@course.color_selector)%>" onClick="select_video(this.id,this.color);ga('send','event','videos','Play',this.id);">
+                  <li id="<%=hole.hole_num%>" class= "hole-number" hole_image= "<%= hole.logo_image.present? ? hole.logo_image.url : logo_on_video(@course)%>" logo_hyperlink = "<%= hole.logo_hyperlink.present? ? hole.logo_hyperlink : hyperlink_on_video(@course)%>" color="<%=color_selector(@course.color_selector)%>" onClick="select_video(this.id,this.color);ga('send','event','videos','Play',this.id);">
                     <%=link_to hole.hole_num, embed_hole_info_path(hole.id, hole_num: hole.hole_num), remote: true %>
                   </li>
                 <% end %>
@@ -161,7 +161,9 @@
 
   $(".hole-number").click(function(){
     logoImage = $(this).attr('hole_image');
+    logoHyperlink = $(this).attr('logo_hyperlink');
     $('.logo a img').attr('src', logoImage)
+    $('.logo a').attr('href', logoHyperlink)
   })
 </script>
 <%= render 'display_file_full_js' %>

@@ -60,7 +60,18 @@ class Admin::HolesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
+  def add_logo_hyperlink
+    if params[:copy_all] == "true"
+      Hole.joins(:course).where(courses: {id: params[:course_id]}).map{|h| h.logo_hyperlink = params[:hyperlink]; h.save}
+    else
+      @hole = Hole.find(params[:hole_id])
+      @hole.logo_hyperlink = params[:hyperlink]
+      @hole.save
+    end
+    render :json => {status: 'success'}, :layout => false
+  end
+
   def add_logo_image
     @hole = Hole.find(params[:hole][:hole_id])
 

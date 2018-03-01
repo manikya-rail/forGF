@@ -112,8 +112,8 @@
             <div class="col-md-4 score-first-row-photos bucket">
               <%= label_tag :score_card_image ,'Score Card',class:"col-md-12 zero-left-right-padd "%>
               <div class="score-label">
-                <%= f.file_field :score_card_image, class: 'btn btn-success upload-btn check-field score-card-field' %>
-                <% score_card_file_name = Course.find(params[:id]).score_card_image%>
+                <%= file_field_tag "score_images[]", type: :file, multiple: true, class: 'btn btn-success upload-btn check-field score-card-field' %>
+                <% score_card_file_name = Course.find(params[:id]).scorecard_images%>
               </div>
               <div class="score image-division">
                <% if score_card_file_name.exists? %>
