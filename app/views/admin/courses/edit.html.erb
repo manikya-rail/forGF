@@ -117,8 +117,14 @@
               </div>
               <div class="score image-division">
                <% if score_card_file_name.exists? %>
-                 <span class="close-cross">&times;</span>
-                 <img src="<%=score_card_file_name.url%>" class="course-logo-image cimage" id="<%=params[:id]%>" name="score_card" >
+                 <div class="scorecard-collection">
+                   <% score_card_file_name.each do |score_card|%>
+                     <div class="scorecard-division">
+                       <span class="close-cross">&times;</span>
+                       <img src="<%=score_card.photo.url%>" class="course-logo-image cimage" id="<%=params[:id]%>" name="score_card" >
+                     </div>
+                   <% end %>
+                 </div>
                <% end %>
               </div>
             </div>
