@@ -19,6 +19,7 @@ namespace :admin do
   post "tags/:video_id/save" ,to: 'tags#create', as: 'create_tag'
   delete "tags/:id" ,to: 'tags#destroy', as: 'delete_tag'
   post "holes/add_image" ,to: 'holes#add_image', as: 'add_image'
+  post "holes/add_logo_hyperlink" ,to: 'holes#add_logo_hyperlink', as: 'add_logo_hyperlink'
   post "holes/add_logo_image" ,to: 'holes#add_logo_image', as: 'add_logo_image'
   put "holes/image/:id" ,to: 'holes#remove_image', as: 'remove_image'
   put "holes/logo_image/:id" ,to: 'holes#remove_logo_image', as: 'remove_logo_image'
