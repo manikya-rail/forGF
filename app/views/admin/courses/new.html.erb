@@ -120,12 +120,8 @@
               <%= label_tag :score_card_image, 'Score Cards', class: "col-md-12 zero-left-right-padd" %>
               <div class="clearfix"></div>
               <div class="btn btn-success upload-btn">
-                <div class="score-label">
-                  <%= file_field_tag "score_images[]", type: :file, multiple: true, class: 'check-field score-card-field' %>
-                </div>
-                <div class="score image-division">
-                  <span class="close-cross hide">&times;</span>
-                  <%= image_tag("", class: "uploaded-score-image course-create-image hide") %>
+                <%= file_field_tag "score_images[]", type: :file, multiple: true, class: 'check-field score-card-field' %>
+                <div class="score-collection">
                 </div>
               </div>
             </div>

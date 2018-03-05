@@ -115,7 +115,7 @@ table th{
     border: 1px solid #666;
     height: 20px;
 }
-.course-photo-images{
+.course-photo-images, .course-scorecard-image{
     width: 50px;
     height: 50px;
     margin-top: 9px;
@@ -123,7 +123,7 @@ table th{
     left: -9px;
     z-index: 1;
 }
-.close-photos{
+.close-photos, .close-scorecard{
     position: relative;
     text-align: center;
     top: -21px;
@@ -137,7 +137,7 @@ table th{
     width: 20px;
     display: inline-block;
 }
-.photo-division{
+.photo-division, .scorecard-division{
     display: inline-block;
 }
 .course-create-image{
@@ -147,7 +147,7 @@ table th{
     margin-left: 84px;
     position: absolute;
 }
-.photos-collection{
+.photos-collection , .scorecard-collection, .score-collection{
     width: 300px;
     overflow-x: scroll;
     padding-top: 8px;
@@ -156,12 +156,12 @@ table th{
 .upload-btn .check-field{
     height: 60px;
 }
-.photos-collection .uploaded-photo-image{
+.photos-collection .uploaded-photo-image, .score-collection .uploaded-photo-image {
     margin:0px;
     padding: 0px;
     position: relative;
 }
-.photos-collection .image-division {
+.photos-collection .image-division, .score-collection .image-division {
     width: 62px;
     position: relative;
     height: 60px;
@@ -170,18 +170,18 @@ table th{
     right: 0;
     float: left;
 }
-.photos-collection span.close-cross {
+.photos-collection span.close-cross, .score-collection span.close-cross {
     left: initial;
     right: -8px;
     top: -8px;
 }
-.temp-photos-collection .upload-division .close-cross{
+.temp-photos-collection .upload-division .close-cross, .temp-score-collection .upload-division .close-cross{
     left: initial;
     right: 1px;
     top: -9px;
 
 }
-.temp-photos-collection .upload-division {
+.temp-photos-collection .upload-division, .temp-score-collection .upload-division{
     width: 62px;
     position: relative;
     height: 60px;

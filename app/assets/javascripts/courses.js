@@ -40,22 +40,24 @@ $(document).on('turbolinks:load', function() {
   });
 
   $(".score-card-field").change(function(){
-    var imageDiv = $('.score.image-division');
-    if (this.files.length > 0) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        if (window.location.href.indexOf('edit') < 0){
-          $('.uploaded-score-image.course-create-image').attr('src', e.target.result).removeClass('hide');
-          $(imageDiv).find('.close-cross').removeClass('hide');
-        }else{
-          if ($('.score .course-logo-image.cimage').length != 0){
-            $('.score .course-logo-image.cimage').attr('src', e.target.result);
-          }else{
-            $(imageDiv).append("<span class='close-cross'>&times;</span> <img src='"+e.target.result+"' class='course-logo-image cimage'>");
-          }
+    var PhotoCollection, divClass, imageClass;
+    if (window.location.href.indexOf('edit') < 0){
+      PhotoCollection = $('.score-collection');
+      divClass = 'image-division';
+      imageClass = 'course-create-image uploaded-photo-image';
+    }else{
+      PhotoCollection = $('.temp-score-collection');
+      divClass = 'upload-division';
+      imageClass = 'edit-temp-uploaded-photos';
+    }
+    if (this.files && this.files[0]) {
+      $.each(this.files, function(index, data) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $(PhotoCollection).append("<div class='"+ divClass +"'><span class='close-cross'>&times;</span> <img src='"+e.target.result+"' class='"+ imageClass +"'><br></div>");
         }
-      }
-      reader.readAsDataURL(this.files[0]);
+        reader.readAsDataURL(data);
+      });
     }
   });
 

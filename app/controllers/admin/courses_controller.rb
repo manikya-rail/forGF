@@ -116,8 +116,7 @@ class Admin::CoursesController < ApplicationController
          course.cover = nil
          course.save
        elsif params[:for] == "score_card"
-         course.score_card_image = nil
-         course.save
+         course.scorecard_images.select { |aimage| aimage.photo.url == params[:image_source] }.first.destroy()
        end
     else
      CourseImage.find(params[:course_id]).delete

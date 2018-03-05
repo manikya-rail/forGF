@@ -111,17 +111,17 @@
 
             <div class="col-md-4 score-first-row-photos bucket">
               <%= label_tag :score_card_image ,'Score Card',class:"col-md-12 zero-left-right-padd "%>
-              <div class="score-label">
-                <%= file_field_tag "score_images[]", type: :file, multiple: true, class: 'btn btn-success upload-btn check-field score-card-field' %>
+              <div class="score-label btn btn-success upload-btn">
+                <%= file_field_tag "score_images[]", type: :file, multiple: true, class: 'check-field score-card-field' %>
                 <% score_card_file_name = Course.find(params[:id]).scorecard_images%>
-              </div>
-              <div class="score image-division">
+                <div class="temp-score-collection">
+                </div>
                <% if score_card_file_name.exists? %>
                  <div class="scorecard-collection">
                    <% score_card_file_name.each do |score_card|%>
                      <div class="scorecard-division">
-                       <span class="close-cross">&times;</span>
-                       <img src="<%=score_card.photo.url%>" class="course-logo-image cimage" id="<%=params[:id]%>" name="score_card" >
+                       <span class="close-scorecard">&times;</span>
+                       <img src="<%=score_card.photo.url%>" class="course-scorecard-image cimage" id="<%=params[:id]%>" name="score_card" >
                      </div>
                    <% end %>
                  </div>
@@ -331,6 +331,27 @@ $('.close-cross').click(function() {
    })
 });
 
+$('.close-scorecard').click(function() {
+   Closephotos = $(this)
+   PhotosDivision = $(this).closest('.scorecard-division');
+   ImageSrc = $(PhotosDivision).find(".cimage").attr('src');
+   CourseId = $(PhotosDivision).find(".cimage").attr('id');
+   Name = $(PhotosDivision).find(".cimage").attr('name');
+   $.ajax({
+     type: "POST",
+     url: '/admin/courses/remove_course_image',
+     data: {
+       image_source: ImageSrc,
+       course_id: CourseId,
+       for: Name
+     },
+     complete: function(response) {
+       $(Closephotos).addClass('hide');
+       $(PhotosDivision).find(".course-scorecard-image").addClass('hide');
+     }
+   })
+});
+
   $(document).on("click", '.temp-photos-collection .upload-division .close-cross', function() {
     $(this).removeClass('show');
     $(this).addClass('hide');
@@ -340,7 +361,16 @@ $('.close-cross').click(function() {
     $(PhotosDivision).find(".edit-temp-uploaded-photos").removeClass('show');
     $(PhotosDivision).find(".edit-temp-uploaded-photos").addClass('hide');
   });
-
+  
+  $(document).on("click", '.temp-score-collection .upload-division .close-cross', function() {
+    $(this).removeClass('show');
+    $(this).addClass('hide');
+    PhotosDivision = $(this).closest('.upload-division');
+    TempCollection = $(PhotosDivision).closest('.temp-score-collection');
+    UploadBtn = $(TempCollection).closest('.upload-btn');
+    $(PhotosDivision).find(".edit-temp-uploaded-photos").removeClass('show');
+    $(PhotosDivision).find(".edit-temp-uploaded-photos").addClass('hide');
+  });
   $(document).on("click", '.close-cross', function() {
     imageDiv = $(this).closest('.image-division');
     bucket = $(imageDiv).closest('.bucket')
