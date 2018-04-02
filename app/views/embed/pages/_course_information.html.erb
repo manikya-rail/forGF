@@ -14,7 +14,7 @@
       </div>
       <div class="row">
         <div class="col-md-12 bio">
-          <h4 class="hole_description"><%= @course.bio %></h4>
+          <h4 class="hole_description course-divider"><%= @course.bio %></h4>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
           <h3><b class="home_title">Amenities</b></h3>
         </div>
       </div>
-      <div class="row amenity-wrap">
+      <div class="row amenity-wrap course-divider">
         <div class="col-md-12">
 
 
@@ -246,7 +246,7 @@
         </div>
 
         <div id="cover-scorecard">
-          <div id="scorecard_updated">          
+          <div id="scorecard_updated">
             <%= render 'scorecard_updated_data' %>
           </div>
         </div>
@@ -274,7 +274,7 @@
     RowBgColor = $('.tee-rows').attr('color');
     $('.tee-rows td').css({"color":RowBgColor});
   });
-  
+
   $(".tees").click(function(){
      ImageSrc = $(this).children().attr('src');
      TeeName = $(this).text().replace(/\s/g, '');
@@ -400,7 +400,7 @@
   }(jQuery));
 
 
-  $(document).ready(function() { 
+  $(document).ready(function() {
     $('#select_photos').trigger('click');
     $('#hole-map').trigger('click');
   });
@@ -416,6 +416,12 @@
 
 </script>
 <style type="text/css">
+.slop-right-border{
+  border-right: 0px !important;
+}
+.course-divider{
+  border-top: solid 1px #e5e5e5;
+}
 .modal_scorecard_image{
   width: 100%;
 }
@@ -428,7 +434,7 @@
 .topborder {
     margin-left: 27px;
     min-height: 30px;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     margin-right: 27px;
 }
 .score-specs{
@@ -436,7 +442,7 @@
   padding: 0 10px;
   color: #777;
   margin-top: 10px;
-  border-top: solid 1px #e5e5e5;
+  /*border-top: solid 1px #e5e5e5;*/
 }
 .table tr{
   line-height: 2.5;
@@ -581,7 +587,7 @@ h4 img {
     margin-left: 0px;
     clear: both;
     padding-top: 20px;
-    border-top: solid 1px #e5e5e5;
+    /*border-top: solid 1px #e5e5e5;*/
     width: 100%;
 }
 .score-specs tbody > tr:first-child td {
@@ -753,6 +759,7 @@ table.score-specs tr:nth-child(2) td  {
   width: 170px;
   border: none;
   color: #777;text-transform: uppercase;
+  font-family: 'Avenir'
 }
 .stat-container .btn-group .dropdown-menu{
     max-height: 200px;
@@ -767,13 +774,13 @@ table.score-specs tr:nth-child(2) td  {
 .bx-wrapper {
   position: relative;
 }
-.bx-controls {
+/*.bx-controls {
     position: absolute;
     top: 0px;
     left: 0px;
     bottom: 0px;
     width: 100%;
-}
+}*/
 .tee-rows td, .rowstart{
   font-family: Avenir-heavy;
   font-size: 14px;
@@ -783,8 +790,12 @@ table.score-specs tr:nth-child(2) td  {
   font-size: 14px;
 }
 .mobile-scroll {
-    border-bottom: solid 1px #e5e5e5;
+    /*border-bottom: solid 1px #e5e5e5;*/
     margin-bottom: 5px;
+    overflow-x: auto;
+    display: inline-flex;
+    white-space: nowrap;
+    width: 85%;
 }
 /*// 320, 480, 760, 960, 1200 and 1600px.*/
       @media only screen and (min-width: 1600px) {
@@ -816,7 +827,7 @@ table.score-specs tr:nth-child(2) td  {
       @media only screen and (max-width: 1599px) and (min-width: 1200px) {
         .description {
           padding-top: 30px;
-          margin-bottom: 30px;
+          /*margin-bottom: 30px;*/
           padding-left: 45px;
         }
         /*.description h4{
@@ -932,13 +943,13 @@ table.score-specs tr:nth-child(2) td  {
       .score-specs {
           margin-top: 0px;
       }
-        
+
       .rowcolumns {
           min-width: 58px;
       }
       .description2 {
-          border-bottom: solid 1px #e5e5e5;
-          padding-bottom: 30px;
+          /*border-bottom: solid 1px #e5e5e5;*/
+         /* padding-bottom: 30px;*/
       }
       .slider h3 {
         width: auto;
@@ -979,7 +990,7 @@ table.score-specs tr:nth-child(2) td  {
         .about{
           padding-bottom: 20px;
           margin-bottom: 20px;
-          border-bottom: 2px solid lightgrey;
+          /*border-bottom: 2px solid lightgrey;*/
         }
         .description {
           text-align: center;
@@ -1008,9 +1019,9 @@ table.score-specs tr:nth-child(2) td  {
           margin-bottom: 20px;
         }
         .amenity-wrap {
-         padding-bottom: 30px;
+         /*padding-bottom: 30px;*/
         }
-         
+
         .description2 {
           text-align: center;
           padding-left: 0px;
@@ -1083,7 +1094,7 @@ table.score-specs tr:nth-child(2) td  {
         }
       }
       @media only screen and (max-width: 768px) {
-        
+
         .scorecard-row h3 {
             margin-bottom: 30px;
             display: block !important;
@@ -1279,7 +1290,7 @@ table.score-specs tr:nth-child(2) td  {
         .about{
           padding-bottom: 20px;
           margin-bottom: 20px;
-          border-bottom: 1px solid lightgrey;
+          /*border-bottom: 1px solid lightgrey;*/
         }
         .bio {
           padding-left: 0px;
