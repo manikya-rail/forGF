@@ -29,7 +29,7 @@
 
 
 
-      <div class="responsive scroll-pane horizontal-only">
+      <div class="responsive">
          <% @course.amenities.each do |amenity| %>
 
            <% if amenity.restaurants %>
@@ -261,9 +261,6 @@
   </div>
 <script type="text/javascript">
   $(document).ready(function(){
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      $('.scroll-pane').jScrollPane();
-    }
     $('.bxslider').bxSlider({
       mode: 'horizontal',
       useCSS: false,
