@@ -96,8 +96,11 @@ function showPlayerActions(){
   // $(".lower-gradient").slideDown(500);
 }
 
-$('.video_container').hover(
-  function(){
+$('.player-container').hover(
+  function(event){
+    if ($(this).hasClass('hole-home')){
+      event.stopPropagation();
+    }
     bgcolor = $(this).attr('progress-color');
     showBars();
     progressColor(bgcolor);
