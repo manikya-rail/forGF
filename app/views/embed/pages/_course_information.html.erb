@@ -398,6 +398,9 @@
 
 </script>
 <style type="text/css">
+.scorecard-row{
+  padding-top: 15px;
+}
 .slop-right-border{
   border-right: 0px !important;
 }
@@ -424,7 +427,6 @@
   width: 100%;
   padding: 0 10px;
   color: #777;
-  margin-top: 10px;
   /*border-top: solid 1px #e5e5e5;*/
 }
 .table tr{
@@ -500,9 +502,6 @@
 .architect {
   padding-left: 30px;
 }
-.about{
-
-}
 
 .st2 {
   display: none;
@@ -557,7 +556,6 @@ h4 img {
     margin: auto;
     position: relative;
     padding: 0px 26px;
-    margin-bottom: 5px;
 }
 .actual-scorecard {
     padding: 0px 17px;
@@ -569,7 +567,7 @@ h4 img {
 .map-scorecard .stat-container {
     margin-left: 0px;
     clear: both;
-    padding-top: 20px;
+    padding-top: 15px;
     /*border-top: solid 1px #e5e5e5;*/
     width: 100%;
 }
@@ -670,6 +668,7 @@ table.score-specs tr:nth-child(2) td  {
 }
 .responsive{
   padding-top: 15px;
+  padding-bottom: 30px;
   display: inline-flex;
 }
 .item{
@@ -823,7 +822,7 @@ table.score-specs tr:nth-child(2) td  {
         .pp {
           width: 26%;
         }
-        .specs, .description2 {
+        .specs {
           margin-top: 20px;
         }
         .values {
@@ -853,7 +852,6 @@ table.score-specs tr:nth-child(2) td  {
       @media only screen and (max-width: 1199px) and (min-width: 992px) {
         .description {
           padding-top: 30px;
-          margin-bottom: 30px;
           padding-left: 45px;
         }
         /*.description h4{
@@ -872,7 +870,7 @@ table.score-specs tr:nth-child(2) td  {
           height: 60%;
           width: 60%;
         }
-        .specs, .description2 {
+        .specs{
           margin-top: 20px;
         }
         .values {
@@ -889,6 +887,9 @@ table.score-specs tr:nth-child(2) td  {
       }
 
 @media only screen and (max-width: 1024px) {
+      .scorecard-row{
+        padding-top: 0px;
+      }
       .amenity img {
           float: none;
           margin-right: 0px;
@@ -969,11 +970,6 @@ table.score-specs tr:nth-child(2) td  {
           color: white;
           background-image:url(<%= image_url "hole-selector-background.png" %>);
           background-size: 100% 100%;
-        }
-        .about{
-          padding-bottom: 20px;
-          margin-bottom: 20px;
-          /*border-bottom: 2px solid lightgrey;*/
         }
         .description {
           text-align: center;
@@ -1118,8 +1114,7 @@ table.score-specs tr:nth-child(2) td  {
           padding-left: 50px;
           padding-right: 50px;
           text-align: center;
-        }
-        .about, .specs{
+        }, .specs{
           padding-bottom: 20px;
           margin-bottom: 20px;
         }
@@ -1131,7 +1126,7 @@ table.score-specs tr:nth-child(2) td  {
           width: 40%;
         }
         .amenity-wrap{
-          padding-bottom: 40px;
+          padding-bottom: 15px;
         }
         .amenity h4{
           padding-bottom: 20px;
@@ -1268,11 +1263,6 @@ table.score-specs tr:nth-child(2) td  {
           padding-left: 20px;
           padding-right: 20px;
           text-align: center;
-        }
-        .about{
-          padding-bottom: 20px;
-          margin-bottom: 20px;
-          /*border-bottom: 1px solid lightgrey;*/
         }
         .bio {
           padding-left: 0px;
@@ -1464,5 +1454,8 @@ table.score-specs tr:nth-child(2) td  {
           left: 46%;
         }
       }
+  .description2{
+    padding-top: 30px;
+  }
 
 </style>
