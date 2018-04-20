@@ -1,4 +1,4 @@
-$('#holeinfo').empty().append('<%= j render("hole_information") %>')
+$('.hole-info-div').html('<%= j render("hole_information") %>');
 <% if params[:hole_num].to_i == 1 || params[:hole_num].to_i == 0 %>
   var videoList = []
 
@@ -96,7 +96,7 @@ $('#holeinfo').empty().append('<%= j render("hole_information") %>')
   document.getElementById('par').innerHTML = leftPad(gon.par[hole],1);
   document.getElementById('yard').innerHTML = leftPad(gon.yard[hole],1);
   document.getElementById('mhcp').innerHTML = leftPad(gon.mhcp[hole],1);
- 
+
   }
   function current_video(){
     $firstElement = 0;
