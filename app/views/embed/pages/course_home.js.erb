@@ -1,1 +1,8 @@
 $('.hole-info-div').html('<%= j render("course_information") %>');
+var player = videojs("hole-vid");
+if (player.playlist().length > 1){
+  player.dispose();
+  $("#vplayer").html("<%= j render('vplayer_content') %>");
+  $('.active').removeClass("active");
+  $(".hole-home").addClass('active');
+}
