@@ -53,7 +53,7 @@ class Embed::PagesController < ApplicationController
     @course.score_cards.each do |scorecard|
       @teename << [scorecard.tee_name, scorecard.id, scorecard.color]
     end
-    @course.holes.each do |hole|
+    @course.holes.sort_by(&:hole_num).each do |hole|
       @par << hole.par.to_i
       @yards << hole.yards.to_i
       @mhcp << hole.mhcp.to_i

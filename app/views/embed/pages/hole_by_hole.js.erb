@@ -6,4 +6,5 @@ if (player.playlist().length == 1){
   $('.active').removeClass("active");
   $("li#<%= params[:hole_num]%>").addClass('active');
 }
+var player = videojs("hole-vid");
 player.playlist.currentItem(<%= (params[:hole_num].to_i - 1)%>);

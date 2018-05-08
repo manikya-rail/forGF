@@ -96,6 +96,8 @@
       }
     );
     player.on("loadedmetadata",function () {
+      barupdate();
+      current_video();
       if($(window).width() < 760 && ((player != null) && (!player.paused()))){
         showPlayerActions();
       }else{
@@ -325,7 +327,7 @@
         bgColor=document.getElementById(i+1).getAttribute('color')
         document.getElementById(i+1).setAttribute("style", "border-bottom: 4px solid "+ bgColor + " ");
         j=i+1;
-        //$('#'+j+' a').trigger('click');
+        $('#'+j+' a').trigger('click');
         scrollTo(i);
       }
       else{
