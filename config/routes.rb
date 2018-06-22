@@ -14,6 +14,8 @@ namespace :admin do
   get "users/index"
   get "courses/holes/:id", to: 'courses#holes',as: 'holes_create'
   post "courses/remove_course_image", to: 'courses#remove_course_image'
+  get "/add_playlist_item", to: 'courses#add_playlist_item'
+  get "/add_scorecard", to: 'courses#add_scorecard'
   post "videos/create", to: 'videos#create' ,as: 'video_create'
   get "videos/:id" , to: 'videos#show' ,as: 'video'
   post "tags/:video_id/save" ,to: 'tags#create', as: 'create_tag'
@@ -29,8 +31,9 @@ namespace :admin do
   delete "holes/gallery/:id" ,to: 'holes#remove_hole_image', as: 'remove_hole_image'
   post "ads/add_image" ,to: 'ads#add_image', as: 'upload_image'
   post "holes/add_yardages" ,to: 'holes#add_yardages', as: 'add_yardages'
+  get "/get_yardages", to: 'holes#get_yardages', as: 'get_hole_yardages'
   delete "videos/:id" ,to: 'videos#destroy', as: 'delete_video'
-
+  post "courses/:course_id/update_holes", to: "courses#update_holes", as: 'update_holes_details'
 end
 
   devise_for :admins

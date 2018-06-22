@@ -112,7 +112,7 @@
 
                   <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-hole-image-upl-modal" %> >Upload Image</button></td>
 
-                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-yardages-update-modal" %> >Update Yardages</button></td>
+                  <td><button type="button" class="btn btn-success upload-btn update_yardages" data-hole-id="<%= hole.id %>">Update Yardages</button></td>
 
               </tr>
             <% end %>
@@ -122,25 +122,24 @@
       </div>
     </div>
   </div>
-
-
-  <%@course.holes.each_with_index do |hole, index|%>
-    <%=render :partial => 'admin/holes/video_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
-    <%=render :partial => 'admin/holes/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
-    <%=render :partial => 'admin/holes/hole_image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
-    <%=render :partial => 'admin/holes/map_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num } %>
-    <%=render :partial => 'admin/holes/logo_image_upload_modal' , locals: {hole: hole,  hole_num:hole.hole_num} %>
-    <%=render :partial => 'admin/holes/yardages_update_modal' , locals: {hole: hole,  hole_num:hole.hole_num} %>
-  <%end%>
-
-
 </div>
+<div class="hole_yardages"></div>
 <link href="//vjs.zencdn.net/6.2.8/video-js.min.css" rel="stylesheet">
 <script src="//vjs.zencdn.net/6.2.8/video.min.js"> </script>
 <script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 
 
 <script type="text/javascript">
+  $(function(){
+    $(".update_yardages").on('click', function(){
+      var hole_id = $(this).attr("data-hole-id");
+      $.ajax({
+        url: "<%= admin_get_hole_yardages_path %>",
+        type: "GET",
+        data: {hole_id: hole_id}
+      });
+    });
+  });
 
 var videoList = []
 

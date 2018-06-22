@@ -181,6 +181,12 @@ class Admin::HolesController < ApplicationController
 
   end
 
+  def get_yardages
+    @hole = Hole.find(params[:hole_id])
+    @score_cards = @hole.course.score_cards
+    @yardages = @hole.yardages.where(score_card_id: @score_cards.pluck(:id))
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hole

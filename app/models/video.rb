@@ -1,5 +1,5 @@
 class Video < ApplicationRecord
-  belongs_to :hole
+  belongs_to :videoable, polymorphic: true
   has_many :tags
   has_attached_file :video, styles: {
     :medium => {

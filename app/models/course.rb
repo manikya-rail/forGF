@@ -23,7 +23,7 @@ class Course < ApplicationRecord
      accepts_nested_attributes_for :score_cards, :allow_destroy => true
      accepts_nested_attributes_for :holes, :allow_destroy => true
      accepts_nested_attributes_for :amenities, :allow_destroy => true
-     validates_presence_of :name,:bio, :website, :phone_num, :total_par, :slope, :rating, :length
+     validates_presence_of :name,:bio#, :website, :phone_num, :total_par, :slope, :rating, :length
 
      has_attached_file :logo, styles: {
       thumb: '100x100>',
@@ -55,18 +55,21 @@ class Course < ApplicationRecord
    # Validate the attached image is image/jpg, image/png, etc
    validates_attachment_content_type :score_card_image, :content_type => /\Aimage\/.*\Z/
 
-  has_attached_file :video, styles: {
-    :medium => {
-      :geometry => "1920x1080",
-      :format => 'mp4'
-    },
-    :mobile => {
-      :geometry => "750x422>",
-      :format => 'mp4'
-    }
-  }, :processors => [:transcoder]
+  # has_attached_file :video, styles: {
+  #   :medium => {
+  #     :geometry => "1920x1080",
+  #     :format => 'mp4'
+  #   },
+  #   :mobile => {
+  #     :geometry => "750x422>",
+  #     :format => 'mp4'
+  #   }
+  # }, :processors => [:transcoder]
 
-    validates_attachment_content_type :video, content_type: /\Avideo\/.*\Z/
+  has_many :videos, as: :videoable
+  accepts_nested_attributes_for :videos, :allow_destroy => true
+
+    #validates_attachment_content_type :video, content_type: /\Avideo\/.*\Z/
 
    enum course_type: [ :is_public, :is_private, :is_semi_private ]
 

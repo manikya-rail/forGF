@@ -1,5 +1,6 @@
 class Location < ApplicationRecord
-    belongs_to :course
+    belongs_to :course, optional: true
+    belongs_to :resort, optional: true
     validates :state, :town, :lat, :lng,  presence: true
 
     def self.us_states

@@ -1,0 +1,54 @@
+<%= form_for @course, url: admin_update_holes_details_path(@course), method: "post", :html => { :multipart => true } do |f|%>
+  <div class="col-md-12">
+    <h4>Holes List</h4>
+  </div>
+  <div class="col-md-12">
+    <table class="table borderless holes_list">
+      <thead>
+        <th>HOLE</th>
+        <th>VIDEO</th>
+        <th>COVER</th>
+        <th>MAP</th>
+        <th>GALLERY</th>
+        <th>YARDAGES</th>
+        <th>DESCRIPTION</th>
+      </thead>
+      <tbody>
+        <% @course.holes.order("hole_num").each do |hole| %>
+          <tr>
+            <td><%= hole.hole_num %></td>
+            <td><span class="btn btn-success btn-file">Upload Video<%= file_field_tag "holes[#{hole.id}][video]" %></span></td>
+            <td><span class="btn btn-success btn-file">Upload Cover<%= file_field_tag "holes[#{hole.id}][cover]" %></span>  </td>
+            <td><span class="btn btn-success btn-file">Upload Map<%= file_field_tag "holes[#{hole.id}][map]" %></span></td>
+            <td><span class="btn btn-success btn-file">Upload Images<%= file_field_tag "holes[#{hole.id}][images][]", type: :file, multiple: true %></span></td>
+            <td>
+              <%= link_to "javascript:void(0)", class: "btn btn-success update_yardages", "data-hole-id": "#{hole.id}" do %>
+                Update Yardages
+              <% end %>
+            </td>
+            <td><%= text_field_tag "holes[#{hole.id}][description]", "", class: "form-control", placeholder: "Description"%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-12 text-center pb-20">    
+    <%= f.submit "Save", class: "btn btn-primary"%>
+    <%= f.submit "+", class: "btn btn-info btn-add"%>
+  </div>
+<% end %>
+<div class="hole_yardages">
+  
+</div>
+<script type="text/javascript">
+  $(function(){
+    $(".update_yardages").on('click', function(){
+      var hole_id = $(this).attr("data-hole-id");
+      $.ajax({
+        url: "<%= admin_get_hole_yardages_path %>",
+        type: "GET",
+        data: {hole_id: hole_id}
+      });
+    });
+  });
+</script>

@@ -1,0 +1,168 @@
+<div class="col-md-12 course-info-row scorecard zero-left-right-padd" id="scorecard">
+  <div class="col-md-2 ">
+    <%= text_field_tag "score_cards[#{scorecard_index}][tee_name]", "", class: "col-md-12 form-control", placeholder: "Tee Name"%>
+  </div>
+  <div class="col-md-3">
+    <%#= text_field_tag "score_cards[#{scorecard_index}][color]", "", class: "col-md-12 form-control", placeholder: "Color"%>
+
+    <%= select_tag "score_cards[#{scorecard_index}][color]", options_for_select(["Green", "Red", "White", "Blue", "Violet", "Gold", "Teal", "LightBlue", "Black"]), class:'dropdown-less-padd form-control inline check-field' ,style: 'margin-left:10px;'%>
+  </div>
+  <div class="col-md-6">
+    <div class="col-md-3">
+      <%= text_field_tag "score_cards[#{scorecard_index}][total_par]", "", class: "col-md-12 form-control total_par", placeholder: "PAR", readonly: true%>
+    </div>
+    <div class="col-md-3">
+      <%= text_field_tag "score_cards[#{scorecard_index}][total_yards]", "", class: "col-md-12 form-control total_yards", placeholder: "YARDS", readonly: true%>
+    </div>
+    <div class="col-md-3">
+      <%= text_field_tag "score_cards[#{scorecard_index}][total_rating]", "", class: "col-md-12 form-control total_rating", placeholder: "RATING"%>
+    </div>
+    <div class="col-md-3">
+      <%= text_field_tag "score_cards[#{scorecard_index}][total_slope]", "", class: "col-md-12 form-control total_slope", placeholder: "SLOPE"%>
+    </div>
+  </div>
+  <div class="col-md-12 zero-left-right-padd">
+    <table class="table borderless scorecard_table">
+      <thead>
+        <th>TEE</th>
+        <% (1..9).each do |int|%>
+          <th><%= int %></th>
+        <% end %>
+        <th>OUT</th>
+        <% (10..18).each do |int|%>
+          <th><%= int %></th>
+        <% end %>
+        <th>IN</th>
+        <th>TOT</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>YDS</strong></td>
+          <% (1..9).each do |int|%>
+            <td>
+              <%= text_field_tag "score_cards[#{scorecard_index}][holes][#{int}][yardges]", "", class: "form-control yards_input yards_input_first_half"%>
+            </td>
+          <% end %>
+          <td>
+            <%= text_field_tag "score_cards[#{scorecard_index}][yds_out]", "", class: "form-control yards_first_total", readonly: true%>
+          </td>
+          <% (10..18).each do |int|%>
+            <td>
+              <%= text_field_tag "score_cards[#{scorecard_index}][holes][#{int}][yardges]", "", class: "form-control yards_input yards_input_second_half"%>
+            </td>
+          <% end %>
+          <td>
+            <%= text_field_tag "score_cards[#{scorecard_index}][yds_in]", "", class: "form-control yards_second_total", readonly: true%>
+          </td>
+          <td>
+            <%= text_field_tag "score_cards[#{scorecard_index}][yds_final_out]", "", class: "form-control yards_total", readonly: true%>
+          </td>
+        </tr>
+
+        <tr>
+          <td><strong>PAR</strong></td>
+          <% (1..9).each do |int|%>
+            <td>
+              <%= text_field_tag "score_cards[#{scorecard_index}][holes][#{int}][par]", "", class: "form-control par_input_first_half par_input"%>
+            </td>
+          <% end %>
+          <td>
+            <%= text_field_tag "score_cards[#{scorecard_index}][par_out]", "", class: "form-control par_first_total", readonly: true%>
+          </td>
+          <% (10..18).each do |int|%>
+            <td>
+              <%= text_field_tag "score_cards[#{scorecard_index}][holes][#{int}][par]", "", class: "form-control par_input_second_half par_input"%>
+            </td>
+          <% end %>
+          <td>
+            <%= text_field_tag "score_cards[#{scorecard_index}][par_in]", "", class: "form-control par_second_total", readonly: true%>
+          </td>
+          <td>
+            <%= text_field_tag "score_cards[#{scorecard_index}][par_final_out]", "", class: "form-control par_total", readonly: true%>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>HCP</strong></td>
+          <% (1..9).each do |int|%>
+            <td>
+              <%= text_field_tag "score_cards[#{scorecard_index}][holes][#{int}][hcp]", "", class: "form-control"%>
+            </td>
+          <% end %>
+          <td>
+            
+          </td>
+          <% (10..18).each do |int|%>
+            <td>
+              <%= text_field_tag "score_cards[#{scorecard_index}][holes][#{int}][hcp]", "", class: "form-control"%>
+            </td>
+          <% end %>
+          <td>
+            
+          </td>
+          <td>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $(".par_input").on('keyup', function(){
+      var par_first_half_values = $(this).parents('div.scorecard').find('.par_input_first_half').map(function() {
+        if (this.value != ""){
+          return this.value;
+        }
+      }).get();
+
+      var par_second_half_values = $(this).parents('div.scorecard').find('.par_input_second_half').map(function() {
+        if (this.value != ""){
+          return this.value;
+        }
+      }).get();
+
+      var first_out = 0
+      for (var i = 0; i < par_first_half_values.length; i++) {
+        first_out += par_first_half_values[i] << 0;
+      }
+
+      var second_out = 0
+      for (var i = 0; i < par_second_half_values.length; i++) {
+        second_out += par_second_half_values[i] << 0;
+      }
+      $(this).closest('tr').find(".par_first_total").val(first_out);
+      $(this).closest('tr').find(".par_second_total").val(second_out);
+      $(this).closest('tr').find(".par_total").val(first_out + second_out);
+      $(this).parents('div.scorecard').find('input.total_par').val(first_out + second_out);
+    });
+
+    $(".yards_input").on('keyup', function(){
+      var yards_first_half_values = $(this).parents('div.scorecard').find('.yards_input_first_half').map(function() {
+        if (this.value != ""){
+          return this.value;
+        }
+      }).get();
+
+      var yards_second_half_values = $(this).parents('div.scorecard').find('.yards_input_second_half').map(function() {
+        if (this.value != ""){
+          return this.value;
+        }
+      }).get();
+
+      var first_out = 0
+      for (var i = 0; i < yards_first_half_values.length; i++) {
+        first_out += yards_first_half_values[i] << 0;
+      }
+
+      var second_out = 0
+      for (var i = 0; i < yards_second_half_values.length; i++) {
+        second_out += yards_second_half_values[i] << 0;
+      }
+      $(this).closest('tr').find(".yards_first_total").val(first_out);
+      $(this).closest('tr').find(".yards_second_total").val(second_out);
+      $(this).closest('tr').find(".yards_total").val(first_out + second_out);
+      $(this).parents('div.scorecard').find('input.total_yards').val(first_out + second_out);
+    });
+  });
+</script>

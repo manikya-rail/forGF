@@ -1,11 +1,13 @@
 class Hole < ApplicationRecord
     belongs_to :course
     # validates :par,:yards, :mhcp, :whcp, presence: true
-    has_one :video
+    has_one :video, as: :videoable
     has_one :score
     has_many :ads
     has_many :yardages, :dependent => :destroy
-    has_many :hole_image, :dependent => :destroy
+    has_many :pars, :dependent => :destroy
+    has_many :hcps, :dependent => :destroy
+    has_many :hole_images, :dependent => :destroy
 
 
     accepts_nested_attributes_for :yardages, :allow_destroy => true

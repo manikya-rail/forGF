@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206122814) do
+ActiveRecord::Schema.define(version: 20180619131638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,14 @@ ActiveRecord::Schema.define(version: 20171206122814) do
     t.index ["resort_id"], name: "index_courses_on_resort_id", using: :btree
   end
 
+  create_table "hcps", force: :cascade do |t|
+    t.integer  "score_card_id"
+    t.integer  "hole_id"
+    t.integer  "hcp"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "hole_images", force: :cascade do |t|
     t.integer  "hole_id"
     t.datetime "created_at",         null: false
@@ -140,8 +148,8 @@ ActiveRecord::Schema.define(version: 20171206122814) do
     t.string   "mhcp"
     t.string   "whcp"
     t.integer  "course_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "hole_num"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -152,6 +160,11 @@ ActiveRecord::Schema.define(version: 20171206122814) do
     t.string   "map_content_type"
     t.integer  "map_file_size"
     t.datetime "map_updated_at"
+    t.string   "logo_image_file_name"
+    t.string   "logo_image_content_type"
+    t.integer  "logo_image_file_size"
+    t.datetime "logo_image_updated_at"
+    t.string   "logo_hyperlink"
     t.index ["course_id"], name: "index_holes_on_course_id", using: :btree
   end
 
@@ -173,6 +186,7 @@ ActiveRecord::Schema.define(version: 20171206122814) do
     t.integer  "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "resort_id"
     t.index ["course_id"], name: "index_locations_on_course_id", using: :btree
   end
 
@@ -182,10 +196,23 @@ ActiveRecord::Schema.define(version: 20171206122814) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pars", force: :cascade do |t|
+    t.integer  "score_card_id"
+    t.integer  "hole_id"
+    t.integer  "par"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "resorts", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "resort_type"
+    t.string   "website"
+    t.string   "phone_num"
+    t.integer  "network_id"
+    t.integer  "courses_count"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -207,9 +234,22 @@ ActiveRecord::Schema.define(version: 20171206122814) do
     t.string   "tee_name"
     t.string   "color"
     t.integer  "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.float    "rating",     default: 0.0
+    t.float    "slope",      default: 0.0
     t.index ["course_id"], name: "index_score_cards_on_course_id", using: :btree
+  end
+
+  create_table "scorecard_images", force: :cascade do |t|
+    t.integer  "course_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.index ["course_id"], name: "index_scorecard_images_on_course_id", using: :btree
   end
 
   create_table "scores", force: :cascade do |t|
@@ -269,6 +309,10 @@ ActiveRecord::Schema.define(version: 20171206122814) do
     t.integer  "video_file_size"
     t.datetime "video_updated_at"
     t.integer  "hole_id"
+    t.string   "videoable_type"
+    t.integer  "videoable_id"
+    t.string   "title"
+    t.text     "description"
   end
 
   create_table "yardages", force: :cascade do |t|
@@ -287,6 +331,7 @@ ActiveRecord::Schema.define(version: 20171206122814) do
   add_foreign_key "courses", "lists"
   add_foreign_key "hole_images", "holes"
   add_foreign_key "lists", "courses"
+  add_foreign_key "scorecard_images", "courses"
   add_foreign_key "yardages", "holes"
   add_foreign_key "yardages", "score_cards"
 end

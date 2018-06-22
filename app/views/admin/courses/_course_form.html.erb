@@ -1,0 +1,37 @@
+<div class="col-md-12 course-info-row">
+  <div class="col-md-4 form-group">
+    <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
+    <%= ff.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Name of Course"%>
+  </div>
+  <div class="col-md-4">
+    <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
+    <div class="clearfix"></div>
+    <div class="btn btn-success upload-btn">
+      <div class="cover-label">
+        <%= ff.file_field :cover, class: 'check-field cover-field' %>
+      </div>
+      <div class="cover image-division">
+        <span class="close-cross hide">&times;</span>
+        <%= image_tag("", class: "uploaded-cover-image course-create-image hide") %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
+    <div class="clearfix"></div>
+    <div class="btn btn-success upload-btn">
+      <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field course-photos-field' %>
+      <div class="photos-collection"></div>
+    </div>
+  </div>
+  <div class="col-md-4 form-group">
+    <%= label_tag :bio ,'Description',class:"col-md-12 zero-left-right-padd"%>
+    <%= ff.text_area :bio, rows: "4", class: 'col-md-12 form-control check-field'%>
+  </div>
+  <div class="col-md-4 course-info-row">
+    <div class="col-md-12 form-group">
+      <%= label_tag :color_selector ,'Color Selector',class:"col-md-12 zero-left-right-padd"%>
+      <%= ff.color_field :color_selector, class:"col-md-12 form-control check-field", placeholder: "Color Selector" %>
+    </div>
+  </div>
+</div>

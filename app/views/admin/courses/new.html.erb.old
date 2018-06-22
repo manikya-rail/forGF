@@ -1,7 +1,14 @@
+
+<% content_for :side_nav do %>
+  <%= render :partial => 'side_nav' %>
+<% end %>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
 <div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
-  <%= form_for(@course, url: {controller: 'courses', action: 'create'}, method: "post" ) do |f|%>
+  <%= form_for @course, url: {controller: 'courses', action: 'create'}, method: "post", :html => { :multipart => true }, :remote => true do |f|%>
 
     <div class="col-md-12">
+      <div class="basic-course-info">
         <div class="col-md-12 course-info-row">
             <div class="col-md-4 form-group">
               <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
@@ -12,7 +19,9 @@
                 <%= f.fields_for :location do |location_form| %>
                   <%= render 'admin/locations/form.html.erb', location_form: location_form %>
                 <% end %>
+
             </div>
+
         </div>
 
         <div class="col-md-12 course-info-row">
@@ -37,6 +46,7 @@
             <div class="col-md-4">
               <%= select_tag('resort', options_for_select(Resort.all.pluck(:name, :id)), options = {prompt: 'Resort', class:'dropdown-padd dropdown form-control inline ' , style: 'width:50%;' , name: 'course[resort_id]'}) %>
               <button type="button" class="btn btn-info btn-add inline" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
+              <%= link_to "Edit List", admin_resorts_path %>
 
 
 
@@ -45,6 +55,7 @@
             <div class="col-md-4">
               <%= select_tag('network',options_for_select(Network.all.pluck(:name, :id)), options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;' , name: 'course[network_id]'}) %>
               <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
+              <%= link_to "Edit List", admin_networks_path %>
 
 
             </div>
@@ -60,7 +71,7 @@
             <div class="col-md-4 form-group">
               <%= label_tag :contact_info, 'Contact Info',class:"col-md-12 zero-left-right-padd"%>
               <%= f.text_field :website, class:"col-md-12 form-control contact-info check-field", placeholder: "Website" %>
-              <%= f.text_field :phone_num, class: "col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
+              <%= f.text_field :phone_num, class:"col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
             </div>
 
             <div class="col-md-4">
@@ -78,17 +89,82 @@
 
         <div class="col-md-12 course-info-row">
             <div class="col-md-4">
-              <%= label_tag :logo ,'Logo',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.file_field :logo, class: 'btn btn-success upload-btn check-field' %>
+              <%= label_tag :logo ,'Logo (Color)',class:"col-md-12 zero-left-right-padd"%>
+              <div class="clearfix"></div>
+              <div class="btn btn-success upload-btn">
+                <div class="logo-label">
+                  <%= f.file_field :logo, class: 'check-field logo-field' %>
+                </div>
+                <div class="logo image-division">
+                  <span class="close-cross hide">&times;</span>
+                  <%= image_tag("", class: "uploaded-logo-image course-create-image hide") %>
+                </div>
+              </div>
             </div>
 
             <div class="col-md-4">
               <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
-              <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field' %>
+              <div class="clearfix"></div>
+              <div class="btn btn-success upload-btn">
+                <div class="cover-label">
+                  <%= f.file_field :cover, class: 'check-field cover-field' %>
+                </div>
+                <div class="cover image-division">
+                  <span class="close-cross hide">&times;</span>
+                  <%= image_tag("", class: "uploaded-cover-image course-create-image hide") %>
+                </div>
+              </div>
             </div>
 
-            <div class="col-md-8"></div>
+            <div class="col-md-4">
+              <%= label_tag :score_card_image, 'Score Cards', class: "col-md-12 zero-left-right-padd" %>
+              <div class="clearfix"></div>
+              <div class="btn btn-success upload-btn">
+                <%= file_field_tag "score_images[]", type: :file, multiple: true, class: 'check-field score-card-field' %>
+                <div class="score-collection">
+                </div>
+              </div>
+            </div>
 
+            <div class="col-md-4">
+              <%= label_tag :transparent_logo, 'Logo (Transparent Background)', class: "col-md-12 zero-left-right-padd" %>
+              <div class="clearfix"></div>
+              <div class="btn btn-success upload-btn">
+                <div class="trans-label">
+                  <%= f.file_field :transparent_logo, class: 'check-field trans-logo-field' %>
+                </div>
+                <div class="trans image-division">
+                  <span class="close-cross hide">&times;</span>
+                  <%= image_tag("", class: "uploaded-trans-image course-create-image hide") %>
+                </div>
+                <%= f.text_field :logo_hyperlink, class: "col-md-12 form-control contact-info check-field", placeholder: "Hyperlink" %>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
+              <div class="clearfix"></div>
+              <div class="btn btn-success upload-btn">
+                <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field course-photos-field' %>
+                <div class="photos-collection">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <%= label_tag :video ,'Video',class:"col-md-12 zero-left-right-padd "%>
+              <div class="clearfix"></div>
+              <div class="btn btn-success upload-btn">
+                <%= f.file_field :video, class: 'check-field' %>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 course-info-row">
+          <div class="col-md-2 form-group">
+            <%= label_tag :color_selector ,'Color Selector',class:"col-md-12 zero-left-right-padd"%>
+            <%= f.text_field :color_selector, class:"col-md-12 form-control check-field", placeholder: "Color Selector" %>
+          </div>
         </div>
 
         <div class="col-md-12 course-info-row">
@@ -111,15 +187,28 @@
               <%= label_tag :length ,'Length',class:"col-md-12 zero-left-right-padd"%>
               <%= f.text_field :length, class:"col-md-12 form-control check-field", placeholder: "Length"%>
             </div>
+
+            <div class="col-md-3 form-group">
+              <%= label_tag :number_of_tees ,'Number of Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :number_of_tees, class:"col-md-12 form-control check-field", placeholder: "Number of Tee Boxes"%>
+            </div>
+            <div class="col-md-2 form-group">
+              <%= label_tag :architect ,'Architect',class:"col-md-12 zero-left-right-padd"%>
+              <%= f.text_field :architect, class:"col-md-12 form-control check-field", placeholder: "Architect" %>
+            </div>
         </div>
 
         <div class="col-md-12 course-info-row score-cards-wrapper">
-            <%= label_tag :score_card ,'Score Card',class:"col-md-12 zero-left-right-padd"%>
+            <%= label_tag :score_card ,'Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
             <div class="col-md-8 score-card-wrapper dynamic-fields">
 
               <%= f.fields_for :score_cards do |score_card_form| %>
                 <%= render 'admin/score_cards/form', s: score_card_form %>
               <% end %>
+
+              <div class="col-md-2">
+                <button type="button" class="btn btn-info btn-add inline" id='add-score-card' >+</button>
+              </div>
 
 
             </div>
@@ -129,11 +218,14 @@
             </div>
 
         </div>
-
-        <div class="col-md-12 course-info-row">
+      </div>
+        <div class="col-md-12 course-info-row course-holes-info">
           <%=render :partial => 'hole' , locals: {f: f } %>
         </div>
-
+        <div class="text-center">
+          <!-- <span id="previous" class="btn btn-primary">Previous</span> -->
+          <span id="next" class="btn btn-primary" style="margin-left:20px;">Next</span>
+        </div>
 
     </div>
   <%end%>
@@ -155,6 +247,20 @@ function containText(textFieldId){
     return false;
   }
 }
+
+$('#previous').click(function courseView(){
+  $('.basic-course-info').show();
+  $('.course-holes-info').hide();
+});
+
+$('#next').click(function holesView(){
+  $( "#new_course" ).submit();
+  // $('.basic-course-info').hide();
+  // $('.course-holes-info').show();
+});
+
+
+
 
 function enableCheck(checkID){
   $('#' + checkID).show();
@@ -205,9 +311,9 @@ function checkContactInfo() {
 }
 
 function checkAmenities() {
-  var amenities_checkboxes = $('input[name="course[amenity_attributes][restaurants]"]:checked').length +
-    $('input[name="course[amenity_attributes][caddies]"]:checked').length +
-    $('input[name="course[amenity_attributes][carts]"]:checked').length
+  var amenities_checkboxes = $('input[name="course[amenities_attributes][0][restaurants]"]:checked').length +
+    $('input[name="course[amenities_attributes][0][caddies]"]:checked').length +
+    $('input[name="course[amenities_attributes][0][carts]"]:checked').length
 
   if ( amenities_checkboxes >= 1 ) {
     enableCheck('amenities-check')
@@ -312,26 +418,6 @@ checkFields();
     }
   });
 
-  // $('#add-resorts').click(function() {
-
-  //   var clonedField = $('#resort-name-field').clone();
-  //   var resortNameFieldLen = $('.resort-name-field').length ;
-  //   clonedField.removeAttr( "id" )
-  //   clonedField.attr('name', 'course[resorts_attributes][' + resortNameFieldLen + '][name]' );
-
-  //   clonedField.appendTo($('#resort-name-field').parent('div'))
-
-  // });
-
-  // $('#add-networks').click(function() {
-  //   var clonedField = $('#network-name-field').clone();
-  //   clonedField.removeAttr( "id" )
-  //   var networkNameFieldLen = $('.network-name-field').length ;
-  //   clonedField.attr('name', 'course[networks_attributes][' + networkNameFieldLen + '][name]' );
-  //   clonedField.appendTo($('#network-name-field').parent('div'))
-
-  // });
-
   $('#add-score-card').click(function() {
     var clonedField = $('.score-card-wrapper').first().clone();
     var teeNameField = clonedField.find('#tee-name-field');
@@ -342,7 +428,7 @@ checkFields();
     colorField.removeAttr( "id" )
     var scoreCardLen = $('.score-card-wrapper').length ;
     teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
-    colorField.attr('name', 'course[networks_attributes][' + scoreCardLen + '][name]' );
+    colorField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][color]' );
     clonedField.appendTo($('.score-cards-wrapper'))
 
   });
@@ -352,5 +438,15 @@ checkFields();
     $( "#new_course" ).submit();
   });
 
-
+  $( "#create-course-btn" ).hide();
+  
+  $(document).on("click", '.close-cross', function() {
+    $(this).removeClass('show');
+    $(this).addClass('hide');
+    PhotosDivision = $(this).closest('.image-division');
+    UploadBtn = $(PhotosDivision).closest('.upload-btn');
+    $(UploadBtn).find('.check-field').val("");
+    $(PhotosDivision).find(".course-create-image").removeClass('show');
+    $(PhotosDivision).find(".course-create-image").addClass('hide');
+  });
 </script>

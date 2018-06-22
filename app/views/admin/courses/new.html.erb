@@ -5,231 +5,79 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
-  <%= form_for @course, url: {controller: 'courses', action: 'create'}, method: "post", :html => { :multipart => true }, :remote => true do |f|%>
-
+  <%= form_for @resort, url: {controller: 'courses', action: 'create'}, method: "post", :html => { :multipart => true }, :remote => true do |f|%>
     <div class="col-md-12">
+      <div class="col-md-12">
+        <h4 class="col-md-4">Client Information</h4>
+      </div>
       <div class="basic-course-info">
         <div class="col-md-12 course-info-row">
-            <div class="col-md-4 form-group">
-              <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Full name of course"%>
-            </div>
-
-            <div class="col-md-8 form-group">
-                <%= f.fields_for :location do |location_form| %>
-                  <%= render 'admin/locations/form.html.erb', location_form: location_form %>
-                <% end %>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-12 course-info-row">
-            <%= label_tag :course_type ,'Course Type',class:"col-md-12 zero-left-right-padd",style:"margin-left:15px;"%>
-            <div class="col-md-4">
-
-              <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'is_public',false ,class: 'checkbox check-field inline', id: 'course_type_public' %>
-                <span class="inline">Public</span>
-              </div>
-              <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'is_private',false ,class: 'checkbox check-field inline', id: 'course_type_private' %>
-                <span class="inline">Private</span>
-              </div>
-              <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'is_semi_private',false ,class: 'checkbox check-field inline', id: 'course_type_semi_private' %>
-                <span class="inline">Semi-Private</span>
-              </div>
-
-            </div>
-
-            <div class="col-md-4">
-              <%= select_tag('resort', options_for_select(Resort.all.pluck(:name, :id)), options = {prompt: 'Resort', class:'dropdown-padd dropdown form-control inline ' , style: 'width:50%;' , name: 'course[resort_id]'}) %>
-              <button type="button" class="btn btn-info btn-add inline" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
-              <%= link_to "Edit List", admin_resorts_path %>
-
-
-
-            </div>
-
-            <div class="col-md-4">
-              <%= select_tag('network',options_for_select(Network.all.pluck(:name, :id)), options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;' , name: 'course[network_id]'}) %>
-              <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
-              <%= link_to "Edit List", admin_networks_path %>
-
-
-            </div>
-        </div>
-
-        <div class="col-md-12 course-info-row">
-            <div class="col-md-4 form-group">
-              <%= label_tag :bio ,'Bio',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_area :bio, rows: "4", class: 'col-md-12 form-control check-field'%>
-
-            </div>
-
-            <div class="col-md-4 form-group">
-              <%= label_tag :contact_info, 'Contact Info',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :website, class:"col-md-12 form-control contact-info check-field", placeholder: "Website" %>
-              <%= f.text_field :phone_num, class:"col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
-            </div>
-
-            <div class="col-md-4">
-              <div class="col-md-12">
-                <%= f.fields_for :amenities do |amenity_form| %>
-                  <%= render 'admin/amenities/form', a: amenity_form %>
-                <% end %>
-              </div>
-
-            </div>
-
-
-
-        </div>
-
-        <div class="col-md-12 course-info-row">
-            <div class="col-md-4">
-              <%= label_tag :logo ,'Logo (Color)',class:"col-md-12 zero-left-right-padd"%>
-              <div class="clearfix"></div>
-              <div class="btn btn-success upload-btn">
-                <div class="logo-label">
-                  <%= f.file_field :logo, class: 'check-field logo-field' %>
-                </div>
-                <div class="logo image-division">
-                  <span class="close-cross hide">&times;</span>
-                  <%= image_tag("", class: "uploaded-logo-image course-create-image hide") %>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
-              <div class="clearfix"></div>
-              <div class="btn btn-success upload-btn">
-                <div class="cover-label">
-                  <%= f.file_field :cover, class: 'check-field cover-field' %>
-                </div>
-                <div class="cover image-division">
-                  <span class="close-cross hide">&times;</span>
-                  <%= image_tag("", class: "uploaded-cover-image course-create-image hide") %>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <%= label_tag :score_card_image, 'Score Cards', class: "col-md-12 zero-left-right-padd" %>
-              <div class="clearfix"></div>
-              <div class="btn btn-success upload-btn">
-                <%= file_field_tag "score_images[]", type: :file, multiple: true, class: 'check-field score-card-field' %>
-                <div class="score-collection">
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <%= label_tag :transparent_logo, 'Logo (Transparent Background)', class: "col-md-12 zero-left-right-padd" %>
-              <div class="clearfix"></div>
-              <div class="btn btn-success upload-btn">
-                <div class="trans-label">
-                  <%= f.file_field :transparent_logo, class: 'check-field trans-logo-field' %>
-                </div>
-                <div class="trans image-division">
-                  <span class="close-cross hide">&times;</span>
-                  <%= image_tag("", class: "uploaded-trans-image course-create-image hide") %>
-                </div>
-                <%= f.text_field :logo_hyperlink, class: "col-md-12 form-control contact-info check-field", placeholder: "Hyperlink" %>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
-              <div class="clearfix"></div>
-              <div class="btn btn-success upload-btn">
-                <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field course-photos-field' %>
-                <div class="photos-collection">
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <%= label_tag :video ,'Video',class:"col-md-12 zero-left-right-padd "%>
-              <div class="clearfix"></div>
-              <div class="btn btn-success upload-btn">
-                <%= f.file_field :video, class: 'check-field' %>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-md-12 course-info-row">
-          <div class="col-md-2 form-group">
-            <%= label_tag :color_selector ,'Color Selector',class:"col-md-12 zero-left-right-padd"%>
-            <%= f.text_field :color_selector, class:"col-md-12 form-control check-field", placeholder: "Color Selector" %>
+          <div class="col-md-4 form-group">
+            <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
+            <%= f.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Full name of Client"%>
+          </div>
+          <div class="col-md-8 form-group">
+            <%= f.fields_for :location do |location_form| %>
+              <%= render 'admin/locations/form.html.erb', location_form: location_form %>
+            <% end %>
           </div>
         </div>
-
         <div class="col-md-12 course-info-row">
-            <div class="col-md-2 form-group">
-              <%= label_tag :total_par ,'Total Par',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :total_par, class:"col-md-12 form-control check-field", placeholder: "Total Par" %>
+          <div class="col-md-4">
+            <%= label_tag :course_type ,'Client Type',class: "col-md-12 zero-left-right-padd" %>
+            <%= check_box_tag 'resort[resort_type]' ,'is_public',false ,class: 'checkbox check-field inline', id: 'course_type_public' %>
+            <span class="inline">Public</span>
+            <div class="inline">
+              <%= check_box_tag 'resort[resort_type]' ,'is_private',false ,class: 'checkbox check-field inline', id: 'course_type_private' %>
+              <span class="inline">Private</span>
             </div>
-
-            <div class="col-md-2 form-group">
-              <%= label_tag :slope ,'Slope',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :slope, class:"col-md-12 form-control check-field", placeholder: "Slope" %>
+            <div class="inline">
+              <%= check_box_tag 'resort[resort_type]' ,'is_semi_private',false ,class: 'checkbox check-field inline', id: 'course_type_semi_private' %>
+              <span class="inline">Semi-Private</span>
             </div>
-
-            <div class="col-md-2 form-group">
-              <%= label_tag :rating ,'Rating',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :rating, class:"col-md-12 form-control check-field", placeholder: "Rating" %>
-            </div>
-
-            <div class="col-md-2 form-group">
-              <%= label_tag :length ,'Length',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :length, class:"col-md-12 form-control check-field", placeholder: "Length"%>
-            </div>
-
-            <div class="col-md-3 form-group">
-              <%= label_tag :number_of_tees ,'Number of Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :number_of_tees, class:"col-md-12 form-control check-field", placeholder: "Number of Tee Boxes"%>
-            </div>
-            <div class="col-md-2 form-group">
-              <%= label_tag :architect ,'Architect',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :architect, class:"col-md-12 form-control check-field", placeholder: "Architect" %>
-            </div>
+          </div>
+          <div class="col-md-4">
+            <%= label_tag :course_type ,'',class:"col-md-12 zero-left-right-padd", style: "min-height: 25px;" %>
+            <%= select_tag('network',options_for_select(Network.all.pluck(:name, :id)), options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;' , name: 'resort[network_id]'}) %>
+            <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
+            <%= link_to "Edit List", admin_networks_path %>
+          </div>
+          <div class="col-md-4 form-group">
+            <%= label_tag :contact_info, 'Contact Info',class:"col-md-12 zero-left-right-padd"%>
+            <%= f.text_field :website, class:"col-md-12 form-control contact-info check-field", placeholder: "Website" %>
+            <%= f.text_field :phone_num, class:"col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
+          </div>
         </div>
-
-        <div class="col-md-12 course-info-row score-cards-wrapper">
-            <%= label_tag :score_card ,'Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
-            <div class="col-md-8 score-card-wrapper dynamic-fields">
-
-              <%= f.fields_for :score_cards do |score_card_form| %>
-                <%= render 'admin/score_cards/form', s: score_card_form %>
-              <% end %>
-
-              <div class="col-md-2">
-                <button type="button" class="btn btn-info btn-add inline" id='add-score-card' >+</button>
-              </div>
-
-
+        <div class="col-md-12 green-separator"></div>
+        <%= f.fields_for :courses, Course.new do |course_form| %>
+          <div class="col-md-12">
+            <h4 class="col-md-4">Course Information</h4>
+            <%= render 'course_form', ff: course_form %>
+          </div>
+          <div class="col-md-12">
+            <h4 class="col-md-4">Playlist</h4>
+            <%= render 'videos_form', video_index: 0 %>
+            <div class="col-md-12">
+              <button type="button" class="btn btn-info btn-add" id='add_playlist' href="javascript:void(0)">+</button>
+              <button type="button" class="btn btn-info btn-add" id='remove_playlist' href="javascript:void(0)" style="display: none;">-</button>
             </div>
+          </div>
 
-            <div class="col-md-4">
-
+          <div class="col-md-12 zero-left-right-padd">
+            <h4 class="col-md-4">Scorecard</h4>
+            <%= render 'scorecard_form', scorecard_index: 0 %>
+            <div class="col-md-12">
+              <button type="button" class="btn btn-info btn-add" id='add_scorecard' href="javascript:void(0)">+</button>
+              <button type="button" class="btn btn-info btn-add" id='remove_scorecard' href="javascript:void(0)" style="display: none;">-</button>
             </div>
-
+          </div>
+        <% end %>
+        <div class="text-center">
+          <%= f.submit "Next", class: "btn btn-primary", style: "margin-left:20px;", id: "save_client" %>
         </div>
       </div>
-        <div class="col-md-12 course-info-row course-holes-info">
-          <%=render :partial => 'hole' , locals: {f: f } %>
-        </div>
-        <div class="text-center">
-          <!-- <span id="previous" class="btn btn-primary">Previous</span> -->
-          <span id="next" class="btn btn-primary" style="margin-left:20px;">Next</span>
-        </div>
-
     </div>
   <%end%>
-
   <%= render :partial => 'admin/resorts/new_modal' %>
   <%= render :partial => 'admin/networks/new_modal' %>
 </div>
@@ -239,214 +87,45 @@
 
 
 <script type="text/javascript">
-function containText(textFieldId){
-  if ( $('#' + textFieldId).val().length > 0 ){
-    return true;
-  }
-  else{
-    return false;
-  }
-}
+var video_index = 0;
+var scorecard_index = 0;
+$("#add_playlist").on('click', function(){
+  video_index ++;
+  $.ajax({
+    url: "<%= admin_add_playlist_item_path %>",
+    type: "GET",
+    data: {video_index: video_index}
+  });
+})
 
-$('#previous').click(function courseView(){
-  $('.basic-course-info').show();
-  $('.course-holes-info').hide();
+$("#remove_playlist").on('click', function(){
+  video_index --;
+  var last_video_element = $(".video_item").last();
+  $(last_video_element).remove();
+  if ($(".video_item").length == 1){
+    $("#remove_playlist").hide();
+  }
+})
+$("#add_scorecard").on('click', function(){
+  scorecard_index ++;
+  $.ajax({
+    url: "<%= admin_add_scorecard_path %>",
+    type: "GET",
+    data: {scorecard_index: scorecard_index}
+  });
+})
+
+$("#remove_scorecard").on('click', function(){
+  scorecard_index --;
+  var last_scorecard = $(".scorecard").last();
+  $(last_scorecard).remove();
+  if ($(".scorecard").length == 1){
+    $("#remove_scorecard").hide();
+  }
 });
 
-$('#next').click(function holesView(){
-  $( "#new_course" ).submit();
-  // $('.basic-course-info').hide();
-  // $('.course-holes-info').show();
+$('#save_client').on('click', function(){
+  $(this).addClass('disabled');
+  $(this).text('Processing..');
 });
-
-
-
-
-function enableCheck(checkID){
-  $('#' + checkID).show();
-}
-
-function disableCheck(checkID){
-  $('#' + checkID).hide();
-}
-
-function checkLocation() {
-  if(
-      containText('course_location_attributes_town') &&
-      containText('course_location_attributes_lat') &&
-      containText('course_location_attributes_lng') &&
-      $('#course_location_attributes_state').val() != ""
-    ){
-    enableCheck('location-check')
-  }
-  else{
-    disableCheck('location-check')
-  }
-
-}
-
-function checkCourseType() {
-  var course_type_checkbox = $('input[id="course_type_private"]:checked').length +
-    $('input[id="course_type_public"]:checked').length +
-    $('input[id="course_type_semi_private"]:checked').length
-
-  if ( course_type_checkbox > 0 ) {
-    enableCheck('course-type-check')
-  }
-  else {
-    disableCheck('course-type-check')
-  }
-}
-
-function checkContactInfo() {
-   if(
-      containText('course_website') &&
-      containText('course_phone_num')
-    ){
-    enableCheck('contact_info-check')
-  }
-  else{
-    disableCheck('contact_info-check')
-  }
-}
-
-function checkAmenities() {
-  var amenities_checkboxes = $('input[name="course[amenities_attributes][0][restaurants]"]:checked').length +
-    $('input[name="course[amenities_attributes][0][caddies]"]:checked').length +
-    $('input[name="course[amenities_attributes][0][carts]"]:checked').length
-
-  if ( amenities_checkboxes >= 1 ) {
-    enableCheck('amenities-check')
-  }
-  else {
-    disableCheck('amenities-check')
-  }
-}
-
-function checkLogo() {
-  if ($('#course_logo').val()) {
-    enableCheck('logo-check')
-  }
-  else {
-    disableCheck('logo-check')
-  }
-}
-
-function checkCover() {
-  if ($('#course_cover').val()) {
-    enableCheck('cover-check')
-  }
-  else {
-    disableCheck('cover-check')
-  }
-}
-
-function checkScoreCard() {
-  if(
-      containText('tee-name-field') &&
-      $('#course_score_cards_attributes_0_color').val() != ""
-    ){
-    enableCheck('score_card-check')
-  }
-  else{
-    disableCheck('score_card-check')
-  }
-}
-
-
-function checkFields(){
-  $('.glyphicon-ok').hide();
-
-  var idsHash =  {
-        'course_length': 'length-check',
-        'course_rating': 'rating-check',
-        'course_total_par': 'par-check',
-        'course_slope': 'slope-check',
-        'course_bio': 'bio-check',
-        'course_name': 'name-check',
-        'course_amenities': 'amenities-check',
-        'course_logo' : 'logo-check',
-        'course_cover' : 'cover-check',
-        // : 'overview-checkbox',
-      }
-
-    $(".check-field").focusout(function() {
-      if (idsHash[this.id]){
-        if (containText(this.id)){
-          enableCheck(idsHash[this.id]);
-        }
-        else{
-          disableCheck(idsHash[this.id]);
-        }
-      }
-      else{
-        if (checkLocation()){
-          enableCheck('location-check');
-        }
-        else if(checkCourseType()){
-          enableCheck('course-type-check')
-        }
-        else if(checkContactInfo()){
-          enableCheck('contact_info-check')
-        }
-        else if(checkAmenities()){
-          enableCheck('amenities-check')
-        }
-        else if(checkLogo()){
-          enableCheck('logo-check')
-        }
-        else if(checkCover()){
-          enableCheck('cover-check')
-        }
-        else if(checkScoreCard()){
-          enableCheck('score_card-check')
-        }
-      }
-  })
-}
-
-checkFields();
-
-  $("input:checkbox").on('click', function() {
-    var $box = $(this);
-    if ($box.is(":checked")) {
-      var group = "input:checkbox[name='" + $box.attr("name") + "']";
-      $(group).prop("checked", false);
-      $box.prop("checked", true);
-    } else {
-      $box.prop("checked", false);
-    }
-  });
-
-  $('#add-score-card').click(function() {
-    var clonedField = $('.score-card-wrapper').first().clone();
-    var teeNameField = clonedField.find('#tee-name-field');
-    var colorField = clonedField.find('#course_score_cards_attributes_0_color');
-    var btnAdd = clonedField.find('.btn-add').remove();
-
-    teeNameField.removeAttr( "id" )
-    colorField.removeAttr( "id" )
-    var scoreCardLen = $('.score-card-wrapper').length ;
-    teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
-    colorField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][color]' );
-    clonedField.appendTo($('.score-cards-wrapper'))
-
-  });
-
-
-  $( "#create-course-btn" ).click(function() {
-    $( "#new_course" ).submit();
-  });
-
-  $( "#create-course-btn" ).hide();
-  
-  $(document).on("click", '.close-cross', function() {
-    $(this).removeClass('show');
-    $(this).addClass('hide');
-    PhotosDivision = $(this).closest('.image-division');
-    UploadBtn = $(PhotosDivision).closest('.upload-btn');
-    $(UploadBtn).find('.check-field').val("");
-    $(PhotosDivision).find(".course-create-image").removeClass('show');
-    $(PhotosDivision).find(".course-create-image").addClass('hide');
-  });
 </script>

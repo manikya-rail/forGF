@@ -148,8 +148,8 @@ table th{
     position: absolute;
 }
 .photos-collection , .scorecard-collection, .score-collection{
-    width: 300px;
-    overflow-x: scroll;
+    max-width: 300px;
+    overflow-x: auto;
     padding-top: 8px;
     padding-bottom: 6px;
 }
@@ -195,4 +195,57 @@ table th{
     padding: 0px;
     position: relative;
     width: 50px;
+}
+#course-page-content-wrapper h4{
+    color: gray;
+}
+.green-separator{
+    min-height: 1px;
+    background: #40a475;
+}
+.mar-top-50{
+    margin-top: 50px;
+}
+table th{
+    color: #80838a;
+}
+table.borderless{
+    border: none;
+    margin-top: 15px;
+}
+.borderless > thead > tr > th{
+    border: none !important;
+}
+.scorecard_table input{
+    padding: 2px !important;
+}
+body{
+    overflow-x: hidden
+}
+.table.holes_list{
+    overflow-x: auto;
+    display: inline-block;
+}
+.holes_list th{
+    color: #16A476;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }

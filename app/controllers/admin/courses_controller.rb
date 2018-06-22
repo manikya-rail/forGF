@@ -1,9 +1,17 @@
 class Admin::CoursesController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-
   # GET /courses
   # GET /courses.json
+
+  def add_playlist_item
+    @video_index = params["video_index"].to_i    
+  end
+
+  def add_scorecard
+    @scorecard_index = params["scorecard_index"].to_i    
+  end
+
   def index
     # @courses = Course.all
     @courses = Course.order("id DESC")
@@ -25,13 +33,14 @@ class Admin::CoursesController < ApplicationController
 
   # GET /courses/new
   def new
-    @course = Course.new
-    @course.build_location
-    @course.amenities.build
-    @course.score_cards.build
-    1..18.times do |index|
-      @course.holes.build
-    end
+    @resort = Resort.new
+    @resort.build_location
+    @resort.courses.build
+    # @course.amenities.build
+    # @course.score_cards.build
+    # 1..18.times do |index|
+    #   @course.holes.build
+    # end
   end
 
   def holes
@@ -45,26 +54,31 @@ class Admin::CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course = Course.new(course_params)
-
-    respond_to do |format|
-      if @course.save
-
-        if params[:images]
-          params[:images].each { |image|
-            @course.course_images.create(photo: image)
-          }
+    if params[:resort_id].blank?
+      @resort = Resort.new(resort_params)
+    else
+      @resort = Resort.find(params[:resort_id])
+      @resort.assign_attributes(resort_params)
+    end
+    if @resort.save
+      @course = @resort.courses.last
+      if params[:images]
+        params[:images].each { |image| @course.course_images.create(photo: image)}
+      end
+      if params[:score_cards]
+        params[:score_cards].each do |scorecard_index, scorecard_params|
+          score_card = @course.score_cards.create(tee_name: scorecard_params[:tee_name], 
+            color: scorecard_params[:color], rating: scorecard_params[:total_rating],
+            slope: scorecard_params[:total_slope])
+          scorecard_params[:holes].each do |hole_num, hole_params|
+            hole = @course.holes.find_or_create_by(hole_num: hole_num)
+            if score_card.present? && hole.present?
+              yardage = score_card.yardages.find_or_create_by(hole_id: hole.id, yards: hole_params[:yardges])
+              par = score_card.pars.find_or_create_by(hole_id: hole.id, par: hole_params[:par])
+              hcp = score_card.hcps.find_or_create_by(hole_id: hole.id, hcp: hole_params[:hcp])
+            end
+          end
         end
-        if params[:score_images]
-          params[:score_images].each { |image|
-            @course.scorecard_images.create(photo: image)
-          }
-        end
-        format.html { redirect_to admin_holes_create_path(@course), notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
-      else
-        format.html { render :new }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -123,10 +137,35 @@ class Admin::CoursesController < ApplicationController
     end 
     render :json => {status: 'success'}, :layout => false
   end
+
+  def update_holes
+    course = Course.find(params[:course_id])
+    params[:holes].each do |hole_id, hole_params|
+      hole = Hole.find(hole_id)
+      hole.build_video(video: hole_params[:video]) if hole_params[:video].present?
+      hole.image = hole_params[:cover] if hole_params[:cover].present?
+      hole.map = hole_params[:map] if hole_params[:map].present?
+      hole.description = hole_params[:description]
+      hole.save
+      if hole_params[:images].present?
+        hole_params[:images].each do |image|
+          hole.hole_images.create(image: image)
+        end
+      end
+    end
+    if params[:commit] == "Save"
+      redirect_to admin_courses_path
+    else
+      @resort = course.resort
+      @resort.courses.build
+      render :new
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Course.find(params[:id])
+      @course = Course.find(params[:id]) rescue nil
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -137,5 +176,9 @@ class Admin::CoursesController < ApplicationController
           score_cards_attributes: [:id, :tee_name, :color, :rating, :slope, :_destroy],
           holes_attributes: [:id, :par, :yards, :mhcp, :whcp, :description, :hole_num]
         )
+    end
+
+    def resort_params
+      params.require(:resort).permit(:name, :resort_type, :website, :phone_num, :network_id, location_attributes: [:town,:state, :lat, :lng], courses_attributes: [:name, :bio, :color_selector, videos_attributes: [:title, :description, :video]])
     end
 end
