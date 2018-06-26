@@ -1,0 +1,18 @@
+<div class="col-md-12 select_course_heading">
+	<h2>SELECT COURSE</h2>
+</div>
+<% @courses.each do |course| %>
+	<div class="col-md-12 course_list_item">
+		<%= image_tag course.course_images.first.photo.url %>
+		<%= image_tag "big-play.png", class: "play_button" %>
+		<span class="course_title"><%= course.name %></span>
+		<span class="course_description"><%= course.bio %></span>
+	</div>
+	<div class="col-md-12 course_list_item">
+		<%= image_tag course.course_images.second.photo.url %>
+		<%= image_tag "big-play.png", class: "play_button" %>
+	</div>
+<% end %>
+<div class="col-md-12 text-center select_course_footer">
+	<%= image_tag "signature_v2.png" %>
+</div>

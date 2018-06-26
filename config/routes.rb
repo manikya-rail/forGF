@@ -6,7 +6,9 @@ namespace :admin do
   resources :score_cards
   resources :amenities
   resources :networks
-  resources :resorts
+  resources :resorts do
+    get :courses_list
+  end
   resources :locations
   resources :courses
   resources :ads

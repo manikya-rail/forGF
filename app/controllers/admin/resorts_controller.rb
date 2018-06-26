@@ -1,4 +1,5 @@
 class Admin::ResortsController < ApplicationController
+  layout "embed", only: :courses_list
   before_action :set_resort, only: [:show, :edit, :update, :destroy]
 
   # GET /resorts
@@ -62,6 +63,11 @@ class Admin::ResortsController < ApplicationController
       format.html { redirect_to admin_resorts_url, notice: 'Resort was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def courses_list
+    @resort = Resort.find(params[:resort_id])
+    @courses = @resort.courses
   end
 
   private

@@ -1,22 +1,21 @@
 .pt-20{padding-top: 20px;}
 .pb-20{padding-bottom: 20px;}
 #course-page-content-wrapper{
-    margin-top: 5%;
-
+  margin-top: 5%;
 }
 
 .zero-left-right-padd{
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 .hole,.course-info-row{
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .dropdown-padd{
-   padding: 6px 40px;
+  padding: 6px 40px;
 }
 .dropdown-less-padd{
    padding: 2px 30px;
@@ -210,42 +209,64 @@ table th{
     color: #80838a;
 }
 table.borderless{
-    border: none;
-    margin-top: 15px;
+  border: none;
+  margin-top: 15px;
 }
 .borderless > thead > tr > th{
-    border: none !important;
+  border: none !important;
 }
 .scorecard_table input{
-    padding: 2px !important;
+  padding: 2px !important;
 }
 body{
-    overflow-x: hidden
+  overflow-x: hidden
 }
 .table.holes_list{
-    overflow-x: auto;
-    display: inline-block;
+  overflow-x: auto;
+  display: inline-block;
 }
 .holes_list th{
-    color: #16A476;
+  color: #16A476;
 }
 .btn-file {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+.course_list_item img{
+  width: 100%;
+  max-height: 350px;
+}
+.course_list_item .play_button{
+  width: 10% !important;
+  position: absolute;
+  top: 25%;
+  left: 45%;
+}
+.course_list_item{
+  margin-top: 10px;
+}
+.select_course_heading h2{
+  text-align: center;
+  font-family: Bank Gothic Medium;
+}
+.select_course_footer img{
+  max-height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
