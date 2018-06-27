@@ -11,188 +11,85 @@
       </div>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
   <div class="col-md-12 description2">
     <div class="row">
       <div class="col-md-12">
-        <h3><b class="home_title">Amenities</b></h3>
+        <h3><b class="home_title">Playlist</b></h3>
       </div>
+      <div class="clearfix"></div>
+      <ul class="slider slider-nav playlist_thumb">
+        <li class="playing">
+          <div>
+            <img src="http://www.rodzinne-wakacje.pl/wp-content/uploads/2017/05/maldives-1993704_960_720-696x391.jpg" />
+            <a href="#">
+              <%= image_tag "big-play.png", :class => "play_btn" %>
+            </a>
+          </div>
+          <span>The Gold Course</span>
+        </li>
+        <li>
+          <div>
+            <img src="https://i.pinimg.com/originals/94/dd/57/94dd573e4b4de604ea7f33548da99fd6.jpg" />
+            <a href="#">
+              <%= image_tag "big-play.png", :class => "play_btn" %>
+            </a>
+          </div>
+          <span>The Gold Course</span>
+        </li>
+        <li>
+          <div>
+            <img src="https://i.pinimg.com/originals/bc/a2/0e/bca20e9db15992b75ed6e64a26aee002.jpg" />
+            <a href="#">
+              <%= image_tag "big-play.png", :class => "play_btn" %>
+            </a>
+          </div>
+          <span>The Gold Course</span>
+        </li>
+        <li>
+          <div>
+            <img src="https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&h=350" />
+            <a href="#">
+              <%= image_tag "big-play.png", :class => "play_btn" %>
+            </a>
+          </div>
+          <span>The Gold Course</span>
+        </li>
+        <li>
+          <div>
+            <img src="https://media.luftika.rs/2017/04/uskrsnja-jaja-4.jpg" />
+            <a href="#">
+              <%= image_tag "big-play.png", :class => "play_btn" %>
+            </a>
+          </div>
+          <span>The Gold Course</span>
+        </li>
+      </ul>
     </div>
-    <div class="row amenity-wrap">
-      <div class="col-md-12 col-xs-12 col-sm-12 course-divider">
-        <div class="responsive">
-          <% @course.amenities.each do |amenity| %>
-            <% if amenity.restaurants %>
-              <div class="item active">
-                <span class="amenity">
-                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                  width="35px" height="35px" viewBox="0 0 102.000000 148.000000"
-                  preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,148.000000) scale(0.100000,-0.100000)"
-                    fill="#000000" stroke="none">
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M40 1212 c0 -236 0 -239 23 -260 19 -18 35 -22 90 -22 l67 0 0 -160
-                      0 -160 -25 -10 c-14 -5 -30 -21 -35 -35 -14 -36 -13 -444 1 -483 11 -32 34
-                      -45 79 -45 45 0 68 13 79 45 12 34 14 436 2 478 -4 14 -19 31 -34 38 l-27 13
-                      0 160 0 159 68 0 c59 0 72 3 90 23 21 23 22 31 22 260 0 230 -1 237 -20 237
-                      -19 0 -20 -8 -22 -237 l-3 -238 -67 -3 -68 -3 0 241 c0 233 -1 240 -20 240
-                      -19 0 -20 -7 -20 -240 l0 -241 -67 3 -68 3 -3 238 c-2 229 -3 237 -22 237 -19
-                      0 -20 -7 -20 -238z m214 -272 c-6 -6 -15 -6 -24 0 -13 9 -13 11 0 20 18 11 39
-                      -5 24 -20z m24 -382 c17 -17 17 -459 0 -476 -15 -15 -61 -15 -76 0 -17 17 -17
-                      459 0 476 7 7 24 12 38 12 14 0 31 -5 38 -12z"/>
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M727 1432 c-15 -16 -17 -54 -17 -330 0 -379 -11 -352 140 -352 l100
-                      0 0 -74 0 -74 -44 5 c-38 5 -48 2 -70 -20 l-26 -26 0 -239 c0 -278 0 -280 83
-                      -284 36 -1 52 3 67 18 19 19 20 41 22 707 l3 687 -121 0 c-104 0 -123 -2 -137
-                      -18z m223 -332 l0 -311 -97 3 -98 3 -3 295 c-1 162 0 300 3 307 3 9 32 13 100
-                      13 l95 0 0 -310z m-10 -549 c6 -12 10 -106 10 -235 0 -182 -2 -217 -16 -230
-                      -18 -19 -55 -21 -72 -4 -17 17 -17 459 0 476 19 19 66 15 78 -7z"/>
-                    </g>
-                  </svg>
-                  <h4 class="hole_description">Restaurant</h4>
-                </span>
-              </div>
-            <% end %>
-            <% if amenity.caddies %>
-              <div class="item">
-                <span class="amenity">
-                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                  width="35px" height="35px" viewBox="0 0 62.000000 85.000000"
-                  preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,85.000000) scale(0.100000,-0.100000)"
-                    fill="#000000" stroke="none">
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M385 829 c-22 -18 -26 -27 -21 -53 5 -27 1 -37 -25 -62 -17 -16 -44
-                      -58 -60 -93 -34 -74 -83 -121 -170 -162 -32 -16 -59 -33 -59 -38 0 -6 -11 -13
-                      -25 -17 -32 -8 -32 -22 3 -69 27 -38 29 -39 97 -41 78 -3 139 20 150 57 5 15
-                      10 18 15 10 11 -19 -1 -61 -32 -110 -16 -25 -33 -62 -39 -83 -5 -20 -21 -50
-                      -34 -66 -38 -46 -33 -59 31 -78 60 -17 104 -13 104 11 0 9 -11 20 -25 25 -41
-                      16 -41 36 0 96 28 40 42 53 54 48 9 -4 25 -9 36 -11 23 -5 54 -77 64 -148 l6
-                      -40 55 3 c60 3 96 17 105 39 9 25 -4 33 -50 33 -60 0 -68 18 -71 160 -2 63 -6
-                      127 -10 143 -3 16 -1 34 6 42 6 8 9 19 5 25 -3 5 -2 10 4 10 22 0 82 63 79 83
-                      -4 27 -50 60 -86 61 -28 1 -30 4 -35 46 -4 32 -1 47 9 53 8 4 14 15 14 22 0 8
-                      5 15 11 15 6 0 9 7 5 15 -3 8 0 15 7 15 7 0 18 5 25 12 9 9 2 18 -31 40 -50
-                      34 -75 35 -112 7z m91 -18 c18 -14 21 -20 10 -24 -8 -3 -17 -19 -21 -36 -4
-                      -21 -13 -31 -25 -31 -24 0 -37 -20 -20 -30 7 -4 16 -36 19 -71 6 -64 24 -88
-                      34 -47 5 17 9 20 18 11 6 -6 17 -9 23 -7 7 3 21 -4 31 -16 18 -19 18 -21 -1
-                      -41 -10 -11 -31 -28 -46 -37 -35 -21 -40 -47 -29 -162 5 -52 6 -99 2 -103 -11
-                      -11 7 -107 25 -134 10 -17 25 -23 61 -25 42 -3 45 -5 28 -14 -11 -6 -41 -15
-                      -67 -18 -47 -7 -48 -7 -48 21 0 15 -12 58 -27 95 -22 57 -30 68 -49 68 -13 0
-                      -28 9 -34 21 -10 17 -14 18 -27 7 -26 -21 -93 -129 -93 -150 0 -10 15 -27 33
-                      -38 37 -23 20 -26 -48 -8 -51 14 -53 18 -25 43 10 9 27 40 36 69 9 28 27 67
-                      40 87 43 64 54 149 19 149 -14 0 -45 -26 -45 -38 0 -20 -51 -36 -116 -36 -70
-                      -1 -72 0 -93 31 -27 41 -27 41 7 45 15 2 25 7 24 12 -4 10 87 61 94 54 2 -3
-                      26 17 54 43 32 30 61 70 79 111 16 35 43 76 61 93 26 25 30 35 25 62 -10 57
-                      42 82 91 44z"/>
-                    </g>
-                  </svg>
-                  <h4 class="hole_description">Caddies</h4>
-                </span>
-              </div>
-            <% end %>
-            <% if amenity.carts %>
-              <div class="item">
-                <span class="amenity">
-                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                  width="40px" height="35px" viewBox="0 0 112.000000 81.000000"
-                  preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,81.000000) scale(0.100000,-0.100000)"
-                    fill="#000000" stroke="none">
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M263 803 c-7 -2 -13 -13 -13 -24 0 -14 9 -21 30 -25 17 -4 30 -9 30
-                      -13 0 -3 -12 -81 -26 -173 l-27 -168 -46 0 -46 0 -65 -120 c-45 -85 -69 -120
-                      -82 -120 -13 0 -18 -8 -18 -30 0 -28 2 -30 38 -30 36 0 40 2 51 39 23 79 111
-                      116 181 75 32 -19 60 -63 60 -93 0 -21 4 -21 200 -21 195 0 200 1 200 20 0 31
-                      26 75 54 94 14 9 45 16 70 16 57 0 112 -43 122 -96 l6 -34 69 0 69 0 0 30 c0
-                      23 -4 30 -20 30 -19 0 -20 7 -20 179 0 193 1 191 -56 191 -20 0 -24 5 -24 31
-                      0 25 3 29 19 24 28 -8 46 19 26 39 -18 18 -25 19 -49 10 -12 -4 -16 -20 -16
-                      -55 0 -37 -4 -51 -19 -59 -18 -9 -19 -18 -14 -105 6 -92 5 -95 -15 -95 -25 0
-                      -26 3 -47 226 -19 206 -19 204 4 204 32 0 51 11 51 30 0 10 -7 21 -16 24 -19
-                      7 -643 7 -661 -1z m657 -23 c0 -5 -17 -10 -38 -10 l-38 0 21 -223 c12 -123 25
-                      -228 29 -235 4 -7 23 -12 42 -12 l35 0 -2 103 -2 102 47 0 46 1 0 -183 c0
-                      -176 1 -183 20 -183 11 0 20 -4 20 -10 0 -5 -22 -10 -49 -10 -48 0 -50 1 -61
-                      35 -37 112 -194 130 -261 29 -10 -16 -19 -37 -19 -46 0 -17 -15 -18 -178 -18
-                      l-178 0 -12 34 c-7 19 -29 48 -48 65 -30 27 -42 31 -90 31 -50 0 -59 -3 -90
-                      -34 -19 -19 -37 -48 -40 -65 -5 -24 -12 -31 -30 -31 -27 0 -33 17 -8 22 8 2
-                      43 55 77 118 l62 115 50 3 50 3 30 192 30 192 -25 3 c-14 2 -29 8 -34 13 -6 5
-                      117 9 317 9 211 0 327 -4 327 -10z m110 -170 c0 -5 -7 -10 -15 -10 -8 0 -15 5
-                      -15 10 0 6 7 10 15 10 8 0 15 -4 15 -10z"/>
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M350 758 c0 -7 -12 -93 -26 -192 -16 -110 -22 -182 -16 -188 6 -6 23
-                      -2 46 9 32 15 36 21 31 43 -8 30 3 20 34 -32 13 -21 18 -38 12 -38 -5 0 -14 8
-                      -20 17 -8 16 -12 16 -50 -2 -22 -11 -41 -22 -41 -25 1 -3 22 -45 48 -95 l47
-                      -90 43 -3 42 -3 0 70 0 71 180 0 180 0 0 38 c0 20 -7 118 -15 217 -8 99 -15
-                      188 -15 198 0 16 -18 17 -240 17 -185 0 -240 -3 -240 -12z m460 -20 c0 -7 7
-                      -96 15 -198 8 -102 15 -193 15 -202 0 -17 -15 -18 -180 -18 l-180 0 0 -68 0
-                      -69 -28 5 c-24 3 -34 16 -66 79 -20 41 -36 76 -34 78 26 20 43 21 57 3 14 -17
-                      18 -17 35 -5 18 13 18 16 -10 68 -20 38 -35 54 -49 54 -15 0 -20 -6 -18 -26 1
-                      -19 -5 -30 -23 -38 -13 -6 -24 -9 -24 -7 0 2 11 81 25 176 14 95 25 174 25
-                      176 0 2 99 4 220 4 169 0 220 -3 220 -12z"/>
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M164 210 c-64 -26 -84 -115 -38 -169 50 -59 150 -46 179 23 39 92
-                      -49 183 -141 146z m85 -25 c82 -42 46 -165 -49 -165 -10 0 -32 12 -49 26 -44
-                      37 -44 91 0 128 35 30 58 32 98 11z"/>
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M799 206 c-15 -9 -34 -32 -44 -52 -36 -76 15 -149 103 -149 90 0 136
-                      107 75 175 -33 37 -93 49 -134 26z m112 -35 c39 -40 39 -82 0 -122 -46 -46
-                      -109 -34 -138 26 -16 33 -16 37 0 70 29 60 92 72 138 26z"/>
-                    </g>
-                  </svg>
-                  <h4 class="hole_description">Carts</h4>
-                </span>
-              </div>
-            <% end %>
-
-            <% if amenity.golf_boards %>
-              <div class="item">
-                <span class="amenity">
-                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                  width="40px" height="35px" viewBox="0 0 87.000000 68.000000"
-                  preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,68.000000) scale(0.100000,-0.100000)"
-                    fill="#000000" stroke="none">
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M95 666 c-16 -11 -17 -17 -7 -29 7 -8 21 -13 32 -10 17 4 20 0 20
-                      -26 0 -42 -31 -43 -47 0 -10 25 -16 30 -39 27 -39 -4 -42 -27 -5 -41 34 -13
-                      39 -22 16 -31 -14 -5 -16 -33 -15 -195 l2 -188 -26 -26 c-23 -23 -34 -47 -22
-                      -47 3 0 18 14 34 30 43 43 108 43 150 0 l30 -30 217 0 217 0 30 30 c24 24 38
-                      30 75 30 36 0 50 -6 75 -30 33 -34 46 -34 29 -1 -19 35 -67 54 -120 46 -25 -4
-                      -160 -9 -298 -11 l-253 -4 0 200 c0 169 -2 202 -15 206 -10 4 -15 20 -15 48 0
-                      61 -26 81 -65 52z m35 -16 c-20 -13 -33 -13 -25 0 3 6 14 10 23 10 15 0 15 -2
-                      2 -10z m40 -287 l0 -188 -47 3 -48 4 2 181 c2 100 3 183 3 185 0 1 20 2 45 2
-                      l45 0 0 -187z m487 -228 c-5 -14 -439 -14 -444 0 -2 6 76 10 222 10 146 0 224
-                      -4 222 -10z"/>
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M233 465 c0 -44 2 -61 4 -37 2 23 2 59 0 80 -2 20 -4 1 -4 -43z"/>
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M61 114 c-28 -35 -26 -59 5 -91 20 -20 31 -24 57 -19 60 12 82 64 47
-                      109 -29 37 -80 37 -109 1z m87 -6 c17 -17 15 -63 -2 -78 -23 -18 -59 -8 -75
-                      22 -14 24 -14 28 3 47 21 23 56 27 74 9z"/>
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M700 113 c-35 -45 -13 -97 47 -109 26 -5 37 -1 57 19 31 32 33 56 5
-                      91 -29 36 -80 36 -109 -1z m96 -14 c17 -19 17 -23 3 -47 -24 -44 -79 -40 -92
-                      8 -7 26 20 60 47 60 13 0 31 -9 42 -21z"/>
-                    </g>
-                  </svg>
-                  <h4 class="hole_description">Golfboards</h4>
-                </span>
-              </div>
-            <% end %>
-            <% if amenity.practice_range %>
-              <div class="item">
-                <span class="amenity">
-                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                  width="40px" height="35px" viewBox="0 0 112.000000 83.000000"
-                  preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,83.000000) scale(0.100000,-0.100000)"
-                    fill="#000000" stroke="none">
-                      <path fill="<%=color_selector(@course.color_selector)%>" d="M550 557 l0 -274 -122 -7 c-212 -11 -378 -56 -414 -111 -16 -25 -16
-                      -27 3 -53 26 -35 108 -68 224 -88 117 -21 494 -24 614 -5 157 25 265 74 265
-                      120 0 66 -183 124 -432 138 l-118 6 0 184 0 184 145 -3 145 -3 0 93 0 92 -155
-                      0 -155 0 0 -273z m290 183 l0 -70 -135 0 -135 0 0 70 0 70 135 0 135 0 0 -70z
-                      m-290 -545 c0 -37 4 -65 10 -65 6 0 10 28 10 65 l0 65 44 0 c70 0 245 -20 316
-                      -35 78 -18 157 -52 165 -73 34 -88 -385 -157 -736 -121 -217 22 -353 71 -334
-                      121 19 49 251 102 463 107 l62 1 0 -65z"/>
-                    </g>
-                  </svg>
-                  <h4 class="hole_description">Practice Range</h4>
-                </span>
-              </div>
-            <% end %>
-          <% end%>
-        </div>
-      </div>
-    </div>
+    
   </div>
-</div>
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
 <div class="row slider">
   <div class="col-md-12 col-xs-12 col-sm-12 st1">
     <div class="row scorecard-row">
@@ -256,6 +153,44 @@
      });
     return slider;
   }
+
+  $('.playlist_thumb').slick({
+     slidesToShow: 4,
+     slidesToScroll: 1,
+     dots: true,
+     focusOnSelect: true,
+     responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+   });
+  
 
   $(".tees").click(function(){
      ImageSrc = $(this).children().attr('src');

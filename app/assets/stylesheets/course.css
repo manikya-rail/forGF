@@ -1,3 +1,20 @@
+@font-face {
+    font-family: 'avenirbold';
+    src: url('12_avenir_95_black_09173-webfont.woff2') format('woff2'),
+         url('12_avenir_95_black_09173-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'avenirregular';
+    src: url('avenir_roman-webfont.woff2') format('woff2'),
+         url('avenir_roman-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 .pt-20{padding-top: 20px;}
 .pb-20{padding-bottom: 20px;}
 #course-page-content-wrapper{
@@ -248,25 +265,178 @@ body{
   cursor: inherit;
   display: block;
 }
+
+.course_list_item{
+  position: relative;
+  margin-top: 2px;
+}
+
 .course_list_item img{
   width: 100%;
   max-height: 350px;
+  object-fit: cover;
+
 }
 .course_list_item .play_button{
-  width: 10% !important;
+  width: 70px !important;
   position: absolute;
-  top: 25%;
-  left: 45%;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, -50%);
+  background: transparent !important;
 }
-.course_list_item{
-  margin-top: 10px;
+
+.course_list_item .play_button img{
+  height: auto;
 }
+.course_list_item:before{
+  content: '';
+  background: rgba(51,51,51,.5);
+  width: calc(100% - 30px);
+  height: 100%;
+  position: absolute;
+  transition:all .3s ease-in-out;
+  left: 50%;
+  transform:translateX(-50%);
+}
+.course_info{
+  font-family: 'avenirregular';
+  color: #fff;
+  position: absolute;
+  bottom: 60px;
+  padding: 0px 30px;
+  text-align: center;
+  left: 0;
+  width: 100%;
+
+}
+.course_info:before{
+  content: '';
+}
+.course_info .course_description {
+    white-space: nowrap;
+    max-width: 750px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 auto;
+    width: 100%;
+}
+.course_info h2{
+  font-family: 'avenirbold'; 
+}
+
 .select_course_heading h2{
   text-align: center;
-  font-family: Bank Gothic Medium;
+  margin-top: 25px;
+  font-family: 'avenirregular';
+  margin-bottom: 15px;
+  font-size: 24px;
 }
 .select_course_footer img{
   max-height: 50px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.course_list_item:hover:before{
+  background: transparent;
+}
+
+.playlist_thumb li{
+  position: relative;
+  padding: 15px 15px;
+}
+.playlist_thumb li img{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.playlist_thumb li span{
+  display: inline-block;
+  margin-top: 10px;
+}
+.playlist_thumb li div{
+  position: relative;
+}
+.playlist_thumb li.playing div .play_btn{
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+}
+.playlist_thumb li div .play_btn{
+  opacity: 1;
+  visibility: visible;
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.playlist_thumb li:not(.playing) div:before{
+  content: '';
+  background: rgba(255,255,255,.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition:all .3s ease-in-out;
+  opacity: 0;
+}
+.playlist_thumb li:not(.playing) div:hover:before{
+  opacity: 1;
+}
+.playlist_thumb li.playing div:before{
+  content: 'Now Playing';
+  position: absolute;
+  width: 170px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: #fff;
+  border: 1px solid #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 9;
+}
+.playlist_thumb li.playing div:after{
+  content: '';
+  background: rgba(51,51,51,.5);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.playlist_thumb .slick-next, .playlist_thumb .slick-next:hover, .playlist_thumb .slick-next:focus, .playlist_thumb .slick-prev, .playlist_thumb .slick-prev:focus, .playlist_thumb .slick-prev:hover{
+  right: 0px;
+  background: url(/assets/right-black.png) no-repeat;
+  background-color: #f6f6f6;
+  box-shadow: 1px 0px 5px rgba(0,0,0,.5);
+  background-size: 8px;
+  width: 40px;
+  height: 40px !important;
+  background-position: center;
+  margin-top: -14px;
+}
+.playlist_thumb .slick-prev, .playlist_thumb .slick-prev:focus, .playlist_thumb .slick-prev:hover{
+  left: 0px;
+  background: url(/assets/left-black.png) no-repeat;
+  background-size: 8px;
+  background-position: center;
+  background-color: #f6f6f6;
+  z-index: 9;
+}
+
+@media screen and (max-width: 450px){
+  .course_info{
+    bottom: 15px
+  }
+  .course_info h2{
+    font-size: 20px;
+  }
 }

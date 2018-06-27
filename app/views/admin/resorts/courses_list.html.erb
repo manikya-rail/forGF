@@ -1,18 +1,31 @@
 <div class="col-md-12 select_course_heading">
 	<h2>SELECT COURSE</h2>
 </div>
-<% @courses.each do |course| %>
-	<div class="col-md-12 course_list_item">
-		<%= image_tag course.course_images.first.photo.url %>
-		<%= image_tag "big-play.png", class: "play_button" %>
-		<span class="course_title"><%= course.name %></span>
-		<span class="course_description"><%= course.bio %></span>
-	</div>
-	<div class="col-md-12 course_list_item">
-		<%= image_tag course.course_images.second.photo.url %>
-		<%= image_tag "big-play.png", class: "play_button" %>
-	</div>
-<% end %>
+<div class="clearfix"></div>
+<div class="select_course_body clearfix">
+	<% @courses.each do |course| %>
+		<div class="col-md-12 course_list_item">
+			<%= image_tag course.course_images.first.photo.url %>
+			<a href="#" class="play_button">
+				<%= image_tag "big-play.png" %>
+			</a>
+			<div class="course_info">
+				<h2 class="course_title"><%= course.name %></h2>
+				<p class="course_description"><%= course.bio %></p>
+			</div>
+		</div>
+		<div class="col-md-12 course_list_item">
+			<%= image_tag course.course_images.first.photo.url %>
+			<a href="#" class="play_button">
+				<%= image_tag "big-play.png" %>
+			</a>
+			<div class="course_info">
+				<h2 class="course_title"><%= course.name %></h2>
+				<p class="course_description"><%= course.bio %></p>
+			</div>
+		</div>
+	<% end %>
+</div>
 <div class="col-md-12 text-center select_course_footer">
 	<%= image_tag "signature_v2.png" %>
 </div>
