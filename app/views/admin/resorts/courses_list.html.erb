@@ -5,17 +5,7 @@
 <div class="select_course_body clearfix">
 	<% @courses.each do |course| %>
 		<div class="col-md-12 course_list_item">
-			<%= image_tag course.course_images.first.photo.url %>
-			<a href="#" class="play_button">
-				<%= image_tag "big-play.png" %>
-			</a>
-			<div class="course_info">
-				<h2 class="course_title"><%= course.name %></h2>
-				<p class="course_description"><%= course.bio %></p>
-			</div>
-		</div>
-		<div class="col-md-12 course_list_item">
-			<%= image_tag course.course_images.first.photo.url %>
+			<%= image_tag course.cover.url %>
 			<a href="#" class="play_button">
 				<%= image_tag "big-play.png" %>
 			</a>

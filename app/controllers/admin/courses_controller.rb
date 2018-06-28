@@ -1,4 +1,5 @@
 class Admin::CoursesController < ApplicationController
+  require 'fileutils'
   before_action :authenticate_admin!
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   # GET /courses
@@ -49,6 +50,7 @@ class Admin::CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+    @course.videos.build
   end
 
   # POST /courses
@@ -62,8 +64,27 @@ class Admin::CoursesController < ApplicationController
     end
     if @resort.save
       @course = @resort.courses.last
-      if params[:images]
-        params[:images].each { |image| @course.course_images.create(photo: image)}
+      if params[:images].present?
+        images_path = []
+        params[:images].each_with_index do |image, index|
+          tmp = image.tempfile
+          file = File.join("public", image.original_filename)
+          FileUtils.cp tmp.path, file
+          images_path << file
+        end
+        UploadCourseMediaWorker.perform_async(images_path, @course.id)
+      end
+      if params[:videos].present?
+        videos_details_arr = []
+        params[:videos].each do |index, video_params|
+          video_details = {title: video_params[:title], description: video_params[:description]}
+          tmp = video_params[:video].tempfile
+          file = File.join("public", video_params[:video].original_filename)
+          FileUtils.cp tmp.path, file
+          video_details[:file_path] = file
+          videos_details_arr << video_details
+        end
+        UploadCourseVideoWorker.perform_async(@course.id, videos_details_arr)
       end
       if params[:score_cards]
         params[:score_cards].each do |scorecard_index, scorecard_params|
@@ -140,19 +161,41 @@ class Admin::CoursesController < ApplicationController
 
   def update_holes
     course = Course.find(params[:course_id])
+    all_hole_details = []
     params[:holes].each do |hole_id, hole_params|
-      hole = Hole.find(hole_id)
-      hole.build_video(video: hole_params[:video]) if hole_params[:video].present?
-      hole.image = hole_params[:cover] if hole_params[:cover].present?
-      hole.map = hole_params[:map] if hole_params[:map].present?
-      hole.description = hole_params[:description]
-      hole.save
+      hole_details = {hole_id: hole_id, description: hole_params[:description]}
+      if hole_params[:video].present?
+        hole_video = hole_params[:video].tempfile
+        hole_video_file = File.join("public", hole_params[:video].original_filename)
+        FileUtils.cp hole_video.path, hole_video_file
+        hole_details[:video_file_path] = hole_video_file
+      end
+      if hole_params[:cover].present?
+        hole_cover = hole_params[:cover].tempfile
+        hole_cover_file = File.join("public", hole_params[:cover].original_filename)
+        FileUtils.cp hole_cover.path, hole_cover_file
+        hole_details[:cover_file_path] = hole_cover_file
+      end
+      if hole_params[:map].present?
+        hole_map = hole_params[:map].tempfile
+        hole_map_file = File.join("public", hole_params[:map].original_filename)
+        FileUtils.cp hole_map.path, hole_map_file
+        hole_details[:map_file_path] = hole_map_file
+      end
+
+      hole_images_paths = []
       if hole_params[:images].present?
         hole_params[:images].each do |image|
-          hole.hole_images.create(image: image)
+          hole_image = image.tempfile
+          hole_image_file = File.join("public", image.original_filename)
+          FileUtils.cp hole_image.path, hole_image_file
+          hole_images_paths << hole_map_file
         end
       end
+      hole_details[:hole_images_paths] = hole_images_paths
+      all_hole_details << hole_details
     end
+    UploadHoleMediaWorker.perform_async(all_hole_details)
     if params[:commit] == "Save"
       redirect_to admin_courses_path
     else
@@ -179,6 +222,6 @@ class Admin::CoursesController < ApplicationController
     end
 
     def resort_params
-      params.require(:resort).permit(:name, :resort_type, :website, :phone_num, :network_id, location_attributes: [:town,:state, :lat, :lng], courses_attributes: [:name, :bio, :color_selector, videos_attributes: [:title, :description, :video]])
+      params.require(:resort).permit(:name, :resort_type, :website, :phone_num, :network_id, location_attributes: [:town,:state, :lat, :lng], courses_attributes: [:name, :bio, :color_selector, :cover])
     end
 end

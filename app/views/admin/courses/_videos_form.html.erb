@@ -1,21 +1,21 @@
 <div class="col-md-12 course-info-row video_item" id="video_item_<%= video_index %>">
   <div class="col-md-4 form-group">
     <%= label_tag :title ,"Item ##{video_index + 1}",class:"col-md-12 zero-left-right-padd"%>
-    <%= text_field_tag "resort[courses_attributes][0][videos_attributes][#{video_index}][title]", "", class:"col-md-12 form-control check-field", placeholder: "Item Title"%>
+    <%= text_field_tag "videos[#{video_index}][title]", "", class:"col-md-12 form-control check-field", placeholder: "Item Title"%>
   </div>
   <div class="col-md-4">
     <%= label_tag :video ,'Video',class:"col-md-12 zero-left-right-padd "%>
     <div class="clearfix"></div>
     <div class="btn btn-success upload-btn">
       <div class="cover-label">
-        <%= file_field_tag "resort[courses_attributes][0][videos_attributes][#{video_index}][video]", class: 'check-field cover-field' %>
+        <%= file_field_tag "videos[#{video_index}][video]", class: 'check-field cover-field' %>
       </div>
     </div>
   </div>
   <div class="col-md-12 form-group">
     <div class="col-md-4" style="padding-left: 0px; padding-right: 21px;">
       <%= label_tag :bio ,'Description',class:"zero-left-right-padd"%>
-      <%= text_area_tag "resort[courses_attributes][0][videos_attributes][#{video_index}][description]", "", rows: "4", class: 'form-control check-field'%>
+      <%= text_area_tag "videos[#{video_index}][description]", "", rows: "4", class: 'form-control check-field'%>
     </div>
     <!-- <div class="col-md-8 form-group">
       <button type="button" class="btn btn-danger pull-right mar-top-50 remove_item" href="javascript:void(0)">Remove</button>

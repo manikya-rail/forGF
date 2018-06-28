@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+require 'sidekiq/web'
 namespace :admin do
   post "search", to: "search#search", as: 'search'
   resources :holes
@@ -68,4 +68,5 @@ end
     get "course/:id", to: 'pages#course_home',as: 'course_info'
     post "pages/update_tee_scorecard", to: 'pages#update_tee_scorecard'
   end
+  mount Sidekiq::Web, at: '/sidekiq'
 end
