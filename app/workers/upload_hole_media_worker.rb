@@ -4,9 +4,9 @@ class UploadHoleMediaWorker
   def perform(all_hole_details)
   	all_hole_details.each do |hole_params|
   	  hole = Hole.find(hole_params["hole_id"])
-  	  video_file = File.open(hole_params["video_file_path"]) if hole_params["video_file_path"].present?
-  	  cover_file = File.open(hole_params["cover_file_path"]) if hole_params["cover_file_path"].present?
-  	  map_file = File.open(hole_params["map_file_path"]) if hole_params["map_file_path"].present?
+  	  video_file = File.open(hole_params["video_file_path"]) rescue nil
+  	  cover_file = File.open(hole_params["cover_file_path"]) rescue nil
+  	  map_file = File.open(hole_params["map_file_path"]) rescue nil
 
   	  hole.build_video(video: video_file) if video_file.present?
   	  hole.image = cover_file if cover_file.present?
@@ -15,10 +15,16 @@ class UploadHoleMediaWorker
   	  hole.save
   	  if hole_params["hole_images_paths"].present?
   	    hole_params["hole_images_paths"].each do |image|
-  	      image_file = map_file = File.open(image)
-  	      hole.hole_images.create(image: image_file)
+  	      image_file = File.open(image) rescue nil
+  	      if image_file.present?
+  	      	hole.hole_images.create(image: image_file)
+  	      	FileUtils.rm image_file
+  	      end
   	    end
   	  end
+  	  FileUtils.rm video_file if video_file.present?
+  	  FileUtils.rm cover_file if cover_file.present?
+  	  FileUtils.rm map_file if map_file.present?
   	end
   end
 end

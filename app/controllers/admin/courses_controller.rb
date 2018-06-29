@@ -68,7 +68,7 @@ class Admin::CoursesController < ApplicationController
         images_path = []
         params[:images].each_with_index do |image, index|
           tmp = image.tempfile
-          file = File.join("public", image.original_filename)
+          file = File.join("public", "course_#{@course.id}_image#{index+1}_#{image.original_filename}")
           FileUtils.cp tmp.path, file
           images_path << file
         end
@@ -79,7 +79,7 @@ class Admin::CoursesController < ApplicationController
         params[:videos].each do |index, video_params|
           video_details = {title: video_params[:title], description: video_params[:description]}
           tmp = video_params[:video].tempfile
-          file = File.join("public", video_params[:video].original_filename)
+          file = File.join("public", "course_#{@course.id}_video#{index.to_i+1}_#{video_params[:video].original_filename}")
           FileUtils.cp tmp.path, file
           video_details[:file_path] = file
           videos_details_arr << video_details
@@ -166,30 +166,30 @@ class Admin::CoursesController < ApplicationController
       hole_details = {hole_id: hole_id, description: hole_params[:description]}
       if hole_params[:video].present?
         hole_video = hole_params[:video].tempfile
-        hole_video_file = File.join("public", hole_params[:video].original_filename)
+        hole_video_file = File.join("public", "hole#{hole_id}_video_#{hole_params[:video].original_filename}")
         FileUtils.cp hole_video.path, hole_video_file
         hole_details[:video_file_path] = hole_video_file
       end
       if hole_params[:cover].present?
         hole_cover = hole_params[:cover].tempfile
-        hole_cover_file = File.join("public", hole_params[:cover].original_filename)
+        hole_cover_file = File.join("public", "hole#{hole_id}_cover_#{hole_params[:cover].original_filename}")
         FileUtils.cp hole_cover.path, hole_cover_file
         hole_details[:cover_file_path] = hole_cover_file
       end
       if hole_params[:map].present?
         hole_map = hole_params[:map].tempfile
-        hole_map_file = File.join("public", hole_params[:map].original_filename)
+        hole_map_file = File.join("public", "hole#{hole_id}_map_#{hole_params[:map].original_filename}")
         FileUtils.cp hole_map.path, hole_map_file
         hole_details[:map_file_path] = hole_map_file
       end
 
       hole_images_paths = []
       if hole_params[:images].present?
-        hole_params[:images].each do |image|
+        hole_params[:images].each_with_index do |image, index|
           hole_image = image.tempfile
-          hole_image_file = File.join("public", image.original_filename)
+          hole_image_file = File.join("public", "hole#{hole_id}_image#{index+1}_#{image.original_filename}")
           FileUtils.cp hole_image.path, hole_image_file
-          hole_images_paths << hole_map_file
+          hole_images_paths << hole_image_file
         end
       end
       hole_details[:hole_images_paths] = hole_images_paths
