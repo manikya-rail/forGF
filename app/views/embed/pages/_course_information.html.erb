@@ -27,20 +27,24 @@
       </div>
       <div class="clearfix"></div>
       <ul class="slider slider-nav playlist_thumb">
-        <li class="playing">
-          <div>
-            <img src="http://www.rodzinne-wakacje.pl/wp-content/uploads/2017/05/maldives-1993704_960_720-696x391.jpg" />
-            <a href="#">
-              <%= image_tag "big-play.png", :class => "play_btn" %>
-            </a>
-          </div>
-          <span>The Gold Course</span>
-        </li>
-        <li>
+        <% @course.videos.each do |video| %>
+          <!-- <li class="playing"> -->
+          <li>
+            <div>
+              <!-- <img src="http://www.rodzinne-wakacje.pl/wp-content/uploads/2017/05/maldives-1993704_960_720-696x391.jpg" /> -->
+              <%= image_tag video.thumbnail_image.url %>
+              <a href="#">
+                <%= image_tag "big-play.png", :class => "play_btn" %>
+              </a>
+            </div>
+            <span><%= video.title %></span>
+          </li>
+        <% end %>
+        <!-- <li>
           <div>
             <img src="https://i.pinimg.com/originals/94/dd/57/94dd573e4b4de604ea7f33548da99fd6.jpg" />
             <a href="#">
-              <%= image_tag "big-play.png", :class => "play_btn" %>
+              <%#= image_tag "big-play.png", :class => "play_btn" %>
             </a>
           </div>
           <span>The Gold Course</span>
@@ -49,7 +53,7 @@
           <div>
             <img src="https://i.pinimg.com/originals/bc/a2/0e/bca20e9db15992b75ed6e64a26aee002.jpg" />
             <a href="#">
-              <%= image_tag "big-play.png", :class => "play_btn" %>
+              <%#= image_tag "big-play.png", :class => "play_btn" %>
             </a>
           </div>
           <span>The Gold Course</span>
@@ -58,7 +62,7 @@
           <div>
             <img src="https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&h=350" />
             <a href="#">
-              <%= image_tag "big-play.png", :class => "play_btn" %>
+              <%#= image_tag "big-play.png", :class => "play_btn" %>
             </a>
           </div>
           <span>The Gold Course</span>
@@ -67,11 +71,11 @@
           <div>
             <img src="https://media.luftika.rs/2017/04/uskrsnja-jaja-4.jpg" />
             <a href="#">
-              <%= image_tag "big-play.png", :class => "play_btn" %>
+              <%#= image_tag "big-play.png", :class => "play_btn" %>
             </a>
           </div>
           <span>The Gold Course</span>
-        </li>
+        </li> -->
       </ul>
     </div>
     
@@ -118,13 +122,13 @@
           </div>
         </div>
         <ul class="scorecard">
-          <%= render 'course_specs' %>
+          <%= render 'course_specs', score_card: @score_cards.first %>
         </ul>
       </div>
     </div>
     <div id="cover-scorecard">
       <div id="scorecard_updated">
-        <%= render 'scorecard_updated_data' %>
+        <%= render 'scorecard_updated_data', score_card: @score_cards.first %>
       </div>
     </div>
   </div>

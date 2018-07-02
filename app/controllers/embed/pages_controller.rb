@@ -79,7 +79,6 @@ class Embed::PagesController < ApplicationController
     gon.image = []
     gon.image_urls = []
     gon.description = []
-
     @hole = Hole.find(params[:id])
     @course = Course.find(@hole.course_id)
     @course_color = Course.find(@hole.course_id).color_selector
@@ -105,6 +104,7 @@ class Embed::PagesController < ApplicationController
     @yards = []
     @mhcp = []
     @teename = []
+    @score_cards = @course.score_cards
     @course.score_cards.each do |scorecard|
       @teename << [scorecard.tee_name, scorecard.id, scorecard.color] 
     end
@@ -116,23 +116,7 @@ class Embed::PagesController < ApplicationController
   end
 
   def update_tee_scorecard
-    @course = Course.find(params["cid"])
-    sorted_holes = @course.holes.sort{|a,b| a.hole_num <=> b.hole_num }
-    @yards = []
-    @par = []
-    @mhcp = []
-     @course.holes.each do |hole|
-      @par << hole.par.to_i
-      @mhcp << hole.mhcp.to_i
-    end
-    sorted_holes.each do |hole|
-       @yards << (hole.try(:yardages).select{|m| m.score_card_id == params["sid"].to_i if m.score_card_id.present?}.first.present? ?  hole.try(:yardages).select{|m| m.score_card_id.present? ? m.score_card_id == params["sid"].to_i : 0}.first.yards : 0)
-    end
-    @total_yards = @yards.sum()
-    @total_par  = @par.sum()
-    scorecard = ScoreCard.find(params["sid"].to_i)
-    @tee_rating = scorecard.try(:rating)
-    @tee_slope = scorecard.try(:slope)
+    @scorecard = ScoreCard.find(params[:sid])
   end
 
   def awesome_embed

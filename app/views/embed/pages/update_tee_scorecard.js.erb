@@ -1,2 +1,2 @@
-$(".scorecard").html("<%= j render :partial => 'course_specs' %>");
-$("#scorecard_updated").html("<%= j render :partial => 'scorecard_updated_data' %>");
+$(".scorecard").html("<%= j render :partial => 'course_specs', locals: {score_card: @scorecard} %>");
+$("#scorecard_updated").html("<%= j render :partial => 'scorecard_updated_data', locals: {score_card: @scorecard} %>");
