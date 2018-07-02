@@ -12,6 +12,16 @@
       </div>
     </div>
   </div>
+  <div class="col-md-4">
+    <%= label_tag :thumbnail_image ,'Thumbnail Image', class: "col-md-12 zero-left-right-padd"%>
+    <div class="clearfix"></div>
+    <div class="btn btn-success upload-btn">
+      <div class="cover-label">
+        <%= file_field_tag "videos[#{video_index}][thumbnail_image]", class: 'check-field cover-field' %>
+      </div>
+    </div>
+  </div>
+
   <div class="col-md-12 form-group">
     <div class="col-md-4" style="padding-left: 0px; padding-right: 21px;">
       <%= label_tag :bio ,'Description',class:"zero-left-right-padd"%>

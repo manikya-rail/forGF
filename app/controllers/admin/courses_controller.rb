@@ -82,6 +82,10 @@ class Admin::CoursesController < ApplicationController
           file = File.join("public", "course_#{@course.id}_video#{index.to_i+1}_#{video_params[:video].original_filename}")
           FileUtils.cp tmp.path, file
           video_details[:file_path] = file
+          thumbnail_temp = video_params[:thumbnail_image].tempfile
+          thumbnail_file = File.join("public", "course_#{@course.id}_video_thumbnail#{index.to_i+1}_#{video_params[:thumbnail_image].original_filename}")
+          FileUtils.cp thumbnail_temp.path, thumbnail_file
+          video_details[:thumbnail_path] = thumbnail_file
           videos_details_arr << video_details
         end
         UploadCourseVideoWorker.perform_async(@course.id, videos_details_arr)
