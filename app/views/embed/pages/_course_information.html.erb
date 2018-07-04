@@ -27,13 +27,13 @@
       </div>
       <div class="clearfix"></div>
       <ul class="slider slider-nav playlist_thumb">
-        <% @course.videos.each do |video| %>
+        <% @course.videos.each_with_index do |video, index| %>
           <!-- <li class="playing"> -->
-          <li>
+          <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
             <div>
               <!-- <img src="http://www.rodzinne-wakacje.pl/wp-content/uploads/2017/05/maldives-1993704_960_720-696x391.jpg" /> -->
               <%= image_tag video.thumbnail_image.url %>
-              <a href="#">
+              <a href="javascript:void(0)">
                 <%= image_tag "big-play.png", :class => "play_btn" %>
               </a>
             </div>
@@ -628,7 +628,7 @@ table.score-specs tr:nth-child(2) td  {
     background: #fff;
 }
 .slider h3 {
-  padding-left: 45px;
+  padding-left: 15px;
 }
 .slick-prev, .slick-next {
     width: 20px;

@@ -6,12 +6,12 @@
 	<% @courses.each do |course| %>
 		<div class="col-md-12 course_list_item">
 			<%= image_tag course.cover.url %>
-			<a href="#" class="play_button">
+			<%= link_to embed_display_info_path(course), class: "play_button", data: { turbolinks: false} do %>
 				<%= image_tag "big-play.png" %>
-			</a>
+			<% end %>
 			<div class="course_info">
 				<h2 class="course_title"><%= course.name %></h2>
-				<p class="course_description"><%= course.bio %></p>
+				<p class="course_description" title="<%= course.bio %>"><%= course.bio %></p>
 			</div>
 		</div>
 	<% end %>

@@ -20,4 +20,8 @@ class Video < ApplicationRecord
 
   validates_attachment_content_type :video, content_type: /\Avideo\/.*\Z/
   validates_attachment_content_type :thumbnail_image, :content_type => /\Aimage\/.*\Z/
+
+  def get_src_url(resolution)
+    self.video.url(resolution).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if self.video.present?    
+  end
 end

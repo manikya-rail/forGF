@@ -34,4 +34,16 @@ class Hole < ApplicationRecord
    validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
    validates_attachment_content_type :map, :content_type => /\Aimage\/.*\Z/
    validates_attachment_content_type :logo_image, :content_type => /\Aimage\/.*\Z/
+
+  def total_yards
+    self.yardages.pluck(:yards).compact.sum
+  end
+
+  def total_pars
+    self.pars.pluck(:par).compact.sum
+  end
+
+  def total_hcps
+    self.hcps.pluck(:hcp).compact.sum
+  end
 end
