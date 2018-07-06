@@ -8,7 +8,8 @@ class UploadHoleMediaWorker
   	  cover_file = File.open(hole_params["cover_file_path"]) rescue nil
   	  map_file = File.open(hole_params["map_file_path"]) rescue nil
 
-  	  hole.build_video(video: video_file) if video_file.present?
+  	  hole_video = hole.build_video(video: video_file) if video_file.present?
+  	  hole_video.save if hole_video.present?
   	  hole.image = cover_file if cover_file.present?
   	  hole.map = map_file if map_file.present?
   	  hole.description = hole_params["description"]

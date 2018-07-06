@@ -60,10 +60,11 @@ class Admin::CoursesController < ApplicationController
       @resort = Resort.new(resort_params)
     else
       @resort = Resort.find(params[:resort_id])
-      @resort.assign_attributes(resort_params)
+      courses_params = params[:resort][:courses_attributes]["0"]
+      @course = @resort.courses.create(name: courses_params[:name], bio: courses_params[:bio], color_selector: courses_params[:color_selector], cover: courses_params[:cover])
     end
     if @resort.save
-      @course = @resort.courses.last
+      @course = @resort.courses.last if @course.nil?
       if params[:images].present?
         images_path = []
         params[:images].each_with_index do |image, index|
