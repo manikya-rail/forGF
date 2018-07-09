@@ -1,32 +1,57 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Resorts</h1>
+<!-- Pre load vjs files for next page -->
+<link href="//vjs.zencdn.net/6.2.8/video-js.min.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/6.2.8/video.min.js"> </script>
+<script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @resorts.each do |resort| %>
-      <tr>
-        <td><%= resort.name %></td>
-        <td><%#= link_to 'Show', resort %></td>
-        <td><%= link_to 'Edit', edit_admin_resort_path(resort) %></td>
-        <td><%= link_to 'Destroy', admin_resort_path(resort), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
 
-<br>
+<% content_for :side_nav do %>
+  <%= render :partial => 'admin/shared/side_nav' %>
+<% end %>
 
-<%#= link_to 'New Resort', new_resort_path %>
-<style type="text/css">
-td {
-  padding: 10px;
-}
-</style>
+  <div class="panel panel-default">
+    <h2>Clients List</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div id="course-search-form">
+          <div class="col-md-3" style="padding:0px;">
+            <%= form_for('', :url => url_for(:controller => 'search', :action => 'search') , method: "post", remote: true ) do |f|%>
+              <%= text_field_tag :resort, "", class: "form-control", placeholder: "Search Clients", name: 'search[q]' %>
+              <%= hidden_field_tag :klass, "resort", class: "form-control",name: 'search[klass]' %>
+              <%= hidden_field_tag :id, "resorts-tbl", class: "form-control",name: 'search[id]' %>
+            <%end%>
+          </div>
+          <div class="col-md-9">
+          </div>
+        </div>
+        <table class="table table-striped" id="resorts-tbl">
+          <thead>
+            <tr>
+              <th>Client Name</th>
+              <th>Location</th>
+              <th>Client Type</th>
+              <th>No. of Courses</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @resorts.each do |resort| %>
+              <tr>
+                <td><%= link_to resort.name, admin_resort_courses_list_path(resort) %></td>
+                <td><%= resort.try(:formated_location) %></td>
+                <td><%= resort.try(:course_type) %></td>
+                <td><%= resort.courses.count %></td>
+                <td><%= link_to 'Edit', edit_admin_resort_path(resort) %> | <%= link_to 'Destroy',admin_resort_path(resort) , method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'Show Courses', admin_resort_courses_path(resort) %> </td>
+                
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

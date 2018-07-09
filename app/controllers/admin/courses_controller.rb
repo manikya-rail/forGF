@@ -80,7 +80,7 @@ class Admin::CoursesController < ApplicationController
         params[:videos].each do |index, video_params|
           video_details = {title: video_params[:title], description: video_params[:description]}
           tmp = video_params[:video].tempfile
-          file = File.join("public", "course_#{@course.id}_video#{index.to_i+1}_#{video_params[:video].original_filename}")
+          file = File.join("public", "course_.#{@course.id}_video#{index.to_i+1}_#{video_params[:video].original_filename}")
           FileUtils.cp tmp.path, file
           video_details[:file_path] = file
           thumbnail_temp = video_params[:thumbnail_image].tempfile
@@ -119,12 +119,36 @@ class Admin::CoursesController < ApplicationController
             @course.course_images.create(photo: image)
           }
         end
-        if params[:score_images]
-          params[:score_images].each { |image|
-            @course.scorecard_images.create(photo: image)
-          }
+        if params[:course_video].present?
+          params[:course_video].each do |video_id, vid_params|
+            video = Video.find(video_id)
+            video.update(title: vid_params[:title], description: vid_params[:description])
+          end
         end
-        format.html { redirect_to admin_courses_path, notice: 'Course was successfully updated.' }
+        if params[:videos].present?
+          videos_details_arr = []
+          params[:videos].each do |index, video_params|
+            if video_params[:video].present?
+              video_details = {title: video_params[:title], description: video_params[:description]}
+              tmp = video_params[:video].tempfile
+              file = File.join("public", "course_.#{@course.id}_video#{index.to_i+1}_#{video_params[:video].original_filename}")
+              FileUtils.cp tmp.path, file
+              video_details[:file_path] = file
+              thumbnail_temp = video_params[:thumbnail_image].tempfile
+              thumbnail_file = File.join("public", "course_#{@course.id}_video_thumbnail#{index.to_i+1}_#{video_params[:thumbnail_image].original_filename}")
+              FileUtils.cp thumbnail_temp.path, thumbnail_file
+              video_details[:thumbnail_path] = thumbnail_file
+              videos_details_arr << video_details
+            end
+          end
+          UploadCourseVideoWorker.perform_async(@course.id, videos_details_arr)
+        end
+        # if params[:score_images]
+        #   params[:score_images].each { |image|
+        #     @course.scorecard_images.create(photo: image)
+        #   }
+        # end
+        format.html { redirect_to admin_resort_courses_path(@course.resort), notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit }

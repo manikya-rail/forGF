@@ -8,6 +8,7 @@ namespace :admin do
   resources :networks
   resources :resorts do
     get :courses_list
+    get :courses
   end
   resources :locations
   resources :courses

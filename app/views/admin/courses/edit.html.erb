@@ -1,381 +1,124 @@
-<h1>Editing Course</h1>
-
 <div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
-  <%= form_for(@course, url: url_for(controller: 'courses', action: 'update')) do |f| %>
+  <%= form_for(@course, url: url_for(controller: 'courses', action: 'update'), method: :put, :html => { :multipart => true }) do |f| %>
+    <div class="col-md-12 course-info-row">
+      <div class="col-md-12">
+        <h4>Course Information</h4>
+      </div>
+      <div class="col-md-4 form-group">
+        <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
+        <%= f.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Full name of course"%>
+      </div>
 
-    <div class="col-md-12">
-        <div class="col-md-12 course-info-row">
-            <div class="col-md-4 form-group">
-              <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Full name of course"%>
-            </div>
-
-            <div class="col-md-8 form-group">
-                <%= f.fields_for :location do |location_form| %>
-                  <%= render 'admin/locations/form.html.erb', location_form: location_form %>
-                <% end %>
-
-            </div>
-
+      <div class="col-md-4 cover-first-row-photos bucket">
+        <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
+        <div class="cover-label">
+          <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field cover-field' %>
+          <% cover_file_name = Course.find(params[:id]).cover%>
         </div>
+        <div class="cover image-division">
+          <% if cover_file_name.exists? %>
+            <span class="close-cross">&times;</span>
+            <img src="<%=cover_file_name.url%>" class="course-logo-image cimage" id="<%=params[:id]%>" name="cover">
+          <% end %>
+        </div> 
+      </div>
 
-        <div class="col-md-12 course-info-row">
-            <%= label_tag :course_type ,'Course Type',class:"col-md-12 zero-left-right-padd",style:"margin-left:15px;"%>
-            <div class="col-md-4">
-
-              <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'is_public',false ,class: 'checkbox check-field inline', id: 'course_type_public' %>
-                <span class="inline">Public</span>
+      <div class="col-md-4 second-row-photos">
+        <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
+        <div class="clearfix"></div>
+        <div class="btn btn-success upload-btn">
+          <%= file_field_tag "images[]", type: :file, multiple: true, class: 'course-photos-field' %>
+          <% course_photo_url = Course.find(params[:id]).course_images%>
+          <div class="temp-photos-collection"></div>
+          <div class="photos-collection">
+            <% course_photo_url.each do |course_photo|%>
+              <div class="photo-division">
+                <span class="close-photos">&times;</span>
+                <img src="<%=course_photo.photo.url%>" class="course-photo-images" id="<%=course_photo.id%>">
               </div>
-              <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'is_private',false ,class: 'checkbox check-field inline', id: 'course_type_private' %>
-                <span class="inline">Private</span>
-              </div>
-              <div class="inline">
-                <%= check_box_tag 'course[course_type]' ,'is_semi_private',false ,class: 'checkbox check-field inline', id: 'course_type_semi_private' %>
-                <span class="inline">Semi-Private</span>
-              </div>
-
-            </div>
-
-            <div class="col-md-4">
-              <%= select_tag('resort', options_for_select(Resort.all.pluck(:name, :id)), options = {prompt: 'Resort', class:'dropdown-padd dropdown form-control inline ' , style: 'width:50%;' , name: 'course[resort_id]'}) %>
-              <button type="button" class="btn btn-info btn-add inline" id='add-resort' data-toggle="modal" data-target="#new_resort">+</button>
-
-
-
-            </div>
-
-            <div class="col-md-4">
-              <%= select_tag('network',options_for_select(Network.all.pluck(:name, :id)), options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;' , name: 'course[network_id]'}) %>
-              <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
-
-
-            </div>
-        </div>
-
-        <div class="col-md-12 course-info-row">
-            <div class="col-md-4 form-group">
-              <%= label_tag :bio ,'Bio',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_area :bio, rows: "4", class: 'col-md-12 form-control check-field'%>
-
-            </div>
-
-            <div class="col-md-4 form-group">
-              <%= label_tag :contact_info, 'Contact Info',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :website, class:"col-md-12 form-control contact-info check-field", placeholder: "Website" %>
-              <%= f.text_field :phone_num, class:"col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
-            </div>
-
-            <div class="col-md-4">
-              <div class="col-md-12">
-                <%= f.fields_for :amenities do |amenity_form| %>
-                  <%= render 'admin/amenities/form', a: amenity_form %>
-                <% end %>
-              </div>
-
-            </div>
-
-
-
-        </div>
-
-        <div class="col-md-12 course-info-row">
-            <div class="col-md-4 logo-first-row-photos bucket">
-              <%= label_tag :logo ,'Logo (Color)',class:"col-md-12 zero-left-right-padd"%>
-              <div class="logo-label">
-                <%= f.file_field :logo, class: 'btn btn-success upload-btn check-field logo-field' %>
-              </div>
-              <div class="logo image-division">
-                <% logo_file_name = Course.find(params[:id]).logo%>
-                <% if logo_file_name.exists? %>
-                  <span class="close-cross">&times;</span>
-                  <img src="<%= logo_file_name.url %>" class="course-logo-image cimage" id="<%=params[:id]%>" name="logo">
-                <% end %>
-              </div>
-            </div>
-
-            <div class="col-md-4 cover-first-row-photos bucket">
-              <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
-              <div class="cover-label">
-                <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field cover-field' %>
-                <% cover_file_name = Course.find(params[:id]).cover%>
-              </div>
-              <div class="cover image-division">
-               <% if cover_file_name.exists? %>
-                <span class="close-cross">&times;</span>
-                <img src="<%=cover_file_name.url%>" class="course-logo-image cimage" id="<%=params[:id]%>" name="cover">
-               <% end %>
-              </div> 
-            </div>
-
-            <div class="col-md-4 score-first-row-photos bucket">
-              <%= label_tag :score_card_image ,'Score Card',class:"col-md-12 zero-left-right-padd "%>
-              <div class="score-label btn btn-success upload-btn">
-                <%= file_field_tag "score_images[]", type: :file, multiple: true, class: 'check-field score-card-field' %>
-                <% score_card_file_name = Course.find(params[:id]).scorecard_images%>
-                <div class="temp-score-collection">
-                </div>
-               <% if score_card_file_name.exists? %>
-                 <div class="scorecard-collection">
-                   <% score_card_file_name.each do |score_card|%>
-                     <div class="scorecard-division">
-                       <span class="close-scorecard">&times;</span>
-                       <img src="<%=score_card.photo.url%>" class="course-scorecard-image cimage" id="<%=params[:id]%>" name="score_card" >
-                     </div>
-                   <% end %>
-                 </div>
-               <% end %>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-
-            <div class="col-md-4 trans-second-row-photos bucket">
-              <%= label_tag :transparent_logo, 'Logo (Transparent Background)', class: "col-md-12 zero-left-right-padd" %>
-              <div class="clearfix"></div>
-              <div class="btn btn-success upload-btn">
-               <div class="trans-label">
-                 <%= f.file_field :transparent_logo, class: 'check-field upload-btn trans-logo-field' %>
-                 <% translogo_file_name = Course.find(params[:id]).transparent_logo%>
-               </div>
-                <div class="trans image-division">
-                  <% if translogo_file_name.exists? %>
-                    <span class="close-cross">&times;</span>
-                    <img src="<%= translogo_file_name.url %>" class="course-transparent-logo-image cimage" id="<%= params[:id] %>" name="transparent">
-                  <% end %>
-                </div>
-                <%= f.text_field :logo_hyperlink, class: "col-md-12 form-control contact-info check-field", placeholder: "Hyperlink" %>
-              </div>
-            </div>
-
-            <div class="col-md-4 second-row-photos">
-              <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
-              <div class="clearfix"></div>
-              <div class="btn btn-success upload-btn">
-                <%= file_field_tag "images[]", type: :file, multiple: true, class: 'check-field course-photos-field' %>
-                <% course_photo_url = Course.find(params[:id]).course_images%>
-                <div class="temp-photos-collection">
-                </div>
-                <div class="photos-collection">
-                 <% course_photo_url.each do |course_photo|%>
-                  <div class="photo-division">
-                    <span class="close-photos">&times;</span>
-                    <img src="<%=course_photo.photo.url%>" class="course-photo-images" id="<%=course_photo.id%>">
-                  </div>
-                 <% end %>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 second-row-photos">
-              <%= label_tag :video ,'Video',class:"col-md-12 zero-left-right-padd "%>
-              <div class="clearfix"></div>
-              <div class="btn btn-success upload-btn">
-                <%= f.file_field :video, class: 'check-field' %>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-md-12 course-info-row">
-          <div class="col-md-2 form-group">
-            <%= label_tag :color_selector ,'Color Selector',class:"col-md-12 zero-left-right-padd"%>
-            <%= f.text_field :color_selector, class:"col-md-12 form-control check-field", placeholder: "Color Selector" %>
+            <% end %>
           </div>
         </div>
-
-        <div class="col-md-12 course-info-row">
-            <div class="col-md-2 form-group">
-              <%= label_tag :total_par ,'Total Par',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :total_par, class:"col-md-12 form-control check-field", placeholder: "Total Par" %>
-            </div>
-
-            <div class="col-md-2 form-group">
-              <%= label_tag :slope ,'Slope',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :slope, class:"col-md-12 form-control check-field", placeholder: "Slope" %>
-            </div>
-
-            <div class="col-md-2 form-group">
-              <%= label_tag :rating ,'Rating',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :rating, class:"col-md-12 form-control check-field", placeholder: "Rating" %>
-            </div>
-
-            <div class="col-md-2 form-group">
-              <%= label_tag :length ,'Length',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :length, class:"col-md-12 form-control check-field", placeholder: "Length"%>
-            </div>
-        </div>
-
-        <div class="col-md-12 course-info-row score-cards-wrapper">
-            <%= label_tag :score_card ,'Tee Boxes',class:"col-md-12 zero-left-right-padd"%>
-            <!-- <div class="col-md-7 score-card-wrapper dynamic-fields"> -->
-              <%= f.fields_for :score_cards do |score_card_form| %>
-              <div class="col-md-7 score-card-wrapper dynamic-fields">
-                <%= render 'admin/score_cards/form', s: score_card_form %>
-              </div>
-              <% end %>
-              <div class="col-md-2">
-                <button type="button" class="btn btn-info btn-add inline" id='add-score-card' >+</button>
-              </div>
-            <!-- </div> -->
-
-
-
-        </div>
-        <div class="col-md-12 course-info-row">
-            <div class="col-md-2 form-group">
-              <%= label_tag :architect ,'Architect',class:"col-md-12 zero-left-right-padd"%>
-              <%= f.text_field :architect, class:"col-md-12 form-control check-field", placeholder: "Architect" %>
-            </div>
-        </div>
-
-        <div class="col-md-12 course-info-row">
-          <%=render :partial => 'hole' , locals: {f: f } %>
-        </div>
-
-
+      </div>
     </div>
-    <div class="actions">
+    <div class="col-md-12 course-info-row">
+      <div class="col-md-4 form-group">
+        <%= label_tag :bio ,'Bio',class: "col-md-12 zero-left-right-padd"%>
+        <%= f.text_area :bio, rows: "4", class: 'col-md-12 form-control check-field'%>
+      </div>
+      <div class="col-md-4 form-group">
+        <%= label_tag :color_selector ,'Color Selector',class:"col-md-12 zero-left-right-padd"%>
+        <%= f.text_field :color_selector, class: "col-md-12 form-control check-field", placeholder: "Color Selector" %>
+      </div>
+    </div>
+    <div class="col-md-12 course-info-row">
+      <h4 class="col-md-4">Playlist</h4>
+      <% @course.videos.each_with_index do |video, index| %>
+        <% if video.id.present? %>
+          <div class="col-md-12 course-info-row video_item" id="video_item_<%= index %>">
+            <div class="col-md-4 form-group">
+              <%= label_tag :title ,"Item ##{index + 1}",class:"col-md-12 zero-left-right-padd"%>
+              <%= text_field_tag "course_video[#{video.id}][title]", video.title, class: "col-md-12 form-control check-field", placeholder: "Item Title"%>
+            </div>
+            <div class="col-md-4">
+              <%= label_tag :video ,'Video',class: "col-md-12 zero-left-right-padd "%>
+              <div class="clearfix"></div>
+              <div class="btn btn-success upload-btn">
+                <div class="cover-label">
+                  <%= file_field_tag "course_video[#{video.id}][video]", class: 'check-field cover-field' %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <%= label_tag :thumbnail_image ,'Thumbnail Image', class: "col-md-12 zero-left-right-padd"%>
+              <div class="clearfix"></div>
+              <%= image_tag (video.thumbnail_image.url), style: "width: 130px;"%>
+            </div>
+
+            <div class="col-md-12 form-group">
+              <div class="col-md-4" style="padding-left: 0px; padding-right: 21px;">
+                <%= label_tag :bio ,'Description',class:"zero-left-right-padd"%>
+                <%= text_area_tag "course_video[#{video.id}][description]", video.description, rows: "4", class: 'form-control check-field'%>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <%= render 'videos_form', video_index: @course.videos.count + 1 %>
+      <div class="col-md-12">
+        <button type="button" class="btn btn-info btn-add" id='add_playlist' href="javascript:void(0)">+</button>
+        <button type="button" class="btn btn-info btn-add" id='remove_playlist' href="javascript:void(0)" style="display: none;">-</button>
+      </div>
+    </div>
+    <div class="col-md-12 actions">
       <%= f.submit "Update", class: 'btn btn-primary' %>
-      <%= link_to 'Back', root_path %>
+      <%= link_to 'Back', admin_resort_courses_path(@course.resort) %>
     </div>
   <%end%>
 
-  <%= render :partial => 'admin/resorts/new_modal' %>
-  <%= render :partial => 'admin/networks/new_modal' %>
+  <%#= render :partial => 'admin/resorts/new_modal' %>
+  <%#= render :partial => 'admin/networks/new_modal' %>
 </div>
 
 
 
 <script type="text/javascript">
+  var video_index = <%= @course.videos.count + 1 %>;
+  $("#add_playlist").on('click', function(){
+    video_index ++;
+    $.ajax({
+      url: "<%= admin_add_playlist_item_path %>",
+      type: "GET",
+      data: {video_index: video_index}
+    });
+  })
 
-
-$('#add-score-card').click(function() {
-  if ($('.score-card-wrapper').length) {
-
-    var clonedField = $('.score-card-wrapper').first().clone();
-    var teeNameField = clonedField.find('#tee-name-field');
-    var colorField = clonedField.find('#course_score_cards_attributes_0_color');
-    var btnAdd = clonedField.find('.btn-add').remove();
-
-    teeNameField.removeAttr( "id" )
-    colorField.removeAttr( "id" )
-    var scoreCardLen = $('.score-card-wrapper').length ;
-    teeNameField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][tee_name]' );
-    colorField.attr('name', 'course[score_cards_attributes][' + scoreCardLen + '][color]' );
-    clonedField.appendTo($('.score-cards-wrapper'))
-  }
-  else{
-    $('.score-cards-wrapper').append(''+
-      '<div class="col-md-7 score-card-wrapper dynamic-fields">'+
-        '<div class="col-md-4">'+
-          '<input class=" tee-name-field form-control inline check-field" placeholder="Tee Name" id="tee-name-field" type="text" value="t3" name="course[score_cards_attributes][0][tee_name]">'+
-        '</div>'+
-        '<div class="col-md-4">'+
-          '<select class="dropdown-less-padd form-control inline check-field" style="margin-left:10px;" name="course[score_cards_attributes][0][color]" id="course_score_cards_attributes_0_color"><'+'option value="Green">Green</option>'+
-            '<option value="Red">Red</option>'+
-            '<option value="White">White</option>'+
-            '<option value="Blue">Blue</option>'+
-            '<option value="Violet">Violet</option>'+
-            '<option value="Gold">Gold</option>'+
-            '<option selected="selected" value="Teal">Teal</option>'+
-            '<option value="LightBlue">LightBlue</option>'+
-            '<option value="Black">Black</option></select>'+
-        '</div>'+
-        '<div class="col-md-2">'+
-          '<input name="course[score_cards_attributes][0][_destroy]" type="hidden" value="0"><input type="checkbox" value="1" name="course[score_cards_attributes][0][_destroy]" id="course_score_cards_attributes_0__destroy">'+
-          '<label for="course_score_cards_attributes_0__destroy">Remove</label>'+
-        '</div>'+
-      '</div>');
-
-  }
-
-  });
-
-$('.close-photos').click(function() {
-   Closephotos = $(this)
-   PhotosDivision = $(this).closest('.photo-division');
-   ImageSrc = $(PhotosDivision).find(".course-photo-images").attr('src');
-   CourseId = $(PhotosDivision).find(".course-photo-images").attr('id'); 
-   $.ajax({
-     type: "POST",
-     url: '/admin/courses/remove_course_image',
-     data: {
-       image_source: ImageSrc,
-       course_id: CourseId
-     },
-     complete: function(response) {
-       $(Closephotos).addClass('hide');
-       $(PhotosDivision).find(".course-photo-images").addClass('hide');
-     }
-   })
-});
-
-$('.close-cross').click(function() {
-   Closephotos = $(this)
-   PhotosDivision = $(this).closest('.image-division');
-   ImageSrc = $(PhotosDivision).find(".cimage").attr('src');
-   CourseId = $(PhotosDivision).find(".cimage").attr('id');
-   Name = $(PhotosDivision).find(".cimage").attr('name');
-   $.ajax({
-     type: "POST",
-     url: '/admin/courses/remove_course_image',
-     data: {
-       image_source: ImageSrc,
-       course_id: CourseId,
-       for: Name
-     },
-     complete: function(response) {
-       $(Closephotos).remove();
-       $(PhotosDivision).find(".cimage").remove();
-     }
-   })
-});
-
-$('.close-scorecard').click(function() {
-   Closephotos = $(this)
-   PhotosDivision = $(this).closest('.scorecard-division');
-   ImageSrc = $(PhotosDivision).find(".cimage").attr('src');
-   CourseId = $(PhotosDivision).find(".cimage").attr('id');
-   Name = $(PhotosDivision).find(".cimage").attr('name');
-   $.ajax({
-     type: "POST",
-     url: '/admin/courses/remove_course_image',
-     data: {
-       image_source: ImageSrc,
-       course_id: CourseId,
-       for: Name
-     },
-     complete: function(response) {
-       $(Closephotos).addClass('hide');
-       $(PhotosDivision).find(".course-scorecard-image").addClass('hide');
-     }
-   })
-});
-
-  $(document).on("click", '.temp-photos-collection .upload-division .close-cross', function() {
-    $(this).removeClass('show');
-    $(this).addClass('hide');
-    PhotosDivision = $(this).closest('.upload-division');
-    TempCollection = $(PhotosDivision).closest('.temp-photos-collection');
-    UploadBtn = $(TempCollection).closest('.upload-btn');
-    $(PhotosDivision).find(".edit-temp-uploaded-photos").removeClass('show');
-    $(PhotosDivision).find(".edit-temp-uploaded-photos").addClass('hide');
-  });
-  
-  $(document).on("click", '.temp-score-collection .upload-division .close-cross', function() {
-    $(this).removeClass('show');
-    $(this).addClass('hide');
-    PhotosDivision = $(this).closest('.upload-division');
-    TempCollection = $(PhotosDivision).closest('.temp-score-collection');
-    UploadBtn = $(TempCollection).closest('.upload-btn');
-    $(PhotosDivision).find(".edit-temp-uploaded-photos").removeClass('show');
-    $(PhotosDivision).find(".edit-temp-uploaded-photos").addClass('hide');
-  });
-  $(document).on("click", '.close-cross', function() {
-    imageDiv = $(this).closest('.image-division');
-    bucket = $(imageDiv).closest('.bucket')
-    $(bucket).find('.upload-btn').val('');
-    $(imageDiv).find('.close-cross').remove();
-    $(imageDiv).find('.cimage').remove();
-  });
+  $("#remove_playlist").on('click', function(){
+    video_index --;
+    var last_video_element = $(".video_item").last();
+    $(last_video_element).remove();
+    if ($(".video_item").length == 1){
+      $("#remove_playlist").hide();
+    }
+  })
 </script>

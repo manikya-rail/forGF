@@ -1,28 +1,80 @@
-<h1>Editing Resort</h1>
-
-<%#= render 'form', resort: @resort %>
-<%= form_for(@resort, url: {controller: 'resorts', action: 'update'}, method: "put" ) do |form|%>
-  <% if @resort.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@resort.errors.count, "error") %> prohibited this resort from being saved:</h2>
-
-      <ul>
-      <% @resort.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
+  <%= form_for(@resort, url: {controller: 'resorts', action: 'update'}, method: "put" ) do |f|%>
+    <div class="col-md-12 course-info-row">
+      <div class="col-md-12">
+        <h4>Client Information</h4>
+      </div>
+      <div class="basic-course-info">
+        <div class="col-md-12 course-info-row">
+          <div class="col-md-4 form-group">
+            <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
+            <%= f.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Full name of Client"%>
+          </div>
+          <div class="col-md-8 form-group">
+            <%= f.fields_for :location do |location_form| %>
+              <%= render 'admin/locations/form.html.erb', location_form: location_form %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-12 course-info-row">
+          <div class="col-md-4">
+            <%= label_tag :course_type ,'Client Type',class: "col-md-12 zero-left-right-padd" %>
+            <%= check_box_tag 'resort[resort_type]' ,'is_public', @resort.resort_type == "is_public", class: 'checkbox check-field inline', id: 'course_type_public' %>
+            <span class="inline">Public</span>
+            <div class="inline">
+              <%= check_box_tag 'resort[resort_type]' ,'is_private', @resort.resort_type == "is_private", class: 'checkbox check-field inline', id: 'course_type_private' %>
+              <span class="inline">Private</span>
+            </div>
+            <div class="inline">
+              <%= check_box_tag 'resort[resort_type]' ,'is_semi_private', @resort.resort_type == "is_semi_private", class: 'checkbox check-field inline', id: 'course_type_semi_private' %>
+              <span class="inline">Semi-Private</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <%= label_tag :course_type ,'',class:"col-md-12 zero-left-right-padd", style: "min-height: 25px;" %>
+            <%= select_tag('network', options_for_select(Network.all.pluck(:name, :id), @resort.network_id), options = {prompt: 'Network',class:'dropdown-padd dropdown form-control inline' , style: 'width:50%;' , name: 'resort[network_id]'}) %>
+            <button type="button" class="btn btn-info btn-add" id='add-network' data-toggle="modal" data-target="#new_network">+</button>
+            <%= link_to "Edit List", admin_networks_path %>
+          </div>
+          <div class="col-md-4 form-group">
+            <%= label_tag :contact_info, 'Contact Info',class:"col-md-12 zero-left-right-padd"%>
+            <%= f.text_field :website, class:"col-md-12 form-control contact-info check-field", placeholder: "Website" %>
+            <%= f.text_field :phone_num, class:"col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
+          </div>
+          <div class="col-md-8 form-group">
+            <h4>Embedable Link For Client</h4>
+            <textarea style="height:90px; resize:none; padding: 10px; text-align: center; " readonly id="iframe_link" class="form-control">
+              <div class="fore-test-iframe">
+                <iframe src="<%= "#{request.base_url}/admin/resorts/#{@resort.id}/courses_list" %>" width="100%"  allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" style="height:100vh; border: none;" id="fore_videos_iframe" onload="resizeIframe(this)"> </iframe>
+              </div>
+              <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+              <script type="text/javascript" src="http://d1s5na5d5z3eyp.cloudfront.net/assets/iframeResizer.min.js"></script>
+              <script type="text/javascript">
+                iFrameResize({log: true, enablePublicMethods: true });
+              </script>
+            </textarea>
+          </div>
+          <div class="col-md-4 form-group">
+            <button class="btn btn-primary" style="margin-top: 65px;" onclick="copyText()" type="button">Copy Link</button>
+          </div> 
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <%= f.submit "Save", class: "btn btn-primary", style: "margin-left:20px;", id: "save_client" %>
     </div>
   <% end %>
+  <%= render :partial => 'admin/networks/new_modal' %>
+</div>
+<script type="text/javascript">
+  function copyText() {
+    /* Get the text field */
+    var copyText = document.getElementById("iframe_link");
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :resort_name %>
-  </div>
+    /* Select the text field */
+    copyText.select();
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-
-<%#= link_to 'Show', @resort %> |
-<%= link_to 'Back', admin_resorts_path %>
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
+  }
+</script>

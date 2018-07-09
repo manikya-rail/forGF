@@ -1,0 +1,55 @@
+
+<!-- Pre load vjs files for next page -->
+<link href="//vjs.zencdn.net/6.2.8/video-js.min.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/6.2.8/video.min.js"> </script>
+<script src="https://rawgit.com/atlance01/vrapp-ionic/master/www/js/lib/videojs-playlist.js"></script>
+
+
+<div class="container">
+
+<% content_for :side_nav do %>
+  <%= render :partial => 'admin/shared/side_nav' %>
+<% end %>
+
+  <div class="panel panel-default">
+    <h2>Course List</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div id="course-search-form">
+          <div class="col-md-3" style="padding:0px;">
+            <%= form_for('', :url => url_for(:controller => 'search', :action => 'search') , method: "post", remote: true ) do |f|%>
+              <%= text_field_tag :course, "", class: "form-control", placeholder: "Search Courses",name: 'search[q]' %>
+              <%= hidden_field_tag :klass, "course", class: "form-control",name: 'search[klass]' %>
+              <%= hidden_field_tag :id, "courses-tbl", class: "form-control",name: 'search[id]' %>
+            <%end%>
+          </div>
+          <div class="col-md-9">
+          </div>
+        </div>
+        <table class="table table-striped" id="courses-tbl">
+          <thead>
+            <tr>
+              <th>Cover</th>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @courses.each do |course| %>
+              <tr>
+                <td><%= image_tag (course.cover.url), style: "width: 50px;" %></td>
+                <td><%= link_to course.name, admin_course_path(course) %></td>
+                <td><%= link_to 'Edit', edit_admin_course_path(course) %> | <%= link_to 'Destroy', admin_course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
