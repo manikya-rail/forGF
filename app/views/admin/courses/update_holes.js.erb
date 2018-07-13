@@ -1,0 +1,1 @@
+$(".holes_list").find("tr#hole_row_<%= @hole.id %>").html("<%= j render(partial: 'hole_row', locals: {hole: @hole}) %>");

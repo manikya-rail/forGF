@@ -1,11 +1,13 @@
 
 <% content_for :side_nav do %>
-  <%= render :partial => 'side_nav' %>
+  <%= render :partial => 'admin/courses/side_nav' %>
 <% end %>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
 
 <div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
-  <%= form_for @resort, url: {controller: 'courses', action: 'create'}, method: "post", :html => { :multipart => true }, :remote => true do |f|%>
+  <%= form_for @resort, url: {controller: 'courses', action: 'create'}, method: "post", :html => { :multipart => true } do |f|%>
     <%= hidden_field_tag :resort_id, @resort.id %>
     <div class="col-md-12">
       <div class="col-md-12">
@@ -53,11 +55,11 @@
         <%= f.fields_for :courses, Course.new do |course_form| %>
           <div class="col-md-12">
             <h4 class="col-md-4">Course Information</h4>
-            <%= render 'course_form', ff: course_form %>
+            <%= render 'admin/courses/course_form', ff: course_form %>
           </div>
           <div class="col-md-12">
             <h4 class="col-md-4">Playlist</h4>
-            <%= render 'videos_form', video_index: 0 %>
+            <%= render 'admin/courses/videos_form', video_index: 0 %>
             <div class="col-md-12">
               <button type="button" class="btn btn-info btn-add" id='add_playlist' href="javascript:void(0)">+</button>
               <button type="button" class="btn btn-info btn-add" id='remove_playlist' href="javascript:void(0)" style="display: none;">-</button>
@@ -66,7 +68,7 @@
 
           <div class="col-md-12 zero-left-right-padd">
             <h4 class="col-md-4">Scorecard</h4>
-            <%= render 'scorecard_form', scorecard_index: 0 %>
+            <%= render 'admin/courses/scorecard_form', scorecard_index: 0 %>
             <div class="col-md-12">
               <button type="button" class="btn btn-info btn-add" id='add_scorecard' href="javascript:void(0)">+</button>
               <button type="button" class="btn btn-info btn-add" id='remove_scorecard' href="javascript:void(0)" style="display: none;">-</button>
@@ -75,6 +77,12 @@
         <% end %>
         <div class="text-center">
           <%= f.submit "Next", class: "btn btn-primary", style: "margin-left:20px;", id: "save_client" %>
+          <div class="progress" style="display: none;">
+              <div class="bar"></div >
+              <div class="percent">0%</div >
+          </div>
+          
+          <!-- <div id="status"></div> -->
         </div>
       </div>
     </div>
@@ -82,11 +90,6 @@
   <%= render :partial => 'admin/resorts/new_modal' %>
   <%= render :partial => 'admin/networks/new_modal' %>
 </div>
-
-
-
-
-
 <script type="text/javascript">
 var video_index = 0;
 var scorecard_index = 0;
@@ -128,5 +131,36 @@ $("#remove_scorecard").on('click', function(){
 $('#save_client').on('click', function(){
   $(this).addClass('disabled');
   $(this).text('Processing..');
+});
+
+$(function() {
+    
+var bar = $('.bar');
+var percent = $('.percent');
+//var status = $('#status');
+   
+$('form.new_resort').ajaxForm({
+    beforeSend: function() {
+      //status.empty();
+      $("#save_client").hide();
+      $(".progress").show();
+      var percentVal = '0%';
+      bar.width(percentVal)
+      percent.html(percentVal);
+    },
+    uploadProgress: function(event, position, total, percentComplete) {
+      var percentVal = percentComplete + '%';
+      bar.width(percentVal)
+      percent.html(percentVal);
+    //console.log(percentVal, position, total);
+    },
+    success: function() {
+      percent.html("Processing...");
+    },
+  complete: function(xhr) {
+    percent.html("Processing...");
+  }
+}); 
+
 });
 </script>

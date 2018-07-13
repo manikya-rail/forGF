@@ -75,6 +75,12 @@ class Admin::ResortsController < ApplicationController
     @courses = @resort.courses
   end
 
+  def add_course
+    @resort = Resort.find(params[:resort_id])
+    @resort.courses.build
+    render 'admin/courses/new'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_resort

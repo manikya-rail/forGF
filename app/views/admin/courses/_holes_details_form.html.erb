@@ -1,4 +1,4 @@
-<%= form_for @course, url: admin_update_holes_details_path(@course), method: "post", :html => { :multipart => true } do |f|%>
+<%#= form_for @course, url: admin_update_holes_details_path(@course), method: "post", :html => { :multipart => true } do |f|%>
   <div class="col-md-12">
     <h4>Holes List</h4>
   </div>
@@ -12,31 +12,24 @@
         <th>GALLERY</th>
         <th>YARDAGES</th>
         <th>DESCRIPTION</th>
+        <th></th>
       </thead>
       <tbody>
         <% @course.holes.order("hole_num").each do |hole| %>
-          <tr>
-            <td><%= hole.hole_num %></td>
-            <td><span class="btn btn-success btn-file">Upload Video<%= file_field_tag "holes[#{hole.id}][video]" %></span></td>
-            <td><span class="btn btn-success btn-file">Upload Cover<%= file_field_tag "holes[#{hole.id}][cover]" %></span>  </td>
-            <td><span class="btn btn-success btn-file">Upload Map<%= file_field_tag "holes[#{hole.id}][map]" %></span></td>
-            <td><span class="btn btn-success btn-file">Upload Images<%= file_field_tag "holes[#{hole.id}][images][]", type: :file, multiple: true %></span></td>
-            <td>
-              <%= link_to "javascript:void(0)", class: "btn btn-success update_yardages", "data-hole-id": "#{hole.id}" do %>
-                Update Yardages
-              <% end %>
-            </td>
-            <td><%= text_field_tag "holes[#{hole.id}][description]", "", class: "form-control", placeholder: "Description"%></td>
+          <tr id="hole_row_<%= hole.id %>">
+            <%= render 'hole_row', hole: hole %>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
   <div class="col-md-12 text-center pb-20">    
-    <%= f.submit "Save", class: "btn btn-primary"%>
-    <%= f.submit "+", class: "btn btn-info btn-add"%>
+    <%#= f.submit "Save", class: "btn btn-primary"%>
+    <%= link_to admin_resort_add_course_path(@course.resort), class: "btn btn-info btn-add", title: "Add another course" do %>
+      +
+    <% end %>
   </div>
-<% end %>
+<%# end %>
 <div class="hole_yardages">
   
 </div>
