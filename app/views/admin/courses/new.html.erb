@@ -4,10 +4,10 @@
 <% end %>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
 
 <div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
-  <%= form_for @resort, url: {controller: 'courses', action: 'create'}, method: "post", :html => { :multipart => true } do |f|%>
+  <%= form_for @resort, url: {controller: 'courses', action: 'create'}, method: "post", :html => { :multipart => true, class: "resort_course_form" } do |f|%>
     <%= hidden_field_tag :resort_id, @resort.id %>
     <div class="col-md-12">
       <div class="col-md-12">
@@ -16,8 +16,8 @@
       <div class="basic-course-info">
         <div class="col-md-12 course-info-row">
           <div class="col-md-4 form-group">
-            <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
-            <%= f.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Full name of Client"%>
+            <%= label_tag :name ,'Name',class: "col-md-12 zero-left-right-padd"%>
+            <%= f.text_field :name , class: "col-md-12 form-control check-field", placeholder: "Full name of Client"%>
           </div>
           <div class="col-md-8 form-group">
             <%= f.fields_for :location do |location_form| %>
@@ -139,7 +139,7 @@ var bar = $('.bar');
 var percent = $('.percent');
 //var status = $('#status');
    
-$('form.new_resort').ajaxForm({
+$('form.resort_course_form').ajaxForm({
     beforeSend: function() {
       //status.empty();
       $("#save_client").hide();

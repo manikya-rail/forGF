@@ -67,20 +67,13 @@ class Admin::CoursesController < ApplicationController
     if @resort.save
       @course = @resort.courses.last if @course.nil?
       if params[:images].present?
-        #images_path = []
         Thread.new do
           params[:images].each_with_index do |image, index|
             @course.course_images.create(photo: image)
-            # tmp = image.tempfile
-            # file = File.join("public", "course_#{@course.id}_image#{index+1}_#{image.original_filename}")
-            # FileUtils.cp tmp.path, file
-            # images_path << file
           end
         end
-        #UploadCourseMediaWorker.perform_async(images_path, @course.id)
       end
       if params[:videos].present?
-        #videos_details_arr = []
         Thread.new do
           params[:videos].each do |index, video_params|
             video_details = {title: video_params[:title], description: video_params[:description]}
@@ -88,20 +81,8 @@ class Admin::CoursesController < ApplicationController
             course_video.video = video_params[:video]
             course_video.thumbnail_image = video_params[:thumbnail_image]
             course_video.save
-
-
-            # tmp = video_params[:video].tempfile
-            # file = File.join("public", "course_.#{@course.id}_video#{index.to_i+1}_#{video_params[:video].original_filename}")
-            # FileUtils.cp tmp.path, file
-            # video_details[:file_path] = file
-            # thumbnail_temp = video_params[:thumbnail_image].tempfile
-            # thumbnail_file = File.join("public", "course_#{@course.id}_video_thumbnail#{index.to_i+1}_#{video_params[:thumbnail_image].original_filename}")
-            # FileUtils.cp thumbnail_temp.path, thumbnail_file
-            # video_details[:thumbnail_path] = thumbnail_file
-            # videos_details_arr << video_details
           end
         end
-        #UploadCourseVideoWorker.perform_async(@course.id, videos_details_arr)
       end
       if params[:score_cards]
         params[:score_cards].each do |scorecard_index, scorecard_params|
@@ -126,40 +107,30 @@ class Admin::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        if params[:images]
-          params[:images].each { |image|
-            @course.course_images.create(photo: image)
-          }
-        end
-        if params[:course_video].present?
-          params[:course_video].each do |video_id, vid_params|
-            video = Video.find(video_id)
-            video.update(title: vid_params[:title], description: vid_params[:description])
+        Thread.new do 
+          if params[:images]
+            params[:images].each { |image|
+              @course.course_images.create(photo: image)
+            }
           end
-        end
-        if params[:videos].present?
-          videos_details_arr = []
-          params[:videos].each do |index, video_params|
-            if video_params[:video].present?
-              video_details = {title: video_params[:title], description: video_params[:description]}
-              tmp = video_params[:video].tempfile
-              file = File.join("public", "course_.#{@course.id}_video#{index.to_i+1}_#{video_params[:video].original_filename}")
-              FileUtils.cp tmp.path, file
-              video_details[:file_path] = file
-              thumbnail_temp = video_params[:thumbnail_image].tempfile
-              thumbnail_file = File.join("public", "course_#{@course.id}_video_thumbnail#{index.to_i+1}_#{video_params[:thumbnail_image].original_filename}")
-              FileUtils.cp thumbnail_temp.path, thumbnail_file
-              video_details[:thumbnail_path] = thumbnail_file
-              videos_details_arr << video_details
+          if params[:course_video].present?
+            params[:course_video].each do |video_id, vid_params|
+              video = Video.find(video_id)
+              video.update(title: vid_params[:title], description: vid_params[:description])
             end
           end
-          UploadCourseVideoWorker.perform_async(@course.id, videos_details_arr)
+          if params[:videos].present?
+            videos_details_arr = []
+            params[:videos].each do |index, video_params|
+              if video_params[:video].present?
+                course_video = @course.videos.create(title: video_params["title"], description: video_params["description"])
+                course_video.video = video_params[:video]
+                course_video.thumbnail_image = video_params[:thumbnail_image]
+                course_video.save
+              end
+            end
+          end
         end
-        # if params[:score_images]
-        #   params[:score_images].each { |image|
-        #     @course.scorecard_images.create(photo: image)
-        #   }
-        # end
         format.html { redirect_to admin_resort_courses_path(@course.resort), notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
@@ -268,12 +239,7 @@ class Admin::CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :course_type, :bio, :website, :phone_num, :color_selector, :total_par, :slope, :rating, :length, :number_of_tees, :architect, :resort_id, :network_id, :logo, :cover, :video, :transparent_logo, :logo_hyperlink,
-          amenities_attributes: [:id, :restaurants, :caddies, :carts, :practice_range, :golf_boards],
-          location_attributes: [:id, :town,:state, :lat, :lng],
-          score_cards_attributes: [:id, :tee_name, :color, :rating, :slope, :_destroy],
-          holes_attributes: [:id, :par, :yards, :mhcp, :whcp, :description, :hole_num]
-        )
+      params.require(:course).permit(:name, :bio, :color_selector, :resort_id)
     end
 
     def resort_params

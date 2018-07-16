@@ -21,9 +21,12 @@
               <%= text_field_tag :course, "", class: "form-control", placeholder: "Search Courses",name: 'search[q]' %>
               <%= hidden_field_tag :klass, "course", class: "form-control",name: 'search[klass]' %>
               <%= hidden_field_tag :id, "courses-tbl", class: "form-control",name: 'search[id]' %>
-            <%end%>
+            <% end %>
           </div>
           <div class="col-md-9">
+            <%= link_to admin_resort_add_course_path(@resort), class: "btn btn-info btn-add pull-right", title: "Add another course" do %>
+              +
+            <% end %>
           </div>
         </div>
         <table class="table table-striped" id="courses-tbl">

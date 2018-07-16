@@ -47,7 +47,7 @@
           <h4>Embedable Link For Videos</h4>
           <textarea style="width:710px; height:90px; resize:none; padding: 10px; text-align: center; " readonly>
             <div class="fore-test-iframe">
-              <iframe src="<%= "#{request.base_url}/embed/#{@course.id}" %>" width="100%"  allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" style="height:100vh; border: none;" id="fore_videos_iframe" onload="resizeIframe(this)"> </iframe>
+              <iframe src="<%= "#{request.base_url}/admin/resorts/#{@course.resort_id}/courses_list" %>" width="100%"  allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" style="height:100vh; border: none;" id="fore_videos_iframe" onload="resizeIframe(this)"> </iframe>
             </div>
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
             <script type="text/javascript" src="http://d1s5na5d5z3eyp.cloudfront.net/assets/iframeResizer.min.js"></script>
@@ -57,71 +57,9 @@
           </textarea>
         </div>
     </div>
+    <%= render 'holes_details_form'%>
   </div>
 
-  <div class="panel panel-default">
-    <h2>Holes List</h2>
-    <div class="panel panel-default">
-      <div class="panel-body">
-
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>HOLE NUMBER</th>
-              <th>VIDEO</th>
-              <th>Cover</th>
-              <th>Map</th>
-              <th>Logo</th>
-              <th width="160">Hyperlink</th>
-              <th>Gallery</th>
-              <th>Yardages</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @course.holes.sort_by{ |m| m.hole_num }.each_with_index do |hole, index| %>
-              <tr>
-                <td><%= "Hole " + hole.try(:hole_num).to_s  %></td>
-                <%if hole.video.present?%>
-                  <td><%#=link_to hole.try(:video).try(:video_file_name), admin_video_path(hole.video)%>
-                  <%=link_to "Add Tag", admin_video_path(hole.video)%> | <%= link_to 'Destroy', admin_video_path(hole.video), method: :delete, data: { confirm: 'Are you sure?' } %>
-                </td>
-                <%else%>
-                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-vid-upl-modal" %> >Upload Video</button></td>
-                <%end%>
-                <% if hole.image.exists? %>
-                  <td><%#= link_to hole.image_file_name, hole.image.url %><%= link_to 'view', hole.image.url %> | <%= link_to 'Destroy', admin_remove_image_path(hole), method: :put, data: { confirm: 'Are you sure?' } %></td>
-                <% else %>
-                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-image-upl-modal" %> >Upload Cover</button></td>
-                <% end %>
-                <% if hole.map.exists? %>
-                  <td><%#= link_to hole.map_file_name, hole.map.url %><%= link_to 'View', hole.map.url %> | <%= link_to 'Destroy', admin_remove_map_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></td>
-                <% else %>
-                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-map-upl-modal" %> >Upload Map</button></td>
-                <% end %>
-                <% if hole.logo_image.exists? %>
-                  <td><%#= link_to hole.map_file_name, hole.map.url %><%= link_to 'View', hole.logo_image.url %> | <%= link_to 'Destroy', admin_remove_logo_image_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></td>
-                <% else %>
-                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-logo-image-upl-modal" %> >Upload Logo</button></td>
-                <% end %>
-                <% if hole.logo_hyperlink.present? %>
-                  <td><div style="width:165px;"><%= text_field_tag :logo_hyperlink ,hole.logo_hyperlink, class:"col-md-12 form-control check-field", placeholder: 'https://www.example.com', hole_number: hole.hole_num, hole_id: hole.id,course_id: @course.id  %><span class="tooltip hide copy-<%=hole.hole_num%>" title="Copy to all"><i class="glyphicon glyphicon-copy pull-left"></i></span></div></td>
-                <% else %>
-                  <td><div style="width:165px;"><%= text_field_tag :logo_hyperlink ,"", class:"col-md-12 form-control check-field", placeholder: 'https://www.example.com', hole_number: hole.hole_num, hole_id: hole.id, course_id: @course.id %><span class="tooltip hide copy-<%=hole.hole_num%>" title="Copy to all"><i class="glyphicon glyphicon-copy pull-left"></i></span></div></td>
-                <% end %>
-
-                  <td><button type="button" class="btn btn-success upload-btn" data-toggle="modal" data-target=<%= "#hole-#{hole.hole_num}-hole-image-upl-modal" %> >Upload Image</button></td>
-
-                  <td><button type="button" class="btn btn-success upload-btn update_yardages" data-hole-id="<%= hole.id %>">Update Yardages</button></td>
-
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-
-      </div>
-    </div>
-  </div>
 </div>
 <div class="hole_yardages"></div>
 <link href="//vjs.zencdn.net/6.2.8/video-js.min.css" rel="stylesheet">

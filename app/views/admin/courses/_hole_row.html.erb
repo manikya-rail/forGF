@@ -16,11 +16,19 @@
           <td>
             <% if hole.image.present? %>
               <span><%= image_tag hole.image.url, style: "width: 50px;" %></span>
+              <span><%= link_to 'Destroy', admin_remove_image_path(hole), method: :put, data: { confirm: 'Are you sure?' } %></span>
             <% else %>
               <span class="btn btn-success btn-file">Upload Cover<%=  f.file_field :image %></span>
             <% end %>
           </td>
-          <td><span class="btn btn-success btn-file">Upload Map<%=  f.file_field :map %></span></td>
+          <td>
+            <% if hole.map.present? %>
+              <span><%= image_tag hole.map.url, style: "width: 50px;" %></span>
+              <span><%= link_to 'Destroy', admin_remove_map_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></span>
+            <% else %>
+              <span class="btn btn-success btn-file">Upload Map<%=  f.file_field :map %></span>
+            <% end %>
+          </td>
           <td><span class="btn btn-success btn-file">Upload Images<%=  f.file_field :hole_images, type: :file, multiple: true %></span></td>
           <td>
             <%= link_to "javascript:void(0)", class: "btn btn-success update_yardages", "data-hole-id": "#{hole.id}" do %>
