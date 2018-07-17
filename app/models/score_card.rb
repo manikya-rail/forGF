@@ -18,9 +18,9 @@ class ScoreCard < ApplicationRecord
     def get_yards_data
     	scorecard_yards = self.yardages.order("hole_id").map(&:yards)
     	scorecard_yards_data = scorecard_yards.first(9)
-    	scorecard_yards_data << scorecard_yards.first(9).sum
+    	scorecard_yards_data << scorecard_yards.first(9).compact.sum
     	scorecard_yards_data << scorecard_yards.last(9)
-    	scorecard_yards_data << scorecard_yards.last(9).sum
+    	scorecard_yards_data << scorecard_yards.last(9).compact.sum
     	scorecard_yards_data << total_yards
     	scorecard_yards_data.flatten!
     	scorecard_yards_data
@@ -29,9 +29,9 @@ class ScoreCard < ApplicationRecord
     def get_pars_data
     	scorecard_pars = self.pars.order("hole_id").map(&:par)
     	scorecard_pars_data = scorecard_pars.first(9)
-    	scorecard_pars_data << scorecard_pars.first(9).sum
+    	scorecard_pars_data << scorecard_pars.first(9).compact.sum
     	scorecard_pars_data << scorecard_pars.last(9)
-    	scorecard_pars_data << scorecard_pars.last(9).sum
+    	scorecard_pars_data << scorecard_pars.last(9).compact.sum
     	scorecard_pars_data << total_par
     	scorecard_pars_data.flatten!
     	scorecard_pars_data

@@ -13,12 +13,11 @@
         <%= label_tag :cover ,'Cover Photo',class:"col-md-12 zero-left-right-padd "%>
         <div class="cover-label">
           <%= f.file_field :cover, class: 'btn btn-success upload-btn check-field cover-field' %>
-          <% cover_file_name = Course.find(params[:id]).cover%>
         </div>
         <div class="cover image-division">
-          <% if cover_file_name.exists? %>
+          <% if @course.cover.present? %>
             <span class="close-cross">&times;</span>
-            <img src="<%=cover_file_name.url%>" class="course-logo-image cimage" id="<%=params[:id]%>" name="cover">
+            <img src="<%= @course.cover.url %>" class="course-logo-image cimage" id="<%=params[:id]%>" name="cover">
           <% end %>
         </div> 
       </div>
@@ -28,13 +27,13 @@
         <div class="clearfix"></div>
         <div class="btn btn-success upload-btn">
           <%= file_field_tag "images[]", type: :file, multiple: true, class: 'course-photos-field' %>
-          <% course_photo_url = Course.find(params[:id]).course_images%>
+          <%# course_photo_url = @course.course_images %>
           <div class="temp-photos-collection"></div>
           <div class="photos-collection">
-            <% course_photo_url.each do |course_photo|%>
+            <% @course.course_images.each do |course_photo|%>
               <div class="photo-division">
-                <span class="close-photos">&times;</span>
-                <img src="<%=course_photo.photo.url%>" class="course-photo-images" id="<%=course_photo.id%>">
+                <span class="close-photos" data-photo-id="<%= course_photo.id %>">&times;</span>
+                <img src="<%= course_photo.photo.url %>" class="course-photo-images" id="<%= course_photo.id %>">
               </div>
             <% end %>
           </div>
@@ -72,19 +71,30 @@
             <div class="col-md-4">
               <%= label_tag :thumbnail_image ,'Thumbnail Image', class: "col-md-12 zero-left-right-padd"%>
               <div class="clearfix"></div>
-              <%= image_tag (video.thumbnail_image.url), style: "width: 130px;"%>
+              <div class="btn btn-success upload-btn">
+                <%= file_field_tag "course_video[#{video.id}][thumbnail_image]", type: :file %>
+                <%# course_photo_url = @course.course_images %>
+                <div class="temp-photos-collection"></div>
+                <div class="photos-collection">
+                  <div class="photo-division">
+                    <span class="close-photos" data-video-id="<%= video.id %>">&times;</span>
+                    <img src="<%= video.thumbnail_image.url %>" class="course-photo-images" id="<%= video.id %>">
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="col-md-12 form-group">
-              <div class="col-md-4" style="padding-left: 0px; padding-right: 21px;">
-                <%= label_tag :bio ,'Description',class:"zero-left-right-padd"%>
-                <%= text_area_tag "course_video[#{video.id}][description]", video.description, rows: "4", class: 'form-control check-field'%>
-              </div>
+            <div class="col-md-4">
+              <%= label_tag :bio ,'Description',class:"zero-left-right-padd"%>
+              <%= text_area_tag "course_video[#{video.id}][description]", video.description, rows: "4", class: 'form-control check-field'%>
+            </div>
+            <div class="col-md-4">
+              <%= link_to "Remove Video", admin_video_path(video), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }, style: "    margin-top: 45px;"%>
             </div>
           </div>
         <% end %>
       <% end %>
-      <%= render 'videos_form', video_index: @course.videos.count + 1 %>
+      <%#= render 'videos_form', video_index: @course.videos.count + 1 %>
       <div class="col-md-12">
         <button type="button" class="btn btn-info btn-add" id='add_playlist' href="javascript:void(0)">+</button>
         <button type="button" class="btn btn-info btn-add" id='remove_playlist' href="javascript:void(0)" style="display: none;">-</button>
@@ -113,6 +123,9 @@
           <div class="col-md-3">
             <%= text_field_tag "course_scorecard[#{scorecard.id}][total_slope]", scorecard.slope.to_i, class: "col-md-12 form-control total_slope", placeholder: "SLOPE"%>
           </div>
+        </div>
+        <div class="col-md-1">
+          <%= link_to "-", admin_score_card_path(scorecard), class: "btn btn-info btn-add", method: :delete, data: { confirm: 'Are you sure?' }%>
         </div>
         <div class="col-md-12 zero-left-right-padd">
           <table class="table borderless scorecard_table">
@@ -204,7 +217,7 @@
         </div>
       </div>
     <% end %>
-    <%= render 'scorecard_form', scorecard_index: @course.score_cards.count + 1 %>
+    <%#= render 'scorecard_form', scorecard_index: @course.score_cards.count + 1 %>
     <div class="col-md-12">
       <button type="button" class="btn btn-info btn-add" id='add_scorecard' href="javascript:void(0)">+</button>
       <button type="button" class="btn btn-info btn-add" id='remove_scorecard' href="javascript:void(0)" style="display: none;">-</button>
@@ -222,8 +235,8 @@
 
 
 <script type="text/javascript">
-  var video_index = <%= @course.videos.count + 1 %>;
-  var video_index = <%= @course.score_cards.count + 1 %>;
+  var video_index = <%= @course.videos.count %>;
+  var scorecard_index = <%= @course.score_cards.count %>;
   $("#add_playlist").on('click', function(){
     video_index ++;
     $.ajax({

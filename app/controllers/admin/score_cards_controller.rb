@@ -54,9 +54,10 @@ class Admin::ScoreCardsController < ApplicationController
   # DELETE /score_cards/1
   # DELETE /score_cards/1.json
   def destroy
+    course = @score_card.course
     @score_card.destroy
     respond_to do |format|
-      format.html { redirect_to score_cards_url, notice: 'Score card was successfully destroyed.' }
+      format.html { redirect_to edit_admin_course_path(course), notice: 'Score card was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

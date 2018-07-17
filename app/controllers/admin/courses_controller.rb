@@ -71,6 +71,11 @@ class Admin::CoursesController < ApplicationController
           params[:images].each_with_index do |image, index|
             @course.course_images.create(photo: image)
           end
+          if params[:scorecard_images].present?
+            params[:scorecard_images].each { |scorecard_image|
+              @course.scorecard_images.create(photo: scorecard_image)
+            }
+          end
         end
       end
       if params[:videos].present?
@@ -107,6 +112,37 @@ class Admin::CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
+        if params[:course_scorecard].present?
+          params[:course_scorecard].each do |scorecard_id, scorecard_params|
+            scorecard = ScoreCard.find(scorecard_id)
+            scorecard.tee_name = scorecard_params[:tee_name]
+            scorecard.color = scorecard_params[:color]
+            scorecard.rating = scorecard_params[:total_rating]
+            scorecard.slope = scorecard_params[:total_slope]
+            scorecard.save
+            scorecard_params[:holes].each do |hole_num, hole_scorecard_params|
+              hole = @course.holes.find_by(hole_num: hole_num)
+              hole.yardages.find_by(score_card_id: scorecard.id).update(yards: hole_scorecard_params[:yardges])
+              hole.pars.find_by(score_card_id: scorecard.id).update(par: hole_scorecard_params[:par])
+              hole.hcps.find_by(score_card_id: scorecard.id).update(hcp: hole_scorecard_params[:hcp])
+            end
+          end
+        end
+        if params[:score_cards].present?
+          params[:score_cards].each do |scorecard_index, scorecard_params|
+            score_card = @course.score_cards.create(tee_name: scorecard_params[:tee_name], 
+              color: scorecard_params[:color], rating: scorecard_params[:total_rating],
+              slope: scorecard_params[:total_slope])
+            scorecard_params[:holes].each do |hole_num, hole_params|
+              hole = @course.holes.find_or_create_by(hole_num: hole_num)
+              if score_card.present? && hole.present?
+                yardage = score_card.yardages.find_or_create_by(hole_id: hole.id, yards: hole_params[:yardges])
+                par = score_card.pars.find_or_create_by(hole_id: hole.id, par: hole_params[:par])
+                hcp = score_card.hcps.find_or_create_by(hole_id: hole.id, hcp: hole_params[:hcp])
+              end
+            end
+          end
+        end
         Thread.new do 
           if params[:images]
             params[:images].each { |image|
@@ -120,7 +156,6 @@ class Admin::CoursesController < ApplicationController
             end
           end
           if params[:videos].present?
-            videos_details_arr = []
             params[:videos].each do |index, video_params|
               if video_params[:video].present?
                 course_video = @course.videos.create(title: video_params["title"], description: video_params["description"])
@@ -129,6 +164,11 @@ class Admin::CoursesController < ApplicationController
                 course_video.save
               end
             end
+          end
+          if params[:scorecard_images].present?
+            params[:scorecard_images].each { |scorecard_image|
+              @course.scorecard_images.create(photo: scorecard_image)
+            }
           end
         end
         format.html { redirect_to admin_resort_courses_path(@course.resort), notice: 'Course was successfully updated.' }
