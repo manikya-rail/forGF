@@ -1,4 +1,8 @@
-var last_video_element = $(".video_item").last();
+if ($(".video_item").length == 0){
+	var last_video_element = $(".playlist_heading").last();
+}else{
+	var last_video_element = $(".video_item").last();	
+}
 $(last_video_element).after("<%= j render(partial: 'videos_form', locals: {video_index: @video_index}) %>");
 if ($(".video_item").length > 1){
   $("#remove_playlist").show();

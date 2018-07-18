@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="col-md-12 course-info-row">
-      <h4 class="col-md-4">Playlist</h4>
+      <h4 class="col-md-4 playlist_heading">Playlist</h4>
       <% @course.videos.each_with_index do |video, index| %>
         <% if video.id.present? %>
           <div class="col-md-12 course-info-row video_item" id="video_item_<%= index %>">
