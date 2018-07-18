@@ -238,12 +238,12 @@
   var video_index = <%= @course.videos.count %>;
   var scorecard_index = <%= @course.score_cards.count %>;
   $("#add_playlist").on('click', function(){
-    video_index ++;
     $.ajax({
       url: "<%= admin_add_playlist_item_path %>",
       type: "GET",
       data: {video_index: video_index}
     });
+    video_index ++;
   })
 
   $("#remove_playlist").on('click', function(){
@@ -256,12 +256,12 @@
   })
 
   $("#add_scorecard").on('click', function(){
-    scorecard_index ++;
     $.ajax({
       url: "<%= admin_add_scorecard_path %>",
       type: "GET",
       data: {scorecard_index: scorecard_index}
     });
+    scorecard_index ++;
   })
 
   $("#remove_scorecard").on('click', function(){
