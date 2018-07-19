@@ -153,6 +153,9 @@ class Admin::CoursesController < ApplicationController
             params[:course_video].each do |video_id, vid_params|
               video = Video.find(video_id)
               video.update(title: vid_params[:title], description: vid_params[:description])
+              video.video = vid_params[:video] if vid_params[:video].present?
+              video.thumbnail_image = vid_params[:thumbnail_image] if vid_params[:thumbnail_image].present?
+              video.save
             end
           end
           if params[:videos].present?
@@ -171,7 +174,7 @@ class Admin::CoursesController < ApplicationController
             }
           end
         end
-        format.html { redirect_to admin_resort_courses_path(@course.resort), notice: 'Course was successfully updated.' }
+        format.html { redirect_to admin_course_holes_list_path(@course), notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit }
@@ -206,7 +209,7 @@ class Admin::CoursesController < ApplicationController
          course.scorecard_images.select { |aimage| aimage.photo.url == params[:image_source] }.first.destroy()
        end
     else
-     CourseImage.find(params[:course_id]).delete
+     CourseImage.find(params[:course_image_id]).delete
     end 
     render :json => {status: 'success'}, :layout => false
   end
@@ -269,6 +272,11 @@ class Admin::CoursesController < ApplicationController
     #   @resort.courses.build
     #   render :new
     # end
+  end
+
+  def holes_list
+    @course = Course.find(params[:course_id])
+    @resort = @course.resort
   end
 
   private

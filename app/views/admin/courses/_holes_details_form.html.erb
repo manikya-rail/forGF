@@ -28,11 +28,12 @@
     <%= link_to admin_resort_add_course_path(@course.resort), class: "btn btn-info btn-add", title: "Add another course" do %>
       +
     <% end %>
+
+    <%= link_to "Edit course", edit_admin_course_path(@course), class: "btn btn-primary" %>
   </div>
 <%# end %>
-<div class="hole_yardages">
-  
-</div>
+<div class="hole_yardages"></div>
+<div class="hole_images_modal"></div>
 <script type="text/javascript">
   $(function(){
     $(".update_yardages").on('click', function(){
@@ -41,6 +42,15 @@
         url: "<%= admin_get_hole_yardages_path %>",
         type: "GET",
         data: {hole_id: hole_id}
+      });
+    });
+
+    $(".other_hole_images").on('click', function(){
+      var hole_id = $(this).attr("data-hole-id");
+      $.ajax({
+        url: "/admin/holes/"+hole_id+"/hole_images",
+        type: "GET",
+        data: {id: hole_id}
       });
     });
   });

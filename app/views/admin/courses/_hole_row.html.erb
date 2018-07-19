@@ -29,7 +29,11 @@
               <span class="btn btn-success btn-file">Upload Map<%=  f.file_field :map %></span>
             <% end %>
           </td>
-          <td><span class="btn btn-success btn-file">Upload Images<%=  f.file_field :hole_images, type: :file, multiple: true %></span></td>
+          <td><span class="btn btn-success btn-file">Upload Images<%=  f.file_field :hole_images, type: :file, multiple: true %></span>
+            <% if hole.hole_images.count > 0 %>
+              <span class="other_hole_images" data-hole-id="<%= hole.id%>">View other images</span>
+            <% end %>
+          </td>
           <td>
             <%= link_to "javascript:void(0)", class: "btn btn-success update_yardages", "data-hole-id": "#{hole.id}" do %>
               Update Yardages

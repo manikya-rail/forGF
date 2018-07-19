@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 require 'sidekiq/web'
 namespace :admin do
   post "search", to: "search#search", as: 'search'
-  resources :holes
+  resources :holes do
+    get :hole_images
+  end
   resources :score_cards
   resources :amenities
   resources :networks
@@ -12,7 +14,9 @@ namespace :admin do
     get :add_course
   end
   resources :locations
-  resources :courses
+  resources :courses do
+    get :holes_list
+  end
   resources :ads
   # resources :videos
   get "users/index"

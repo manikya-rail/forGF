@@ -5,8 +5,8 @@
         <h4>Course Information</h4>
       </div>
       <div class="col-md-4 form-group">
-        <%= label_tag :name ,'Name',class:"col-md-12 zero-left-right-padd"%>
-        <%= f.text_field :name , class:"col-md-12 form-control check-field", placeholder: "Full name of course"%>
+        <%= label_tag :name ,'Name',class: "col-md-12 zero-left-right-padd"%>
+        <%= f.text_field :name , class: "col-md-12 form-control check-field", placeholder: "Full name of course"%>
       </div>
 
       <div class="col-md-4 cover-first-row-photos bucket">
@@ -16,7 +16,6 @@
         </div>
         <div class="cover image-division">
           <% if @course.cover.present? %>
-            <span class="close-cross">&times;</span>
             <img src="<%= @course.cover.url %>" class="course-logo-image cimage" id="<%=params[:id]%>" name="cover">
           <% end %>
         </div> 
@@ -65,6 +64,7 @@
               <div class="btn btn-success upload-btn">
                 <div class="cover-label">
                   <%= file_field_tag "course_video[#{video.id}][video]", class: 'check-field cover-field' %>
+                  <div class="video-collection"><%= video.video_file_name %></div>
                 </div>
               </div>
             </div>
@@ -74,10 +74,8 @@
               <div class="btn btn-success upload-btn">
                 <%= file_field_tag "course_video[#{video.id}][thumbnail_image]", type: :file %>
                 <%# course_photo_url = @course.course_images %>
-                <div class="temp-photos-collection"></div>
                 <div class="photos-collection">
                   <div class="photo-division">
-                    <span class="close-photos" data-video-id="<%= video.id %>">&times;</span>
                     <img src="<%= video.thumbnail_image.url %>" class="course-photo-images" id="<%= video.id %>">
                   </div>
                 </div>
@@ -222,8 +220,8 @@
       <button type="button" class="btn btn-info btn-add" id='add_scorecard' href="javascript:void(0)">+</button>
       <button type="button" class="btn btn-info btn-add" id='remove_scorecard' href="javascript:void(0)" style="display: none;">-</button>
     </div>
-    <div class="col-md-12 actions">
-      <%= f.submit "Update", class: 'btn btn-primary' %>
+    <div class="col-md-12 actions mar-top-50">
+      <%= f.submit "Next", class: 'btn btn-primary' %>
       <%= link_to 'Back', admin_resort_courses_path(@course.resort) %>
     </div>
   <%end%>

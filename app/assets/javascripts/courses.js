@@ -81,25 +81,38 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-  $('.course-photos-field').change(function(){
-    var PhotoCollection, divClass, imageClass;
-    if (window.location.href.indexOf('edit') < 0){
-      PhotoCollection = $('.photos-collection');
-      divClass = 'image-division';
-      imageClass = 'course-create-image uploaded-photo-image';
-    }else{
-      PhotoCollection = $('.temp-photos-collection');
-      divClass = 'upload-division';
-      imageClass = 'edit-temp-uploaded-photos';
-    }
-    if (this.files && this.files[0]) {
-      $.each(this.files, function(index, data) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $(PhotoCollection).append("<div class='"+ divClass +"'><span class='close-cross'>&times;</span> <img src='"+e.target.result+"' class='"+ imageClass +"'><br></div>");
-        }
-        reader.readAsDataURL(data);
-      });
-    }
+  $(".edit_course").on('click', '.close-photos', function(){
+    var course_image_id = $(this).attr('data-photo-id');
+    $(this).closest('div.photo-division').remove();
+    $.ajax({
+      url: "/admin/courses/remove_course_image",
+      type: "POST",
+      data: {course_image_id: course_image_id},
+      success: function(data){
+
+      }
+    });
   });
+
+  // $('.course-photos-field').change(function(){
+  //   var PhotoCollection, divClass, imageClass;
+  //   if (window.location.href.indexOf('edit') < 0){
+  //     PhotoCollection = $('.photos-collection');
+  //     divClass = 'image-division';
+  //     imageClass = 'course-create-image uploaded-photo-image';
+  //   }else{
+  //     PhotoCollection = $('.temp-photos-collection');
+  //     divClass = 'upload-division';
+  //     imageClass = 'edit-temp-uploaded-photos';
+  //   }
+  //   if (this.files && this.files[0]) {
+  //     $.each(this.files, function(index, data) {
+  //       var reader = new FileReader();
+  //       reader.onload = function (e) {
+  //         $(PhotoCollection).append("<div class='"+ divClass +"'><img src='"+e.target.result+"' class='"+ imageClass +"'><br></div>");
+  //       }
+  //       reader.readAsDataURL(data);
+  //     });
+  //   }
+  // });
 });

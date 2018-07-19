@@ -1,5 +1,5 @@
 class Admin::HolesController < ApplicationController
-  before_action :set_hole, only: [:show, :edit, :update, :destroy, :remove_image, :remove_map, :remove_logo_image]
+  before_action :set_hole, only: [:show, :edit, :update, :destroy, :remove_image, :remove_map, :remove_logo_image, :hole_images]
 
   # GET /holes
   # GET /holes.json
@@ -103,6 +103,7 @@ class Admin::HolesController < ApplicationController
   # put /holes/1.json
   def remove_image
     @hole.image.destroy
+    @hole.update(image: nil)
     respond_to do |format|
       format.html { redirect_to :back , notice: 'Image was successfully destroyed.' }
       format.json { head :no_content }
@@ -123,6 +124,7 @@ class Admin::HolesController < ApplicationController
   # put /holes/1.json
   def remove_map
     @hole.map.destroy
+    @hole.update(map: nil)
     respond_to do |format|
       format.html { redirect_to :back , notice: 'Map was successfully destroyed.' }
       format.json { head :no_content }
@@ -174,7 +176,7 @@ class Admin::HolesController < ApplicationController
     @hole=@holeimage.hole
     if @holeimage.destroy
       respond_to do |format|
-        format.html { redirect_to admin_course_path(@hole.course) , notice: 'Gallery image was successfully destroyed.' }
+        format.html { redirect_to :back , notice: 'Gallery image was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
@@ -185,6 +187,10 @@ class Admin::HolesController < ApplicationController
     @hole = Hole.find(params[:hole_id])
     @score_cards = @hole.course.score_cards
     @yardages = @hole.yardages.where(score_card_id: @score_cards.pluck(:id))
+  end
+
+  def hole_images
+    @hole_images = @hole.hole_images    
   end
 
   private

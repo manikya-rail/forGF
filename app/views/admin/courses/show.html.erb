@@ -9,7 +9,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <h2>
-        <%= image_tag @course.logo, style: "height:75px; widht: 75px" %>
+        <%= image_tag @course.cover, style: "height:75px; widht: 75px" %>
         <%=@course.name.titleize %>
       </h2>
       <table class="table">
@@ -68,18 +68,7 @@
 
 
 <script type="text/javascript">
-  $(function(){
-    $(".update_yardages").on('click', function(){
-      var hole_id = $(this).attr("data-hole-id");
-      $.ajax({
-        url: "<%= admin_get_hole_yardages_path %>",
-        type: "GET",
-        data: {hole_id: hole_id}
-      });
-    });
-  });
-
-var videoList = []
+  var videoList = []
 
 for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
   videoList.push({
