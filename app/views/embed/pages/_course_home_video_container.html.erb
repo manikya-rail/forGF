@@ -97,8 +97,9 @@
 
     $('.playlist_items').on('click', function(){
       var clicked_item = $(this).attr('data-video-index');
-      var player = videojs('hole-vid');
+      var player = videojs('home-vid');
       player.playlist.currentItem(parseInt(clicked_item));
+      player.play();
     });
 
     $(".hole-number").click(function(){
