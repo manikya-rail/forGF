@@ -68,6 +68,11 @@ class Admin::CoursesController < ApplicationController
     end
     if @resort.save
       @course = @resort.courses.last if @course.nil?
+      if @course.holes.blank?
+        (1..18).each do |hole_num|
+          @course.holes.create(hole_num: hole_num)
+        end
+      end
       if params[:images].present?
         Thread.new do
           params[:images].each_with_index do |image, index|
@@ -97,8 +102,8 @@ class Admin::CoursesController < ApplicationController
             color: scorecard_params[:color], rating: scorecard_params[:total_rating],
             slope: scorecard_params[:total_slope])
           scorecard_params[:holes].each do |hole_num, hole_params|
-            hole = @course.holes.find_or_create_by(hole_num: hole_num)
-            if score_card.present? && hole.present?
+            hole = @course.holes.find_by(hole_num: hole_num)
+            if score_card.id.present? && hole.present?
               yardage = score_card.yardages.find_or_create_by(hole_id: hole.id, yards: hole_params[:yardges])
               par = score_card.pars.find_or_create_by(hole_id: hole.id, par: hole_params[:par])
               hcp = score_card.hcps.find_or_create_by(hole_id: hole.id, hcp: hole_params[:hcp])
@@ -106,6 +111,11 @@ class Admin::CoursesController < ApplicationController
           end
         end
       end
+    else
+      @errors = []
+      @resort.errors.each do |field, details|
+        @errors << "#{field.to_s} : #{details}"
+      end 
     end
   end
 

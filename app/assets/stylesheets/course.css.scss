@@ -499,3 +499,13 @@ body{
   display: inline-block;
   vertical-align: top;
 }
+.errors-div li{
+  list-style-type: none;
+  padding-left: 0px;
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+li.error-list-heading{
+  color: #333333;
+}

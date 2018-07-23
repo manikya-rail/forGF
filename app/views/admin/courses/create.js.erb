@@ -1,2 +1,10 @@
 //$("#course-page-content-wrapper").html("<%#= j render partial: 'holes_details_form'%>");
-window.location.href= "<%= admin_course_holes_list_path(@course) %>";
+<% if @errors.blank? %>
+	window.location.href= "<%= admin_course_holes_list_path(@course) %>";
+<% else %>
+	$("#save_client").show();
+	$("#save_client").removeAttr('disabled');
+	$("#save_client").removeClass('disabled');
+	$(".progress").hide();
+	$(".errors-div").html("<%= j render partial: '/admin/courses/errors_list'%>");
+<% end %>
