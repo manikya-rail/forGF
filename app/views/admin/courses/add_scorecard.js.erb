@@ -1,5 +1,5 @@
-var last_scorecard = $(".scorecard").last();
-$(last_scorecard).after("<%= j render(partial: 'scorecard_form', locals: {scorecard_index: @scorecard_index}) %>");
-if ($(".scorecard").length > 1){
+var last_scorecard = $(".scorecard_container").last();
+$(last_scorecard).after("<%= j render(partial: 'scorecard_form', locals: {scorecard_index: @scorecard_index, from_edit: @from_edit}) %>");
+if ($(".scorecard_container").length > 1){
   $("#remove_scorecard").show();
 }

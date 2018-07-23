@@ -1,8 +1,8 @@
-<div class="col-md-12 course-info-row scorecard zero-left-right-padd" id="scorecard">
+<div class="col-md-12 course-info-row scorecard_container zero-left-right-padd" id="scorecard">
   <div class="col-md-2 ">
     <%= text_field_tag "score_cards[#{scorecard_index}][tee_name]", "", class: "col-md-12 form-control", placeholder: "Tee Name"%>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
     <%#= text_field_tag "score_cards[#{scorecard_index}][color]", "", class: "col-md-12 form-control", placeholder: "Color"%>
 
     <%= select_tag "score_cards[#{scorecard_index}][color]", options_for_select(["Green", "Red", "White", "Blue", "Violet", "Gold", "Teal", "LightBlue", "Black"]), class:'dropdown-less-padd form-control inline check-field' ,style: 'margin-left:10px;'%>
@@ -20,6 +20,15 @@
     <div class="col-md-3">
       <%= text_field_tag "score_cards[#{scorecard_index}][total_slope]", "", class: "col-md-12 form-control total_slope", placeholder: "SLOPE"%>
     </div>
+  </div>
+  <div class="col-md-2">
+    <% if from_edit %>
+      <%= hidden_field_tag "score_cards[#{scorecard_index}][rank]", scorecard_index + 1, class: "rank-field" %>
+      <div class="ordering_buttons">
+        <%= link_to "", "javascript:void(0)", class: "btn btn-sm btn-primary glyphicon glyphicon-chevron-up scorecard-reorder-up" %>
+        <%= link_to "", "javascript:void(0)", class: "btn btn-sm btn-primary glyphicon glyphicon-chevron-down scorecard-reorder-down" %>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-12 zero-left-right-padd">
     <table class="table borderless scorecard_table">

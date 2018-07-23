@@ -87,4 +87,8 @@ class Course < ApplicationRecord
   def sibling_courses
     self.resort.courses.where.not(id: self.id)
   end
+
+  def playlist_items
+    videos.order(:rank)    
+  end
 end

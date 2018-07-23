@@ -22,6 +22,7 @@ namespace :admin do
   get "users/index"
   get "courses/holes/:id", to: 'courses#holes',as: 'holes_create'
   post "courses/remove_course_image", to: 'courses#remove_course_image'
+  post "courses/remove_scorecard_image", to: 'courses#remove_scorecard_image'
   get "/add_playlist_item", to: 'courses#add_playlist_item'
   get "/add_scorecard", to: 'courses#add_scorecard'
   post "videos/create", to: 'videos#create' ,as: 'video_create'

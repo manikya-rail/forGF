@@ -94,6 +94,18 @@ $(document).on('turbolinks:load', function() {
     });
   });
 
+  $(".edit_course").on('click', '.close-scorecard-photos', function(){
+    var scorecard_image_id = $(this).attr('data-photo-id');
+    $(this).closest('div.photo-division').remove();
+    $.ajax({
+      url: "/admin/courses/remove_scorecard_image",
+      type: "POST",
+      data: {scorecard_image_id: scorecard_image_id},
+      success: function(data){
+
+      }
+    });
+  });
   // $('.course-photos-field').change(function(){
   //   var PhotoCollection, divClass, imageClass;
   //   if (window.location.href.indexOf('edit') < 0){
@@ -115,4 +127,61 @@ $(document).on('turbolinks:load', function() {
   //     });
   //   }
   // });
+
+  $(document).on("click", ".video-reorder-up", function(){
+    var $current = $(this).closest('div.video_item')
+    var current_rank = parseInt($current.find('.rank-field').val());
+    var $previous = $current.prev('div.video_item');
+    if($previous.length !== 0){
+      $current.insertBefore($previous);
+      var new_current_rank = current_rank - 1;
+      $current.find('.rank-field').val(new_current_rank);
+      $current.find('.item_title').text("Item #"+new_current_rank);
+      $previous.find('.rank-field').val(current_rank);
+      $previous.find('.item_title').text("Item #"+current_rank);
+    }
+    return false;
+  });
+
+  $(document).on("click", ".video-reorder-down", function(){
+    var $current = $(this).closest('div.video_item')
+    var current_rank = parseInt($current.find('.rank-field').val());
+    var $next = $current.next('div.video_item');
+    if($next.length !== 0){
+      $current.insertAfter($next);
+      var new_current_rank = current_rank + 1;
+      $current.find('.rank-field').val(new_current_rank);
+      $current.find('.item_title').text("Item #"+new_current_rank);
+      $next.find('.rank-field').val(current_rank);
+      $next.find('.item_title').text("Item #"+current_rank);
+    }
+    return false;
+  });
+
+
+  $(document).on("click", ".scorecard-reorder-up", function(){
+    var $current = $(this).closest('div.scorecard_container')
+    var current_rank = parseInt($current.find('.rank-field').val());
+    var $previous = $current.prev('div.scorecard_container');
+    if($previous.length !== 0){
+      $current.insertBefore($previous);
+      var new_current_rank = current_rank - 1;
+      $current.find('.rank-field').val(new_current_rank);
+      $previous.find('.rank-field').val(current_rank);
+    }
+    return false;
+  });
+
+  $(document).on("click", ".scorecard-reorder-down", function(){
+    var $current = $(this).closest('div.scorecard_container')
+    var current_rank = parseInt($current.find('.rank-field').val());
+    var $next = $current.next('div.scorecard_container');
+    if($next.length !== 0){
+      $current.insertAfter($next);
+      var new_current_rank = current_rank + 1;
+      $current.find('.rank-field').val(new_current_rank);
+      $next.find('.rank-field').val(current_rank);
+    }
+    return false;
+  });
 });

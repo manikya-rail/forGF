@@ -479,3 +479,23 @@ body{
   cursor: pointer;
   font-size: 12px;
 }
+.close-scorecard-photos{
+  position: relative;
+  text-align: center;
+  top: -31px;
+  left: 60px;
+  color: red;
+  z-index: 100;
+  background: #eee;
+  border-radius: 50%;
+  border: 1px solid #666;
+  cursor: pointer;
+  width: 20px;
+  display: inline-block;
+}
+.ordering_buttons{
+  margin-bottom: 10px;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: top;
+}

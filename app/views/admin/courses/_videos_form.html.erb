@@ -1,6 +1,13 @@
 <div class="col-md-12 course-info-row video_item" id="video_item_<%= video_index %>">
   <div class="col-md-4 form-group">
-    <%= label_tag :title ,"Item ##{video_index + 1}",class:"col-md-12 zero-left-right-padd"%>
+    <%= label_tag :title ,"Item ##{video_index + 1}",class: "col-md-12 zero-left-right-padd item_title", style: "width: auto;"%>
+    <% if from_edit %>
+      <div class="ordering_buttons">
+        <%= link_to "", "javascript:void(0)", class: "btn btn-sm btn-primary glyphicon glyphicon-chevron-up reorder-up" %>
+        <%= link_to "", "javascript:void(0)", class: "btn btn-sm btn-primary glyphicon glyphicon-chevron-down reorder-down" %>
+      </div>
+    <% end %>
+    <%= hidden_field_tag "videos[#{video_index}][rank]", video_index + 1, class: "rank-field"%>
     <%= text_field_tag "videos[#{video_index}][title]", "", class:"col-md-12 form-control check-field", placeholder: "Item Title"%>
   </div>
   <div class="col-md-4">

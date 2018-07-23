@@ -6,11 +6,13 @@ class Admin::CoursesController < ApplicationController
   # GET /courses.json
 
   def add_playlist_item
-    @video_index = params["video_index"].to_i    
+    @video_index = params["video_index"].to_i   
+    @from_edit = params[:from_edit].present? && params[:from_edit] == "true" 
   end
 
   def add_scorecard
-    @scorecard_index = params["scorecard_index"].to_i    
+    @scorecard_index = params["scorecard_index"].to_i   
+    @from_edit = params[:from_edit].present? && params[:from_edit] == "true" 
   end
 
   def index
@@ -152,7 +154,7 @@ class Admin::CoursesController < ApplicationController
           if params[:course_video].present?
             params[:course_video].each do |video_id, vid_params|
               video = Video.find(video_id)
-              video.update(title: vid_params[:title], description: vid_params[:description])
+              video.update(title: vid_params[:title], description: vid_params[:description], rank: vid_params[:rank])
               video.video = vid_params[:video] if vid_params[:video].present?
               video.thumbnail_image = vid_params[:thumbnail_image] if vid_params[:thumbnail_image].present?
               video.save
@@ -161,7 +163,7 @@ class Admin::CoursesController < ApplicationController
           if params[:videos].present?
             params[:videos].each do |index, video_params|
               if video_params[:video].present?
-                course_video = @course.videos.create(title: video_params["title"], description: video_params["description"])
+                course_video = @course.videos.create(title: video_params["title"], description: video_params["description"], rank: video_params["rank"])
                 course_video.video = video_params[:video]
                 course_video.thumbnail_image = video_params[:thumbnail_image]
                 course_video.save
@@ -277,6 +279,11 @@ class Admin::CoursesController < ApplicationController
   def holes_list
     @course = Course.find(params[:course_id])
     @resort = @course.resort
+  end
+
+  def remove_scorecard_image
+    ScorecardImage.find(params[:scorecard_image_id]).destroy    
+    render :json => {status: 'success'}, :layout => false
   end
 
   private

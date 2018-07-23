@@ -59,7 +59,7 @@
           </div>
           <div class="col-md-12">
             <h4 class="col-md-4">Playlist</h4>
-            <%= render 'admin/courses/videos_form', video_index: 0 %>
+            <%= render 'admin/courses/videos_form', video_index: 0, from_edit: false %>
             <div class="col-md-12">
               <button type="button" class="btn btn-info btn-add" id='add_playlist' href="javascript:void(0)">+</button>
               <button type="button" class="btn btn-info btn-add" id='remove_playlist' href="javascript:void(0)" style="display: none;">-</button>
@@ -68,7 +68,7 @@
 
           <div class="col-md-12 zero-left-right-padd">
             <h4 class="col-md-4">Scorecard</h4>
-            <%= render 'admin/courses/scorecard_form', scorecard_index: 0 %>
+            <%= render 'admin/courses/scorecard_form', scorecard_index: 0, from_edit: false %>
             <div class="col-md-12">
               <button type="button" class="btn btn-info btn-add" id='add_scorecard' href="javascript:void(0)">+</button>
               <button type="button" class="btn btn-info btn-add" id='remove_scorecard' href="javascript:void(0)" style="display: none;">-</button>
@@ -98,7 +98,7 @@ $("#add_playlist").on('click', function(){
   $.ajax({
     url: "<%= admin_add_playlist_item_path %>",
     type: "GET",
-    data: {video_index: video_index}
+    data: {video_index: video_index, from_edit: false}
   });
 })
 
@@ -115,7 +115,7 @@ $("#add_scorecard").on('click', function(){
   $.ajax({
     url: "<%= admin_add_scorecard_path %>",
     type: "GET",
-    data: {scorecard_index: scorecard_index}
+    data: {scorecard_index: scorecard_index, from_edit: false}
   });
 })
 

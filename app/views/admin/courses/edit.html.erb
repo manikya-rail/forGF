@@ -22,7 +22,7 @@
       </div>
 
       <div class="col-md-4 second-row-photos">
-        <%= label_tag :photos ,'Photos',class:"col-md-12 zero-left-right-padd "%>
+        <%= label_tag :photos ,'Photos',class: "col-md-12 zero-left-right-padd "%>
         <div class="clearfix"></div>
         <div class="btn btn-success upload-btn">
           <%= file_field_tag "images[]", type: :file, multiple: true, class: 'course-photos-field' %>
@@ -48,14 +48,34 @@
         <%= label_tag :color_selector ,'Color Selector',class:"col-md-12 zero-left-right-padd"%>
         <%= f.text_field :color_selector, class: "col-md-12 form-control check-field", placeholder: "Color Selector" %>
       </div>
+      <div class="col-md-4 course-info-row">
+        <%= label_tag :scorecard_images ,'Score Card Images',class: "col-md-12 zero-left-right-padd "%>
+        <div class="clearfix"></div>
+        <div class="btn btn-success upload-btn">
+          <%= file_field_tag "scorecard_images[]", type: :file, multiple: true, class: 'check-field course-scorecard-images-field' %>
+          <div class="photos-collection">
+            <% @course.scorecard_images.each do |scorecard_image|%>
+              <div class="photo-division">
+                <span class="close-scorecard-photos" data-photo-id="<%= scorecard_image.id %>">&times;</span>
+                <img src="<%= scorecard_image.photo.url %>" class="course-scorecard-images" id="<%= scorecard_image.id %>" style="width: 50px; height: 60px;">
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-12 course-info-row">
       <h4 class="col-md-4 playlist_heading">Playlist</h4>
-      <% @course.videos.each_with_index do |video, index| %>
+      <% @course.playlist_items.each_with_index do |video, index| %>
         <% if video.id.present? %>
           <div class="col-md-12 course-info-row video_item" id="video_item_<%= index %>">
+            <%= hidden_field_tag "course_video[#{video.id}][rank]", video.rank.present? ? video.rank : index + 1, class: "rank-field", placeholder: "Item Title"%>
             <div class="col-md-4 form-group">
-              <%= label_tag :title ,"Item ##{index + 1}",class:"col-md-12 zero-left-right-padd"%>
+              <%= label_tag :title ,"Item ##{video.rank.present? ? video.rank : index + 1}",class:"col-md-12 zero-left-right-padd item_title", style: "width: auto;"%>
+              <div class="ordering_buttons">
+                <%= link_to "", "javascript:void(0)", class: "btn btn-sm btn-primary glyphicon glyphicon-chevron-up video-reorder-up" %>
+                <%= link_to "", "javascript:void(0)", class: "btn btn-sm btn-primary glyphicon glyphicon-chevron-down video-reorder-down" %>
+              </div>
               <%= text_field_tag "course_video[#{video.id}][title]", video.title, class: "col-md-12 form-control check-field", placeholder: "Item Title"%>
             </div>
             <div class="col-md-4">
@@ -99,16 +119,16 @@
       </div>
     </div>
     <h4 class="col-md-4">Scorecard</h4>
-    <% @course.score_cards.each do |scorecard| %>
-
-      <div class="col-md-12 course-info-row scorecard zero-left-right-padd" id="scorecard">
-        <div class="col-md-2 ">
+    <% @course.score_cards.each_with_index do |scorecard, index| %>
+      <div class="col-md-12 course-info-row scorecard_container zero-left-right-padd">
+        <%= hidden_field_tag "course_scorecard[#{scorecard.id}][rank]", scorecard.rank.present? ? scorecard.rank : index + 1, class: "rank-field"%>
+        <div class="col-md-2 col-lg-2 col-sm-12">
           <%= text_field_tag "course_scorecard[#{scorecard.id}][tee_name]", scorecard.tee_name, class: "col-md-12 form-control", placeholder: "Tee Name"%>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2 col-lg-2 col-sm-12">
           <%= select_tag "course_scorecard[#{scorecard.id}][color]", options_for_select(["Green", "Red", "White", "Blue", "Violet", "Gold", "Teal", "LightBlue", "Black"], scorecard.color), class:'dropdown-less-padd form-control inline check-field' ,style: 'margin-left:10px;'%>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-lg-6 col-sm-12">
           <div class="col-md-3">
             <%= text_field_tag "course_scorecard[#{scorecard.id}][total_par]", scorecard.total_par, class: "col-md-12 form-control total_par", placeholder: "PAR", readonly: true%>
           </div>
@@ -122,8 +142,12 @@
             <%= text_field_tag "course_scorecard[#{scorecard.id}][total_slope]", scorecard.slope.to_i, class: "col-md-12 form-control total_slope", placeholder: "SLOPE"%>
           </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2 col-lg-2 col-sm-4">
           <%= link_to "-", admin_score_card_path(scorecard), class: "btn btn-info btn-add", method: :delete, data: { confirm: 'Are you sure?' }%>
+          <div class="ordering_buttons">
+            <%= link_to "", "javascript:void(0)", class: "btn btn-sm btn-primary glyphicon glyphicon-chevron-up scorecard-reorder-up" %>
+            <%= link_to "", "javascript:void(0)", class: "btn btn-sm btn-primary glyphicon glyphicon-chevron-down scorecard-reorder-down" %>
+          </div>
         </div>
         <div class="col-md-12 zero-left-right-padd">
           <table class="table borderless scorecard_table">
@@ -239,7 +263,7 @@
     $.ajax({
       url: "<%= admin_add_playlist_item_path %>",
       type: "GET",
-      data: {video_index: video_index}
+      data: {video_index: video_index, from_edit: true}
     });
     video_index ++;
   })
@@ -247,9 +271,13 @@
   $("#remove_playlist").on('click', function(){
     video_index --;
     var last_video_element = $(".video_item").last();
-    $(last_video_element).remove();
-    if ($(".video_item").length == 1){
-      $("#remove_playlist").hide();
+    if (last_video_element.find("a.btn-danger").length > 0){
+      alert("Click on 'Remove Video' button to delete the last item.")
+    }else{      
+      $(last_video_element).remove();
+      if ($(".video_item").length == 1){
+        $("#remove_playlist").hide();
+      }
     }
   })
 
@@ -257,17 +285,21 @@
     $.ajax({
       url: "<%= admin_add_scorecard_path %>",
       type: "GET",
-      data: {scorecard_index: scorecard_index}
+      data: {scorecard_index: scorecard_index, from_edit: true}
     });
     scorecard_index ++;
   })
 
   $("#remove_scorecard").on('click', function(){
     scorecard_index --;
-    var last_scorecard = $(".scorecard").last();
-    $(last_scorecard).remove();
-    if ($(".scorecard").length == 1){
-      $("#remove_scorecard").hide();
+    var last_scorecard = $(".scorecard_container").last();
+    if (last_scorecard.find("a.btn-add").length > 0){
+      alert("Click on '-' button to delete the last scorecard.")
+    }else{
+      $(last_scorecard).remove();
+      if ($(".scorecard_container").length == 1){
+        $("#remove_scorecard").hide();
+      }
     }
   });
 </script>
