@@ -1,103 +1,39 @@
 <div class="row description">
+  <div class="col-md-12">
+    <div class="clearfix"></div>
+    <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+      <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
+    </div>
+    <div class="clearfix"></div>
+    <ul class="slider slider-nav playlist_thumb course-divider">
+      <% @course.videos.each_with_index do |video, index| %>
+        <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
+          <div>
+            <%= image_tag video.thumbnail_image.url %>
+            <a href="javascript:void(0)">
+              <%= image_tag "big-play.png", :class => "play_btn" %>
+            </a>
+          </div>
+          <span><%= video.title %></span>
+        </li>
+      <% end %>
+    </ul>
+  </div>    
+</div>
+<div class="row description">
   <div class="col-md-12 about">
-    <div class="row">
-      <div class="col-md-6">
-        <h3><b class="home_title">About the Course</b></h3>
-      </div>
+    <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+      <h3><b class="home_title">About the Course</b></h3>
     </div>
-    <div class="row">
-      <div class="col-md-12 bio course-divider">
-        <h4 class="hole_description"><%= @course.bio %></h4>
-      </div>
+    <div class="col-md-12 bio course-divider">
+      <h4 class="hole_description"><%= @course.bio %></h4>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-  <div class="col-md-12 description2">
-    <div class="row">
-      <div class="col-md-12">
-        <h3><b class="home_title">Playlist</b></h3>
-      </div>
-      <div class="clearfix"></div>
-      <ul class="slider slider-nav playlist_thumb">
-        <% @course.videos.each_with_index do |video, index| %>
-          <!-- <li class="playing"> -->
-          <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
-            <div>
-              <!-- <img src="http://www.rodzinne-wakacje.pl/wp-content/uploads/2017/05/maldives-1993704_960_720-696x391.jpg" /> -->
-              <%= image_tag video.thumbnail_image.url %>
-              <a href="javascript:void(0)">
-                <%= image_tag "big-play.png", :class => "play_btn" %>
-              </a>
-            </div>
-            <span><%= video.title %></span>
-          </li>
-        <% end %>
-        <!-- <li>
-          <div>
-            <img src="https://i.pinimg.com/originals/94/dd/57/94dd573e4b4de604ea7f33548da99fd6.jpg" />
-            <a href="#">
-              <%#= image_tag "big-play.png", :class => "play_btn" %>
-            </a>
-          </div>
-          <span>The Gold Course</span>
-        </li>
-        <li>
-          <div>
-            <img src="https://i.pinimg.com/originals/bc/a2/0e/bca20e9db15992b75ed6e64a26aee002.jpg" />
-            <a href="#">
-              <%#= image_tag "big-play.png", :class => "play_btn" %>
-            </a>
-          </div>
-          <span>The Gold Course</span>
-        </li>
-        <li>
-          <div>
-            <img src="https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&h=350" />
-            <a href="#">
-              <%#= image_tag "big-play.png", :class => "play_btn" %>
-            </a>
-          </div>
-          <span>The Gold Course</span>
-        </li>
-        <li>
-          <div>
-            <img src="https://media.luftika.rs/2017/04/uskrsnja-jaja-4.jpg" />
-            <a href="#">
-              <%#= image_tag "big-play.png", :class => "play_btn" %>
-            </a>
-          </div>
-          <span>The Gold Course</span>
-        </li> -->
-      </ul>
-    </div>
-    
-  </div>
-
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-<div class="row slider">
+</div>
+<div class="row slider description">
   <div class="col-md-12 col-xs-12 col-sm-12 st1">
     <div class="row scorecard-row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
         <h3 style="display:inline-block;"><b class="home_title">Scorecard</b></h3>
         <div class="actual-scorecard">
           <a href= "#" data-toggle="modal" data-target="#modal_scorecard" style="text-decoration:none;font-family: Avenir;font-size: 14px;color:<%=color_selector(@course.color_selector)%>">View</a>
@@ -106,9 +42,9 @@
     </div>
     <div id="map-desk" class="map-scorecard row">
       <div class="stat-container">
-        <div class="col-xs-5 col-sm-3 col-md-2 select-container">
+        <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2 select-container">
           <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left; padding-left: 0px;">
               <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %><span class="teename-caret"><%=@teename[0][0]%></span>
               <i class="caret"></i>
             </button>
@@ -121,7 +57,7 @@
             </ul>
           </div>
         </div>
-        <ul class="scorecard">
+        <ul class="col-xs-7 col-sm-9 col-md-10 col-lg-10 scorecard mar-lft-10">
           <%= render 'course_specs', score_card: @score_cards.first %>
         </ul>
       </div>
@@ -357,7 +293,6 @@
   margin-left: 160px;
 }
 .topborder {
-    margin-left: 27px;
     min-height: 30px;
     /*margin-top: 10px;*/
     margin-right: 27px;
@@ -494,7 +429,6 @@ h4 img {
     width: 100%;
     margin: auto;
     position: relative;
-    padding: 0px 26px;
 }
 .actual-scorecard {
     padding: 0px 17px;
@@ -1344,8 +1278,7 @@ table.score-specs tr:nth-child(2) td  {
         }*/
 
         .scorecard{
-          padding: 0;
-          margin: 0;
+          margin: 7px 0 0 -64px !important;
         }
         .stat-container .select-container{
           padding: 0;
@@ -1395,6 +1328,9 @@ table.score-specs tr:nth-child(2) td  {
       }
   .description2{
     padding-top: 30px;
+  }
+  .mar-lft-10{
+    margin-left: 10px;
   }
 
 </style>
