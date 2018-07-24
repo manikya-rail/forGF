@@ -131,6 +131,7 @@ class Admin::CoursesController < ApplicationController
             scorecard.color = scorecard_params[:color]
             scorecard.rating = scorecard_params[:total_rating]
             scorecard.slope = scorecard_params[:total_slope]
+            scorecard.rank = scorecard_params[:rank]
             scorecard.save
             scorecard_params[:holes].each do |hole_num, hole_scorecard_params|
               hole = @course.holes.find_by(hole_num: hole_num)
@@ -144,7 +145,7 @@ class Admin::CoursesController < ApplicationController
           params[:score_cards].each do |scorecard_index, scorecard_params|
             score_card = @course.score_cards.create(tee_name: scorecard_params[:tee_name], 
               color: scorecard_params[:color], rating: scorecard_params[:total_rating],
-              slope: scorecard_params[:total_slope])
+              slope: scorecard_params[:total_slope], rank: scorecard_params[:rank])
             scorecard_params[:holes].each do |hole_num, hole_params|
               hole = @course.holes.find_or_create_by(hole_num: hole_num)
               if score_card.present? && hole.present?
@@ -304,7 +305,7 @@ class Admin::CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :bio, :color_selector, :resort_id)
+      params.require(:course).permit(:name, :bio, :color_selector, :resort_id, :cover)
     end
 
     def resort_params

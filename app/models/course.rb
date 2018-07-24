@@ -91,4 +91,8 @@ class Course < ApplicationRecord
   def playlist_items
     videos.order(:rank)    
   end
+
+  def sorted_scorecards
+    score_cards.order(:rank)
+  end
 end

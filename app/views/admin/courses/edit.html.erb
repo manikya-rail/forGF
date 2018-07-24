@@ -119,7 +119,7 @@
       </div>
     </div>
     <h4 class="col-md-4">Scorecard</h4>
-    <% @course.score_cards.each_with_index do |scorecard, index| %>
+    <% @course.sorted_scorecards.each_with_index do |scorecard, index| %>
       <div class="col-md-12 course-info-row scorecard_container zero-left-right-padd">
         <%= hidden_field_tag "course_scorecard[#{scorecard.id}][rank]", scorecard.rank.present? ? scorecard.rank : index + 1, class: "rank-field"%>
         <div class="col-md-2 col-lg-2 col-sm-12">
