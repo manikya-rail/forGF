@@ -36,14 +36,27 @@ class Hole < ApplicationRecord
    validates_attachment_content_type :logo_image, :content_type => /\Aimage\/.*\Z/
 
   def total_yards
-    self.yardages.pluck(:yards).compact.sum
+    first_scorecard = course_first_scorecard
+    self.yardages.find_by(score_card_id: first_scorecard.id).try(:yards)
+    #self.yardages.pluck(:yards).compact.sum
+
   end
 
   def total_pars
-    self.pars.pluck(:par).compact.sum
+    first_scorecard = course_first_scorecard
+    self.pars.find_by(score_card_id: first_scorecard.id).try(:par)
+    #self.pars.pluck(:par).compact.sum
   end
 
   def total_hcps
-    self.hcps.pluck(:hcp).compact.sum
+    first_scorecard = course_first_scorecard
+    self.hcps.find_by(score_card_id: first_scorecard.id).try(:hcp)
+    #self.hcps.pluck(:hcp).compact.sum
+  end
+
+  def course_first_scorecard
+    first_scorecard = self.course.score_cards.where(rank: 1).first
+    first_scorecard = self.course.score_cards.first if first_scorecard.nil?
+    first_scorecard 
   end
 end
