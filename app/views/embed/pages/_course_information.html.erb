@@ -5,7 +5,7 @@
       <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
     </div>
     <div class="clearfix"></div>
-    <ul class="slider slider-nav playlist_thumb course-divider">
+    <ul class="slider slider-nav playlist_thumb course-divider" style="margin-bottom: 0px; padding-bottom: 15px;">
       <% @course.videos.each_with_index do |video, index| %>
         <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
           <div>
@@ -30,7 +30,7 @@
     </div>
   </div>
 </div>
-<div class="row slider description">
+<div class="row slider description" style="padding-top: 5px;">
   <div class="col-md-12 col-xs-12 col-sm-12 st1">
     <div class="row scorecard-row">
       <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
@@ -656,7 +656,7 @@ table.score-specs tr:nth-child(2) td  {
       @media only screen and (min-width: 1600px) {
         .description {
           padding-top: 50px;
-          margin-bottom: 50px;
+          /*margin-bottom: 50px;*/
           padding-left: 45px;
         }
         .specs, .description2 {

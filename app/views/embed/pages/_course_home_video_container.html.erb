@@ -6,7 +6,25 @@
 
     <div class="previous on-video"> <%= image_tag "left.png" %> </div>
     <div class="next on-video"><%= image_tag "right.png" %></div>
-    <div class="logo on-video"><%= link_to image_tag(logo_on_video(@course)), admin_resort_courses_list_path(@course.resort), target: :_blank %></div>
+    <!-- <div class="logo on-video"><%#= link_to image_tag(logo_on_video(@course)), admin_resort_courses_list_path(@course.resort), target: :_blank %></div> -->
+    <% sibling_courses = @course.sibling_courses %>
+    <% if sibling_courses.count > 1 %>
+      <div class="logo on-video">
+        <div class="dropdown">
+          <button class="btn btn-transparent dropdown-toggle" type="button" data-toggle="dropdown"><%= @course.name %>
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <% sibling_courses.each do |course| %>
+              <li>
+                <%= link_to embed_display_info_path(course) do %>
+                  <%= course.name %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
     <div class = "lower-gradient"></div>
     <div class="vjs-playlist">
       <div id="0" class="hole-home active">
@@ -44,7 +62,6 @@
     </div>
   </div>
 </div>
-
 <script type="text/javascript">
   $(function(){
     $(".hole-home").on("click touchend", function(e) {
