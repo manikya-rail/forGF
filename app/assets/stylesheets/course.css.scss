@@ -1,19 +1,38 @@
-@font-face {
-    font-family: 'avenirbold';
-    src: url('12_avenir_95_black_09173-webfont.woff2') format('woff2'),
-         url('12_avenir_95_black_09173-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 
 @font-face {
-    font-family: 'avenirregular';
-    src: url('avenir_roman-webfont.woff2') format('woff2'),
-         url('avenir_roman-webfont.woff') format('woff');
+    font-family: 'bankgothic_md_btmedium';
+    src: url('bankgothic-webfont.woff2') format('woff2'),
+         url('bankgothic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'Avenir-black';
+    src: url('Avenir-Black.eot');
+    src: url('Avenir-Black.eot?#iefix') format('embedded-opentype'),
+        url('Avenir-Black.woff2') format('woff2'),
+        url('Avenir-Black.woff') format('woff'),
+        url('Avenir-Black.ttf') format('truetype'),
+        url('Avenir-Black.svg#Avenir-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Avenir-medium';
+    src: url('Avenir-Medium.eot');
+    src: url('Avenir-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Avenir-Medium.woff2') format('woff2'),
+        url('Avenir-Medium.woff') format('woff'),
+        url('Avenir-Medium.ttf') format('truetype'),
+        url('Avenir-Medium.svg#Avenir-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+
 
 .pt-20{padding-top: 20px;}
 .pb-20{padding-bottom: 20px;}
@@ -300,10 +319,9 @@ body{
   transform:translateX(-50%);
 }
 .course_info{
-  font-family: 'avenirregular';
   color: #fff;
   position: absolute;
-  bottom: 60px;
+  bottom: 35px;
   padding: 0px 30px;
   text-align: center;
   left: 0;
@@ -314,21 +332,21 @@ body{
   content: '';
 }
 .course_info .course_description {
-    white-space: nowrap;
-    max-width: 750px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0 auto;
-    width: 100%;
+  max-width: 1000px;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 100%;
+  max-height: 55px;
+  font-family: 'Avenir-medium';
 }
 .course_info h2{
-  font-family: 'avenirbold'; 
+    font-family: 'Avenir-black';
 }
 
 .select_course_heading h2{
   text-align: center;
   margin-top: 25px;
-  font-family: 'avenirregular';
+  font-family: 'bankgothic_md_btmedium';
   margin-bottom: 15px;
   font-size: 24px;
 }
@@ -434,12 +452,35 @@ body{
   z-index: 9;
 }
 
+@media screen and (min-width: 1600px){
+  .playlist ul li.hole-number a{
+    padding: 24px 28px 16px;
+  }
+  .vjs-playlist .hole-home{
+    padding-left: 23px;
+    margin-top: 0;
+  }
+  .course-divider{
+    padding-bottom: 30px !important;
+  }
+  .bio.course-divider, .slider.description{
+    padding-bottom: 10px !important;
+  }
+}
+
 @media screen and (max-width: 450px){
   .course_info{
     bottom: 15px
   }
   .course_info h2{
     font-size: 20px;
+  }
+  .course_list_item .play_button{
+    width: 45px !important;
+  }
+  .course_info .course_description{
+    max-height: 26px;
+    line-height: 14px;
   }
 }
 .progress { 
