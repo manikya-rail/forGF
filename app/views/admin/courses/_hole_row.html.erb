@@ -1,5 +1,5 @@
 <td colspan="8">
-  <%= form_for hole, url: admin_update_holes_details_path(@course), method: "post", :html => { :multipart => true }, :remote => true do |f|%>
+  <%= form_for hole, url: admin_update_holes_details_path(@course), method: "post", :html => { :multipart => true, id: "hole_#{hole.id}_update_form"} do |f|%>
     <%= f.hidden_field :id %>
     <table class="table borderless hole_form_table">
       <tbody>
@@ -40,9 +40,33 @@
             <% end %>
           </td>
           <td><%=  f.text_field :description, class: "form-control", placeholder: "Description"%></td>
-          <td><%=  f.submit "Save", class: "btn btn-primary" %></td>
+          <td><%=  f.submit "Save", class: "btn btn-primary", id: "update_hole_#{hole.id}" %>
+            <span class="progress_percent"></span>
+          </td>
         </tr>
       </tbody>
     </table>
   <% end %>
 </td>
+<script type="text/javascript">
+  $(function(){
+    $('form#hole_<%= hole.id %>_update_form').ajaxForm({
+        beforeSend: function() {
+          var form = $("form#hole_<%= hole.id %>_update_form");
+          $("#update_hole_<%= hole.id %>").hide();
+          form.find("span.progress_percent").html("0%");
+        },
+        uploadProgress: function(event, position, total, percentComplete) {
+          var form = $("form#hole_<%= hole.id %>_update_form");
+          form.find("span.progress_percent").html(percentComplete+ "%");
+          if(percentComplete == "100"){
+            form.find("span.progress_percent").html("Processing...");
+          }
+        },
+        success: function() {
+        },
+      complete: function(xhr) {
+      }
+    });
+  });
+</script>
