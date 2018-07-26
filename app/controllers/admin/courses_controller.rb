@@ -187,7 +187,7 @@ class Admin::CoursesController < ApplicationController
             }
           end
         end
-        format.html { redirect_to admin_course_holes_list_path(@course), notice: 'Course was successfully updated.' }
+        format.html { redirect_to admin_resort_courses_path(@course.resort), notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit }
