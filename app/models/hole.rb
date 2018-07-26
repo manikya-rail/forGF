@@ -55,7 +55,7 @@ class Hole < ApplicationRecord
   end
 
   def course_first_scorecard
-    first_scorecard = self.course.score_cards.where(rank: 1).first
+    first_scorecard = self.course.score_cards.order(:rank).first unless self.course.score_cards.pluck(:rank).compact.blank?
     first_scorecard = self.course.score_cards.first if first_scorecard.nil?
     first_scorecard 
   end

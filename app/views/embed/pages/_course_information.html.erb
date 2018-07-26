@@ -6,7 +6,7 @@
     </div>
     <div class="clearfix"></div>
     <ul class="slider slider-nav playlist_thumb course-divider" style="margin-bottom: 0px; padding-bottom: 15px;">
-      <% @course.videos.each_with_index do |video, index| %>
+      <% @course.playlist_items.each_with_index do |video, index| %>
         <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
           <div>
             <%= image_tag video.thumbnail_image.url %>
