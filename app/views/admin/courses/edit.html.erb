@@ -118,7 +118,7 @@
         <button type="button" class="btn btn-info btn-add" id='remove_playlist' href="javascript:void(0)" style="display: none;">-</button>
       </div>
     </div>
-    <h4 class="col-md-4">Scorecard</h4>
+    <h4 class="col-md-4 scorecard_heading">Scorecard</h4>
     <% @course.sorted_scorecards.each_with_index do |scorecard, index| %>
       <div class="col-md-12 course-info-row scorecard_container zero-left-right-padd">
         <%= hidden_field_tag "course_scorecard[#{scorecard.id}][rank]", scorecard.rank.present? ? scorecard.rank : index + 1, class: "rank-field"%>

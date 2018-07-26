@@ -1,4 +1,8 @@
-var last_scorecard = $(".scorecard_container").last();
+if ($(".scorecard_container").length == 0){
+	var last_video_element = $(".scorecard_heading").last();
+}else{
+	var last_video_element = $(".scorecard_container").last();	
+}
 $(last_scorecard).after("<%= j render(partial: 'scorecard_form', locals: {scorecard_index: @scorecard_index, from_edit: @from_edit}) %>");
 if ($(".scorecard_container").length > 1){
   $("#remove_scorecard").show();
