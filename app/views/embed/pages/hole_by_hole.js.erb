@@ -86,6 +86,9 @@ if ($('#hole-vid').length == 0){
       showBars();
     }
     timer = setTimeout(function(){hideBars()}, 5000);
+    $('.vjs-volume-panel').removeClass('vjs-hidden');
+    $('.vjs-mute-control').removeClass('vjs-hidden');
+    $('.vjs-volume-control').removeClass('vjs-hidden');
   });
 
   player.on("userinactive",function () {
@@ -109,3 +112,12 @@ if ($('#hole-vid').length == 0){
 $("li.active").removeClass('active');
 $(".hole-home").removeClass('active');
 $("#<%= (params[:hole_num])%>").addClass('active');
+if(mobilecheck()){
+  $('button.vjs-playback-rate').on('click touchstart',function(){
+    $('.vjs-menu').css({"display":"block"})
+    $('.vjs-menu').removeClass('hide')
+  });
+  $('.vjs-menu-item').on('click touchstart',function(){
+    $('.vjs-menu').addClass('hide')
+  });
+}

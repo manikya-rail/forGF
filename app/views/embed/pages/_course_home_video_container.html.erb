@@ -97,6 +97,7 @@
       }
     });
 
+
     try {player.volume(1);} catch (e) {}
     player.playlist(videoList);
     player.playlist.autoadvance(0);
@@ -153,6 +154,9 @@
         showBars();
       }
       timer = setTimeout(function(){hideBars()}, 5000);
+      $('.vjs-volume-panel').removeClass('vjs-hidden');
+      $('.vjs-mute-control').removeClass('vjs-hidden');
+      $('.vjs-volume-control').removeClass('vjs-hidden');
     });
 
     player.on("userinactive",function () {
@@ -233,6 +237,16 @@
       scrollValue = a*liWidth;
       $('.playlist').animate( { scrollLeft: scrollValue }, 500);
 
+    }
+
+    if(mobilecheck()){
+      $('button.vjs-playback-rate').on('click touchstart',function(){
+        $('.vjs-menu').css({"display":"block"})
+        $('.vjs-menu').removeClass('hide')
+      });
+      $('.vjs-menu-item').on('click touchstart',function(){
+        $('.vjs-menu').addClass('hide')
+      });
     }
   })
 </script>
