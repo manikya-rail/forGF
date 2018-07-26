@@ -44,7 +44,7 @@
                 <td><%= resort.try(:formated_location) %></td>
                 <td><%= resort.try(:course_type) %></td>
                 <td><%= resort.courses.count %></td>
-                <td><%= link_to 'Edit', edit_admin_resort_path(resort) %> | <%= link_to 'Destroy',admin_resort_path(resort) , method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'Show Courses', admin_resort_courses_path(resort) %> </td>
+                <td><%= link_to 'Edit', edit_admin_resort_path(resort) %> | <%= link_to 'Delete',admin_resort_path(resort) , method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'Show Courses', admin_resort_courses_path(resort) %> </td>
                 
               </tr>
             <% end %>

@@ -8,7 +8,7 @@
           <td>
             <% if hole.video.present? %>
               <span><%= hole.video.video_file_name %></span>
-              <span><%= link_to 'Destroy', admin_video_path(hole.video), method: :delete, data: { confirm: 'Are you sure?' } %></span>
+              <span><%= link_to 'Delete', admin_video_path(hole.video), method: :delete, data: { confirm: 'Are you sure?' } %></span>
             <% else %>
               <span class="btn btn-success btn-file">Upload Video<%= f.file_field :video %></span>
             <% end %>
@@ -16,7 +16,7 @@
           <td>
             <% if hole.image.present? %>
               <span><%= image_tag hole.image.url, style: "width: 50px;" %></span>
-              <span><%= link_to 'Destroy', admin_remove_image_path(hole), method: :put, data: { confirm: 'Are you sure?' } %></span>
+              <span><%= link_to 'Delete', admin_remove_image_path(hole), method: :put, data: { confirm: 'Are you sure?' } %></span>
             <% else %>
               <span class="btn btn-success btn-file">Upload Cover<%=  f.file_field :image %></span>
             <% end %>
@@ -24,7 +24,7 @@
           <td>
             <% if hole.map.present? %>
               <span><%= image_tag hole.map.url, style: "width: 50px;" %></span>
-              <span><%= link_to 'Destroy', admin_remove_map_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></span>
+              <span><%= link_to 'Delete', admin_remove_map_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></span>
             <% else %>
               <span class="btn btn-success btn-file">Upload Map<%=  f.file_field :map %></span>
             <% end %>

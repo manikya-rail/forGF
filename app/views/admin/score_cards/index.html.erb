@@ -19,7 +19,7 @@
         <td><%= score_card.course_id %></td>
         <td><%= link_to 'Show', admin_score_card_path(score_card) %></td>
         <td><%= link_to 'Edit', edit_admin_score_card_path(score_card) %></td>
-        <td><%= link_to 'Destroy', admin_score_card_path(score_card), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', admin_score_card_path(score_card), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

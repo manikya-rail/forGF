@@ -3,7 +3,7 @@
         <tr>
           <td><%= image_tag (r.cover.url), style: "width: 50px;" %></td>
           <td><%= link_to r.name, admin_course_path(r) %></td>
-          <td><%= link_to 'Edit', edit_admin_course_path(r) %> | <%= link_to 'Destroy', admin_course_path(r), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_admin_course_path(r) %> | <%= link_to 'Delete', admin_course_path(r), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           
         </tr>
     <%elsif klass == "user"%>
@@ -21,7 +21,7 @@
           <td><%= r.try(:formated_location) %></td>
           <td><%= r.try(:course_type) %></td>
           <td><%= r.courses.count %></td>
-          <td><%= link_to 'Edit', edit_admin_resort_path(r) %> | <%= link_to 'Destroy',admin_resort_path(r), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_admin_resort_path(r) %> | <%= link_to 'Delete',admin_resort_path(r), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           
         </tr>
     <%end%>
