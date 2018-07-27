@@ -234,57 +234,14 @@ class Admin::CoursesController < ApplicationController
     Thread.new do
       if params[:hole][:hole_images].present?
         params[:hole][:hole_images].each do |image|
-          @hole.hole_images.create(image: image)
+          @hole.hole_images.create(image: image) if image.present?
         end
       end
       if params[:hole][:video].present?
         hole_video = @hole.build_video(video: params[:hole][:video])
-        @hole.video.save
+        hole_video.save
       end
     end
-    # course = Course.find(params[:course_id])
-    # all_hole_details = []
-    # params[:holes].each do |hole_id, hole_params|
-    #   hole_details = {hole_id: hole_id, description: hole_params[:description]}
-    #   if hole_params[:video].present?
-    #     hole_video = hole_params[:video].tempfile
-    #     hole_video_file = File.join("public", "hole#{hole_id}_video_#{hole_params[:video].original_filename}")
-    #     FileUtils.cp hole_video.path, hole_video_file
-    #     hole_details[:video_file_path] = hole_video_file
-    #   end
-    #   if hole_params[:cover].present?
-    #     hole_cover = hole_params[:cover].tempfile
-    #     hole_cover_file = File.join("public", "hole#{hole_id}_cover_#{hole_params[:cover].original_filename}")
-    #     FileUtils.cp hole_cover.path, hole_cover_file
-    #     hole_details[:cover_file_path] = hole_cover_file
-    #   end
-    #   if hole_params[:map].present?
-    #     hole_map = hole_params[:map].tempfile
-    #     hole_map_file = File.join("public", "hole#{hole_id}_map_#{hole_params[:map].original_filename}")
-    #     FileUtils.cp hole_map.path, hole_map_file
-    #     hole_details[:map_file_path] = hole_map_file
-    #   end
-
-    #   hole_images_paths = []
-    #   if hole_params[:images].present?
-    #     hole_params[:images].each_with_index do |image, index|
-    #       hole_image = image.tempfile
-    #       hole_image_file = File.join("public", "hole#{hole_id}_image#{index+1}_#{image.original_filename}")
-    #       FileUtils.cp hole_image.path, hole_image_file
-    #       hole_images_paths << hole_image_file
-    #     end
-    #   end
-    #   hole_details[:hole_images_paths] = hole_images_paths
-    #   all_hole_details << hole_details
-    # end
-    # UploadHoleMediaWorker.perform_async(all_hole_details)
-    # if params[:commit] == "Save"
-    #   redirect_to admin_courses_path
-    # else
-    #   @resort = course.resort
-    #   @resort.courses.build
-    #   render :new
-    # end
   end
 
   def holes_list
