@@ -270,7 +270,7 @@ DEPENDENCIES
   pg
   pg_search
   pry
-  puma (~> 3.0)
+  puma (~> 3.7)
   rack-cors
   rails (~> 5.0.2)
   remotipart (~> 1.2)
