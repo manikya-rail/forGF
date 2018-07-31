@@ -231,17 +231,25 @@ class Admin::CoursesController < ApplicationController
     @hole = Hole.find(params[:hole][:id])
     @hole.update(hole_params)
     @course = @hole.course
-    Thread.new do
-      if params[:hole][:hole_images].present?
-        params[:hole][:hole_images].each do |image|
-          @hole.hole_images.create(image: image) if image.present?
-        end
-      end
-      if params[:hole][:video].present?
-        hole_video = @hole.build_video(video: params[:hole][:video])
-        hole_video.save
+    hole_details, hole_images_paths = {hole_id: params[:hole][:id]}, []
+    if params[:hole][:hole_images].reject{|a| a.blank?}.present?
+      params[:hole][:hole_images].each_with_index do |image, index|
+        FileUtils::mkdir_p "public/hole_#{params[:hole][:id]}"
+        hole_image = image.tempfile
+        hole_image_file = File.join("public", "hole_#{params[:hole][:id]}" , "#{image.original_filename}")
+        FileUtils.cp hole_image.path, hole_image_file
+        hole_images_paths << hole_image_file
       end
     end
+    if params[:hole][:video].present?
+      FileUtils::mkdir_p "public/hole_#{params[:hole][:id]}"
+      hole_video = params[:hole][:video].tempfile
+      hole_video_file = File.join("public", "hole_#{params[:hole][:id]}", "#{params[:hole][:video].original_filename}")
+      FileUtils.cp hole_video.path, hole_video_file
+      hole_details[:video_file_path] = hole_video_file
+    end
+    hole_details[:hole_images_paths] = hole_images_paths
+    UploadHoleMediaWorker.perform_async(hole_details) if hole_details[:video_file_path].present? || hole_details[:hole_images_paths].present?
   end
 
   def holes_list
