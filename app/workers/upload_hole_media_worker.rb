@@ -2,6 +2,12 @@ class UploadHoleMediaWorker
   include Sidekiq::Worker
 
   def perform(hole_params)
+    memory_output = %x(free)
+    free_memory = memory_output.split(" ")[9]
+    if free_memory.to_i < 30000
+      UploadHoleMediaWorker.perform_in(10.minutes, hole_params)
+      return
+    end
   	hole = Hole.find(hole_params["hole_id"])
     video_file = File.open(hole_params["video_file_path"]) rescue nil
     # cover_file = File.open(hole_params["cover_file_path"]) rescue nil
