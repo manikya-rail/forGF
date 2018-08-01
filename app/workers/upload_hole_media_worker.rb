@@ -5,7 +5,7 @@ class UploadHoleMediaWorker
     memory_output = %x(free)
     free_memory = memory_output.split(" ")[9]
     if free_memory.to_i < 1000000
-      UploadHoleMediaWorker.perform_in(10.minutes, hole_params)
+      UploadHoleMediaWorker.perform_in(5.minutes, hole_params)
       return
     end
   	hole = Hole.find(hole_params["hole_id"])
