@@ -1,12 +1,24 @@
 <div class="row" style="margin-top:10px;">
-	<% hole.hole_images.each do | holeimage | %>
-		<div class="col-md-3">
-		    <div class="thumbnail">
-		      <a href="<%= holeimage.image.url %>">
-		        <%=image_tag holeimage.image.url(:thumb) %>
-		      </a>
-		    </div>
-		    <%= link_to 'Delete', admin_remove_hole_image_path(holeimage), method: :delete, data: { confirm: 'Are you sure?' } %>
-	  	</div>
-	<% end%>
+	<%= form_for :hole_images, url: admin_hole_set_images_rank_path(hole), method: "post", :remote => true do |f| %>
+		<% hole.hole_images.order(:rank).each_with_index do | holeimage, index | %>
+			<div class="col-md-3 gallery_list">
+				<%= hidden_field_tag "hole_image[#{holeimage.id}]", holeimage.rank.present? ? holeimage.rank : index+1, class: "rank-field" %>
+				<div class="ordering_buttons">
+				  <%= link_to "", "javascript:void(0)", class: "btn btn-xs btn-primary glyphicon glyphicon-chevron-left hole_image-reorder-left" %>
+				  <%= link_to "", "javascript:void(0)", class: "btn btn-xs btn-primary glyphicon glyphicon-chevron-right hole_image-reorder-right" %>
+				</div>
+			    <div class="thumbnail">
+			      <a href="javascript:void(0)">
+			        <%=image_tag holeimage.image.url(:thumb) %>
+			      </a>
+			    </div>
+			    <div class="col-md-3">
+			    	<%= link_to 'Delete', admin_remove_hole_image_path(holeimage), method: :delete, data: { confirm: 'Are you sure?' } %>
+			    </div>
+		  	</div>
+		<% end%>
+		<div class="col-md-12">
+			<%= f.submit "Save Order", class: "btn btn-success pull-right"%>
+		</div>
+	<% end %>
 </div>

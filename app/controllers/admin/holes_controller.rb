@@ -193,6 +193,13 @@ class Admin::HolesController < ApplicationController
     @hole_images = @hole.hole_images    
   end
 
+  def set_images_rank
+    params[:hole_image].each do |hole_image_id, rank|
+      hole_image = HoleImage.find(hole_image_id)
+      hole_image.update(rank: rank)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hole

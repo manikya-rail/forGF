@@ -4,6 +4,7 @@ namespace :admin do
   post "search", to: "search#search", as: 'search'
   resources :holes do
     get :hole_images
+    post :set_images_rank
   end
   resources :score_cards
   resources :amenities

@@ -5,18 +5,22 @@ class UploadHoleMediaWorker
     memory_output = %x(free)
     free_memory = memory_output.split(" ")[9]
     if free_memory.to_i < 1048576
-      stats = Sidekiq::Stats.new
-      if stats.processes_size < 4
-        system('echo fore | sudo -S sync && echo 3 | sudo tee /proc/sys/vm/drop_caches')
-        system('echo fore | sudo -S sysctl -w vm.drop_caches=3')
-      end
+      # stats = Sidekiq::Stats.new
+      # if stats.processes_size < 4
+      #   system('echo ubox52 | sudo -S sync && echo 3 | sudo tee /proc/sys/vm/drop_caches')
+      #   system('echo ubox52 | sudo -S sysctl -w vm.drop_caches=3')
+      # end
       UploadHoleMediaWorker.perform_in(10.minutes, hole_params)
       return
     end
   	hole = Hole.find(hole_params["hole_id"])
     video_file = File.open(hole_params["video_file_path"]) rescue nil
-
-    hole_video = hole.build_video(video: video_file) if video_file.present?
+    if video_file.present?
+      hole_video = Video.find(hole_params[:video_id]) rescue nil
+      hole_video = hole.build_video() if hole_video.nil?
+      hole_video.video = video_file
+      hole_video.status = "completed"
+    end
     hole_video.save if hole_video.present?
     if hole_params["hole_images_paths"].present?
       hole_params["hole_images_paths"].each do |image|

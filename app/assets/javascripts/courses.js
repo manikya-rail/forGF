@@ -184,4 +184,32 @@ $(document).on('turbolinks:load', function() {
     }
     return false;
   });
+
+
+
+  $(document).on("click", ".hole_image-reorder-right", function(){
+    var $current = $(this).closest('div.gallery_list');
+    var current_rank = parseInt($current.find('.rank-field').val());
+    var $next = $current.next('div.gallery_list');
+    if($next.length !== 0){
+      $current.insertAfter($next);
+      var new_current_rank = current_rank + 1;
+      $current.find('.rank-field').val(new_current_rank);
+      $next.find('.rank-field').val(current_rank);
+    }
+    return false;
+  });
+
+  $(document).on("click", ".hole_image-reorder-left", function(){
+    var $current = $(this).closest('div.gallery_list')
+    var current_rank = parseInt($current.find('.rank-field').val());
+    var $previous = $current.prev('div.gallery_list');
+    if($previous.length !== 0){
+      $current.insertBefore($previous);
+      var new_current_rank = current_rank - 1;
+      $current.find('.rank-field').val(new_current_rank);
+      $previous.find('.rank-field').val(current_rank);
+    }
+    return false;
+  });
 });

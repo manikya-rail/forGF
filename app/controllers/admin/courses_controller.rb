@@ -242,10 +242,13 @@ class Admin::CoursesController < ApplicationController
       end
     end
     if params[:hole][:video].present?
+      hole_video_obj = @hole.build_video(status: "processing")
+      hole_video_obj.save
       FileUtils::mkdir_p "public/hole_#{params[:hole][:id]}"
       hole_video = params[:hole][:video].tempfile
       hole_video_file = File.join("public", "hole_#{params[:hole][:id]}", "#{params[:hole][:video].original_filename}")
       FileUtils.cp hole_video.path, hole_video_file
+      hole_details[:video_id] = hole_video_obj.id
       hole_details[:video_file_path] = hole_video_file
     end
     hole_details[:hole_images_paths] = hole_images_paths

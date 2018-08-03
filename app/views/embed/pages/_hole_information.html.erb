@@ -38,7 +38,7 @@
       </div>
       <div id="22">
         <ul id="slider" class="bxslider">
-          <% @hole.hole_images.each do | holeimage | %>
+          <% @hole.hole_images.order(:rank).each do | holeimage | %>
             <li><%=image_tag holeimage.image.url %></li>
           <% end%>
         </ul>

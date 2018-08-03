@@ -7,8 +7,12 @@
           <td><%= hole.hole_num %></td>
           <td>
             <% if hole.video.present? %>
-              <span><%= hole.video.video_file_name %></span>
-              <span><%= link_to 'Delete', admin_video_path(hole.video), method: :delete, data: { confirm: 'Are you sure?' } %></span>
+              <% if hole.video.status != "processing" %>
+                <span><%= hole.video.video_file_name %></span>
+                <span><%= link_to 'Delete', admin_video_path(hole.video), method: :delete, data: { confirm: 'Are you sure?' } %></span>
+              <% else %>
+                <span>Uploading...</span>
+              <% end %>
             <% else %>
               <span class="btn btn-success btn-file">Upload Video<%= f.file_field :video %></span>
             <% end %>
