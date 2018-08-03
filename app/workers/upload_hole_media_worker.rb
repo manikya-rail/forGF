@@ -5,6 +5,11 @@ class UploadHoleMediaWorker
     memory_output = %x(free)
     free_memory = memory_output.split(" ")[9]
     if free_memory.to_i < 1048576
+      stats = Sidekiq::Stats.new
+      if stats.processes_size < 4
+        system('echo fore | sudo -S sync && echo 3 | sudo tee /proc/sys/vm/drop_caches')
+        system('echo fore | sudo -S sysctl -w vm.drop_caches=3')
+      end
       UploadHoleMediaWorker.perform_in(10.minutes, hole_params)
       return
     end
