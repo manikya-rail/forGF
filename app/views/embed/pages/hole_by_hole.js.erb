@@ -77,20 +77,6 @@ if ($('#hole-vid').length == 0){
     }
   );
 
-  var timer;
-
-  player.on("loadedmetadata",function () {
-    if($(window).width() < 760 && player.paused()){
-      showPlayerActions();
-    }else{
-      showBars();
-    }
-    timer = setTimeout(function(){hideBars()}, 5000);
-    $('.vjs-volume-panel').removeClass('vjs-hidden');
-    $('.vjs-mute-control').removeClass('vjs-hidden');
-    $('.vjs-volume-control').removeClass('vjs-hidden');
-  });
-
   player.on("userinactive",function () {
     if (!player.paused()){
       hideBars();
@@ -100,6 +86,22 @@ if ($('#hole-vid').length == 0){
   player.on("useractive",function () {
       showBars();
       clearTimeout(timer);
+  });
+  var timer;
+
+  player.on("loadedmetadata",function () {
+    id = player.playlist.currentItem();
+    var j = id+1;
+    $('li#'+j+' a').trigger('click');
+    if($(window).width() < 760 && player.paused()){
+      showPlayerActions();
+    }else{
+      showBars();
+    }
+    timer = setTimeout(function(){hideBars()}, 5000);
+    $('.vjs-volume-panel').removeClass('vjs-hidden');
+    $('.vjs-mute-control').removeClass('vjs-hidden');
+    $('.vjs-volume-control').removeClass('vjs-hidden');
   });
 }else{
   var player = videojs('hole-vid');
