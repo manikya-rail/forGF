@@ -24,7 +24,7 @@
           <ul class="dropdown-menu">
             <% sibling_courses.each do |course| %>
               <li>
-                <%= link_to embed_display_info_path(course) do %>
+                <%= link_to embed_display_info_path(course), data: { turbolinks: false} do %>
                   <%= course.name %>
                 <% end %>
               </li>
