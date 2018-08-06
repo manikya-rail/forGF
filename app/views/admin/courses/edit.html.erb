@@ -136,10 +136,10 @@
             <%= text_field_tag "course_scorecard[#{scorecard.id}][total_yards]", scorecard.total_yards, class: "col-md-12 form-control total_yards", placeholder: "YARDS", readonly: true%>
           </div>
           <div class="col-md-3">
-            <%= text_field_tag "course_scorecard[#{scorecard.id}][total_rating]", scorecard.rating.to_i, class: "col-md-12 form-control total_rating", placeholder: "RATING"%>
+            <%= text_field_tag "course_scorecard[#{scorecard.id}][total_rating]", scorecard.rating, class: "col-md-12 form-control total_rating", placeholder: "RATING"%>
           </div>
           <div class="col-md-3">
-            <%= text_field_tag "course_scorecard[#{scorecard.id}][total_slope]", scorecard.slope.to_i, class: "col-md-12 form-control total_slope", placeholder: "SLOPE"%>
+            <%= text_field_tag "course_scorecard[#{scorecard.id}][total_slope]", scorecard.slope, class: "col-md-12 form-control total_slope", placeholder: "SLOPE"%>
           </div>
         </div>
         <div class="col-md-2 col-lg-2 col-sm-4">
