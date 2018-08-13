@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def hyperlink_on_video(course)
-    course.logo_hyperlink.present? ? course.logo_hyperlink : "http://foreflyovers.com"
+    course.logo_hyperlink.present? ? course.logo_hyperlink : "https://foregolf.com"
   end
 end

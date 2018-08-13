@@ -3,7 +3,7 @@
   <%= render :partial => 'admin/courses/side_nav' %>
 <% end %>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
 
 <div id="course-page-content-wrapper" class="col-md-12" style="margin-top: 0px;">
@@ -81,7 +81,7 @@
               <div class="bar"></div >
               <div class="percent">0%</div >
           </div>
-          
+
           <!-- <div id="status"></div> -->
         </div>
         <div class="col-md-12 errors-div"></div>
@@ -135,11 +135,11 @@ $('#save_client').on('click', function(){
 });
 
 $(function() {
-    
+
 var bar = $('.bar');
 var percent = $('.percent');
 //var status = $('#status');
-   
+
 $('form.resort_course_form').ajaxForm({
     beforeSend: function() {
       //status.empty();
@@ -161,7 +161,7 @@ $('form.resort_course_form').ajaxForm({
   complete: function(xhr) {
     percent.html("Processing...");
   }
-}); 
+});
 
 });
 </script>
