@@ -1,6 +1,7 @@
 class Admin::ResortsController < ApplicationController
   layout "embed", only: :courses_list
   before_action :set_resort, only: [:show, :edit, :update, :destroy]
+  after_action :set_version_header, only: :courses_list
 
   # GET /resorts
   # GET /resorts.json
@@ -90,5 +91,10 @@ class Admin::ResortsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def resort_params
       params.require(:resort).permit(:name)
+    end
+
+    def set_version_header
+        # response.headers['X-Frame-Options'] = 'AllowAll'
+        response.set_header("X-Frame-Options", "ALLOWALL")
     end
 end
