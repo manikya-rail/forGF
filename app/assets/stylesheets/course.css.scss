@@ -468,6 +468,12 @@ body{
   }
 }
 
+@media screen and (max-width: 766px){
+  .course_info .course_description{
+    display: none;
+  }
+}
+
 @media screen and (max-width: 450px){
   .course_info{
     bottom: 15px
