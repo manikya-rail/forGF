@@ -51,7 +51,7 @@ class Embed::PagesController < ApplicationController
     @holes = @course.holes.order("hole_num")
     @score_cards = @course.sorted_scorecards
     @course.score_cards.each do |scorecard|
-      @teename << [scorecard.tee_name, scorecard.id, scorecard.color] 
+      @teename << [scorecard.tee_name, scorecard.id, scorecard.color]
     end
     # gon.hole_num = []
     # gon.videos = []
@@ -125,7 +125,7 @@ class Embed::PagesController < ApplicationController
     @holes = @course.holes.order("hole_num")
     @score_cards = @course.sorted_scorecards
     @course.score_cards.each do |scorecard|
-      @teename << [scorecard.tee_name, scorecard.id, scorecard.color] 
+      @teename << [scorecard.tee_name, scorecard.id, scorecard.color]
     end
   end
 
@@ -142,7 +142,7 @@ class Embed::PagesController < ApplicationController
     end
 
     def set_version_header
-        # response.headers['X-Frame-Options'] = 'AllowAll'
-        response.set_header("X-Frame-Options", "ALLOWALL")
+      # response.set_header("X-Frame-Options", "ALLOWALL")
+      response.headers.except! 'X-Frame-Options'
     end
 end
