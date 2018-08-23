@@ -94,7 +94,7 @@ class Admin::ResortsController < ApplicationController
     end
 
     def set_version_header
-        # response.headers['X-Frame-Options'] = 'AllowAll'
-        response.set_header("X-Frame-Options", "ALLOWALL")
+      # response.set_header("X-Frame-Options", "ALLOWALL")
+      response.headers.except! 'X-Frame-Options'
     end
 end
