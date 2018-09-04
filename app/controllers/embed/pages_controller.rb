@@ -45,8 +45,8 @@ class Embed::PagesController < ApplicationController
     @course = Course.find(params[:id])
     resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
     @course.playlist_items.each do |video|
-      gon.videos_urls << video.video.url(resolution).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if video.video.present?
-      gon.image_urls << video.thumbnail_image.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if video.thumbnail_image.present?
+      gon.videos_urls << video.video.url(resolution).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net').gsub("http", "https") if video.video.present?
+      gon.image_urls << video.thumbnail_image.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net').gsub("http", "https") if video.thumbnail_image.present?
     end
     @holes = @course.holes.order("hole_num")
     @score_cards = @course.sorted_scorecards
