@@ -8,7 +8,7 @@
     <% if @course.scorecard_images.exists? %>
         <% @course.scorecard_images.each do |image| %>
           <li class="modal-content">
-              <%=image_tag image.photo.url, class: "modal_scorecard_image" %>
+              <%=image_tag image.photo.url.gsub("http", "https"), class: "modal_scorecard_image" %>
           </li>
       <% end %>
     <% else %>
