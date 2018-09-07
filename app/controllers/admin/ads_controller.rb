@@ -30,13 +30,10 @@ class Admin::AdsController < ApplicationController
       redirect_to :back, notice: 'Image not uploaded.'
     end
   end
-  
-  def holes
-    @course = Course.find(params[:id])
-  end
-
-
-
+  # SG : unused action
+  # def holes
+  #   @course = Course.find(params[:id])
+  # end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course

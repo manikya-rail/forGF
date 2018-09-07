@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
       <div id="message"></div>
-        <%=form_for :ad, url: admin_upload_image_path, method: "post", :html => { :multipart => true }, :remote => true do |v|%>
+        <%= form_for :ad, url: add_image_admin_ads_path, method: "post", :html => { :multipart => true }, :remote => true do |v| %>
             <%= v.file_field :image , style: "padding: 10 0px; margin:10px 0px;"%>
             <%= v.hidden_field :hole_id ,value: hole.id%>
             <%= v.hidden_field :slot_num ,value: "#{slot_num}"%>

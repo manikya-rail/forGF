@@ -3,9 +3,10 @@ class Admin::HolesController < ApplicationController
 
   # GET /holes
   # GET /holes.json
-  def index
-    @holes = Hole.all
-  end
+  # SG : unused action
+  # def index
+  #   @holes = Hole.all
+  # end
 
   # GET /holes/1
   # GET /holes/1.json
@@ -13,9 +14,10 @@ class Admin::HolesController < ApplicationController
   end
 
   # GET /holes/new
-  def new
-    @hole = Hole.new
-  end
+  # SG : unused action
+  # def new
+  #   @hole = Hole.new
+  # end
 
   # GET /holes/1/edit
   def edit
@@ -23,19 +25,20 @@ class Admin::HolesController < ApplicationController
 
   # POST /holes
   # POST /holes.json
-  def create
-    @hole = Hole.new(hole_params)
-
-    respond_to do |format|
-      if @hole.save
-        format.html { redirect_to @hole, notice: 'Hole was successfully created.' }
-        format.json { render :show, status: :created, location: @hole }
-      else
-        format.html { render :new }
-        format.json { render json: @hole.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # SG : unused action
+  # def create
+  #   @hole = Hole.new(hole_params)
+  #
+  #   respond_to do |format|
+  #     if @hole.save
+  #       format.html { redirect_to @hole, notice: 'Hole was successfully created.' }
+  #       format.json { render :show, status: :created, location: @hole }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @hole.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /holes/1
   # PATCH/PUT /holes/1.json
@@ -81,14 +84,14 @@ class Admin::HolesController < ApplicationController
       redirect_to admin_course_path(@hole.course), notice: 'Image not uploaded.'
     end
   end
-
-  def remove_logo_image
-    @hole.logo_image.destroy
-    respond_to do |format|
-      format.html { redirect_to :back , notice: 'Image was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # SG - Unused Action
+  # def remove_logo_image
+  #   @hole.logo_image.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to :back , notice: 'Image was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   def add_image
     @hole = Hole.find(params[:hole][:hole_id])
@@ -112,7 +115,6 @@ class Admin::HolesController < ApplicationController
 
   def add_map
     @hole = Hole.find(params[:hole][:hole_id])
-
     if @hole.update(hole_params)
       redirect_to admin_course_path(@hole.course), notice: 'Map was successfully uploaded.'
     else
@@ -156,14 +158,14 @@ class Admin::HolesController < ApplicationController
     @hole = Hole.find(params[:hole][:hole_id])
 
     # if @hole.update(hole_params)
-    if @hole.present?  
+    if @hole.present?
       if params[:images]
         params[:images].each { |image|
           @hole.hole_image.create(image: image)
         }
         redirect_to admin_course_path(@hole.course), notice: 'Images were successfully uploaded.'
       end
-        
+
     else
         redirect_to admin_course_path(@hole.course), notice: 'Images not uploaded.'
     end
@@ -190,7 +192,7 @@ class Admin::HolesController < ApplicationController
   end
 
   def hole_images
-    @hole_images = @hole.hole_images    
+    @hole_images = @hole.hole_images
   end
 
   def set_images_rank

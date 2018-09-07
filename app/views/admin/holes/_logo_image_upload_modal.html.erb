@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
       <div id="message"></div>
-        <%=form_for hole, url: admin_add_logo_image_path, method: "post", :html => { :multipart => true }, :remote => true do |v|%>
+        <%=form_for hole, url: add_logo_image_admin_holes_path, method: "post", :html => { :multipart => true }, :remote => true do |v|%>
             <%= v.file_field :logo_image , style: "padding: 10 0px; margin:10px 0px;"%>
             <%= v.hidden_field :hole_id ,value: hole.id%>
             <%= v.submit 'Upload', id: 'fileUpload', class: "btn btn-success upload-btn"%>
@@ -22,4 +22,3 @@
 
   </div>
 </div>
-

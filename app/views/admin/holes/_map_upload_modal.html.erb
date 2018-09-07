@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
       <div id="message"></div>
-        <%=form_for hole, url: admin_add_map_path, method: "post", :html => { :multipart => true }, :remote => true do |v|%>
+        <%=form_for hole, url: add_map_admin_holes_path, method: "post", :html => { :multipart => true }, :remote => true do |v|%>
             <%= v.file_field :map , style: "padding: 10 0px; margin:10px 0px;"%>
             <%= v.hidden_field :hole_id ,value: hole.id%>
             <%= v.submit 'Upload', id: 'fileUpload', class: "btn btn-success upload-btn"%>

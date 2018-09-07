@@ -1,5 +1,5 @@
 <div class="row" style="margin-top:10px;">
-	<%= form_for :hole_images, url: admin_hole_set_images_rank_path(hole), method: "post", :remote => true do |f| %>
+	<%= form_for :hole_images, url: set_images_rank_admin_holes_path, method: "post", :remote => true do |f| %>
 		<% hole.hole_images.order(:rank).each_with_index do | holeimage, index | %>
 			<div class="col-md-3 gallery_list">
 				<%= hidden_field_tag "hole_image[#{holeimage.id}]", holeimage.rank.present? ? holeimage.rank : index+1, class: "rank-field" %>
@@ -13,7 +13,7 @@
 			      </a>
 			    </div>
 			    <div class="col-md-3">
-			    	<%= link_to 'Delete', admin_remove_hole_image_path(holeimage), method: :delete, data: { confirm: 'Are you sure?' } %>
+			    	<%= link_to 'Delete', remove_hole_image_admin_hole_path(holeimage), method: :delete, data: { confirm: 'Are you sure?' } %>
 			    </div>
 		  	</div>
 		<% end%>

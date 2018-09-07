@@ -1,6 +1,6 @@
 class Admin::ResortsController < ApplicationController
   layout "embed", only: :courses_list
-  before_action :set_resort, only: [:show, :edit, :update, :destroy]
+  before_action :set_resort, only: [:edit, :destroy]
   after_action :set_version_header, only: :courses_list
 
   # GET /resorts
@@ -11,13 +11,15 @@ class Admin::ResortsController < ApplicationController
 
   # GET /resorts/1
   # GET /resorts/1.json
-  def show
-  end
+  # SG : unused action
+  # def show
+  # end
 
+  # SG : unused action
   # GET /resorts/new
-  def new
-    @resort = Resort.new
-  end
+  # def new
+  #   @resort = Resort.new
+  # end
 
   # GET /resorts/1/edit
   def edit
@@ -44,6 +46,7 @@ class Admin::ResortsController < ApplicationController
 
   # PATCH/PUT /resorts/1
   # PATCH/PUT /resorts/1.json
+
   def update
     respond_to do |format|
       if @resort.update(resort_params)

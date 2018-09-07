@@ -22,9 +22,10 @@ class Admin::TagsController < ApplicationController
     @video = @tag.try(:video)
     @tag.destroy
   end
-
-  def show
-  end
+  
+  # SG - unused action
+  # def show
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

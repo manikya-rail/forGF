@@ -1,50 +1,83 @@
 Rails.application.routes.draw do
-require 'sidekiq/web'
-namespace :admin do
-  post "search", to: "search#search", as: 'search'
-  resources :holes do
-    get :hole_images
-    post :set_images_rank
+  require 'sidekiq/web'
+  namespace :admin do
+    post "search", to: "search#search", as: 'search'
+    resources :holes, except: [:index, :create, :new] do
+      member do
+        get :hole_images
+        put :remove_map
+        put :remove_image
+        delete :remove_hole_image
+      end
+      collection do
+        get :get_yardages
+        post :add_image
+        post :add_logo_hyperlink
+        post :add_logo_image
+        post :add_map
+        post :add_hole_image
+        post :add_yardages
+        post :set_images_rank
+      end
+    end
+    resources :score_cards, except: [:index, :create]
+    resources :networks
+    resources :resorts, except: [:new, :show] do
+      get :courses_list
+      get :courses
+      get :add_course
+    end
+    resources :courses do
+      get :holes_list
+      post :update_holes
+      collection do
+        get :add_playlist_item
+        get :add_scorecard
+        post :remove_course_image
+        post :remove_scorecard_image
+      end
+    end
+    resources :ads, only: [:show, :index] do
+      collection do
+        post :add_image
+      end
+    end
+    resources :videos, only: [:create, :show, :destroy] do
+      resources :tags, only: [:create]
+    end
+    resources :tags, only: [:destroy]
+    resources :users, only: [:index]
+
+    # SG - non-restful routes
+    # post "videos/create", to: 'videos#create' ,as: 'video_create'
+    # get "videos/:id" , to: 'videos#show' ,as: 'video'
+    # delete "videos/:id" ,to: 'videos#destroy', as: 'delete_video'
+    # post "tags/:video_id/save" ,to: 'tags#create', as: 'create_tag'
+    # delete "tags/:id" ,to: 'tags#destroy', as: 'delete_tag'
+    # get "users/index"
+    # post "courses/remove_course_image", to: 'courses#remove_course_image'
+    # post "courses/remove_scorecard_image", to: 'courses#remove_scorecard_image'
+    # get "/add_playlist_item", to: 'courses#add_playlist_item'
+    # get "/add_scorecard", to: 'courses#add_scorecard'
+    # post "holes/add_image" ,to: 'holes#add_image', as: 'add_image'
+    # post "holes/add_logo_hyperlink" ,to: 'holes#add_logo_hyperlink', as: 'add_logo_hyperlink'
+    # post "holes/add_logo_image" ,to: 'holes#add_logo_image', as: 'add_logo_image'
+    # put "holes/image/:id" ,to: 'holes#remove_image', as: 'remove_image'
+    # post "holes/add_map" ,to: 'holes#add_map', as: 'add_map'
+    # put "holes/map/:id" ,to: 'holes#remove_map', as: 'remove_map'
+    # post "holes/add_hole_image" ,to: 'holes#add_hole_image', as: 'add_hole_image'
+    # delete "holes/gallery/:id" ,to: 'holes#remove_hole_image', as: 'remove_hole_image'
+    # post "holes/add_yardages" ,to: 'holes#add_yardages', as: 'add_yardages'
+    # get "/get_yardages", to: 'holes#get_yardages', as: 'get_hole_yardages'
+    # post "ads/add_image" ,to: 'ads#add_image', as: 'upload_image'
+    # post "courses/:course_id/update_holes", to: "courses#update_holes", as: 'update_holes_details'
+
+    # SG - unused actions/routes
+    # get "courses/holes/:id", to: 'courses#holes',as: 'holes_create'
+    # put "holes/logo_image/:id" ,to: 'holes#remove_logo_image', as: 'remove_logo_image'
+    # resources :amenities
+    #resources :locations
   end
-  resources :score_cards
-  resources :amenities
-  resources :networks
-  resources :resorts do
-    get :courses_list
-    get :courses
-    get :add_course
-  end
-  resources :locations
-  resources :courses do
-    get :holes_list
-  end
-  resources :ads
-  # resources :videos
-  get "users/index"
-  get "courses/holes/:id", to: 'courses#holes',as: 'holes_create'
-  post "courses/remove_course_image", to: 'courses#remove_course_image'
-  post "courses/remove_scorecard_image", to: 'courses#remove_scorecard_image'
-  get "/add_playlist_item", to: 'courses#add_playlist_item'
-  get "/add_scorecard", to: 'courses#add_scorecard'
-  post "videos/create", to: 'videos#create' ,as: 'video_create'
-  get "videos/:id" , to: 'videos#show' ,as: 'video'
-  post "tags/:video_id/save" ,to: 'tags#create', as: 'create_tag'
-  delete "tags/:id" ,to: 'tags#destroy', as: 'delete_tag'
-  post "holes/add_image" ,to: 'holes#add_image', as: 'add_image'
-  post "holes/add_logo_hyperlink" ,to: 'holes#add_logo_hyperlink', as: 'add_logo_hyperlink'
-  post "holes/add_logo_image" ,to: 'holes#add_logo_image', as: 'add_logo_image'
-  put "holes/image/:id" ,to: 'holes#remove_image', as: 'remove_image'
-  put "holes/logo_image/:id" ,to: 'holes#remove_logo_image', as: 'remove_logo_image'
-  post "holes/add_map" ,to: 'holes#add_map', as: 'add_map'
-  put "holes/map/:id" ,to: 'holes#remove_map', as: 'remove_map'
-  post "holes/add_hole_image" ,to: 'holes#add_hole_image', as: 'add_hole_image'
-  delete "holes/gallery/:id" ,to: 'holes#remove_hole_image', as: 'remove_hole_image'
-  post "ads/add_image" ,to: 'ads#add_image', as: 'upload_image'
-  post "holes/add_yardages" ,to: 'holes#add_yardages', as: 'add_yardages'
-  get "/get_yardages", to: 'holes#get_yardages', as: 'get_hole_yardages'
-  delete "videos/:id" ,to: 'videos#destroy', as: 'delete_video'
-  post "courses/:course_id/update_holes", to: "courses#update_holes", as: 'update_holes_details'
-end
 
   devise_for :admins
   devise_for :users

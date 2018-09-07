@@ -1,4 +1,4 @@
-<%#= form_for @course, url: admin_update_holes_details_path(@course), method: "post", :html => { :multipart => true } do |f|%>
+<%#= form_for @course, url: admin_course_update_holes_path(@course), method: "post", :html => { :multipart => true } do |f|%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
   <div class="col-md-12">
     <h4>Holes List</h4>
@@ -24,7 +24,7 @@
       </tbody>
     </table>
   </div>
-  <div class="col-md-12 text-center pb-20">    
+  <div class="col-md-12 text-center pb-20">
     <%#= f.submit "Save", class: "btn btn-primary"%>
     <%= link_to admin_resort_add_course_path(@course.resort), class: "btn btn-info btn-add", title: "Add another course" do %>
       +
@@ -40,7 +40,7 @@
     $(".update_yardages").on('click', function(){
       var hole_id = $(this).attr("data-hole-id");
       $.ajax({
-        url: "<%= admin_get_hole_yardages_path %>",
+        url: "<%= get_yardages_admin_holes_path %>",
         type: "GET",
         data: {hole_id: hole_id}
       });

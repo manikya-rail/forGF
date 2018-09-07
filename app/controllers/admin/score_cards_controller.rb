@@ -3,9 +3,10 @@ class Admin::ScoreCardsController < ApplicationController
 
   # GET /score_cards
   # GET /score_cards.json
-  def index
-    @score_cards = ScoreCard.all
-  end
+  # SG : Unused action
+  # def index
+  #   @score_cards = ScoreCard.all
+  # end
 
   # GET /score_cards/1
   # GET /score_cards/1.json
@@ -23,19 +24,20 @@ class Admin::ScoreCardsController < ApplicationController
 
   # POST /score_cards
   # POST /score_cards.json
-  def create
-    @score_card = ScoreCard.new(score_card_params)
-
-    respond_to do |format|
-      if @score_card.save
-        format.html { redirect_to @score_card, notice: 'Score card was successfully created.' }
-        format.json { render :show, status: :created, location: @score_card }
-      else
-        format.html { render :new }
-        format.json { render json: @score_card.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # SG : Unused action
+  # def create
+  #   @score_card = ScoreCard.new(score_card_params)
+  #
+  #   respond_to do |format|
+  #     if @score_card.save
+  #       format.html { redirect_to @score_card, notice: 'Score card was successfully created.' }
+  #       format.json { render :show, status: :created, location: @score_card }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @score_card.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /score_cards/1
   # PATCH/PUT /score_cards/1.json

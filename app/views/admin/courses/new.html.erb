@@ -97,7 +97,7 @@ var scorecard_index = 0;
 $("#add_playlist").on('click', function(){
   video_index ++;
   $.ajax({
-    url: "<%= admin_add_playlist_item_path %>",
+    url: "<%= add_playlist_item_admin_courses_path %>",
     type: "GET",
     data: {video_index: video_index, from_edit: false}
   });
@@ -114,7 +114,7 @@ $("#remove_playlist").on('click', function(){
 $("#add_scorecard").on('click', function(){
   scorecard_index ++;
   $.ajax({
-    url: "<%= admin_add_scorecard_path %>",
+    url: "<%= add_scorecard_admin_courses_path %>",
     type: "GET",
     data: {scorecard_index: scorecard_index, from_edit: false}
   });

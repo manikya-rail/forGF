@@ -18,7 +18,7 @@
           <% if @course.cover.present? %>
             <img src="<%= @course.cover.url %>" class="course-logo-image cimage" id="<%=params[:id]%>" name="cover">
           <% end %>
-        </div> 
+        </div>
       </div>
 
       <div class="col-md-4 second-row-photos">
@@ -220,7 +220,7 @@
                   </td>
                 <% end %>
                 <td>
-                  
+
                 </td>
                 <% (10..18).each do |int|%>
                   <td>
@@ -228,10 +228,10 @@
                   </td>
                 <% end %>
                 <td>
-                  
+
                 </td>
                 <td>
-                  
+
                 </td>
               </tr>
             </tbody>
@@ -262,7 +262,7 @@
   var scorecard_index = <%= @course.score_cards.count %>;
   $("#add_playlist").on('click', function(){
     $.ajax({
-      url: "<%= admin_add_playlist_item_path %>",
+      url: "<%= add_playlist_item_admin_courses_path %>",
       type: "GET",
       data: {video_index: video_index, from_edit: true}
     });
@@ -274,7 +274,7 @@
     var last_video_element = $(".video_item").last();
     if (last_video_element.find("a.btn-danger").length > 0){
       alert("Click on 'Remove Video' button to delete the last item.")
-    }else{      
+    }else{
       $(last_video_element).remove();
       if ($(".video_item").length == 1){
         $("#remove_playlist").hide();
@@ -284,7 +284,7 @@
 
   $("#add_scorecard").on('click', function(){
     $.ajax({
-      url: "<%= admin_add_scorecard_path %>",
+      url: "<%= add_scorecard_admin_courses_path %>",
       type: "GET",
       data: {scorecard_index: scorecard_index, from_edit: true}
     });

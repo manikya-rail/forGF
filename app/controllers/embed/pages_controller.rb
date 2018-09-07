@@ -63,11 +63,8 @@ class Embed::PagesController < ApplicationController
     # gon.image = []
     # gon.image_urls = []
     # gon.description = []
-
     # @course = Course.find(params[:id])
-
     # @holes = @course.holes.sort_by{ |m| m.hole_num }
-
     # resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
     # @holes.each do |hole|
     #   gon.hole_num << hole.hole_num if hole.video.present?
@@ -133,8 +130,9 @@ class Embed::PagesController < ApplicationController
     @scorecard = ScoreCard.find(params[:sid])
   end
 
-  def awesome_embed
-  end
+  # SG - no routes defined for this
+  # def awesome_embed
+  # end
 
   private
     def set_course

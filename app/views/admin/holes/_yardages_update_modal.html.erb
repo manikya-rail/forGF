@@ -9,16 +9,16 @@
       </div>
       <div class="modal-body">
       <div id="message"></div>
-                
 
-        <%=form_for :yardages, url: admin_add_yardages_path, method: "post", :remote => true do |v|%>
+
+        <%=form_for :yardages, url: add_yardages_admin_holes_path, method: "post", :remote => true do |v|%>
             <% if @score_cards.present? %>
               <% @score_cards.each do |tee| %>
                 <div class="col-md-12" id="tee_num_<%="#{tee.id}"%>">
                   <%= label_tag :name ,"#{tee.color}", class: "col-md-6 zero-left-padd"%>
                   <div class="col-md-6 form-group">
                     <%= v.text_field "#{tee.id}" , class: "zero-right-padd form-control", placeholder: 'Enter value', value: @hole.yardages.find_by(score_card_id: tee.id).try(:yards) %>
-                  </div>            
+                  </div>
                 </div>
               <%end%>
               <%= v.hidden_field :hole_id , value: @hole.id%>

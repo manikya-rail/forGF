@@ -1,5 +1,5 @@
 <td colspan="8">
-  <%= form_for hole, url: admin_update_holes_details_path(@course), method: "post", :html => { :multipart => true, id: "hole_#{hole.id}_update_form"} do |f|%>
+  <%= form_for hole, url: admin_course_update_holes_path(@course), method: "post", :html => { :multipart => true, id: "hole_#{hole.id}_update_form"} do |f|%>
     <%= f.hidden_field :id %>
     <table class="table borderless hole_form_table">
       <tbody>
@@ -20,7 +20,7 @@
           <td>
             <% if hole.image.present? %>
               <span><%= image_tag hole.image.url, style: "width: 50px;" %></span>
-              <span><%= link_to 'Delete', admin_remove_image_path(hole), method: :put, data: { confirm: 'Are you sure?' } %></span>
+              <span><%= link_to 'Delete', remove_image_admin_hole_path(hole), method: :put, data: { confirm: 'Are you sure?' } %></span>
             <% else %>
               <span class="btn btn-success btn-file">Upload Cover<%=  f.file_field :image %></span>
             <% end %>
@@ -28,7 +28,7 @@
           <td>
             <% if hole.map.present? %>
               <span><%= image_tag hole.map.url, style: "width: 50px;" %></span>
-              <span><%= link_to 'Delete', admin_remove_map_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></span>
+              <span><%= link_to 'Delete', remove_map_admin_hole_path(hole), method: :put, data: { confirm: 'Are you sure?' }%></span>
             <% else %>
               <span class="btn btn-success btn-file">Upload Map<%=  f.file_field :map %></span>
             <% end %>

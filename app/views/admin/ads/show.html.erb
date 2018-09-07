@@ -35,10 +35,12 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h4>Embedable Link For Videos</h4>
-          <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; " readonly><iframe width="720px" height="620px" src="<%= "#{request.base_url}/embed/#{@course.id}" %>"> </iframe></textarea>
+          <textarea style="width:710px; height:45px; resize:none; padding: 10px; text-align: center; " readonly>
+            <iframe width="720px" height="620px" src="<%= "#{request.base_url}/embed/#{@course.id}" %>"> </iframe>
+          </textarea>
         </div>
     </div>
-  
+
     <h2>Holes List</h2>
     <div class="panel panel-default">
       <div class="panel-body">
@@ -96,4 +98,3 @@
     <%=render :partial => 'admin/ads/image_upload_modal' , locals: {hole: hole,  hole_num: hole.hole_num, slot_num: 3 } %>
   <%end%>
 </div>
-

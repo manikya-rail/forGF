@@ -39,7 +39,7 @@
       </div>
       <div class="modal-body">
       <div id="message"></div>
-        <%= form_for Tag.new, :url => admin_create_tag_path(@video), :method => :post, :remote => true do  %>
+        <%= form_for Tag.new, :url => admin_video_tags_path(@video), :method => :post, :remote => true do  %>
           <%= text_field_tag :tag, nil, placeholder: 'Enter tag here...', class: "form-control margin-10" ,name: 'tag[tag]' %>
           <%= hidden_field(:tag, :time, id:'tag-timestamp')%>
           <%= submit_tag "Save", class: "save-tag-btn btn btn-primary margin-10" %>

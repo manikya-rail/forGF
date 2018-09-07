@@ -11,9 +11,9 @@
         <tr>
           <td><%= tag.tag%></td>
           <td><%= tag.time%></td>
-          <td><%=link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, admin_delete_tag_path(tag), :confirm => 'Are you sure?' ,method: :delete, remote:true %></td>
+          <td><%=link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, admin_tag_path(tag), :confirm => 'Are you sure?' ,method: :delete, remote:true %></td>
         </tr>
       <%end%>
-  
+
   </tbody>
 </table>
