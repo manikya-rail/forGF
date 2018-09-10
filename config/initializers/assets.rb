@@ -12,3 +12,5 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( navbar-fixed-side.css course.css)
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf|otf|ttc)$/
 
+Rails.application.config.assets.precompile += %w( video.js )
+Rails.application.config.assets.precompile += %w( videojs-playlist.js )
