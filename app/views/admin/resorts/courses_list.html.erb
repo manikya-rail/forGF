@@ -4,7 +4,7 @@
 <div class="clearfix"></div>
 <div class="select_course_body clearfix">
 	<% @courses.each do |course| %>
-		<%= link_to "#", class: "play_button", onclick: "window.location.replace='#{embed_display_info_path(course)}'", data: { turbolinks: false} do %>
+		<%= link_to "#", class: "play_button", onclick: "window.location.href='#{embed_display_info_path(course)}'", data: { turbolinks: false} do %>
 			<%= image_tag "big-play.png" %>
 			<div class="col-md-12 course_list_item">
 				<%= image_tag course.cover.url.gsub("http", "https") %>
