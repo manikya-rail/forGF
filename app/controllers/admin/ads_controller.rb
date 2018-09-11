@@ -43,5 +43,4 @@ class Admin::AdsController < ApplicationController
     def ad_params
       params.require(:ad).permit(:hole_id, :slot_num, :image)
     end
-
 end

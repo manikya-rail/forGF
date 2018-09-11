@@ -1,10 +1,7 @@
-
 <div class="container">
-
-<% content_for :side_nav do %>
-  <%= render :partial => 'admin/shared/side_nav' %>
-<% end %>
-
+  <% content_for :side_nav do %>
+    <%= render :partial => 'admin/shared/side_nav' %>
+  <% end %>
   <div class="panel panel-default">
     <h2>Course List</h2>
     <div class="panel panel-default">
@@ -29,7 +26,6 @@
               <th>Amenities</th>
             </tr>
           </thead>
-
           <tbody>
             <% @courses.each do |course| %>
               <tr>
@@ -41,10 +37,7 @@
             <% end %>
           </tbody>
         </table>
-
       </div>
     </div>
   </div>
-
-
 </div>

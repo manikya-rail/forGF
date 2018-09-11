@@ -1,5 +1,5 @@
 class Embed::PagesController < ApplicationController
-  before_action :set_course, only: [:show]
+  before_action :set_course, only: [:show, :display]
   # after_filter :allow_iframe, only: [:show, :awesome_embed]
   after_action :set_version_header
   # layout "embed", only: [:show]
@@ -42,7 +42,7 @@ class Embed::PagesController < ApplicationController
     gon.videos_urls = []
     gon.image_urls = []
     @teename = []
-    @course = Course.find(params[:id])
+    # @course = Course.find(params[:id])
     resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
     @course.playlist_items.each do |video|
       gon.videos_urls << video.video.url(resolution).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net').gsub("http", "https") if video.video.present?
@@ -136,7 +136,9 @@ class Embed::PagesController < ApplicationController
 
   private
     def set_course
-      @course = Course.find(params[:id])
+      @course = Course.find_by_id(params[:id])
+      return true if @course.present?
+      redirect_back 
     end
 
     def set_version_header

@@ -73,23 +73,27 @@ class Course < ApplicationRecord
   end
 
   def resorts_names
-      self.resorts.pluck(:name).join(',')
+    self.resorts.pluck(:name).join(',')
   end
 
   def networks_names
-      self.networks.pluck(:name).join(',')
+    self.networks.pluck(:name).join(',')
   end
 
   def amenities_list
-   self.amenities.pluck(:name).join(',') rescue 'N/A'
+    self.amenities.pluck(:name).join(',') rescue 'N/A'
   end
 
   def sibling_courses
-    self.resort.courses.where.not(id: self.id)
+    if self.resort.present?
+      self.resort.courses.where.not(id: self.id)
+    else
+      []
+    end
   end
 
   def playlist_items
-    videos.order(:rank)    
+    videos.order(:rank)
   end
 
   def sorted_scorecards

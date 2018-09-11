@@ -1,6 +1,6 @@
 class Admin::ResortsController < ApplicationController
   layout "embed", only: :courses_list
-  before_action :set_resort, only: [:edit, :destroy]
+  before_action :set_resort, only: [:edit, :destroy, :courses_list, :courses, :add_course ]
   after_action :set_version_header, only: :courses_list
 
   # GET /resorts
@@ -70,17 +70,17 @@ class Admin::ResortsController < ApplicationController
   end
 
   def courses_list
-    @resort = Resort.find(params[:resort_id])
+    # @resort = Resort.find(params[:resort_id])
     @courses = @resort.courses
   end
 
   def courses
-    @resort = Resort.find(params[:resort_id])
+    # @resort = Resort.find(params[:resort_id])
     @courses = @resort.courses
   end
 
   def add_course
-    @resort = Resort.find(params[:resort_id])
+    # @resort = Resort.find(params[:resort_id])
     @resort.courses.build
     render 'admin/courses/new'
   end
@@ -88,7 +88,8 @@ class Admin::ResortsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_resort
-      @resort = Resort.find(params[:id])
+      @resort = Resort.find_by_id(params[:resort_id] || params[:id])
+      return false if @resort.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

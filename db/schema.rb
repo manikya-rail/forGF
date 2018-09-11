@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180619131638) do
+ActiveRecord::Schema.define(version: 20180803131334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20180619131638) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "rank"
     t.index ["hole_id"], name: "index_hole_images_on_hole_id", using: :btree
   end
 
@@ -238,6 +239,7 @@ ActiveRecord::Schema.define(version: 20180619131638) do
     t.datetime "updated_at",               null: false
     t.float    "rating",     default: 0.0
     t.float    "slope",      default: 0.0
+    t.integer  "rank"
     t.index ["course_id"], name: "index_score_cards_on_course_id", using: :btree
   end
 
@@ -313,6 +315,12 @@ ActiveRecord::Schema.define(version: 20180619131638) do
     t.integer  "videoable_id"
     t.string   "title"
     t.text     "description"
+    t.string   "thumbnail_image_file_name"
+    t.string   "thumbnail_image_content_type"
+    t.integer  "thumbnail_image_file_size"
+    t.datetime "thumbnail_image_updated_at"
+    t.integer  "rank"
+    t.string   "status"
   end
 
   create_table "yardages", force: :cascade do |t|

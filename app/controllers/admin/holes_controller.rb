@@ -1,5 +1,5 @@
 class Admin::HolesController < ApplicationController
-  before_action :set_hole, only: [:show, :edit, :update, :destroy, :remove_image, :remove_map, :remove_logo_image, :hole_images]
+  before_action :set_hole, only: [:show, :edit, :update, :destroy, :remove_image, :remove_map, :remove_logo_image, :hole_images, :get_yardages]
 
   # GET /holes
   # GET /holes.json
@@ -186,7 +186,6 @@ class Admin::HolesController < ApplicationController
   end
 
   def get_yardages
-    @hole = Hole.find(params[:hole_id])
     @score_cards = @hole.course.score_cards
     @yardages = @hole.yardages.where(score_card_id: @score_cards.pluck(:id))
   end
@@ -205,7 +204,8 @@ class Admin::HolesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hole
-      @hole = Hole.find(params[:id])
+      @hole = Hole.find(params[:hole_id] || params[:id])
+      return false if @hole.present?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

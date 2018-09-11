@@ -1,7 +1,7 @@
 class Admin::CoursesController < ApplicationController
   #require 'fileutils'
   before_action :authenticate_admin!
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :remove_course_image, :holes_list]
   # GET /courses
   # GET /courses.json
 
@@ -135,10 +135,13 @@ class Admin::CoursesController < ApplicationController
             scorecard.rank = scorecard_params[:rank]
             scorecard.save
             scorecard_params[:holes].each do |hole_num, hole_scorecard_params|
-              hole = @course.holes.find_by(hole_num: hole_num)              
-              hole.yardages.find_by(score_card_id: scorecard.id).update(yards: hole_scorecard_params[:yardges])
-              hole.pars.find_by(score_card_id: scorecard.id).update(par: hole_scorecard_params[:par])
-              hole.hcps.find_by(score_card_id: scorecard.id).update(hcp: hole_scorecard_params[:hcp])
+              hole = @course.holes.find_by(hole_num: hole_num)
+              hole_yardges = hole.yardages.find_by(score_card_id: scorecard.id)
+              hole_pars = hole.pars.find_by(score_card_id: scorecard.id)
+              hole_hcps = hole.hcps.find_by(score_card_id: scorecard.id)
+              hole_yardges.update(yards: hole_scorecard_params[:yardges]) if hole_yardges.present?
+              hole_pars.update(par: hole_scorecard_params[:par]) if hole_pars.present?
+              hole_hcps.update(hcp: hole_scorecard_params[:hcp]) if hole_hcps.present?
             end
           end
         end
@@ -165,11 +168,13 @@ class Admin::CoursesController < ApplicationController
           end
           if params[:course_video].present?
             params[:course_video].each do |video_id, vid_params|
-              video = Video.find(video_id)
-              video.update(title: vid_params[:title], description: vid_params[:description], rank: vid_params[:rank])
-              video.video = vid_params[:video] if vid_params[:video].present?
-              video.thumbnail_image = vid_params[:thumbnail_image] if vid_params[:thumbnail_image].present?
-              video.save
+              video = Video.find_by_id(video_id)
+              if video.present?
+                video.update(title: vid_params[:title], description: vid_params[:description], rank: vid_params[:rank])
+                video.video = vid_params[:video] if vid_params[:video].present?
+                video.thumbnail_image = vid_params[:thumbnail_image] if vid_params[:thumbnail_image].present?
+                video.save
+              end
             end
           end
           if params[:videos].present?
@@ -209,27 +214,29 @@ class Admin::CoursesController < ApplicationController
 
   def remove_course_image
     if params[:for].present?
-       course = Course.find(params[:course_id])
-       if params[:for] == "logo"
-         course.logo = nil
-         course.save
-       elsif params[:for] == "transparent"
-         course.transparent_logo = nil
-         course.save
-       elsif params[:for] == "cover"
-         course.cover = nil
-         course.save
-       elsif params[:for] == "score_card"
-         course.scorecard_images.select { |aimage| aimage.photo.url == params[:image_source] }.first.destroy()
+       if course.present?
+         if params[:for] == "logo"
+           course.logo = nil
+           course.save
+         elsif params[:for] == "transparent"
+           course.transparent_logo = nil
+           course.save
+         elsif params[:for] == "cover"
+           course.cover = nil
+           course.save
+         elsif params[:for] == "score_card"
+           course.scorecard_images.select { |aimage| aimage.photo.url == params[:image_source] }.first.destroy()
+         end
        end
     else
-     CourseImage.find(params[:course_image_id]).delete
+     course_image = CourseImage.find_by_id(params[:course_image_id])
+     course_image.delete if course_image.present?
     end
     render :json => {status: 'success'}, :layout => false
   end
 
   def update_holes
-    @hole = Hole.find(params[:hole][:id])
+    @hole = Hole.find_by_id(params[:hole][:id])
     @hole.update(hole_params)
     @course = @hole.course
     hole_details, hole_images_paths = {hole_id: params[:hole][:id]}, []
@@ -257,7 +264,6 @@ class Admin::CoursesController < ApplicationController
   end
 
   def holes_list
-    @course = Course.find(params[:course_id])
     @resort = @course.resort
   end
 
@@ -269,7 +275,12 @@ class Admin::CoursesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Course.find(params[:id]) rescue nil
+      if params[:id].present?
+        @course = Course.find_by_id(params[:id])
+      elsif params[:course_id].present?
+        @course = Course.find_by_id(params[:course_id])
+      end
+      return false if @course.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

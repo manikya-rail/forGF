@@ -48089,3 +48089,5 @@
   return videojs$1;
 
 })));
+
+!function(){!function(a){var b=a&&a.videojs;b&&(b.CDN_VERSION="7.1.0")}(window)}();
