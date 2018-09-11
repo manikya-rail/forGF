@@ -65,6 +65,7 @@
 $(window).load(function() {
   // $(window).load(function() {
     $(".se-pre-con").fadeOut('slow');
+    // $(".se-pre-con").fadeOut("slow");
   // });
   $(function(){
     var player = videojs('home-vid');
@@ -114,6 +115,195 @@ $(window).load(function() {
       $(".lower-gradient").animate({bottom: '0px'});
       $(".hole-bar").animate({top: '-70px'});
   }
+
+
+
+  $(function(){
+    $(".hole-home").on("click touchend", function(e) {
+      $.ajax({
+        url: '<%= embed_course_info_path(@course.id) %>',
+        type: 'GET',
+        dataType: "script"
+      })
+    });
+    var videoList = []
+    for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
+      videoList.push({
+        sources: [{
+          src: gon.videos_urls[i],
+          type: 'video/mp4'
+        }],
+        poster: gon.image_urls[i]
+      });
+    }
+    var player = videojs('home-vid', {
+      controls: true, fluid:true,
+      'playbackRates': [0.5, 1, 1.5, 2],
+      abr: {enable: true},
+      controlBar: {
+        children: {
+          'playToggle':{},
+          'progressControl':{},
+          'volumeMenuButton':{},
+          'volumePanel': {inline: false},
+          'playbackRateMenuButton':{},
+          'fullscreenToggle':{}
+        }
+      }
+    });
+
+
+    try {player.volume(1);} catch (e) {}
+    player.playlist(videoList);
+    player.playlist.autoadvance(0);
+
+    player.on('play', function(){
+      var current_src = player.currentSrc();
+      var playing_item = $("ul.playlist_thumb").find("[data-current-src='" + current_src + "']");
+      $("li.playing").removeClass('playing');
+      playing_item.addClass('playing');
+    });
+
+    player.on('ended', function(){
+      $("li.playing").removeClass('playing');
+    });
+
+    $('.playlist_items').on('click', function(){
+      var clicked_item = $(this).attr('data-video-index');
+      var player = videojs('home-vid');
+      player.playlist.currentItem(parseInt(clicked_item));
+      player.play();
+    });
+
+    $(".hole-number").click(function(){
+      logoImage = $(this).attr('hole_image');
+      logoHyperlink = $(this).attr('logo_hyperlink');
+    })
+
+    document.querySelector('.previous').addEventListener('click', function() {
+      player.playlist.previous();
+    });
+    document.querySelector('.next').addEventListener('click', function() {
+      player.playlist.next();
+    });
+
+    $('.player-container').hover(
+      function(event){
+        bgcolor = $(this).attr('progress-color');
+        showBars();
+        progressColor(bgcolor);
+      }, function(){
+        if (!player.paused()){
+          hideBars();
+        }
+      }
+    );
+
+    var timer;
+
+    player.on("loadedmetadata",function () {
+      $firstElement = 0;
+      if($(window).width() < 760 && player.paused()){
+        showPlayerActions();
+      }else{
+        showBars();
+      }
+      timer = setTimeout(function(){hideBars()}, 5000);
+      $('.vjs-volume-panel').removeClass('vjs-hidden');
+      $('.vjs-mute-control').removeClass('vjs-hidden');
+      $('.vjs-volume-control').removeClass('vjs-hidden');
+    });
+
+    player.on("userinactive",function () {
+      if (!player.paused()){
+        hideBars();
+      }
+    });
+
+    player.on("useractive",function () {
+        showBars();
+        clearTimeout(timer);
+    });
+
+    document.querySelector('.right-green').addEventListener('click', function() {
+      var nextActiveId;
+      if($(window).width() < 350){
+        nextActiveId = $firstElement + 1;
+      }
+      else if($(window).width() >= 350 && $(window).width() < 480){
+        nextActiveId = $firstElement + 2;
+      }
+      else if($(window).width() >= 480 && $(window).width() < 600){
+        nextActiveId = $firstElement + 3;
+      }
+      else if($(window).width() >= 600 && $(window).width() < 760){
+        nextActiveId = $firstElement + 5;
+      }
+      else if($(window).width() >= 760 && $(window).width() < 960){
+        nextActiveId = $firstElement + 6;
+      }
+      else if($(window).width() >= 960 && $(window).width() < 1200){
+        nextActiveId = $firstElement + 9;
+      }
+      else if($(window).width() >= 1200){
+        nextActiveId = $firstElement + 10;
+      }
+      if(nextActiveId == 0 || $("#playlist").find("#"+nextActiveId).size() != 0){
+        scrollTo(nextActiveId);
+        $firstElement = nextActiveId
+      }
+    });
+    document.querySelector('.left-green').addEventListener('click', function() {
+      var nextActiveId;
+      if($(window).width() < 350){
+        nextActiveId = $firstElement - 1;
+      }
+      else if($(window).width() >= 350 && $(window).width() < 480){
+        nextActiveId = $firstElement - 2;
+      }
+      else if($(window).width() >= 480 && $(window).width() < 600){
+        nextActiveId = $firstElement - 3;
+      }
+      else if($(window).width() >= 600 && $(window).width() < 760){
+        nextActiveId = $firstElement - 5;
+      }
+      else if($(window).width() >= 760 && $(window).width() < 960){
+        nextActiveId = $firstElement - 6;
+      }
+      else if($(window).width() >= 960 && $(window).width() < 1200){
+        nextActiveId = $firstElement - 9;
+      }
+      else if($(window).width() >= 1200){
+        nextActiveId = $firstElement - 10;
+      }
+      if (nextActiveId < 0){
+        nextActiveId = 0
+      }
+      if(nextActiveId == 0 || $("#playlist").find("#"+nextActiveId).size() != 0){
+        scrollTo(nextActiveId);
+        $firstElement = nextActiveId
+      }
+    });
+
+    function scrollTo(a){
+      // currPos = $(".playlist").scrollLeft();
+      liWidth = $(".playlist ul li").outerWidth(true);
+      // liWidth = 100;
+      scrollValue = a*liWidth;
+      $('.playlist').animate( { scrollLeft: scrollValue }, 500);
+
+    }
+
+    if(mobilecheck()){
+      $('button.vjs-playback-rate').on('click touchstart',function(){
+        $('.vjs-menu').css({"display":"block"})
+        $('.vjs-menu').removeClass('hide')
+      });
+      $('.vjs-menu-item').on('click touchstart',function(){
+        $('.vjs-menu').addClass('hide')
+      });
+    }
+  })
   });
 </script>
 <%#= render 'display_file_full_js' %>
