@@ -4,6 +4,7 @@ class Embed::PagesController < ApplicationController
   after_action :set_version_header
   # layout "embed", only: [:show]
   layout "embed"
+  layout "display", only: [:display]
 
   def show
     gon.hole_num = []
