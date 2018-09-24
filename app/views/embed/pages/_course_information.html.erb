@@ -94,7 +94,8 @@
     return slider;
   }
 
-  $('.playlist_thumb').slick({
+  $( window ).load(function() {
+    $('.playlist_thumb').slick({
     slidesToShow: 4,
     centerMode: true,
     slidesToScroll: 1,
@@ -131,6 +132,9 @@
       // instead of a settings object
     ]
    });
+  });
+  
+
 
 
   $(".tees").click(function(){
