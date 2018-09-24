@@ -94,12 +94,6 @@
     return slider;
   }
 
-  $( window ).load(function() {
-    slickCallAfterContentLoad();
-  });
-
-  slickCallAfterContentLoad();
-  
   function slickCallAfterContentLoad(){
     $('.playlist_thumb').slick({
     slidesToShow: 4,
@@ -139,7 +133,12 @@
     ]
    });
   }
+  
+  $( window ).load(function() {
+    slickCallAfterContentLoad();
+  });
 
+  slickCallAfterContentLoad();
 
   $(".tees").click(function(){
      ImageSrc = $(this).children().attr('src');
