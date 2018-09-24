@@ -5,7 +5,7 @@
       <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
     </div>
     <div class="clearfix"></div>
-    <ul class="slider slider-nav playlist_thumb course-divider" style="margin-bottom: 0px; padding-bottom: 15px;">
+    <ul id="playlist-thumb" class="slider slider-nav playlist_thumb course-divider" style="margin-bottom: 0px; padding-bottom: 15px;">
       <% @course.playlist_items.each_with_index do |video, index| %>
         <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
           <div>
@@ -96,8 +96,9 @@
     return slider;
   }
 
-  $(".playlist_thumb").load("li",function(){
-    $('.playlist_thumb').slick({
+  
+  
+  $('#playlist-thumb').slick({
     slidesToShow: 4,
     centerMode: true,
     slidesToScroll: 1,
@@ -133,9 +134,8 @@
       // settings: "unslick"
       // instead of a settings object
     ]
-   });
-  })
-
+  });
+  
   $(".tees").click(function(){
      ImageSrc = $(this).children().attr('src');
      TeeName = $(this).text().replace(/\s/g, '');
