@@ -77,7 +77,9 @@
 </ul>
 
 <script type="text/javascript">
+
   $(document).ready(sliderInitializer);
+
 
   function sliderInitializer (){
     var slider = $('.bxslider').bxSlider({
@@ -94,7 +96,7 @@
     return slider;
   }
 
-  function slickCallAfterContentLoad(){
+  $(".playlist_thumb").load("li",function(){
     $('.playlist_thumb').slick({
     slidesToShow: 4,
     centerMode: true,
@@ -132,13 +134,7 @@
       // instead of a settings object
     ]
    });
-  }
-  
-  $( window ).load(function() {
-    slickCallAfterContentLoad();
-  });
-
-  slickCallAfterContentLoad();
+  })
 
   $(".tees").click(function(){
      ImageSrc = $(this).children().attr('src');
