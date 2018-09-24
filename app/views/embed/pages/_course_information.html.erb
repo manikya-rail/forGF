@@ -95,6 +95,12 @@
   }
 
   $( window ).load(function() {
+    slickCallAfterContentLoad();
+  });
+
+  slickCallAfterContentLoad();
+  
+  function slickCallAfterContentLoad(){
     $('.playlist_thumb').slick({
     slidesToShow: 4,
     centerMode: true,
@@ -132,9 +138,7 @@
       // instead of a settings object
     ]
    });
-  });
-  
-
+  }
 
 
   $(".tees").click(function(){
