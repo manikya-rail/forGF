@@ -1,24 +1,22 @@
-<div class="row description">
-  <div class="col-md-12">
-    <div class="clearfix"></div>
-    <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
-      <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
-    </div>
-    <div class="clearfix"></div>
-    <ul id="playlist-thumb" class="slider slider-nav playlist_thumb course-divider" style="margin-bottom: 0px; padding-bottom: 15px;">
-      <% @course.playlist_items.each_with_index do |video, index| %>
-        <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
-          <div>
-            <%= image_tag video.thumbnail_image.url.gsub("http", "https") %>
-            <a href="javascript:void(0)">
-              <%= image_tag "big-play.png", :class => "play_btn" %>
-            </a>
-          </div>
-          <span><%= video.title %></span>
-        </li>
-      <% end %>
-    </ul>
+<div class="description">
+  <div class="clearfix"></div>
+  <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+    <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
   </div>
+  <div class="clearfix"></div>
+  <ul id="playlist-thumb" class="slider slider-nav playlist_thumb course-divider" style="margin-bottom: 0px; padding-bottom: 15px;">
+    <% @course.playlist_items.each_with_index do |video, index| %>
+      <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
+        <div>
+          <%= image_tag video.thumbnail_image.url.gsub("http", "https") %>
+          <a href="javascript:void(0)">
+            <%= image_tag "big-play.png", :class => "play_btn" %>
+          </a>
+        </div>
+        <span><%= video.title %></span>
+      </li>
+    <% end %>
+  </ul>
 </div>
 <div class="row description">
   <div class="col-md-12 about">
@@ -99,11 +97,14 @@
   
   $(document).ready(function(){
     $('#playlist-thumb').slick({
+      infinite: true,
       slidesToShow: 4,
-      centerMode: true,
+      centerMode: false,
       slidesToScroll: 1,
       dots: true,
       focusOnSelect: true,
+      variableWidth: true,
+      prevArrow: 'false',
       responsive: [
       {
         breakpoint: 1200,
@@ -278,6 +279,12 @@
 
 </script>
 <style type="text/css">
+.slick-slide{
+  width: 330px !important;
+}
+.slick-next{
+  margin-top: -25px !important;
+}
 .scorecard-row{
   padding-top: 15px;
 }
@@ -1141,8 +1148,7 @@ table.score-specs tr:nth-child(2) td  {
         .description {
           padding-top: 20px;
           margin-left: 0px;
-          padding-left: 20px;
-          padding-right: 20px;
+          padding-left: 6px;
           text-align: center;
         }
         .bio {
