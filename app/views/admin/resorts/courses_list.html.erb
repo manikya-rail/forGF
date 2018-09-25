@@ -6,7 +6,7 @@
 	<% @courses.each do |course| %>
 		<%= link_to embed_display_info_path(course), class: "play_button", data: { turbolinks: false} do %>
 			<%= image_tag "big-play.png" %>
-			<div class="col-md-12 course_list_item" onload="removeloader()">
+			<div class="col-md-12 course_list_item">
 				<%= image_tag course.cover.url.gsub("http", "https") %>
 				<div class="course_info">
 					<h2 class="course_title"><%= course.name %></h2>
@@ -39,6 +39,3 @@
 		background-color: white;
 	}
 </style>
-<script>
-
-</script>
