@@ -20,10 +20,7 @@
   <center><%= link_to image_tag("signature_v2.png"), "https://foregolf.com", target: :_blank %></center>
 </div>
 <script type="text/javascript">
-  $(window).load(function() {
-    $(".se-pre-con").fadeOut("slow");
-  });
-	$( document ).ready(function() {
+	$( 'course_list_item').on('load',function() {
       console.log( "ready!" );
   });
 </script>
