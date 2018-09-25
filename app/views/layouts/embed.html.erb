@@ -24,12 +24,16 @@
     <script>
     window.onload = function(e){ 
     console.log("hello");
-      $(".se-x-con").fadeOut('slow');
+    $(".se-x-con").fadeOut('slow');
     }
-    // $(window).load(function() {
-    //   console.log("hello");
-    //   $(".se-x-con").fadeOut('slow');
-    // });
+    $(document).ready(function(){
+      console.log("hello1");
+      $(".se-x-con").fadeOut('slow');
+    })
+    $(window).load(function() {
+      console.log("hello2");
+      $(".se-x-con").fadeOut('slow');
+    });
     // document.addEventListener('DOMContentLoaded', function(){
     //   $(".se-pre-con").fadeOut('slow');
     //    console.log("asdasdasd");
