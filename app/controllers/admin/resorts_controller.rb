@@ -1,6 +1,6 @@
 class Admin::ResortsController < ApplicationController
   #layout "display", only: [:display]
-  layout "embed", only: :courses_list
+  layout "display", only: :courses_list
   before_action :set_resort, only: [:show, :edit, :update, :destroy]
   after_action :set_version_header, only: :courses_list
 
