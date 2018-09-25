@@ -97,14 +97,14 @@
   
   $(document).ready(function(){
     $('#playlist-thumb').slick({
-      infinite: true,
+      infinite: false,
       slidesToShow: 4,
       centerMode: false,
       slidesToScroll: 1,
       dots: true,
       focusOnSelect: true,
       variableWidth: true,
-      prevArrow: 'false',
+      
       responsive: [
       {
         breakpoint: 1200,
@@ -279,6 +279,9 @@
 
 </script>
 <style type="text/css">
+.slick-disabled{
+  visibility: hidden;
+}
 .slick-slide{
   width: 330px !important;
 }
