@@ -232,7 +232,7 @@ class Admin::CoursesController < ApplicationController
     @hole.update(hole_params)
     @course = @hole.course
     hole_details, hole_images_paths = {hole_id: params[:hole][:id]}, []
-    if params[:hole][:hole_images].reject{|a| a.blank?}.present?
+    if params[:hole][:hole_images].present? && params[:hole][:hole_images].reject{|a| a.blank?}.present?
       params[:hole][:hole_images].each_with_index do |image, index|
         FileUtils::mkdir_p "public/hole_#{params[:hole][:id]}"
         hole_image = image.tempfile
