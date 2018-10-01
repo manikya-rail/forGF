@@ -17,6 +17,7 @@ class UploadHoleMediaWorker
     video_file = File.open(hole_params["video_file_path"]) rescue nil
     if video_file.present?
       hole_video = Video.find(hole_params["video_id"]) rescue nil
+      hole_video.update(status: "uploading")
       hole_video = hole.build_video(status: "processing") if hole_video.nil?
       hole_video.video = video_file
       hole_video.status = "completed"
