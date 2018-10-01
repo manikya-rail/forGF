@@ -4,8 +4,6 @@ class UploadHoleMediaWorker
   def perform(hole_params)
     memory_output = %x(free)
     free_memory = memory_output.split(" ")[9]
-    Logger.new("#{Rails.root}/log/my.log")
-    logger.info "#{free_memory.to_i < 1048576}"
     if free_memory.to_i < 1048576
       # stats = Sidekiq::Stats.new
       # if stats.processes_size < 4
