@@ -7,11 +7,11 @@
           <td><%= hole.hole_num %></td>
           <td>
             <% if hole.video.present? %>
-              <% if hole.video.status != "processing" %>
+              <% if hole.video.status == "uploading" %>
+                <span>Processing...</span>
+              <% elsif hole.video.status != "processing" %>
                 <span><%= hole.video.video_file_name %></span>
                 <span><%= link_to 'Delete', admin_video_path(hole.video), method: :delete, data: { confirm: 'Are you sure?' } %></span>
-              <% elsif hole.video.status == "uploading" %>
-                <span>Processing...</span>
               <% else %>
                 <span>Uploading...</span>
               <% end %>
