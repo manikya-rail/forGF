@@ -3,7 +3,7 @@ class UploadHoleMediaWorker
 
   def perform(hole_params)
     memory_output = %x(free)
-    free_memory = memory_output.split(" ")[9]
+    free_memory = memory_output.split(" ")[9].to_i + memory_output.split(" ")[12].to_i
     if free_memory.to_i < 1048576
       # stats = Sidekiq::Stats.new
       # if stats.processes_size < 4
