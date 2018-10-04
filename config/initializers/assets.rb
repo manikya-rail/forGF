@@ -14,4 +14,4 @@ Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf|otf|ttc)$/
 
 Rails.application.config.assets.precompile += %w( video.js )
 Rails.application.config.assets.precompile += %w( videojs-playlist.js )
-Rails.application.config.assets.precompile += %w( display.js )
+Rails.application.config.assets.precompile += %w( display.js display.scss )

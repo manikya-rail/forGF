@@ -8,31 +8,10 @@
     <%= javascript_include_tag 'application' %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= render :partial => 'layouts/google_analytics' %>
-    <style>
-      .se-pre-con {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background-image: url(<%= asset_url('preloader.gif') %>);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: #fff;
-      }
-    </style>
-    <script>
-    $(window).load(function() {
-      console.log("hello");
-      $(".se-pre-con").fadeOut('slow');
-    });
-    </script>
     <script src="https://www.foregolf.com/wp-content/plugins/advanced-iframe/js/ai_external.js"></script>
    </head>
 
   <body>
-  <div class="se-pre-con"></div>
-  <%= yield %>    
+    <%= yield %>
   </body>
 </html>

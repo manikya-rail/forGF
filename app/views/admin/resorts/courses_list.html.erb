@@ -1,6 +1,24 @@
-<!-- <div class="col-md-12 select_course_heading">
-	<h2>SELECT COURSE</h2>
-</div> -->
+<style>
+  .se-pre-con {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-image: url(<%= asset_url('preloader.gif') %>);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+  }
+</style>
+<div class="se-pre-con"></div>
+<script>
+  $(window).load(function() {
+    console.log("hello");
+    $(".se-pre-con").fadeOut('slow');
+  });
+</script>
 <div class="clearfix"></div>
 <div class="select_course_body clearfix">
 	<% @courses.each do |course| %>
