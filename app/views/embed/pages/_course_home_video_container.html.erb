@@ -105,6 +105,9 @@
 
     player.on('play', function(){
       var current_src = player.currentSrc();
+      if(!current_src.includes("https")){
+        current_src = current_src.replace("http","https")
+      }
       var playing_item = $("ul.playlist_thumb").find("[data-current-src='" + current_src + "']");
       $("li.playing").removeClass('playing');
       playing_item.addClass('playing');
