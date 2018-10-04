@@ -96,6 +96,13 @@
   
   
   $(document).ready(function(){
+    $('.playlist_items').on('click', function(){
+      var clicked_item = $(this).attr('data-video-index');
+      var player = videojs('home-vid');
+      player.playlist.currentItem(parseInt(clicked_item));
+      player.play();
+    });
+    
     $('#playlist-thumb').slick({
       infinite: false,
       slidesToShow: 3,
