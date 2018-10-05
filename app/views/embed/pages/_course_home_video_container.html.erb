@@ -84,9 +84,6 @@
 <script type="text/javascript">
 // $(window).load(function() {
   $(function(){
-    $("#0").click(function(){
-      $(".on-home").find(".dropdown-menu").toggle()
-    })
     function handlerIn() {
       $(".on-home").find(".dropdown-menu").show();
     }
@@ -96,7 +93,7 @@
     $("#0").hover(handlerIn, handlerOut);
     $(".on-home").hover(handlerIn, handlerOut);
 
-    $(".hole-home").on("click touchend", function(e) {
+    $(".hole-home").on("click", function(e) {
       $.ajax({
         url: '<%= embed_course_info_path(@course.id) %>',
         type: 'GET',

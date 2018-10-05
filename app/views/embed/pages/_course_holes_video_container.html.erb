@@ -76,7 +76,7 @@
   }
   .on-home{
     display: block;
-    top: -53px;
+    top: -40px;
     left: 0px;
     position: absolute;
     max-width: 150px;
@@ -87,16 +87,13 @@
 
 <script type="text/javascript">
   $(function(){
-    $(".hole-home").on("click touchend", function(e) {
+    $(".hole-home").on("click", function(e) {
       $.ajax({
         url: '<%= embed_course_info_path(@course.id) %>',
         type: 'GET',
         dataType: "script"
       })
     });
-    $("#0").click(function(){
-      $(".on-home").find(".dropdown-menu").toggle()
-    })
     function handlerIn() {
       $(".on-home").find(".dropdown-menu").show();
     }
