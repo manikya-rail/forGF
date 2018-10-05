@@ -8,7 +8,7 @@
     <div class="next on-video"><%= image_tag "right.png" %></div>
     <!-- <div class="logo on-video"><%#= link_to image_tag(logo_on_video(@course)), admin_resort_courses_list_path(@course.resort), target: :_blank %></div> -->
     <% sibling_courses = @course.sibling_courses %>
-    <% if true %>
+    <% if sibling_courses.count > 0 %>
       <div class="logo on-video">
         <div class="dropdown">
           <button class="btn btn-transparent dropdown-toggle" type="button" data-toggle="dropdown"><%= @course.name %>
