@@ -19,7 +19,7 @@
     <div class = "lower-gradient"></div>
     <div class="merge-dropdown-home">
       <% if sibling_courses.count > 0 %>
-        <div class="on-home">
+        <div class="holes-on-home">
           <div class="dropdown">
             <ul class="dropdown-menu">
               <% sibling_courses.each do |course| %>
@@ -74,7 +74,7 @@
   .merge-dropdown-home{
     position: relative;
   }
-  .on-home{
+  .holes-on-home{
     display: block;
     top: -40px !important;
     left: 0px;
@@ -95,13 +95,13 @@
       })
     });
     function handlerIn() {
-      $(".on-home").find(".dropdown-menu").show();
+      $(".holes-on-home").find(".dropdown-menu").show();
     }
     function handlerOut() {
-      $(".on-home").find(".dropdown-menu").hide();
+      $(".holes-on-home").find(".dropdown-menu").hide();
     }
     $("#0").hover(handlerIn, handlerOut);
-    $(".on-home").hover(handlerIn, handlerOut);
+    $(".holes-on-home").hover(handlerIn, handlerOut);
 
     document.querySelector('.right-green').addEventListener('click', function() {
       var nextActiveId;
