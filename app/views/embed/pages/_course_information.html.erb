@@ -1,10 +1,10 @@
-<div class="description">
+<div class="description divider-course">
   <div class="clearfix"></div>
   <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
     <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
   </div>
   <div class="clearfix"></div>
-  <ul id="playlist-thumb" class="slider slider-nav playlist_thumb course-divider" style="margin-bottom: 0px; padding-bottom: 15px;">
+  <ul id="playlist-thumb" class="slider slider-nav playlist_thumb" style="margin-bottom: 0px; padding-bottom: 15px;">
     <% @course.playlist_items.each_with_index do |video, index| %>
       <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
         <div>
@@ -18,12 +18,12 @@
     <% end %>
   </ul>
 </div>
-<div class="row description">
+<div class="row description divider-course">
   <div class="col-md-12 about">
     <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
       <h3><b class="home_title">About the Course</b></h3>
     </div>
-    <div class="col-md-12 bio course-divider">
+    <div class="col-md-12 bio">
       <h4 class="hole_description"><%= @course.bio %></h4>
     </div>
   </div>
@@ -304,6 +304,9 @@
 .course-divider{
   border-bottom: solid 2px #f5f5f5;
   width: 99%;
+}
+.divider-course{
+  border-bottom: solid 2px #f5f5f5;
 }
 .modal_scorecard_image{
   width: 100%;
@@ -1124,6 +1127,9 @@ table.score-specs tr:nth-child(2) td  {
       }
 
       @media only screen and (max-width: 479px) {
+        .divider-course{
+          width: 94% !important;
+        }
         .topborder{
           margin-right: 0px;
         }
@@ -1283,6 +1289,7 @@ table.score-specs tr:nth-child(2) td  {
         }
         .hole-info-div {
             overflow-x: hidden;
+            padding-left: 15px;
         }
         .item{
           display: inline-table;
