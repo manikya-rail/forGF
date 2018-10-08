@@ -6,10 +6,11 @@
       <ul >
         <li id="firstli" >
           <text id="hole">
-            <span>
-              <%= @hole.hole_num.ordinalize.upcase %>
-            </span>
+            <%= @hole.hole_num %>
           </text>
+          <span id="hole_num">
+            <%= @hole.hole_num.ordinalize.tr("0-9", "").upcase %>
+          </span>
         </li>
         <li ><span>PAR</span>&nbsp;&nbsp;<text id="par"><%= @hole.total_pars %></text></li>
         <li ><text id="yard"><%= @hole.total_yards %></text>&nbsp;&nbsp;<span>YDS</span></li>

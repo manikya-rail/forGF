@@ -106,7 +106,8 @@ if ($('#hole-vid').length == 0){
 }else{
   var player = videojs('hole-vid');
   player.playlist.currentItem(<%= (params[:hole_num].to_i - 1)%>);
-  $("#hole").html("<span><%= @hole.hole_num.ordinalize.upcase %></span>");
+  $("#hole_num").html("<%= @hole.hole_num.ordinalize.tr('0-9', '').upcase %>")
+  $("#hole").html("<%= @hole.hole_num %>");
   $("#par").html("<%= @hole.total_pars %>");
   $("#yard").html("<%= @hole.total_yards %>");
   $("#mhcp").html("<%= @hole.total_hcps %>");
