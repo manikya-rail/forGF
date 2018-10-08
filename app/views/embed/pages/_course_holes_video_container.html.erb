@@ -4,7 +4,13 @@
   <div class="vplayer" id="vplayer">
     <div class="hole-bar">
       <ul >
-        <li id="firstli" ><text id="hole"><%= @hole.hole_num.ordinalize %></text></li>
+        <li id="firstli" >
+          <text id="hole">
+            <span>
+              <%= @hole.hole_num.ordinalize.upcase %>
+            </span>
+          </text>
+        </li>
         <li ><span>PAR</span>&nbsp;&nbsp;<text id="par"><%= @hole.total_pars %></text></li>
         <li ><text id="yard"><%= @hole.total_yards %></text>&nbsp;&nbsp;<span>YDS</span></li>
         <li id="lastli" ><text id="mhcp"><%= @hole.total_hcps %></text>&nbsp;<span>HCP</span></li>
@@ -71,6 +77,9 @@
   </div>
 </div>
 <style type="text/css">
+  #hole span{
+    font-size: 23px;
+  }
   .merge-dropdown-home{
     position: relative;
   }
