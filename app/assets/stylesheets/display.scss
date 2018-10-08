@@ -872,8 +872,10 @@ div:focus {
 }
 
 @media only screen and (max-width: 760px) {
+  .upper-gradient{
+    height: 35px !important;
+  }
   .upper-gradient, .lower-gradient{
-    display: none;
   }
   .hole-bar{
     top: -70px;
