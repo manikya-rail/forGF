@@ -26,18 +26,24 @@
     <div class = "lower-gradient"></div>
     <div class="merge-dropdown-home">
       <% if sibling_courses.count > 0 %>
-        <div class="holes-on-home">
-          <div class="dropdown">
-            <ul class="dropdown-menu">
-              <% sibling_courses.each do |course| %>
-                <li>
-                  <%= link_to embed_display_info_path(course), data: { turbolinks: false} do %>
-                    <%= course.name %>
+        <div class="dropdown">
+          <ul class="dropdown-menu holes-on-home">
+            <li>
+              <a style="color: #0083A9;" href="JavaScript:void(0);">
+                Select Course:
+              </a>
+            </li>
+            <% @course.resort.courses.each do |course| %>
+              <li>
+                <%= link_to embed_display_info_path(course), data: { turbolinks: false} do %>
+                  <%= course.name %>
+                  <% if @course.id == course.id %>
+                    <i class="fa fa-check" aria-hidden="true"></i>
                   <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       <% end %>
       <div class="vjs-playlist">
@@ -91,12 +97,16 @@
   }
   .holes-on-home{
     display: block;
-    top: -40px !important;
+    top: auto !important;
     left: 0px;
     position: absolute;
     max-width: 150px;
-    height: 70px;
     color: white;
+    bottom: 0px !important;
+    display: none;
+  }
+  .holes-on-home li{
+    padding: 5px 0px;
   }
 </style>
 
@@ -110,10 +120,10 @@
       })
     });
     function handlerIn() {
-      $(".holes-on-home").find(".dropdown-menu").show();
+      $(".merge-dropdown-home").find(".dropdown-menu").show();
     }
     function handlerOut() {
-      $(".holes-on-home").find(".dropdown-menu").hide();
+      $(".merge-dropdown-home").find(".dropdown-menu").hide();
     }
     $("#0").hover(handlerIn, handlerOut);
     $(".holes-on-home").hover(handlerIn, handlerOut);
