@@ -1086,7 +1086,9 @@ div:focus {
     left: -17px;
   }
   .logo {
-    left: 0px !important;
+    max-width: 110px !important;
+    top: 7px !important;
+    left: 12px !important;
   }
   .hole-bar{
     height:40px;
@@ -1096,7 +1098,7 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 93%;
-    margin: 2px 0 0 0%;
+    margin: 2px 0 0 17%;
     font-size: 6px;
     line-height: 17px;
   }

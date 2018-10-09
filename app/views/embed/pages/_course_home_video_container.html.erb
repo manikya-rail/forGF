@@ -8,15 +8,25 @@
     <!-- <div class="logo on-video"><%#= link_to image_tag(logo_on_video(@course)), admin_resort_courses_list_path(@course.resort), target: :_blank %></div> -->
     <% sibling_courses = @course.sibling_courses %>
     <div class = "lower-gradient"></div>
+  </div>
+    
     <div class="merge-dropdown-home">
       <% if sibling_courses.count > 0 %>
         <div class="on-home">
           <div class="dropdown">
             <ul class="dropdown-menu">
-              <% sibling_courses.each do |course| %>
+              <li>
+                <a style="color: #0083A9;" href="JavaScript:void(0);">
+                  Select Course:
+                </a>
+              </li>
+              <% @course.resort.courses.each do |course| %>
                 <li>
                   <%= link_to embed_display_info_path(course), data: { turbolinks: false} do %>
                     <%= course.name %>
+                    <% if @course.id == course.id %>
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                    <% end %>
                   <% end %>
                 </li>
               <% end %>
@@ -60,9 +70,13 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
 <style type="text/css">
+.fa-check:before {
+  color: #0083A9;
+  padding-left: 8px;
+  font-size: 18px;
+}
 .merge-dropdown-home{
   position: relative;
 }
