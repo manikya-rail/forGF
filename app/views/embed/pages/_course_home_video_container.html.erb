@@ -12,26 +12,24 @@
     
     <div class="merge-dropdown-home">
       <% if sibling_courses.count > 0 %>
-        <div class="on-home">
-          <div class="dropdown">
-            <ul class="dropdown-menu">
+        <div class="dropdown">
+          <ul class="dropdown-menu on-home">
+            <li>
+              <a style="color: #0083A9;" href="JavaScript:void(0);">
+                Select Course:
+              </a>
+            </li>
+            <% @course.resort.courses.each do |course| %>
               <li>
-                <a style="color: #0083A9;" href="JavaScript:void(0);">
-                  Select Course:
-                </a>
-              </li>
-              <% @course.resort.courses.each do |course| %>
-                <li>
-                  <%= link_to embed_display_info_path(course), data: { turbolinks: false} do %>
-                    <%= course.name %>
-                    <% if @course.id == course.id %>
-                      <i class="fa fa-check" aria-hidden="true"></i>
-                    <% end %>
+                <%= link_to embed_display_info_path(course), data: { turbolinks: false} do %>
+                  <%= course.name %>
+                  <% if @course.id == course.id %>
+                    <i class="fa fa-check" aria-hidden="true"></i>
                   <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       <% end %>
       <div class="vjs-playlist">
@@ -81,13 +79,13 @@
   position: relative;
 }
 .on-home{
-  display: block;
-  top: -53px !important;
+  display: none;
+  top: auto !important;
   left: 0px;
   position: absolute;
   max-width: 150px;
-  height: 70px;
   color: white;
+  bottom: 0px !important;
 }
 
 @media only screen and (max-width: 479px) {
@@ -98,10 +96,10 @@
 // $(window).load(function() {
   $(function(){
     function handlerIn() {
-      $(".on-home").find(".dropdown-menu").show();
+      $(".merge-dropdown-home").find(".dropdown-menu").show();
     }
     function handlerOut() {
-      $(".on-home").find(".dropdown-menu").hide();
+      $(".merge-dropdown-home").find(".dropdown-menu").hide();
     }
     $("#0").hover(handlerIn, handlerOut);
     $(".on-home").hover(handlerIn, handlerOut);
