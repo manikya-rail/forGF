@@ -1,5 +1,8 @@
 <%= Gon::Base.render_data %>
 <div class= "player-container" progress-color="<%=color_selector(@course.color_selector)%>">
+  <div class="logo on-video">
+    <%= link_to image_tag(logo_on_video(@course)), hyperlink_on_video(@course), target: :_blank %>
+  </div>
   <div class = "upper-gradient"></div>
   <div class="vplayer" id="vplayer">
     <div class="hole-bar">
