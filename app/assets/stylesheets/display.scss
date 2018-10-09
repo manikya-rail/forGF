@@ -869,6 +869,9 @@ div:focus {
   .hole-bar ul{
     margin: 9px 0 0 2%;
   }
+  .hole-bar {
+    right: 10%;
+  }
 }
 
 @media only screen and (max-width: 760px) {
@@ -1086,14 +1089,14 @@ div:focus {
     left: -17px;
   }
   .logo {
-    max-width: 110px !important;
-    top: 7px !important;
+    max-width: 94px !important;
+    top: 9px !important;
     left: 12px !important;
   }
   .hole-bar{
     height:40px;
     left: 40%;
-    right: 0 ;
+    right: 35%;
   }
   .hole-bar ul{
     display: table;
