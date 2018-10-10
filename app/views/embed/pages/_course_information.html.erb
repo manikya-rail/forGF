@@ -93,8 +93,8 @@
     return slider;
   }
 
-  
-  
+
+
   $(document).ready(function(){
     $('.playlist_items').on('click', function(){
       var clicked_item = $(this).attr('data-video-index');
@@ -102,7 +102,7 @@
       player.playlist.currentItem(parseInt(clicked_item));
       player.play();
     });
-    
+
     $('#playlist-thumb').slick({
       infinite: true,
       slidesToShow: 3,
@@ -111,7 +111,7 @@
       dots: true,
       focusOnSelect: true,
       variableWidth: true,
-      
+
       responsive: [
       {
         breakpoint: 1200,
@@ -144,7 +144,7 @@
       ]
     });
   })
-  
+
   $(".tees").click(function(){
      ImageSrc = $(this).children().attr('src');
      TeeName = $(this).text().replace(/\s/g, '');
@@ -515,15 +515,16 @@ table.score-specs tr:nth-child(2) td  {
   height: 100%;
 }
 
-.bx-next {
+.bx-next, .bx-prev {
   position: absolute;
-  right: 5%;
   top: 50%;
+  width: 17px;
+}
+.bx-next {
+  right: 62px;
 }
 .bx-prev {
-  position: absolute;
-  left: 5%;
-  top: 50%;
+  left: 62px;
 }
 .description {
   width: 100%;
@@ -714,8 +715,7 @@ table.score-specs tr:nth-child(2) td  {
           font-size: 15px;
         }*/
         .bx-next img, .bx-prev img {
-          height: 60%;
-          width: 60%;
+          width: inherit;
         }
         .pp {
           width: 26%;
@@ -765,8 +765,7 @@ table.score-specs tr:nth-child(2) td  {
           width:26%;
         }
         .bx-next img, .bx-prev img {
-          height: 60%;
-          width: 60%;
+          width: inherit;
         }
         .specs{
           margin-top: 20px;
@@ -881,8 +880,7 @@ table.score-specs tr:nth-child(2) td  {
           padding-right: 10px;
         }
         .bx-next img, .bx-prev img {
-          height: 60%;
-          width: 60%;
+          width: inherit;
         }
          .specs {
           text-align: center;
@@ -1040,8 +1038,7 @@ table.score-specs tr:nth-child(2) td  {
           font-size: 17px;
         }
         .bx-next img, .bx-prev img {
-          height: 60%;
-          width: 60%;
+          width: inherit;
         }
         .specs {
           text-align: center;
@@ -1218,8 +1215,7 @@ table.score-specs tr:nth-child(2) td  {
           font-size: 17px;
         }
         .bx-next img, .bx-prev img {
-          height: 50%;
-          width: 50%;
+          width: inherit;
         }
         .bx-prev, .bx-next {
             margin-top: -15px;

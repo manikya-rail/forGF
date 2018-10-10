@@ -335,7 +335,7 @@ div:focus {
     justify-content: center;
 }
 .previous.on-video img, .next.on-video img{
-    width: 22px;
+  width: 17px;
 }
 
 @media only screen and (min-width: 1600px) {
@@ -580,10 +580,10 @@ div:focus {
     margin-top: -10px;
   }
   .previous{
-    left: 50px;
+    left: 58px;
   }
   .next{
-    right: 63px;
+    right: 58px;
   }
 }
 
@@ -709,10 +709,10 @@ div:focus {
     margin-top: -16px;
   }
   .previous{
-    left: 35px;
+    left: 56px;
   }
   .next{
-    right: 42px;
+    right: 56px;
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
@@ -919,7 +919,7 @@ div:focus {
 
 @media only screen and (min-width: 600px) {
   .left-green svg, .right-green svg{
-    width: 19px;
+    width: 17px;
   }
 }
 

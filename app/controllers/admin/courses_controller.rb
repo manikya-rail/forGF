@@ -6,13 +6,13 @@ class Admin::CoursesController < ApplicationController
   # GET /courses.json
 
   def add_playlist_item
-    @video_index = params["video_index"].to_i   
-    @from_edit = params[:from_edit].present? && params[:from_edit] == "true" 
+    @video_index = params["video_index"].to_i
+    @from_edit = params[:from_edit].present? && params[:from_edit] == "true"
   end
 
   def add_scorecard
-    @scorecard_index = params["scorecard_index"].to_i   
-    @from_edit = params[:from_edit].present? && params[:from_edit] == "true" 
+    @scorecard_index = params["scorecard_index"].to_i
+    @from_edit = params[:from_edit].present? && params[:from_edit] == "true"
   end
 
   def index
@@ -98,7 +98,7 @@ class Admin::CoursesController < ApplicationController
       end
       if params[:score_cards]
         params[:score_cards].each do |scorecard_index, scorecard_params|
-          score_card = @course.score_cards.create(tee_name: scorecard_params[:tee_name], 
+          score_card = @course.score_cards.create(tee_name: scorecard_params[:tee_name],
             color: scorecard_params[:color], rating: scorecard_params[:total_rating],
             slope: scorecard_params[:total_slope])
           scorecard_params[:holes].each do |hole_num, hole_params|
@@ -115,7 +115,7 @@ class Admin::CoursesController < ApplicationController
       @errors = []
       @resort.errors.each do |field, details|
         @errors << "#{field.to_s} : #{details}"
-      end 
+      end
     end
   end
 
@@ -143,7 +143,7 @@ class Admin::CoursesController < ApplicationController
         end
         if params[:score_cards].present?
           params[:score_cards].each do |scorecard_index, scorecard_params|
-            score_card = @course.score_cards.create(tee_name: scorecard_params[:tee_name], 
+            score_card = @course.score_cards.create(tee_name: scorecard_params[:tee_name],
               color: scorecard_params[:color], rating: scorecard_params[:total_rating],
               slope: scorecard_params[:total_slope], rank: scorecard_params[:rank])
             scorecard_params[:holes].each do |hole_num, hole_params|
@@ -156,7 +156,7 @@ class Admin::CoursesController < ApplicationController
             end
           end
         end
-        Thread.new do 
+        Thread.new do
           if params[:images]
             params[:images].each { |image|
               @course.course_images.create(photo: image)
@@ -205,10 +205,10 @@ class Admin::CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def remove_course_image
     if params[:for].present?
-       course = Course.find(params[:course_id]) 
+       course = Course.find(params[:course_id])
        if params[:for] == "logo"
          course.logo = nil
          course.save
@@ -223,7 +223,7 @@ class Admin::CoursesController < ApplicationController
        end
     else
      CourseImage.find(params[:course_image_id]).delete
-    end 
+    end
     render :json => {status: 'success'}, :layout => false
   end
 
@@ -261,7 +261,7 @@ class Admin::CoursesController < ApplicationController
   end
 
   def remove_scorecard_image
-    ScorecardImage.find(params[:scorecard_image_id]).destroy    
+    ScorecardImage.find(params[:scorecard_image_id]).destroy
     render :json => {status: 'success'}, :layout => false
   end
 
