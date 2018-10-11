@@ -1260,7 +1260,7 @@ div:focus {
     right: 17px;
   }
   .vjs-volume-panel{
-    margin-right: -4px !important;
+    margin-right: -5% !important;
   }
   .vjs-playback-rate{
     margin-right: -19px !important;
@@ -1268,14 +1268,18 @@ div:focus {
   .vjs-fullscreen-control{
     left: 6px !important;
   }
+  .slick-prev{
+    left: 0% !important;
+    top: 45% !important;
+  }
 }
 
 @media only screen and (max-width: 300px) {
  .vjs-playback-rate{
-    left: -33px !important;
+    left: -2% !important;
   }
   .vjs-fullscreen-control{
-    left: -15px !important;
+    left: 4% !important;
   }
   .vjs-control-bar .flag{
     left: -7px !important;
