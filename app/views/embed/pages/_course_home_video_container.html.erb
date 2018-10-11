@@ -105,7 +105,10 @@
     }
     $("#0").hover(handlerIn, handlerOut);
     $(".on-home").hover(handlerIn, handlerOut);
-
+    $("#0").click(function(){
+      $(".merge-dropdown-home").find(".dropdown-menu").toggle();
+    })
+    
     $(".hole-home").on("click", function(e) {
       $.ajax({
         url: '<%= embed_course_info_path(@course.id) %>',
