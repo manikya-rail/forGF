@@ -917,7 +917,7 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 93% !important;
-    margin: 10px 0 0 22% !important;
+    margin: 10px 0 0 -2% !important;
     font-size: 10px !important;
     line-height: 20px !important;
     padding-left: 60px !important;
@@ -979,7 +979,13 @@ div:focus {
     margin-left: -45px;
   }
   .logo {
-    display: none;
+    top: 7% !important;
+    left: 3% !important;
+  }
+  .hole-bar ul {
+    font-size: 8px !important;
+    width: 54% !important;
+    padding-left: 24% !important;
   }
   .previous, .next{
     height: 26px;
