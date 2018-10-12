@@ -187,8 +187,8 @@ body{
 
 .logo {
   display:block;
-  top: 25px;
-  left: 25px;
+  top: 3%;
+  left: 3%;
   position: absolute;
   max-width: 150px;
   height: 70px;
@@ -591,7 +591,7 @@ div:focus {
     right: 58px;
   }
   .logo {
-    top: 4% !important;
+    top: 3% !important;
     left: 30px !important;
   }
   .previous.on-video, .next.on-video{
@@ -731,7 +731,7 @@ div:focus {
   }
   .logo{
     left: 35px !important;
-    top: 5% !important;
+    top: 3% !important;
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
@@ -881,9 +881,10 @@ div:focus {
     right: 3%;
   }
   .logo{
-    top: 25px;
+    top: 3% !important;
     display: block;
     max-width: 123px;
+    left: 3%;
   }
   .hole-bar ul{
     margin: 9px 0 0 2%;
@@ -910,9 +911,8 @@ div:focus {
   }
   .logo {
     max-width: 94px !important;
-    top: 24px !important;
-    left: 29px !important;
-    height: 23%;
+    top: 3% !important;;
+    left: 3% !important;
   }
   .hole-bar ul{
     display: table;
@@ -979,7 +979,7 @@ div:focus {
     margin-left: -45px;
   }
   .logo {
-    top: 7% !important;
+    top: 3% !important;
     left: 3% !important;
   }
   .hole-bar ul {
@@ -1141,7 +1141,7 @@ div:focus {
   }
   .logo {
     max-width: 94px !important;
-    top: 17px !important;
+    top: 3% !important;
     left: 14px !important;
   }
   .hole-bar{
