@@ -886,6 +886,23 @@ div:focus {
   .hole-bar{
     top: -70px;
   }
+  .logo {
+    max-width: 94px !important;
+    top: 24px !important;
+    left: 29px !important;
+    height: 23%;
+  }
+  .hole-bar ul{
+    display: table;
+    width: 93% !important;
+    margin: 10px 0 0 22% !important;
+    font-size: 10px !important;
+    line-height: 20px !important;
+    padding-left: 60px !important;
+  }
+  .hole-bar ul li text {
+    font-size: 3.3em !important;
+  }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 760px) {
