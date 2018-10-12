@@ -603,13 +603,16 @@ div:focus {
   }
   .hole-bar ul{
     font-size: 10px;
-    margin-top: 9.5px;
-    line-height: 17px;
+    margin-top: 17.5px;
+    line-height: 20px;
+    margin: 10px 0 0 5% !important;
   }
   .hole-bar ul li span {
     font-size:2.2em;
   }
-
+  .hole-bar ul li text {
+    font-size: 3.1em !important;
+  }
   .hole-bar ul li text {
     font-size:2.8em;
   }
@@ -713,6 +716,10 @@ div:focus {
   }
   .next{
     right: 56px;
+  }
+  .logo{
+    left: 35px !important;
+    top: 5% !important;
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
