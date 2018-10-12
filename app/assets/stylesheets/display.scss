@@ -325,14 +325,14 @@ div:focus {
 }
 
 .previous.on-video, .next.on-video{
-    display: flex;
-    width: 70px;
-    height: 70px;
-    margin-left: -25px;
-    margin-top: -41px;
-    margin-right: -25px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  width: 70px;
+  height: 70px;
+  margin-left: -25px;
+  margin-top: -28px;
+  margin-right: -25px;
+  align-items: center;
+  justify-content: center;
 }
 .previous.on-video img, .next.on-video img{
   width: 17px;
@@ -342,8 +342,8 @@ div:focus {
   body {font-size: 44px;}
   .main-container {width: 1600px; margin: auto;}
   .video-js .vjs-big-play-button {
-    margin-top: -93px;
-    margin-left: -89px;
+    margin-top: -70px;
+    margin-left: -70px;
     height: 140px;
     width: 140px;
   }
@@ -470,7 +470,7 @@ div:focus {
   .video-js .vjs-big-play-button {
     height: 140px;
     width: 140px;
-    margin-top: -102px;
+    margin-top: -70px;
     margin-left: -70px;
   }
   #firstli {
@@ -594,6 +594,9 @@ div:focus {
     top: 4% !important;
     left: 30px !important;
   }
+  .previous.on-video, .next.on-video{
+    margin-top: -24px;
+  }
 }
 
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
@@ -603,7 +606,7 @@ div:focus {
   .video-js .vjs-big-play-button {
     height: 130px;
     width: 130px;
-    margin-top: -80px;
+    margin-top: -65px;
     margin-left: -65px;
   }
   .hole-bar{
@@ -888,6 +891,9 @@ div:focus {
   .hole-bar {
     right: 10%;
   }
+  .previous.on-video, .next.on-video{
+    margin-top: -38px;
+  }
 }
 
 @media only screen and (max-width: 760px) {
@@ -950,6 +956,9 @@ div:focus {
   }
   .next{
     right: 25px;
+  }
+  .previous.on-video, .next.on-video{
+    margin-top: -40px;
   }
 }
 
@@ -1103,6 +1112,9 @@ div:focus {
   }
   .previous.on-video img, .next.on-video img {
     width: 13px;
+  }
+  .previous.on-video, .next.on-video{
+    margin-top: -43px;
   }
 }
 
@@ -1278,6 +1290,9 @@ div:focus {
   .video-js .vjs-volume-panel .vjs-volume-control.vjs-volume-vertical{
     left: -0.5em;
   }
+  .previous.on-video, .next.on-video{
+    margin-top: -41px;
+  }
 }
 
 @media only screen and (min-width: 250px) and (max-width: 349px) {
@@ -1308,6 +1323,9 @@ div:focus {
   .slick-next{
     top: 52% !important;
   }
+  .previous.on-video, .next.on-video{
+    margin-top: -44px;
+  }
 }
 
 @media only screen and (max-width: 300px) {
@@ -1321,7 +1339,14 @@ div:focus {
     left: -7px !important;
   }
   .video-js .vjs-big-play-button {
-     margin-top: -33px !important;
+    margin-top: -42px !important;
+    height: 64px;
+    width: 64px;
+    top: 82px;
+    left: 138px;
+  }
+  .previous.on-video, .next.on-video{
+    margin-top: -46px;
   }
 }
 @media only screen and (max-width: 249px) {
