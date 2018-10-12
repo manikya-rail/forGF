@@ -9,7 +9,7 @@
     <% sibling_courses = @course.sibling_courses %>
     <div class = "lower-gradient"></div>
   </div>
-    
+
     <div class="merge-dropdown-home">
       <% if sibling_courses.count > 0 %>
         <div class="dropdown">
@@ -88,7 +88,7 @@
   bottom: 0px !important;
 }
 .on-home li{
-  padding: 5px 0px !important; 
+  padding: 5px 0px !important;
 }
 @media only screen and (max-width: 479px) {
 
@@ -108,7 +108,7 @@
     $("#0").click(function(){
       $(".merge-dropdown-home").find(".dropdown-menu").toggle();
     })
-    
+
     $(".hole-home").on("click", function(e) {
       $.ajax({
         url: '<%= embed_course_info_path(@course.id) %>',
@@ -194,8 +194,8 @@
 
     var timer;
 
+    $firstElement = 0;
     player.on("loadedmetadata",function () {
-      $firstElement = 0;
       if($(window).width() < 760 && player.paused()){
         showPlayerActions();
       }else{
