@@ -52,7 +52,7 @@
     [0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-122964772-2', 'auto') ;
+    ga('create', "<%= ENV['GOOGLE_ANALYTICS_UID'] %>", 'auto') ;
 
     ga('send', 'pageview');
 
@@ -68,7 +68,7 @@
     [0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-122964772-2', 'auto') ;
+    ga('create', "<%= ENV['GOOGLE_ANALYTICS_UID'] %>", 'auto') ;
 
     ga('send', 'pageview');
 
