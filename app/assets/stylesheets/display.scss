@@ -735,7 +735,7 @@ div:focus {
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
-  body {font-size: 44px;}
+  body {font-size: 35px;}
   .main-container {width: 100vw;}
 
   .video-js .vjs-big-play-button {
@@ -914,7 +914,7 @@ div:focus {
     width: 93% !important;
     margin: 2% 0 0 5% !important;
     font-size: 30% !important;
-    line-height: 20px !important;
+    line-height: 17px !important;
     padding-left: 0px !important;
   }
   .hole-bar ul li text {
@@ -1143,10 +1143,9 @@ div:focus {
     display: table;
     width: 93%;
     margin: 2% 0 0 5%;
-    line-height: 5px !important;
+    line-height: 10px !important;
   }
   #firstli {
-    padding: 6px 3px 0px 3px;
     text-align: center;
   }
 
@@ -1250,7 +1249,7 @@ div:focus {
   }
 }
 @media only screen and (min-width: 350px) and (max-width: 479px) {
-  body {font-size: 20px;}
+  body {font-size: 18px;}
   .previous, .next{
     height: 26px;
     width: 14px;
