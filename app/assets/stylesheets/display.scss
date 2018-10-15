@@ -190,7 +190,7 @@ body{
   top: 3%;
   left: 3%;
   position: absolute;
-  max-width: 150px;
+  max-width: 15%;
   height: 70px;
 
 }
@@ -465,7 +465,7 @@ div:focus {
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
-  body {font-size: 30px;}
+  body {font-size: 44px;}
   .main-container {width: 100vw;}
   .video-js .vjs-big-play-button {
     height: 140px;
@@ -592,7 +592,7 @@ div:focus {
   }
   .logo {
     top: 3% !important;
-    left: 30px !important;
+    left: 3% !important;
   }
   .previous.on-video, .next.on-video{
     margin-top: -24px;
@@ -600,7 +600,7 @@ div:focus {
 }
 
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
-  body {font-size: 30px;}
+  body {font-size: 44px;}
   .main-container {width: 100vw;}
 
   .video-js .vjs-big-play-button {
@@ -730,12 +730,12 @@ div:focus {
     right: 56px;
   }
   .logo{
-    left: 35px !important;
+    left: 3% !important;
     top: 3% !important;
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
-  body {font-size: 30px;}
+  body {font-size: 44px;}
   .main-container {width: 100vw;}
 
   .video-js .vjs-big-play-button {
@@ -752,7 +752,7 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 96%;
-    font-size: 30%;
+    
     line-height: 17px;
   }
   .hole-bar ul li text, .hole-bar ul li span{
@@ -881,7 +881,7 @@ div:focus {
   .logo{
     top: 3% !important;
     display: block;
-    max-width: 123px;
+    max-width: 15%;
     left: 3%;
   }
   .hole-bar ul{
@@ -905,7 +905,7 @@ div:focus {
     top: -70px;
   }
   .logo {
-    max-width: 94px !important;
+    max-width: 15% !important;
     top: 3% !important;;
     left: 3% !important;
   }
@@ -915,7 +915,7 @@ div:focus {
     margin: 2% 0 0 5% !important;
     font-size: 30% !important;
     line-height: 20px !important;
-    padding-left: 60px !important;
+    padding-left: 0px !important;
   }
   .hole-bar ul li text {
     font-size: 3.3em !important;
@@ -1116,7 +1116,7 @@ div:focus {
 }
 
 @media only screen and (max-width: 479px) {
-  body {font-size: 25px;}
+  body {font-size: 20px;}
   .main-container {width: 100vw;}
   .video-js .vjs-big-play-button {
     height: 84px;
@@ -1131,9 +1131,9 @@ div:focus {
     left: -17px;
   }
   .logo {
-    max-width: 94px !important;
+    max-width: 15% !important;
     top: 3% !important;
-    left: 14px !important;
+    left: 3% !important;
   }
   .hole-bar{
     height:40px;
@@ -1143,8 +1143,7 @@ div:focus {
     display: table;
     width: 93%;
     margin: 2% 0 0 5%;
-    font-size: 30%;
-    line-height: 5px;
+    line-height: 5px !important;
   }
   #firstli {
     padding: 6px 3px 0px 3px;
@@ -1251,6 +1250,7 @@ div:focus {
   }
 }
 @media only screen and (min-width: 350px) and (max-width: 479px) {
+  body {font-size: 20px;}
   .previous, .next{
     height: 26px;
     width: 14px;
@@ -1325,6 +1325,7 @@ div:focus {
 }
 
 @media only screen and (max-width: 300px) {
+  body {font-size: 18px !important;}
  .vjs-playback-rate{
     left: -2% !important;
   }
