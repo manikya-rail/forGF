@@ -1224,16 +1224,15 @@ div:focus {
     line-height: 0.85;
   }
   .video-js .vjs-fullscreen-control .vjs-icon-placeholder:before{
-    font-size: 20px;
+    font-size: 32px;
     line-height: 1.23;
     margin-left: -10px;
-    margin-top: 3px;
   }
   .vjs-playback-rate .vjs-playback-rate-value {
-    margin-left: 10px;
-    margin-top: 8px;
-    width: 13px;
-    height: 13px;
+    margin-left: 18px;
+    margin-top: 10px;
+    width: 19px;
+    height: 19px;
   }
   .vjs-volume-bar.vjs-slider-horizontal {
     margin-top: 22.5%;
@@ -1274,7 +1273,7 @@ div:focus {
     left: 5px !important;
   }
   .video-js .vjs-volume-panel.vjs-volume-panel-vertical{
-    width: 5em !important;
+    width: 3.5em;
   }
   .video-js .vjs-volume-panel.vjs-volume-panel-vertical > .vjs-mute-control{
     padding-left: 0px;
@@ -1329,7 +1328,7 @@ div:focus {
 @media only screen and (max-width: 300px) {
   body {font-size: 18px !important;}
  .vjs-playback-rate{
-    left: -10% !important;
+    left: -2% !important;
   }
   .vjs-fullscreen-control{
     left: 4% !important;
@@ -1402,5 +1401,8 @@ div:focus {
 .btn-transparent:hover, .btn-transparent:focus{
   background-color: transparent;
   border-color: transparent;
+  color: #fff;
+}
+transparent;
   color: #fff;
 }
