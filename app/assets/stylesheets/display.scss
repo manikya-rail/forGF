@@ -902,7 +902,7 @@ div:focus {
   .upper-gradient, .lower-gradient{
   }
   .hole-bar{
-    top: -70px;
+    top: -1% !important;
   }
   .logo {
     max-width: 15% !important;
@@ -913,7 +913,7 @@ div:focus {
     display: table;
     width: 93% !important;
     margin: 2% 0 0 5% !important;
-    font-size: 30% !important;
+    font-size: 20% !important;
     line-height: 17px !important;
     padding-left: 0px !important;
   }
@@ -1116,7 +1116,7 @@ div:focus {
 }
 
 @media only screen and (max-width: 479px) {
-  body {font-size: 20px;}
+  body {font-size: 20px !important;}
   .main-container {width: 100vw;}
   .video-js .vjs-big-play-button {
     height: 84px;
@@ -1137,7 +1137,7 @@ div:focus {
   }
   .hole-bar{
     height:40px;
-    right: 3%;
+    right: -4% !important;
   }
   .hole-bar ul{
     display: table;
