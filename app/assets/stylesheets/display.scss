@@ -600,7 +600,9 @@ div:focus {
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
   body {font-size: 44px;}
   .main-container {width: 100vw;}
-
+  .hole-bar ul li{
+    border-right: 1.5px solid #9e8585 !important;
+  }
   .video-js .vjs-big-play-button {
     height: 130px;
     width: 130px;
@@ -749,8 +751,7 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 96%;
-    
-    line-height: 17px;
+    line-height: 15px !important;
   }
   .hole-bar ul li text, .hole-bar ul li span{
     position: relative;
@@ -759,7 +760,9 @@ div:focus {
   .hole-bar ul li span {
     font-size:2.2em;
   }
-
+  .hole-bar ul li{
+    border-right: 1.5px solid #9e8585 !important;
+  }
   .hole-bar ul li text {
     font-size:2.8em;
   }
@@ -911,7 +914,6 @@ div:focus {
     width: 93% !important;
     margin: 2% 0 0 5% !important;
     font-size: 30% !important;
-    line-height: 17px !important;
     padding-left: 0px !important;
   }
   .hole-bar ul li text {
@@ -975,6 +977,10 @@ div:focus {
   }
   .hole-bar ul {
     font-size: 30% !important;
+    line-height: 12px !important;
+  }
+  .hole-bar ul li {
+    border-right: 1px solid #9e8585 !important;
   }
   .previous, .next{
     height: 26px;
@@ -1142,7 +1148,6 @@ div:focus {
     display: table;
     width: 93%;
     margin: 2% 0 0 5%;
-    line-height: 10px !important;
   }
   #firstli {
     text-align: center;
@@ -1249,6 +1254,9 @@ div:focus {
 }
 @media only screen and (min-width: 350px) and (max-width: 479px) {
   body {font-size: 18px;}
+  .hole-bar ul{
+    line-height: 9px !important;
+  }
   .previous, .next{
     height: 26px;
     width: 14px;
@@ -1324,6 +1332,9 @@ div:focus {
     left: 3% !important;
     top: 15% !important;
   }
+  .hole-bar ul{
+    line-height: 5px !important;
+  }
 }
 
 @media only screen and (max-width: 300px) {
@@ -1363,6 +1374,9 @@ div:focus {
   .logo{
     top: 15% !important;
     max-width: 14% !important;
+  }
+  .hole-bar ul{
+    line-height: 5px !important;
   }
 }
 .hole-home{
