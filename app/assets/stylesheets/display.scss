@@ -746,7 +746,7 @@ div:focus {
   .hole-bar{
     height:47px;
     right: 3%;
-    font-size: 20px;
+    font-size: 20px !important;
   }
   .hole-bar ul{
     display: table;
@@ -996,7 +996,7 @@ div:focus {
   .hole-bar{
     height:45px;
     right: 3%;
-    font-size: 15px;
+    font-size: 18px !important;
   }
   .hole-bar ul{
     display: table;
@@ -1142,7 +1142,6 @@ div:focus {
   .hole-bar{
     height:40px;
     right: 3%;
-    font-size: 12px;
   }
   .hole-bar ul{
     display: table;
@@ -1295,6 +1294,9 @@ div:focus {
   .previous.on-video, .next.on-video{
     margin-top: -41px;
   }
+  .hole-bar{
+    font-size: 15px !important;
+  }
 }
 
 @media only screen and (min-width: 250px) and (max-width: 349px) {
@@ -1334,6 +1336,9 @@ div:focus {
   }
   .hole-bar ul{
     line-height: 5px !important;
+  }
+  .hole-bar{
+    font-size: 12px !important;
   }
 }
 
@@ -1377,6 +1382,9 @@ div:focus {
   }
   .hole-bar ul{
     line-height: 5px !important;
+  }
+  .hole-bar{
+    font-size: 10px !important;
   }
 }
 .hole-home{
