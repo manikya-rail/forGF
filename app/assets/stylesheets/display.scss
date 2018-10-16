@@ -187,12 +187,10 @@ body{
 
 .logo {
   display:block;
-  top: 3%;
+  top: 15%;
   left: 3%;
   position: absolute;
   max-width: 15%;
-  height: 70px;
-
 }
 
 .on-video img {
@@ -379,7 +377,7 @@ div:focus {
   }
   .logo{
     left: 30px;
-    top: 3% !important;
+    top: 15% !important;
   }
   .playlist ul li {
     font-size: 37px;
@@ -591,7 +589,7 @@ div:focus {
     right: 58px;
   }
   .logo {
-    top: 3% !important;
+    top: 15% !important;
     left: 3% !important;
   }
   .previous.on-video, .next.on-video{
@@ -731,13 +729,12 @@ div:focus {
   }
   .logo{
     left: 3% !important;
-    top: 3% !important;
+    top: 15% !important;
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
   body {font-size: 35px;}
   .main-container {width: 100vw;}
-
   .video-js .vjs-big-play-button {
     height: 110px;
     width: 110px;
@@ -879,7 +876,7 @@ div:focus {
     right: 3% !important;
   }
   .logo{
-    top: 3% !important;
+    top: 15% !important;
     display: block;
     max-width: 15%;
     left: 3%;
@@ -906,7 +903,7 @@ div:focus {
   }
   .logo {
     max-width: 15% !important;
-    top: 3% !important;;
+    top: 25% !important;
     left: 3% !important;
   }
   .hole-bar ul{
@@ -973,7 +970,7 @@ div:focus {
     margin-left: -45px;
   }
   .logo {
-    top: 3% !important;
+    top: 25% !important;
     left: 3% !important;
   }
   .hole-bar ul {
@@ -1133,7 +1130,7 @@ div:focus {
   }
   .logo {
     max-width: 15% !important;
-    top: 3% !important;
+    top: 20% !important;
     left: 3% !important;
   }
   .hole-bar{
@@ -1323,6 +1320,10 @@ div:focus {
   .previous.on-video, .next.on-video{
     margin-top: -44px;
   }
+  .logo{
+    left: 3% !important;
+    top: 15% !important;
+  }
 }
 
 @media only screen and (max-width: 300px) {
@@ -1358,6 +1359,10 @@ div:focus {
   }
   .next{
     right: 13px;
+  }
+  .logo{
+    top: 15% !important;
+    max-width: 14% !important;
   }
 }
 .hole-home{
