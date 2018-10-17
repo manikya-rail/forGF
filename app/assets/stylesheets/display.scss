@@ -83,6 +83,7 @@ a:hover {
   position: absolute;
   z-index: 1;
   height: 100px;
+  top: 0px !important
 }
 .lower-gradient{
   width: 100%;
@@ -97,23 +98,25 @@ a:hover {
   z-index: -1;
 }
 .hole-bar{
-  right: 3%;
+  right: 30px;
   top: 1%;
   position: absolute;
   height: 50px;
   z-index: 5;
   text-align: center;
   background-size: 100% 100%;
+  top: 0px !important
 }
 
 .hole-bar ul{
-  display: inline-block;
+  /*display: inline-block;*/
   white-space: nowrap;
   list-style: none;
-  margin: 2% 0 0 5%;
+  margin: 20px 0 0 0 !important;
   width: 100%;
   padding-left: 0;
   text-align: center;
+  float: right;
 }
 #firstli {
   margin-left: 10px;
@@ -196,9 +199,9 @@ body{
 .on-video img {
   min-width: 20%;
   min-height: 20%;
-  max-width: 100%;
+  max-width: 150px;
   max-height: 100%;
-  vertical-align: top;
+  /*vertical-align: top;*/
 }
 
 .video-js .vjs-control-bar {
@@ -336,6 +339,10 @@ div:focus {
   width: 17px;
 }
 
+.vjs-playlist .hole-home{
+  padding-top: 8px;
+}
+
 @media only screen and (min-width: 1600px) {
   body {font-size: 44px;}
   .main-container {width: 1600px; margin: auto;}
@@ -356,10 +363,9 @@ div:focus {
   }
   .hole-bar {
     height: 65px;
-    right: 3%;
+    right: 0px;
   }
   .hole-bar ul{
-    margin: 2% 0 0 5%;
     overflow: auto;
     line-height: 25px;
   }
@@ -475,7 +481,7 @@ div:focus {
     margin-left: 5px;
   }
   .hole-bar{
-    right: 3%;
+    right: 0%;
   }
   .hole-bar ul{
     margin: 2% 0 0 5%;
@@ -488,6 +494,7 @@ div:focus {
 
   .hole-bar ul li text {
     font-size: 3.1em;
+    vertical-align: top;
   }
   .vjs-playlist {
     left:0px ;
@@ -511,7 +518,7 @@ div:focus {
     width: 10%;
     display:block;
     cursor: pointer;
-    margin-top: 2px;
+    margin-top: 3px;
     text-align: center;
   }
   .right-green img {
@@ -523,7 +530,7 @@ div:focus {
     width: 10%;
     display:block;
     cursor: pointer;
-    margin-top: 2px;
+    margin-top: 3px;
     text-align: center;
   }
   .left-green img {
@@ -532,7 +539,7 @@ div:focus {
   }
   .hole-home {
     width: 10%;
-    margin-top: -1px !important;
+    margin-top: 5px !important;
     text-align: center;
   }
   .hole-home img {
@@ -590,11 +597,15 @@ div:focus {
     right: 58px;
   }
   .logo {
-    top: 15% !important;
-    left: 3% !important;
+    top: 5% !important;
+    left: 30px !important;
   }
   .previous.on-video, .next.on-video{
     margin-top: -24px;
+  }
+  .vjs-playlist .hole-home {
+      padding-top: 4px;
+      margin-top: 0px !important;
   }
 }
 
@@ -604,6 +615,9 @@ div:focus {
   .hole-bar ul li{
     border-right: 1.5px solid #9e8585 !important;
   }
+  .hole-bar ul li:last-child{
+    border-right: none !important;
+  }
   .video-js .vjs-big-play-button {
     height: 130px;
     width: 130px;
@@ -612,13 +626,13 @@ div:focus {
   }
   .hole-bar{
     height:47px;
-    right: 3%;
+    right: 0px;
   }
   .hole-bar ul{
     font-size: 30%;
     margin-top: 17.5px;
     line-height: 20px;
-    margin: 2% 0 0 5% !important;
+    margin: 20px 0 0 0 !important;
   }
   .hole-bar ul li span {
     font-size:2.2em;
@@ -653,15 +667,12 @@ div:focus {
     width: 10%;
     display:block;
     cursor: pointer;
-    margin-top: 2px;
+    margin-top: 4px;
     text-align: center;
   }
   .right-green img {
    width: auto;
    height:30px;
-  }
-  .left-green, .right-green {
-    margin-top: 0px !important;
   }
   .hole-home img {
     vertical-align: inherit !important;
@@ -671,7 +682,7 @@ div:focus {
     width: 10%;
     display:block;
     cursor: pointer;
-    margin-top: 2px;
+    margin-top: 4px;
     text-align: center;
   }
   .left-green img {
@@ -737,8 +748,12 @@ div:focus {
     right: 56px;
   }
   .logo{
-    left: 3% !important;
-    top: 15% !important;
+    left: 30px !important;
+    top: 5% !important;
+  }
+  .vjs-playlist .hole-home {
+      padding-top: 4px;
+      margin-top: 0px !important;
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 959px) {
@@ -863,6 +878,13 @@ div:focus {
   .hole-info-div{
     width:100vw;
   }
+  .playlist ul li{
+    padding: 0px !important;
+  }
+  .vjs-playlist .hole-home {
+      padding-top: 4px;
+      margin-top: 0px !important;
+  }
 }
 @media only screen and (min-width: 760px) and (max-width: 959px) {
   .previous, .next{
@@ -880,20 +902,33 @@ div:focus {
     right: 33px;
   }
   .hole-bar{
-    right: 3% !important;
+    right: 10px !important;
   }
   .logo{
-    top: 15% !important;
+    top: 5% !important;
     display: block;
     max-width: 15%;
-    left: 3%;
+    left: 30px;
   }
   .hole-bar ul{
-    margin: 2% 0 0 5%;
+    margin: 20px 0 0 0;
   }
   .previous.on-video, .next.on-video{
     margin-top: -38px;
   }
+  .on-video img{
+    max-width: 130px
+  }
+  .hole-bar ul li text {
+    font-size: 2.5em;
+  }
+  .hole-bar ul li span {
+    font-size: 1.8em;
+  }
+  .hole-bar ul li:last-child{
+    border-right: none !important;
+  }
+
 }
 
 @media only screen and (max-width: 760px) {
@@ -910,18 +945,27 @@ div:focus {
   }
   .logo {
     max-width: 15% !important;
-    top: 25% !important;
-    left: 3% !important;
+    top: 20% !important;
+    left: 30px !important;
   }
   .hole-bar ul{
     display: table;
     width: 93% !important;
-    margin: 2% 0 0 5% !important;
+    margin: 20px 0 0 0 !important;
     font-size: 30% !important;
     padding-left: 0px !important;
   }
+  .on-video img{
+    max-width: 130px
+  }
   .hole-bar ul li text {
-    font-size: 3.3em !important;
+    font-size: 4.8em;
+  }
+  .hole-bar ul li span {
+    font-size: 3.8em;
+  }
+  .hole-bar ul li:last-child{
+    border-right: none !important;
   }
 }
 
@@ -930,10 +974,10 @@ div:focus {
     padding-top: 30px;
   }
   .hole-bar{
-    right: 3% !important;
+    right: 10px !important;
   }
   .hole-bar ul li {
-    padding: 1% 4% 1% 4% !important;
+    padding: 1% 15px 1% 15px !important;
   }
   .hole-bar ul li text, .hole-bar ul li span{
     position: relative;
@@ -941,7 +985,7 @@ div:focus {
   }
   .hole-bar ul {
     font-size: 30% !important;
-    margin: 2% 0 0 5%;
+    margin: 20px 0 0 0;
   }
   .previous, .next{
     width: 18px;
@@ -956,6 +1000,18 @@ div:focus {
   }
   .previous.on-video, .next.on-video{
     margin-top: -40px;
+  }
+  .on-video img{
+    max-width: 130px
+  }
+  .hole-bar ul li text {
+    font-size: 4.8em;
+  }
+  .hole-bar ul li span {
+    font-size: 3.8em;
+  }
+  .hole-bar ul li:last-child{
+    border-right: none !important;
   }
 }
 
@@ -976,8 +1032,8 @@ div:focus {
     margin-left: -45px;
   }
   .logo {
-    top: 25% !important;
-    left: 3% !important;
+    top: 35% !important;
+    left: 15px !important;
   }
   .hole-bar ul {
     font-size: 30% !important;
@@ -999,21 +1055,21 @@ div:focus {
   }
   .hole-bar{
     height:45px;
-    right: 3%;
+    right: 5px;
     font-size: 18px !important;
   }
   .hole-bar ul{
     display: table;
     width: 96%;
-    margin: 2% 0 0 5%;
+    margin: 23px 0 0 0;
     font-size: 30%;
     line-height: 17px;
   }
   .hole-bar ul li span {
-    font-size:2.5em;
+    font-size:2.9em;
   }
   .hole-bar ul li text {
-    font-size:3.0em;
+    font-size:3.9em;
   }
   .hole-bar ul li text, .hole-bar ul li span{
     position: relative;
@@ -1121,6 +1177,13 @@ div:focus {
   .previous.on-video, .next.on-video{
     margin-top: -43px;
   }
+  .logo.on-video img {
+      max-width: 100px;
+  }
+  .vjs-playlist .hole-home {
+      padding-top: 6px;
+      margin: 0;
+  }
 }
 
 @media only screen and (max-width: 479px) {
@@ -1140,28 +1203,28 @@ div:focus {
   }
   .logo {
     max-width: 15% !important;
-    top: 20% !important;
-    left: 3% !important;
+    top: 35% !important;
+    left: 15px !important;
   }
   .hole-bar{
     height:40px;
-    right: 3%;
+    right: 5px;
   }
   .hole-bar ul{
     display: table;
     width: 93%;
-    margin: 2% 0 0 5%;
+    margin: 23px 0 0 0;
   }
   #firstli {
     text-align: center;
   }
 
   .hole-bar ul li span {
-    font-size:2.5em;
+    font-size:2.9em;
   }
 
   .hole-bar ul li text {
-    font-size:3.0em;
+    font-size:3.8em;
   }
   .vjs-playlist {
     left:0px ;
@@ -1205,7 +1268,7 @@ div:focus {
     margin-top: -2px;
     text-align: center;
     height: 105%;
-    padding-top: 6px !important;
+    padding-top: 8px !important;
   }
   .hole-home img {
     width: 25px;
@@ -1254,6 +1317,12 @@ div:focus {
   }
   .previous.on-video img, .next.on-video img {
     width: 13px;
+  }
+  .on-video img {
+    max-width: 90px;
+  }
+  .playlist ul li a {
+    padding: 9px 28px 1px !important;
   }
 }
 @media only screen and (min-width: 350px) and (max-width: 479px) {
@@ -1341,6 +1410,7 @@ div:focus {
   }
   .hole-bar ul{
     line-height: 5px !important;
+    margin: 16px 0 0 0 !important;
   }
   .hole-bar{
     font-size: 12px !important;
@@ -1395,9 +1465,9 @@ div:focus {
 .hole-home{
   padding-top: 0px;
 }
-.left-green, .right-green{
+/*.left-green, .right-green{
   margin-top: 0px !important;
-}
+}*/
 .playlist ul li{
   margin: 0px !important;
 }
@@ -1417,11 +1487,14 @@ div:focus {
   .hole-home {
     padding-top: 4px;
   }
-  .left-green, .right-green {
+  /*.left-green, .right-green {
     margin-top: 2px !important;
-  }
+  }*/
   .playlist ul li a {
-    padding: 6px 28px 4px;
+    padding: 19px 28px 12px ;
+  }
+  .playlist ul li {
+    padding: 0px !important;
   }
 }
 .btn-transparent{
