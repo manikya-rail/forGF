@@ -538,6 +538,7 @@ div:focus {
   .hole-home img {
     width: 35px;
     height: 35px;
+    vertical-align: inherit !important;
   }
   .playlist{
     float: left;
@@ -658,6 +659,12 @@ div:focus {
   .right-green img {
    width: auto;
    height:30px;
+  }
+  .left-green, .right-green {
+    margin-top: 0px !important;
+  }
+  .hole-home img {
+    vertical-align: inherit !important;
   }
   .left-green {
     float: left;
@@ -792,6 +799,7 @@ div:focus {
     cursor: pointer;
     margin-top: 2px;
     text-align: center;
+    margin-top: 5px !important;
   }
   .right-green img {
    width: auto;
@@ -804,6 +812,7 @@ div:focus {
     cursor: pointer;
     margin-top: 2px;
     text-align: center;
+    margin-top: 5px !important;
   }
   .left-green img {
    width: auto;
@@ -1264,7 +1273,7 @@ div:focus {
     right: 25px;
   }
   .vjs-volume-panel{
-    margin-right: -4px !important;
+    margin-right: 0px !important;
   }
   .vjs-playback-rate{
     margin-right: -19px !important;
@@ -1387,7 +1396,7 @@ div:focus {
   padding-top: 0px;
 }
 .left-green, .right-green{
-  margin-top: 5px !important;
+  margin-top: 0px !important;
 }
 .playlist ul li{
   margin: 0px !important;
