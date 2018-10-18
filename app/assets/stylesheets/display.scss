@@ -147,14 +147,19 @@ body{
 }
 
 .previous{
+  position: absolute;
   left: 25px;
   top: 45%;
   height: 40px;
  }
 .next{
+  position: absolute;
   right: 25px;
   top: 45%;
   height: 40px;
+}
+.show-prev, .show-next{
+  position: inherit !important;
 }
 
 .flag:before {
