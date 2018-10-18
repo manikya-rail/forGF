@@ -147,13 +147,11 @@ body{
 }
 
 .previous{
-  position: absolute;
   left: 25px;
   top: 45%;
   height: 40px;
  }
 .next{
-  position: absolute;
   right: 25px;
   top: 45%;
   height: 40px;
@@ -416,9 +414,9 @@ div:focus {
     height: 2.2em;
   }
   .flag:before {
-    width: 28px;
-    height: 40px;
-    background-size: 28px;
+    width: 22px;
+    height: 22px;
+    background-size: 20px;
     margin-left: 0px;
     margin-top: 0px;
   }
