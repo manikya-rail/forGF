@@ -340,7 +340,7 @@ div:focus {
 }
 
 .vjs-playlist .hole-home{
-  padding-top: 8px;
+  padding-top: 4px;
 }
 
 @media only screen and (min-width: 1600px) {
@@ -490,11 +490,12 @@ div:focus {
   }
   .hole-bar ul li span {
     font-size:2.2em;
+    vertical-align: text-top;
   }
 
   .hole-bar ul li text {
     font-size: 3.1em;
-    vertical-align: top;
+    vertical-align: bottom;
   }
   .vjs-playlist {
     left:0px ;
@@ -518,7 +519,7 @@ div:focus {
     width: 10%;
     display:block;
     cursor: pointer;
-    margin-top: 3px;
+    margin-top: 0px;
     text-align: center;
   }
   .right-green img {
@@ -530,7 +531,7 @@ div:focus {
     width: 10%;
     display:block;
     cursor: pointer;
-    margin-top: 3px;
+    margin-top: 0px;
     text-align: center;
   }
   .left-green img {
@@ -604,7 +605,7 @@ div:focus {
     margin-top: -24px;
   }
   .vjs-playlist .hole-home {
-      padding-top: 4px;
+      padding-top: 0px;
       margin-top: 0px !important;
   }
 }
@@ -636,12 +637,11 @@ div:focus {
   }
   .hole-bar ul li span {
     font-size:2.2em;
+    vertical-align: text-top;
   }
   .hole-bar ul li text {
     font-size: 3.1em !important;
-  }
-  .hole-bar ul li text {
-    font-size:2.8em;
+    vertical-align: bottom;
   }
   .vjs-playlist {
     left:0px ;
@@ -667,7 +667,7 @@ div:focus {
     width: 10%;
     display:block;
     cursor: pointer;
-    margin-top: 4px;
+    margin-top: 0px;
     text-align: center;
   }
   .right-green img {
@@ -682,7 +682,7 @@ div:focus {
     width: 10%;
     display:block;
     cursor: pointer;
-    margin-top: 4px;
+    margin-top: 0px;
     text-align: center;
   }
   .left-green img {
@@ -752,7 +752,7 @@ div:focus {
     top: 5% !important;
   }
   .vjs-playlist .hole-home {
-      padding-top: 4px;
+      padding-top: 0px;
       margin-top: 0px !important;
   }
 }
@@ -882,7 +882,7 @@ div:focus {
     padding: 0px !important;
   }
   .vjs-playlist .hole-home {
-      padding-top: 4px;
+      padding-top: 0px;
       margin-top: 0px !important;
   }
 }
@@ -921,9 +921,11 @@ div:focus {
   }
   .hole-bar ul li text {
     font-size: 2.5em;
+    vertical-align: bottom;
   }
   .hole-bar ul li span {
     font-size: 1.8em;
+    vertical-align: text-top;
   }
   .hole-bar ul li:last-child{
     border-right: none !important;
@@ -1006,9 +1008,11 @@ div:focus {
   }
   .hole-bar ul li text {
     font-size: 4.8em;
+    vertical-align: bottom;
   }
   .hole-bar ul li span {
     font-size: 3.8em;
+    vertical-align: text-top;
   }
   .hole-bar ul li:last-child{
     border-right: none !important;
@@ -1061,15 +1065,17 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 96%;
-    margin: 23px 0 0 0;
+    margin: 24px 0 0 0 !important;
     font-size: 30%;
     line-height: 17px;
   }
   .hole-bar ul li span {
     font-size:2.9em;
+    vertical-align: middle;
   }
   .hole-bar ul li text {
     font-size:3.9em;
+    vertical-align: middle;
   }
   .hole-bar ul li text, .hole-bar ul li span{
     position: relative;
@@ -1098,7 +1104,7 @@ div:focus {
     width: 15%;
     display:block;
     cursor: pointer;
-    margin-top: 2px;
+    margin-top: 4px;
     text-align: center;
   }
   .right-green img {
@@ -1110,7 +1116,7 @@ div:focus {
     width: 15%;
     display:block;
     cursor: pointer;
-    margin-top: 2px;
+    margin-top: 4px;
     text-align: center;
   }
   .left-green img {
@@ -1181,7 +1187,7 @@ div:focus {
       max-width: 100px;
   }
   .vjs-playlist .hole-home {
-      padding-top: 6px;
+      padding-top: 5px;
       margin: 0;
   }
 }
@@ -1213,7 +1219,7 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 93%;
-    margin: 23px 0 0 0;
+    margin: 21px 0 0 0 !important;
   }
   #firstli {
     text-align: center;
@@ -1221,10 +1227,12 @@ div:focus {
 
   .hole-bar ul li span {
     font-size:2.9em;
+    vertical-align: middle;
   }
 
   .hole-bar ul li text {
     font-size:3.8em;
+    vertical-align: middle;
   }
   .vjs-playlist {
     left:0px ;
@@ -1268,7 +1276,7 @@ div:focus {
     margin-top: -2px;
     text-align: center;
     height: 105%;
-    padding-top: 8px !important;
+    padding-top: 6px !important;
   }
   .hole-home img {
     width: 25px;
@@ -1322,7 +1330,7 @@ div:focus {
     max-width: 90px;
   }
   .playlist ul li a {
-    padding: 9px 28px 1px !important;
+    padding: 7px 28px 1px !important;
   }
 }
 @media only screen and (min-width: 350px) and (max-width: 479px) {
