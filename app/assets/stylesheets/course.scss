@@ -575,3 +575,6 @@ a.button, a.button:visited{
 .signature a:hover{
   background: transparent !important;
 }
+.course_show_video > .video-js .vjs-fullscreen-control .vjs-icon-placeholder:before{
+  line-height: 0.7 !important;
+}
