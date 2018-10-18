@@ -921,11 +921,11 @@ div:focus {
   }
   .hole-bar ul li text {
     font-size: 2.5em;
-    vertical-align: bottom;
+    vertical-align: middle;
   }
   .hole-bar ul li span {
     font-size: 1.8em;
-    vertical-align: text-top;
+    vertical-align: middle;
   }
   .hole-bar ul li:last-child{
     border-right: none !important;
@@ -953,7 +953,7 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 93% !important;
-    margin: 20px 0 0 0 !important;
+    margin: 23px 0 0 0 !important;
     font-size: 30% !important;
     padding-left: 0px !important;
   }
