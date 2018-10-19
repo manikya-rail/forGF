@@ -266,13 +266,23 @@ class Admin::CoursesController < ApplicationController
   end
 
   def get_course_images
+    @request_for = params[:image_type]
   end
 
   def set_images_rank
-    params[:course_image].each do |course_image_id, rank|
-      course_image = CourseImage.find(course_image_id)
-      @course = course_image.course if @course.nil?
-      course_image.update(rank: rank)
+    @request_for = params[:request_for]
+    if @request_for == "course"
+      params[:course_image].each do |course_image_id, rank|
+        course_image = CourseImage.find(course_image_id)
+        @course = course_image.course if @course.nil?
+        course_image.update(rank: rank)
+      end
+    else
+      params[:scorecard_image].each do |scorecard_image_id, rank|
+        scorecard_image = ScorecardImage.find(scorecard_image_id)
+        @course = scorecard_image.course if @course.nil?
+        scorecard_image.update(rank: rank)
+      end
     end
   end
 

@@ -32,7 +32,7 @@
             <%= render 'course_photo_collection' %>
           </div>
           <% if @course.course_images.count > 1 %>
-            <%= link_to admin_course_get_course_images_path(@course), class: "button", remote: true do%>
+            <%= link_to admin_course_get_course_images_path(@course, image_type: 'course'), class: "button", remote: true do%>
               Re-order Images
             <% end %>
           <% end %>
@@ -53,14 +53,14 @@
         <div class="clearfix"></div>
         <div class="btn btn-success upload-btn">
           <%= file_field_tag "scorecard_images[]", type: :file, multiple: true, class: 'check-field course-scorecard-images-field' %>
-          <div class="photos-collection">
-            <% @course.scorecard_images.each do |scorecard_image|%>
-              <div class="photo-division">
-                <span class="close-scorecard-photos" data-photo-id="<%= scorecard_image.id %>">&times;</span>
-                <img src="<%= scorecard_image.photo.url %>" class="course-scorecard-images" id="<%= scorecard_image.id %>" style="width: 50px; height: 60px;">
-              </div>
-            <% end %>
+          <div class="photos-collection scorecard_photos">
+            <%= render 'scorecard_photo_collection' %>
           </div>
+          <% if @course.scorecard_images.count > 1 %>
+            <%= link_to admin_course_get_course_images_path(@course, image_type: 'scorecard'), class: "button", remote: true do%>
+              Re-order Images
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>

@@ -1,2 +1,6 @@
-$('.course_photos').html("<%= j render(partial: 'course_photo_collection')%>");
+<% if @request_for == 'course' %>
+  $('.course_photos').html("<%= j render(partial: 'course_photo_collection')%>");
+<% else %>
+  $('.scorecard_photos').html("<%= j render(partial: 'scorecard_photo_collection')%>");
+<% end %>
 $("#course-images-modal").modal('hide');

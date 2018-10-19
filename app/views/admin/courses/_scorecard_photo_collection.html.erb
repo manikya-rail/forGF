@@ -1,0 +1,6 @@
+<% @course.scorecard_images.order(:rank).each do |scorecard_image|%>
+  <div class="photo-division">
+    <span class="close-scorecard-photos" data-photo-id="<%= scorecard_image.id %>">&times;</span>
+    <img src="<%= scorecard_image.photo.url %>" class="course-scorecard-images" id="<%= scorecard_image.id %>" style="width: 50px; height: 60px;">
+  </div>
+<% end %>
