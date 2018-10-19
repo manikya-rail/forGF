@@ -489,26 +489,26 @@ body{
     line-height: 14px;
   }
 }
-.progress { 
-  position:relative; 
+.progress {
+  position:relative;
   width:400px;
-  padding: 1px; 
-  border-radius: 3px; 
-  height: auto !important; 
-  margin: 0 auto; 
+  padding: 1px;
+  border-radius: 3px;
+  height: auto !important;
+  margin: 0 auto;
   margin-bottom: 10px;
 }
-.bar { 
-  background-color: #f0ad4e; 
-  width:0%; 
-  height:20px; 
-  border-radius: 3px; 
+.bar {
+  background-color: #f0ad4e;
+  width:0%;
+  height:20px;
+  border-radius: 3px;
 }
-.percent { 
-  position:absolute; 
-  display:inline-block; 
-  top:3px; 
-  left:48%; 
+.percent {
+  position:absolute;
+  display:inline-block;
+  top:3px;
+  left:48%;
 }
 .hole_form_table{
   background-color: transparent !important;
@@ -561,17 +561,20 @@ li.error-list-heading{
   font-weight: 600;
   color: green;
 }
-a.button, a.button:visited{
+a.button, a.button:visited, a.button:hover{
   color: #fff;
 }
 
 .gallery_list > .thumbnail{
   margin-bottom: 10px !important;
-  
+
 }
 .col-md-3.gallery_list{
   margin-bottom: 20px;
 }
 .signature a:hover{
   background: transparent !important;
+}
+.upload-btn > a.button:hover{
+  background: transparent;
 }

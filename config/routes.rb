@@ -17,6 +17,8 @@ namespace :admin do
   resources :locations
   resources :courses do
     get :holes_list
+    get :get_course_images
+    post :set_images_rank
   end
   resources :ads
   # resources :videos

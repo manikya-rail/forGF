@@ -1,0 +1,8 @@
+<% @course.course_images.order(:rank).each do |course_photo|%>
+  <div class="photo-division">
+
+    <span class="close-photos" data-photo-id="<%= course_photo.id %>">&times;</span>
+
+    <img src="<%= course_photo.photo.url %>" class="course-photo-images" id="<%= course_photo.id %>">
+  </div>
+<% end %>

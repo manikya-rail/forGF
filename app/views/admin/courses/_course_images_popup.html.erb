@@ -1,0 +1,40 @@
+<div id="course-images-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Photos</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="margin-top:10px;">
+          <%= form_for :course_images, url: admin_course_set_images_rank_path(@course), method: "post", :remote => true do |f| %>
+            <% @course.course_images.order(:rank).each_with_index do | course_image, index | %>
+              <div class="col-md-3 gallery_list course_image_cont">
+                <%= hidden_field_tag "course_image[#{course_image.id}]", course_image.rank.present? ? course_image.rank : index+1, class: "rank-field" %>
+                <div class="ordering_buttons">
+                  <%= link_to "", "javascript:void(0)", class: "btn btn-xs btn-primary glyphicon glyphicon-chevron-left course_image-reorder-left" %>
+                  <%= link_to "", "javascript:void(0)", class: "btn btn-xs btn-primary glyphicon glyphicon-chevron-right course_image-reorder-right" %>
+                </div>
+                  <div class="thumbnail">
+                    <a href="javascript:void(0)">
+                      <%=image_tag course_image.photo.url(:thumb) %>
+                    </a>
+                  </div>
+
+                </div>
+            <% end%>
+            <div class="col-md-12">
+              <%= f.submit "Save Order", class: "btn btn-success pull-right"%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

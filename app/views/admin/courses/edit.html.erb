@@ -18,7 +18,7 @@
           <% if @course.cover.present? %>
             <img src="<%= @course.cover.url %>" class="course-logo-image cimage" id="<%=params[:id]%>" name="cover">
           <% end %>
-        </div> 
+        </div>
       </div>
 
       <div class="col-md-4 second-row-photos">
@@ -28,14 +28,14 @@
           <%= file_field_tag "images[]", type: :file, multiple: true, class: 'course-photos-field' %>
           <%# course_photo_url = @course.course_images %>
           <div class="temp-photos-collection"></div>
-          <div class="photos-collection">
-            <% @course.course_images.each do |course_photo|%>
-              <div class="photo-division">
-                <span class="close-photos" data-photo-id="<%= course_photo.id %>">&times;</span>
-                <img src="<%= course_photo.photo.url %>" class="course-photo-images" id="<%= course_photo.id %>">
-              </div>
-            <% end %>
+          <div class="photos-collection course_photos">
+            <%= render 'course_photo_collection' %>
           </div>
+          <% if @course.course_images.count > 1 %>
+            <%= link_to admin_course_get_course_images_path(@course), class: "button", remote: true do%>
+              Re-order Images
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -220,7 +220,7 @@
                   </td>
                 <% end %>
                 <td>
-                  
+
                 </td>
                 <% (10..18).each do |int|%>
                   <td>
@@ -228,10 +228,10 @@
                   </td>
                 <% end %>
                 <td>
-                  
+
                 </td>
                 <td>
-                  
+
                 </td>
               </tr>
             </tbody>
@@ -255,7 +255,7 @@
   <%#= render :partial => 'admin/networks/new_modal' %>
 </div>
 
-
+<div id="course_images_container"></div>
 
 <script type="text/javascript">
   var video_index = <%= @course.videos.count %>;
@@ -274,7 +274,7 @@
     var last_video_element = $(".video_item").last();
     if (last_video_element.find("a.btn-danger").length > 0){
       alert("Click on 'Remove Video' button to delete the last item.")
-    }else{      
+    }else{
       $(last_video_element).remove();
       if ($(".video_item").length == 1){
         $("#remove_playlist").hide();

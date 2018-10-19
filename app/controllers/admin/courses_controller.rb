@@ -1,7 +1,7 @@
 class Admin::CoursesController < ApplicationController
   #require 'fileutils'
   before_action :authenticate_admin!
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :get_course_images]
   # GET /courses
   # GET /courses.json
 
@@ -265,10 +265,21 @@ class Admin::CoursesController < ApplicationController
     render :json => {status: 'success'}, :layout => false
   end
 
+  def get_course_images
+  end
+
+  def set_images_rank
+    params[:course_image].each do |course_image_id, rank|
+      course_image = CourseImage.find(course_image_id)
+      @course = course_image.course if @course.nil?
+      course_image.update(rank: rank)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Course.find(params[:id]) rescue nil
+      @course = Course.find(params[:id] || params[:course_id]) rescue nil
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

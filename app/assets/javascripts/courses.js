@@ -212,4 +212,30 @@ $(document).on('turbolinks:load', function() {
     }
     return false;
   });
+
+  $(document).on("click", ".course_image-reorder-right", function(){
+    var $current = $(this).closest('div.course_image_cont');
+    var current_rank = parseInt($current.find('.rank-field').val());
+    var $next = $current.next('div.course_image_cont');
+    if($next.length !== 0){
+      $current.insertAfter($next);
+      var new_current_rank = current_rank + 1;
+      $current.find('.rank-field').val(new_current_rank);
+      $next.find('.rank-field').val(current_rank);
+    }
+    return false;
+  });
+
+  $(document).on("click", ".course_image-reorder-left", function(){
+    var $current = $(this).closest('div.course_image_cont')
+    var current_rank = parseInt($current.find('.rank-field').val());
+    var $previous = $current.prev('div.course_image_cont');
+    if($previous.length !== 0){
+      $current.insertBefore($previous);
+      var new_current_rank = current_rank - 1;
+      $current.find('.rank-field').val(new_current_rank);
+      $previous.find('.rank-field').val(current_rank);
+    }
+    return false;
+  });
 });
