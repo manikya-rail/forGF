@@ -578,3 +578,6 @@ a.button, a.button:visited, a.button:hover{
 .upload-btn > a.button:hover{
   background: transparent;
 }
+.course_show_video > .video-js .vjs-fullscreen-control .vjs-icon-placeholder:before{
+  line-height: 0.7 !important;
+}

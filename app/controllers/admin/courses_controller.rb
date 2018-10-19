@@ -280,6 +280,10 @@ class Admin::CoursesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id] || params[:course_id]) rescue nil
+      if @course.present?
+        return @course
+      end
+      redirect_to admin_courses_path
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
