@@ -779,7 +779,7 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 96%;
-    line-height: 15px !important;
+    line-height: 8px !important;
   }
   .hole-bar ul li text, .hole-bar ul li span{
     position: relative;
@@ -1044,7 +1044,7 @@ div:focus {
   }
   .hole-bar ul {
     font-size: 30% !important;
-    line-height: 12px !important;
+    line-height: 4px !important;
   }
   .previous, .next{
     height: 26px;
@@ -1336,7 +1336,7 @@ div:focus {
 @media only screen and (min-width: 350px) and (max-width: 479px) {
   body {font-size: 18px;}
   .hole-bar ul{
-    line-height: 9px !important;
+    line-height: 4px !important;
   }
   .previous, .next{
     height: 26px;
