@@ -632,8 +632,8 @@ div:focus {
   .hole-bar ul{
     font-size: 30%;
     margin-top: 17.5px;
-    line-height: 20px;
-    margin: 20px 0 0 0 !important;
+    line-height: 24px;
+    margin: 18px 0 0 0 !important;
   }
   .hole-bar ul li span {
     font-size:2.2em;
@@ -779,7 +779,7 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 96%;
-    line-height: 8px !important;
+    /*line-height: 25px !important;*/
   }
   .hole-bar ul li text, .hole-bar ul li span{
     position: relative;
@@ -907,6 +907,9 @@ div:focus {
   .hole-bar{
     right: 10px !important;
   }
+  .hole-bar ul{
+    line-height: 25px !important;
+  }
   .logo{
     top: 5% !important;
     display: block;
@@ -914,7 +917,7 @@ div:focus {
     left: 30px;
   }
   .hole-bar ul{
-    margin: 20px 0 0 0;
+    margin: 14px 0 0 0 !important;
   }
   .previous.on-video, .next.on-video{
     margin-top: -38px;
@@ -982,7 +985,7 @@ div:focus {
     right: 10px !important;
   }
   .hole-bar ul li {
-    padding: 1% 15px 1% 15px !important;
+    padding: 1% 15px 2% 15px !important;
   }
   .hole-bar ul li text, .hole-bar ul li span{
     position: relative;
@@ -990,7 +993,8 @@ div:focus {
   }
   .hole-bar ul {
     font-size: 30% !important;
-    margin: 20px 0 0 0;
+    margin: 15px 0 0 0 !important;
+    line-height: 17px !important;
   }
   .previous, .next{
     width: 18px;
@@ -1044,7 +1048,7 @@ div:focus {
   }
   .hole-bar ul {
     font-size: 30% !important;
-    line-height: 4px !important;
+    line-height: 15px !important;
   }
   .previous, .next{
     height: 26px;
@@ -1065,7 +1069,7 @@ div:focus {
   .hole-bar ul{
     display: table;
     width: 96%;
-    margin: 24px 0 0 0 !important;
+    margin: 18px 0 0 0 !important;
     font-size: 30%;
     line-height: 17px;
   }
@@ -1336,7 +1340,8 @@ div:focus {
 @media only screen and (min-width: 350px) and (max-width: 479px) {
   body {font-size: 18px;}
   .hole-bar ul{
-    line-height: 4px !important;
+    line-height: 13px !important;
+    margin: 14px 0 0 0 !important;
   }
   .previous, .next{
     height: 26px;
@@ -1417,8 +1422,8 @@ div:focus {
     top: 15% !important;
   }
   .hole-bar ul{
-    line-height: 5px !important;
-    margin: 16px 0 0 0 !important;
+    line-height: 13px !important;
+    margin: 12px 0 0 0 !important;
   }
   .hole-bar{
     font-size: 12px !important;
