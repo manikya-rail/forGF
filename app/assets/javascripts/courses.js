@@ -81,13 +81,14 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-  $(".edit_course").on('click', '.close-photos', function(){
-    var course_image_id = $(this).attr('data-photo-id');
-    $(this).closest('div.photo-division').remove();
+  $(".edit_course").on('click', '.remove_logo', function(){
+    var course_id = $(this).attr('data-course-id');
+    $(this).addClass('hide');
+    $(this).closest('div.logo-preview').find("img.course-photo-images").remove();
     $.ajax({
       url: "/admin/courses/remove_course_image",
       type: "POST",
-      data: {course_image_id: course_image_id},
+      data: {course_id: course_id, for: "transparent"},
       success: function(data){
 
       }

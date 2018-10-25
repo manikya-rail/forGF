@@ -63,6 +63,28 @@
           <% end %>
         </div>
       </div>
+
+      <div class="col-md-12 form-group" style="padding-left: 0px; padding-right: 21px;">
+        <div class="col-md-4 form-group">
+          <%= label_tag :transparent_logo ,'Logo',class:"col-md-12 zero-left-right-padd "%>
+          <div class="clearfix"></div>
+          <div class="btn btn-success upload-btn">
+            <div class="cover-label">
+              <%= f.file_field :transparent_logo %>
+            </div>
+            <div class="logo-preview" style="min-height: 70px;">
+              <% if @course.transparent_logo.present? %>
+                <span class="close-cross remove_logo" style="top: 50px; left: 165px;" data-course-id="<%= @course.id %>">&times;</span>
+                <%= image_tag @course.transparent_logo.url(:medium), class: "course-photo-images" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 form-group" style="padding-left: 22px; padding-right: 2px;">
+          <%= label_tag :logo_hyperlink ,'Logo Hyperlink',class:"col-md-12 zero-left-right-padd"%>
+          <%= f.text_field :logo_hyperlink , class:"col-md-12 form-control check-field", placeholder: "Redirect URL on click of logo"%>
+        </div>
+      </div>
     </div>
     <div class="col-md-12 course-info-row">
       <h4 class="col-md-4 playlist_heading">Playlist</h4>

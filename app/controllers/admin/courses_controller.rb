@@ -64,7 +64,7 @@ class Admin::CoursesController < ApplicationController
     else
       @resort = Resort.find(params[:resort_id])
       courses_params = params[:resort][:courses_attributes]["0"]
-      @course = @resort.courses.create(name: courses_params[:name], bio: courses_params[:bio], color_selector: courses_params[:color_selector], cover: courses_params[:cover])
+      @course = @resort.courses.create(name: courses_params[:name], bio: courses_params[:bio], color_selector: courses_params[:color_selector], cover: courses_params[:cover], transparent_logo: courses_params[:transparent_logo], logo_hyperlink: courses_params[:logo_hyperlink])
     end
     if @resort.save
       @course = @resort.courses.last if @course.nil?
@@ -298,11 +298,11 @@ class Admin::CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :bio, :color_selector, :resort_id, :cover)
+      params.require(:course).permit(:name, :bio, :color_selector, :resort_id, :cover, :transparent_logo, :logo_hyperlink)
     end
 
     def resort_params
-      params.require(:resort).permit(:name, :resort_type, :website, :phone_num, :network_id, location_attributes: [:town,:state, :lat, :lng], courses_attributes: [:name, :bio, :color_selector, :cover])
+      params.require(:resort).permit(:name, :resort_type, :website, :phone_num, :network_id, location_attributes: [:town,:state, :lat, :lng], courses_attributes: [:name, :bio, :color_selector, :cover, :transparent_logo, :logo_hyperlinkg])
     end
   def hole_params
     params.require(:hole).permit(:image, :map, :description)

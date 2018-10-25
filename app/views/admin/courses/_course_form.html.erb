@@ -29,10 +29,8 @@
     <%= ff.text_area :bio, rows: "4", class: 'col-md-12 form-control check-field'%>
   </div>
   <div class="col-md-4 course-info-row">
-    <div class="col-md-12 form-group">
-      <%= label_tag :color_selector ,'Color Selector',class:"col-md-12 zero-left-right-padd"%>
-      <%= ff.color_field :color_selector, class:"col-md-12 form-control check-field", placeholder: "Color Selector" %>
-    </div>
+    <%= label_tag :color_selector ,'Color Selector',class:"col-md-12 zero-left-right-padd"%>
+    <%= ff.color_field :color_selector, class:"col-md-12 form-control check-field", placeholder: "Color Selector" %>
   </div>
   <div class="col-md-4 course-info-row">
     <%= label_tag :scorecard_images ,'Score Card Images',class: "col-md-12 zero-left-right-padd "%>
@@ -40,6 +38,25 @@
     <div class="btn btn-success upload-btn">
       <%= file_field_tag "scorecard_images[]", type: :file, multiple: true, class: 'check-field course-scorecard-images-field' %>
       <div class="photos-collection"></div>
+    </div>
+  </div>
+  <div class="col-md-12 form-group" style="padding-left: 0px; padding-right: 21px;">
+    <div class="col-md-4 form-group">
+      <%= label_tag :transparent_logo ,'Logo',class:"col-md-12 zero-left-right-padd "%>
+      <div class="clearfix"></div>
+      <div class="btn btn-success upload-btn">
+        <div class="cover-label">
+          <%= ff.file_field :transparent_logo, class: 'check-field' %>
+        </div>
+        <div class="logo-preview">
+          <span class="close-cross hide">&times;</span>
+          <%= image_tag("", class: "logo-preview-image hide") %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 form-group" style="padding-left: 22px; padding-right: 2px;">
+      <%= label_tag :logo_hyperlink ,'Logo Hyperlink',class:"col-md-12 zero-left-right-padd"%>
+      <%= ff.text_field :logo_hyperlink , class:"col-md-12 form-control check-field", placeholder: "Redirect URL on click of logo"%>
     </div>
   </div>
 </div>
