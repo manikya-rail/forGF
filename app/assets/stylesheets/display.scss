@@ -1326,7 +1326,7 @@ div:focus {
     width: 13px;
   }
   .on-video img {
-    max-width: 90px;
+    max-width: 70px;
   }
   .playlist ul li a {
     padding: 7px 28px 1px !important;
@@ -1423,6 +1423,9 @@ div:focus {
     font-size: 10px !important;
     right: 3px !important;
   }
+  .on-video img {
+    max-width: 55px;
+  }
 }
 
 @media only screen and (max-width: 300px) {
@@ -1468,6 +1471,9 @@ div:focus {
   }
   .hole-bar{
     font-size: 10px !important;
+  }
+  .on-video img {
+    max-width: 55px;
   }
 }
 .hole-home{
