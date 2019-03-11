@@ -1443,18 +1443,14 @@ div:focus {
     margin-top: -42px !important;
     height: 64px;
     width: 64px;
-    top: 90px;
-    left: 153px;
+    top: 56% !important;
+    left: 54% !important;
   }
   .previous.on-video, .next.on-video{
     margin-top: -46px;
   }
 }
 @media only screen and (max-width: 249px) {
-  .video-js .vjs-big-play-button {
-    top: 77px !important;
-    left: 130px !important;
-  }
   .previous, .next{
     height: 24px;
     width: 13px;
