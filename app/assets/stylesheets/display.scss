@@ -39,7 +39,9 @@ html,body
   background: transparent !important;
 }
 .signature img {
-  width: 70px;
+  width: 300px;
+  float: right;
+  margin-right: 10px;
 }
 .main-container {
   height: auto !important;
@@ -1208,7 +1210,7 @@ div:focus {
   }
   .logo {
     max-width: 15% !important;
-    
+
     left: 15px !important;
   }
   .hole-bar{
