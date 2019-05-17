@@ -39,9 +39,7 @@ html,body
   background: transparent !important;
 }
 .signature img {
-  width: auto;
-  float: right;
-  margin-right: 10px;
+  width: 100%;
 }
 .main-container {
   height: auto !important;
@@ -346,6 +344,10 @@ div:focus {
 
 .vjs-playlist .hole-home{
   padding-top: 4px;
+}
+
+.p0{
+  padding: 0px !important;
 }
 
 @media only screen and (min-width: 1600px) {
