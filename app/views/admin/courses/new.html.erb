@@ -50,6 +50,10 @@
             <%= f.text_field :website, class:"col-md-12 form-control contact-info check-field", placeholder: "Website" %>
             <%= f.text_field :phone_num, class:"col-md-12 form-control contact-info check-field", placeholder: "Phone Number" %>
           </div>
+          <div class="col-md-4 form-group">
+            <%= label_tag :hide_logo ,'Hide Logo'%>
+            <%= f.check_box :hide_logo %>
+          </div>
         </div>
         <div class="col-md-12 green-separator"></div>
         <%= f.fields_for :courses, Course.new do |course_form| %>
