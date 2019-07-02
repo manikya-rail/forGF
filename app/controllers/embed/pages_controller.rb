@@ -50,6 +50,7 @@ class Embed::PagesController < ApplicationController
       gon.videos_urls << video.video.url(resolution).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net').gsub("http", "https") if video.video.present?
       gon.image_urls << video.thumbnail_image.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net').gsub("http", "https") if video.thumbnail_image.present?
     end
+    @videos_urls = gon.videos_urls
     @holes = @course.holes.order("hole_num")
     @score_cards = @course.sorted_scorecards
     @course.score_cards.each do |scorecard|

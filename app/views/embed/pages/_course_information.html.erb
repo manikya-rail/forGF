@@ -1,23 +1,25 @@
-<div class="description divider-course">
-  <div class="clearfix"></div>
-  <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
-    <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
+<% if @videos_urls.size > 1 %>
+  <div class="description divider-course">
+    <div class="clearfix"></div>
+    <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+      <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
+    </div>
+    <div class="clearfix"></div>
+    <ul id="playlist-thumb" class="slider slider-nav playlist_thumb" style="margin-bottom: 0px; padding-bottom: 15px;">
+      <% @course.playlist_items.each_with_index do |video, index| %>
+        <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
+          <div>
+            <%= image_tag video.thumbnail_image.url.gsub("http", "https") %>
+            <a href="javascript:void(0)">
+              <%= image_tag "big-play.png", :class => "play_btn" %>
+            </a>
+          </div>
+          <span><%= video.title %></span>
+        </li>
+      <% end %>
+    </ul>
   </div>
-  <div class="clearfix"></div>
-  <ul id="playlist-thumb" class="slider slider-nav playlist_thumb" style="margin-bottom: 0px; padding-bottom: 15px;">
-    <% @course.playlist_items.each_with_index do |video, index| %>
-      <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
-        <div>
-          <%= image_tag video.thumbnail_image.url.gsub("http", "https") %>
-          <a href="javascript:void(0)">
-            <%= image_tag "big-play.png", :class => "play_btn" %>
-          </a>
-        </div>
-        <span><%= video.title %></span>
-      </li>
-    <% end %>
-  </ul>
-</div>
+<% end %>
 <div class="row description divider-course">
   <div class="col-md-12 about">
     <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">

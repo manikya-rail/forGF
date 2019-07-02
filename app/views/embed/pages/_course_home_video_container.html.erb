@@ -2,9 +2,10 @@
 <div class= "player-container" progress-color="<%=color_selector(@course.color_selector)%>">
   <div class="vplayer" id="vplayer">
     <video id="home-vid" class="video-js vjs-default-skin vjs-big-play-centered video_container" playsinline></video>
-
-    <div class="previous on-video"> <%= image_tag "left.png" %> </div>
-    <div class="next on-video"><%= image_tag "right.png" %></div>
+    <% if @videos_urls.size > 1 %>
+      <div class="previous on-video"> <%= image_tag "left.png" %> </div>
+      <div class="next on-video"><%= image_tag "right.png" %></div>
+    <% end %>
     <div class="logo on-video"><%= link_to image_tag(logo_on_video(@course)), admin_resort_courses_list_path(@course.resort), target: :_blank %></div>
     <% sibling_courses = @course.sibling_courses %>
     <div class = "lower-gradient"></div>
@@ -173,12 +174,6 @@
       logoHyperlink = $(this).attr('logo_hyperlink');
     })
 
-    document.querySelector('.previous').addEventListener('click', function() {
-      player.playlist.previous();
-    });
-    document.querySelector('.next').addEventListener('click', function() {
-      player.playlist.next();
-    });
 
     $('.player-container').hover(
       function(event){
@@ -299,3 +294,15 @@
   })
 // });
 </script>
+<% if @videos_urls.size > 1 %>
+  <script type="text/javascript">
+    $(function(){
+      document.querySelector('.previous').addEventListener('click', function() {
+        player.playlist.previous();
+      });
+      document.querySelector('.next').addEventListener('click', function() {
+        player.playlist.next();
+      });
+    });
+  </script>
+<% end %>
