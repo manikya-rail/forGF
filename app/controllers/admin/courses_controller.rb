@@ -265,6 +265,11 @@ class Admin::CoursesController < ApplicationController
     render :json => {status: 'success'}, :layout => false
   end
 
+  def remove_course_image
+    CourseImage.find(params[:course_image_id]).destroy
+    render :json => {status: 'success'}, :layout => false
+  end
+
   def get_course_images
     @request_for = params[:image_type]
   end

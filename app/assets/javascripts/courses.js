@@ -107,6 +107,19 @@ $(document).on('turbolinks:load', function() {
       }
     });
   });
+
+  $(".edit_course").on('click', '.close-course-photos', function(){
+    var image_id = $(this).attr('data-photo-id');
+    $(this).closest('div.photo-division').remove();
+    $.ajax({
+      url: "/admin/courses/remove_course_image",
+      type: "POST",
+      data: {course_image_id: image_id},
+      success: function(data){
+
+      }
+    });
+  });
   // $('.course-photos-field').change(function(){
   //   var PhotoCollection, divClass, imageClass;
   //   if (window.location.href.indexOf('edit') < 0){
