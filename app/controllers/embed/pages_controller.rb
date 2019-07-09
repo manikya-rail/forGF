@@ -37,6 +37,7 @@ class Embed::PagesController < ApplicationController
       gon.image_urls << hole.image.url if hole.video.present?
       gon.description << hole.description if hole.video.present?
     end
+    @videos_urls = gon.videos_urls
   end
 
   def display
@@ -113,6 +114,7 @@ class Embed::PagesController < ApplicationController
       gon.image << hole.image_file_name if hole.video.present?
       gon.image_urls << hole.image.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if hole.video.present?
     end
+    @videos_urls = gon.videos_urls
   end
 
   def course_home
@@ -125,6 +127,7 @@ class Embed::PagesController < ApplicationController
       gon.videos_urls << video.video.url(resolution).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if video.video.present?
       gon.image_urls << video.thumbnail_image.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if video.thumbnail_image.present?
     end
+    @videos_urls = gon.videos_urls
     @holes = @course.holes.order("hole_num")
     @score_cards = @course.sorted_scorecards
     @course.score_cards.each do |scorecard|
