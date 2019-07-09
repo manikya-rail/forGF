@@ -160,6 +160,10 @@
 
     player.on('ended', function(){
       $("li.playing").removeClass('playing');
+      if(player.playlist.lastIndex() == player.playlist.currentIndex()){
+        localStorage.setItem("hole_auto_play", true);
+        $(".hole-number#1 a").click()
+      }
     });
 
     $('.playlist_items').on('click', function(){

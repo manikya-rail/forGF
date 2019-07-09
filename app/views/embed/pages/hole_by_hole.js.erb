@@ -34,6 +34,10 @@ if ($('#hole-vid').length == 0){
   player.playlist(videoList);
   player.playlist.autoadvance(0);
   player.playlist.currentItem(<%= (params[:hole_num].to_i) - 1%>);
+  if(localStorage.getItem("hole_auto_play") == "true"){
+    player.play();
+    localStorage.setItem("hole_auto_play", false);
+  }
 
   player.on('play', function(){
     var current_src = player.currentSrc();
