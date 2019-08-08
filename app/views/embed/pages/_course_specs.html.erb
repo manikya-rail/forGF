@@ -9,7 +9,9 @@
 	<li><span><b><%#=@tee_rating%></b></span><p>RATING</p></li>
 	<li class="slop-right-border"><span><b><%#=@tee_slope%></b></span><p>SLOPE</p></li> -->
 <%#end%>
-<li><span><b><%=score_card.total_par %></b></span><p>PAR</p></li>
-<li><span><b><%=score_card.total_yards %></b></span><p>YARDS</p></li>
-<li><span><b><%=score_card.rating %></b></span><p>RATING</p></li>
-<li class="slop-right-border"><span><b><%=score_card.slope %></b></span><p>SLOPE</p></li>
+<%if score_card%>
+  <li><span><b><%=score_card.total_par %></b></span><p>PAR</p></li>
+  <li><span><b><%=score_card.total_yards %></b></span><p>YARDS</p></li>
+  <li><span><b><%=score_card.rating %></b></span><p>RATING</p></li>
+  <li class="slop-right-border"><span><b><%=score_card.slope %></b></span><p>SLOPE</p></li>
+<%end%>
