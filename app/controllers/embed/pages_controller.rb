@@ -101,7 +101,6 @@ class Embed::PagesController < ApplicationController
     @course = Course.find(@hole.course_id)
     @course_color = Course.find(@hole.course_id).color_selector
     @holes = @course.holes.sort_by{ |m| m.hole_num }
-
     resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
     @holes.each do |hole|
       gon.hole_num << hole.hole_num if hole.video.present?
