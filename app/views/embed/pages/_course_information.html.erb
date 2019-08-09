@@ -40,15 +40,19 @@
         </div>
       </div>
     </div>
+
     <div id="map-desk" class="map-scorecard row">
       <div class="stat-container">
         <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2 select-container">
           <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left; padding-left: 0px;">
-             
-              <%= image_tag "tees/#{@teename&[0]&[2]}.png" , :class => "img_preview" %><span class="teename-caret"><%=@teename&[0]&[0]%></span>
-              <i class="caret"></i>
-            </button>
+           
+            <%if @teename.size > 0%>
+              <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left; padding-left: 0px;">
+                <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %><span class="teename-caret"><%=@teename[0][0]%></span>
+                <i class="caret"></i>
+              </button>
+            <%end%>
+
             <ul class="dropdown-menu">
               <% @teename.each do |teename|%>
                 <li class="tees" value="<%=teename[1]%>" course_id="<%=@course.id%>">
@@ -56,6 +60,7 @@
                 </li>
               <% end %>
             </ul>
+
           </div>
         </div>
         <% score = @score_cards.first%>
