@@ -12,6 +12,9 @@
     background-position: center;
     background-color: #fff;
   }
+
+.vjs-resize-manager { border: 0px; }
+
 </style>
 <div class="se-pre-con"></div>
 <script>
@@ -91,11 +94,17 @@
       border-right: 1px solid <%= @course.color_selector %>;
       padding: 1% 8px 1% 8px;
     }
+    .on-video img {
+    max-width: 50px;
+}
   }
   .hole-home.active{
     background-color: #1d1e20;
     border-bottom: 4px solid <%= @course.color_selector %>;
   }
+
+
+
 </style>
 <%= Gon::Base.render_data %>
 <%#= csrf_meta_tags %>
