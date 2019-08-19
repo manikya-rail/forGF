@@ -183,6 +183,11 @@
       logoHyperlink = $(this).attr('logo_hyperlink');
     })
 
+    $(document).ready(function() {
+      bgcolor = $('.player-container').attr('progress-color');  
+      progressColor(bgcolor);
+    });
+
 
     $('.player-container').hover(
       function(event){
