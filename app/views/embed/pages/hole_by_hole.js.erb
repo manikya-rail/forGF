@@ -69,6 +69,13 @@ if ($('#hole-vid').length == 0){
     player.playlist.next();
   });
 
+
+$(document).ready(function() {
+  bgcolor = $('.player-container').attr('progress-color');  
+  progressColor(bgcolor);
+});
+
+
   $('.player-container').hover(
     function(event){
       bgcolor = $(this).attr('progress-color');
@@ -80,6 +87,7 @@ if ($('#hole-vid').length == 0){
       }
     }
   );
+
 
   player.on("userinactive",function () {
     if (!player.paused()){
