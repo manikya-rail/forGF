@@ -1,16 +1,19 @@
 <%= Gon::Base.render_data %>
 <div class= "player-container" progress-color="<%=color_selector(@course.color_selector)%>">
+  
+  <% if @videos_urls.size > 1 %>
+    <div class="previous on-video"> <%= image_tag "left.png" %> </div>
+    <div class="next on-video"><%= image_tag "right.png" %></div>
+  <% end %>
+  <div class = "upper-gradient">
+    <div class="logo on-video"><%= link_to image_tag(logo_on_video(@course)), admin_resort_courses_list_path(@course.resort), target: :_blank %></div>
+  </div>
+  <% sibling_courses = @course.sibling_courses %>
+  <div class = "lower-gradient"></div>
+
   <div class="vplayer" id="vplayer">
     <video id="home-vid" class="video-js vjs-default-skin vjs-big-play-centered video_container" playsinline></video>
-    <% if @videos_urls.size > 1 %>
-      <div class="previous on-video"> <%= image_tag "left.png" %> </div>
-      <div class="next on-video"><%= image_tag "right.png" %></div>
-    <% end %>
-    <div class = "upper-gradient">
-      <div class="logo on-video"><%= link_to image_tag(logo_on_video(@course)), admin_resort_courses_list_path(@course.resort), target: :_blank %></div>
-    </div>
-    <% sibling_courses = @course.sibling_courses %>
-    <div class = "lower-gradient"></div>
+    
   </div>
 
     <div class="merge-dropdown-home">
