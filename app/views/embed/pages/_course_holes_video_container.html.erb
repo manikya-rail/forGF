@@ -135,6 +135,7 @@
 
     document.querySelector('.right-green').addEventListener('click', function() {
       var nextActiveId;
+      $firstElement = 0;
       if($(window).width() < 350){
         nextActiveId = $firstElement + 1;
       }
@@ -163,6 +164,7 @@
     });
     document.querySelector('.left-green').addEventListener('click', function() {
       var nextActiveId;
+      $firstElement = 0;
       if($(window).width() < 350){
         nextActiveId = $firstElement - 1;
       }
