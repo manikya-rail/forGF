@@ -43,7 +43,7 @@ class Embed::PagesController < ApplicationController
     @teename = []
     @course = Course.find(params[:id])
     @resort = @course.resort
-    resolution = 'medium'.to_sym
+    resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
     @course.playlist_items.each do |video|
       gon.videos_urls << video.video.url(resolution).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net').gsub("http", "https") if video.video.present?
       gon.image_urls << video.thumbnail_image.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net').gsub("http", "https") if video.thumbnail_image.present?
@@ -72,7 +72,7 @@ class Embed::PagesController < ApplicationController
     @course = Course.find(@hole.course_id)
     @course_color = Course.find(@hole.course_id).color_selector
     @holes = @course.holes.sort_by{ |m| m.hole_num }
-    resolution = 'medium'.to_sym
+    resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
     @holes.each do |hole|
       gon.hole_num << hole.hole_num if hole.video.present?
       gon.videos << hole.video  if hole.video.present?
@@ -92,8 +92,7 @@ class Embed::PagesController < ApplicationController
     gon.image_urls = []
     @teename = []
     @course = Course.find(params[:id])
-    resolution = 'medium'.to_sym
-    # resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
+    resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
     @course.playlist_items.each do |video|
       gon.videos_urls << video.video.url(resolution).gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if video.video.present?
       gon.image_urls << video.thumbnail_image.url.gsub('s3-us-west-2.amazonaws.com/fore92', 'd1s5na5d5z3eyp.cloudfront.net') if video.thumbnail_image.present?
