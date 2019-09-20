@@ -47,7 +47,7 @@
           <div class="btn-group">
            
             <%if @teename.size > 0%>
-              <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left; padding-left: 0px;">
+              <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left; padding-left: 5px;">
                 <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %><span class="teename-caret"><%=@teename[0][0]%></span>
                 <i class="caret"></i>
               </button>
@@ -692,6 +692,7 @@ table.score-specs tr:nth-child(2) td  {
     display: inline-block;
     white-space: nowrap;
     width: 100%;
+    margin-left: 5px;
 }
 /*// 320, 480, 760, 960, 1200 and 1600px.*/
       @media only screen and (min-width: 250px) and (max-width: 349px) {
