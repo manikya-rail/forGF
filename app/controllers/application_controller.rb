@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def is_mobile?
-    (request.user_agent =~ /\b(Android|iPhone|iPad|Windows Phone|Opera Mobi|Kindle|BackBerry|PlayBook)\b/i).present?
+    (request.user_agent =~ /\b(Android|iPhone|Windows Phone|Opera Mobi|Kindle|BackBerry|PlayBook)\b/i).present?
   end
 
     def authenticate!
