@@ -47,13 +47,13 @@
           <div class="btn-group">
            
             <%if @teename.size > 0%>
-              <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left; padding-left: 5px;margin-left: 7px;">
+              <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left;padding-left: 5px;margin-left: 7px;" >
                 <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %><span class="teename-caret"><%=@teename[0][0]%></span>
                 <i class="caret"></i>
               </button>
             <%end%>
 
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" style="left: 6px;">
               <% @teename.each do |teename|%>
                 <li class="tees" value="<%=teename[1]%>" course_id="<%=@course.id%>">
                   <%= image_tag "tees/#{teename[2]}.png" %><span><%=teename[0]%></span>
@@ -95,10 +95,6 @@
     var slider = $('.bxslider').bxSlider({
       mode: 'horizontal',
       useCSS: false,
-      // infiniteLoop: false,
-      // hideControlOnEnd: true,
-      // // easing: 'easeOutElastic',
-      // speed: 2000,
         pager: false,
         nextText: '<%= image_tag "right.png" %>',
         prevText: '<%= image_tag "left.png" %>'
@@ -188,8 +184,6 @@
     $('#select_map').css({"background-color":bgColor});
     $('#actual-map').css({"display": "none"});
 
-    // $('.bx-next').hide();
-    // $('.bx-prev').hide();
   });
 
   $('#select_photos').click(function (){
@@ -208,21 +202,13 @@
     // $('.bx-next').show();
     // $('.bx-prev').show();
   });
-  // $('.actual-scorecard').click(function (){
-  //   $('#map-desk').hide();
-  //   $('.st1 .bx-wrapper').css({"display":"none"});
-  //   $('#actual-map').css({"display": "block"});
-  // });
-
+  
   $('#hole-map').click(function (){
     bgColor=$(this).attr('color');
     // $('.st1 .bx-wrapper').hide();
     // $('#22').hide();
     $('#44').invisible();
-    // $(".st1 .bx-wrapper").invisible();
-
-    // $('#slider li').hide();
-    // $('#slider').hide();
+    
     $('#hole-photos').removeClass('set');
     $('#hole-photos').addClass('unset');
     $('#hole-photos').css({"border-bottom": "4px solid black"});
@@ -233,8 +219,6 @@
     $('#hole-map').addClass('set');
     $('#hole-map').css({"border-bottom": "4px solid" + bgColor});
 
-    // $('.bx-next').hide();
-    // $('.bx-prev').hide();
   });
 
   $('#hole-photos').click(function (){
@@ -1146,7 +1130,10 @@ table.score-specs tr:nth-child(2) td  {
 
       @media only screen and (max-width: 479px) {
 
-        .dropdown-menu { min-width: 136px; }
+        .dropdown-menu { 
+          min-width: 142px; 
+          left: 30px;
+         }
 
         .scorecard { display: block; width: 380px;}
 
@@ -1340,8 +1327,13 @@ table.score-specs tr:nth-child(2) td  {
           width: auto;
         }
         .stat-container .btn-group .dropdown-toggle{
-          padding: 6px 0px;
-          width: 109px;
+            padding: 6px 0px;
+            width: 60px;
+            padding-left: 10px !important;
+            margin-left: 30px !important;
+            z-index: 99;
+            position: relative;
+                margin-top: 6px;
         }
         .map-scorecard{
           padding-left: 0px;
