@@ -109,10 +109,7 @@ $('.player-container').hover(
 );
 
 function playlistui(){
-  // for (var i = 0, len = gon.videos_urls.length; i < len; i++) {
-
-    // document.getElementById('playlist').innerHTML = '<li id="'+0+'" class="hole-home" onClick="select_video(this.id)"></li>';
-
+  
     for (var i = 1, len = 19; i < len; i++) {
       document.getElementById('playlist').innerHTML += '<li id="'+i+'" onClick="select_video(this.id)">'+i+'</li>';
     }
