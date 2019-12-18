@@ -71,10 +71,6 @@ function sliderInitializer (){
   var slider = $('.bxslider').bxSlider({
     mode: 'horizontal',
     useCSS: false,
-    // infiniteLoop: false,
-    // hideControlOnEnd: true,
-    // // easing: 'easeOutElastic',
-    // speed: 2000,
       pager: false,
       nextText: '<%= image_tag "right.png" %>',
       prevText: '<%= image_tag "left.png" %>'
@@ -84,13 +80,10 @@ function sliderInitializer (){
 
 $('#select_map').click(function (){
   bgColor=$(this).attr('color');
-  // $('.st1 .bx-wrapper').hide();
-  // $('#22').hide();
+  
   $('#22').invisible();
   // $(".st1 .bx-wrapper").invisible();
 
-  // $('#slider li').hide();
-  // $('#slider').hide();
   $('#select_photos').removeClass('selected');
   $('#select_photos').addClass('non-selected');
   $('#select_photos').css({"background-color":"white"});
@@ -119,18 +112,7 @@ $('#select_photos').click(function (){
   // $('.st1 .bx-wrapper').show();
   // $('#22').show();
   $('#22').visible();
-  // slider.reload();
-  // slider.reload();
-  // reloadSlider();
-  // $(".st1 .bx-wrapper").visible();
-  // slider.reload();
-  // sliderInitializer();
-  // $('#slider').show();
-  // $('#slider li').show();
-  // sliderInitializer();
-  // $('#select_photos').removeClass('non-selected');
-  // $('#select_photos').addClass('selected');
-
+  
   // $('.bx-next').show();
   // $('.bx-prev').show();
 });
@@ -142,8 +124,6 @@ $('#hole-map').click(function (){
   $('#44').invisible();
   // $(".st1 .bx-wrapper").invisible();
 
-  // $('#slider li').hide();
-  // $('#slider').hide();
   $('#hole-photos').removeClass('set');
   $('#hole-photos').addClass('unset');
   $('#hole-photos').css({"border-bottom": "4px solid black"});
@@ -154,8 +134,7 @@ $('#hole-map').click(function (){
   $('#hole-map').addClass('set');
   $('#hole-map').css({"border-bottom": "4px solid" + bgColor});
 
-  // $('.bx-next').hide();
-  // $('.bx-prev').hide();
+ 
 });
 
 $('#hole-photos').click(function (){
@@ -174,18 +153,7 @@ $('#hole-photos').click(function (){
   // $('.st1 .bx-wrapper').show();
   // $('#22').show();
   $('#44').visible();
-  // slider.reload();
-  // slider.reload();
-  // reloadSlider();
-  // $(".st1 .bx-wrapper").visible();
-  // slider.reload();
-  // sliderInitializer();
-  // $('#slider').show();
-  // $('#slider li').show();
-  // sliderInitializer();
-  // $('#select_photos').removeClass('non-selected');
-  // $('#select_photos').addClass('selected');
-
+  
   // $('.bx-next').show();
   // $('.bx-prev').show();
 });
