@@ -5,7 +5,8 @@
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-6">
-          <h3><b class="hole_title"><%= @hole.hole_num %><%= @hole.hole_num==1 ? 'st' : @hole.hole_num==2 ? 'nd' : @hole.hole_num==3 ? 'rd' : 'th' %> Hole, Par <%= @hole.pars.first.par if @hole.pars.present? %></b></h3>
+          <!-- <h3><b class="hole_title"><%= @hole.hole_num %><%= @hole.hole_num==1 ? 'st' : @hole.hole_num==2 ? 'nd' : @hole.hole_num==3 ? 'rd' : 'th' %> Hole, Par <%= @hole.pars.first.par if @hole.pars.present? %></b></h3> -->
+          <h3><b class="hole_title">Hole <%= @hole.hole_num %>, Par <%= @hole.pars.first.par if @hole.pars.present? %></b></h3>
         </div>
       </div>
       <div class="row">
@@ -93,8 +94,6 @@ $('#select_map').click(function (){
   $('#select_map').addClass('selected');
   $('#select_map').css({"background-color":bgColor});
 
-  // $('.bx-next').hide();
-  // $('.bx-prev').hide();
 });
 
 $('#select_photos').click(function (){
@@ -113,8 +112,6 @@ $('#select_photos').click(function (){
   // $('#22').show();
   $('#22').visible();
   
-  // $('.bx-next').show();
-  // $('.bx-prev').show();
 });
 
 $('#hole-map').click(function (){
@@ -150,8 +147,6 @@ $('#hole-photos').click(function (){
   $('#hole-photos').addClass('set');
   $('#hole-photos').css({"border-bottom": "4px solid" + bgColor});
 
-  // $('.st1 .bx-wrapper').show();
-  // $('#22').show();
   $('#44').visible();
   
   // $('.bx-next').show();
