@@ -47,10 +47,8 @@ player.on("userinactive",function () {
 });
 
 player.on("useractive",function () {
-  // if (!player.paused()){
     showBars();
     clearTimeout(timer);
-  // }
 });
 
 player.on ("error",function () {
@@ -68,7 +66,6 @@ function hideBars(){
     $(".vjs-control-bar").animate({bottom: '-70px'});
     $(".upper-gradient").animate({top: '-70px'});
     $(".lower-gradient").animate({bottom: '0px'});
-    // $(".lower-gradient").slideUp(300);
 }
 
 function showBars(){
@@ -165,10 +162,8 @@ function select_video(id){
 }
 
 $(document).ready(function(){
-
     $(".right-green").click(function(){
-        // alert($(".playlist").scrollLeft() + " px");
-        // alert($(".playlist ul li").outerWidth(true) + " px");
+       
     });
 });
 
