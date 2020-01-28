@@ -21,7 +21,7 @@
   </div>
 <% end %>
 <div class="row description divider-course">
-  <% if not @course.hide_about_course %>
+  <% unless @course.hide_about_course %>
     <div class="col-md-12 about">
         <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
           <h3><b class="home_title">About the Course</b></h3>
