@@ -21,14 +21,16 @@
   </div>
 <% end %>
 <div class="row description divider-course">
-  <div class="col-md-12 about">
-    <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
-      <h3><b class="home_title">About the Course</b></h3>
+  <% if not @course.hide_about_course %>
+    <div class="col-md-12 about">
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+          <h3><b class="home_title">About the Course</b></h3>
+        </div>
+        <div class="col-md-12 bio">
+          <h4 class="hole_description"><%= @course.bio %></h4>
+        </div>
     </div>
-    <div class="col-md-12 bio">
-      <h4 class="hole_description"><%= @course.bio %></h4>
-    </div>
-  </div>
+  <% end %>
 </div>
 <div class="row slider description" style="padding-top: 5px;">
   <div class="col-md-12 col-xs-12 col-sm-12 st1">

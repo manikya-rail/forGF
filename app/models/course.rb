@@ -19,6 +19,8 @@ class Course < ApplicationRecord
   has_many :course_images, :dependent => :destroy
   has_many :scorecard_images, :dependent => :destroy
 
+  delegate :hide_about_course, to: :resort
+
   accepts_nested_attributes_for :location, :allow_destroy => true
   accepts_nested_attributes_for :score_cards, :allow_destroy => true
   accepts_nested_attributes_for :holes, :allow_destroy => true
