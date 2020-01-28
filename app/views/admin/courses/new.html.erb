@@ -54,6 +54,10 @@
             <%= f.check_box :hide_logo %>
             <%= label_tag :hide_logo ,'Hide Logo'%>
           </div>
+          <div class="col-md-8 form-group">
+            <%= f.check_box :hide_about_course %>
+            <%= label_tag :hide_about_course ,'Hide About Course Info'%>
+          </div>
         </div>
         <div class="col-md-12 green-separator"></div>
         <%= f.fields_for :courses, Course.new do |course_form| %>
