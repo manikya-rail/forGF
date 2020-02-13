@@ -1,23 +1,25 @@
 <% if @videos_urls.size > 1 %>
-  <div class="description divider-course">
-    <div class="clearfix"></div>
-    <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
-      <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
+  <div class="sld-pad">
+    <div class="description sld2-np divider-course">
+      <div class="clearfix"></div>
+      <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
+        <h3><b class="home_title" style="position: inherit;">Playlist</b></h3>
+      </div>
+      <div class="clearfix"></div>
+      <ul id="playlist-thumb" class="slider slider-nav playlist_thumb" style="margin-bottom: 0px; padding-bottom: 15px;">
+        <% @course.playlist_items.each_with_index do |video, index| %>
+          <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
+            <div>
+              <%= image_tag video.thumbnail_image.url.gsub("http", "https") %>
+              <a href="javascript:void(0)">
+                <%= image_tag "big-play.png", :class => "play_btn" %>
+              </a>
+            </div>
+            <span><%= video.title %></span>
+          </li>
+        <% end %>
+      </ul>
     </div>
-    <div class="clearfix"></div>
-    <ul id="playlist-thumb" class="slider slider-nav playlist_thumb" style="margin-bottom: 0px; padding-bottom: 15px;">
-      <% @course.playlist_items.each_with_index do |video, index| %>
-        <li data-current-src="<%= video.get_src_url((is_mobile? ? 'mobile' : 'medium').to_sym) %>" class="playlist_items" data-video-index="<%= index %>">
-          <div>
-            <%= image_tag video.thumbnail_image.url.gsub("http", "https") %>
-            <a href="javascript:void(0)">
-              <%= image_tag "big-play.png", :class => "play_btn" %>
-            </a>
-          </div>
-          <span><%= video.title %></span>
-        </li>
-      <% end %>
-    </ul>
   </div>
 <% end %>
 <% unless @course.hide_about_course %>
@@ -133,20 +135,20 @@
       {
         breakpoint: 992,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 2,centerMode: true
         }
       },
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 2,centerMode: true
         }
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,centerMode: true
         }
       }
         // You can unslick at a given breakpoint now by adding:
@@ -666,7 +668,7 @@ table.score-specs tr:nth-child(2) td  {
 /*// 320, 480, 760, 960, 1200 and 1600px.*/
       @media only screen and (min-width: 250px) and (max-width: 349px) {
         .playlist_thumb li{
-          padding-right: 65px !important;
+          padding-right: 20px !important;
         }
       }
       @media only screen and (min-width: 1600px) {
@@ -699,7 +701,7 @@ table.score-specs tr:nth-child(2) td  {
         .description {
           padding-top: 30px;
           /*margin-bottom: 30px;*/
-          padding-left: 45px;
+          padding-left: 15px;
         }
         /*.description h4{
           font-size: 15px;
@@ -1125,7 +1127,7 @@ table.score-specs tr:nth-child(2) td  {
         .scorecard li { display: inline-block; }
 
         .divider-course{
-          width: 94% !important;
+          width: 100% !important;
         }
         .topborder{
           margin-right: 0px;

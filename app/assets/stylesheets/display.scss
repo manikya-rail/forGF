@@ -590,6 +590,13 @@ div:focus {
   .hole-info-div{
     width:100vw;
   }
+  .sld-pad{
+    overflow: hidden;
+    padding: 30px 15px 30px 30px;
+  }
+  .sld2-np{
+    padding:0 !important;
+  }
   .map-slecter button.btn{
     font-family: Avenir;
     font-size: 18px;
@@ -1404,7 +1411,6 @@ div:focus {
     left: 6px !important;
   }
   .slick-prev{
-    left: 5% !important;
     top: 47% !important;
   }
   .slick-next{
