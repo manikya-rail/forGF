@@ -161,12 +161,64 @@
      
     }
 
+    .image-cls{
+    background: url('/assets/logo.png');
+    height: 30px;
+    width: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-self: center;
+  } 
+
+    .btn-cls{
+    background-color: #ec3f3c;
+    color: white;
+    font-size: 10px;
+    border-radius: 8px;
+    border: 0px;
+    font-weight: bold;
+    padding-right: 25px;
+    padding-left: 25px;
+  }
+
   }
   .hole-home.active{
     background-color: #1d1e20;
     border-bottom: 4px solid <%= @course.color_selector %>;
   }
 
+  .footer-cls{
+    background: url('/assets/bar_background.png') ;
+    min-height: 63px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    padding-right: 40px;
+  }
+
+  .image-cls{
+    background: url('/assets/logo.png');
+    height: 50px;
+    width: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-self: center;
+  } 
+
+  .btn-cls{
+    background-color: #ec3f3c;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 0px;
+    font-weight: bold;
+    padding-right: 35px;
+    padding-left: 35px;
+  }
 
 </style>
 <%= Gon::Base.render_data %>
@@ -178,6 +230,10 @@
       <div class="hole-info-div">
         <%= render 'course_information'%>
       </div>
+    </div>
+    <div class= 'footer-cls'>
+      <div class= 'image-cls'> </div>
+      <button class= 'btn-cls'> BECOME A MEMBER </button>
     </div>
     <div class="signature pb-20">
       <div class='col-md-12 col-sm-12'>
