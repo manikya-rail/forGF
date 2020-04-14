@@ -200,9 +200,9 @@
   }
 
   .image-cls{
-    background: url('/assets/logo.png');
+    background: url(/assets/logo.png);
     height: 50px;
-    width: 150px;
+    width: 173px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -222,7 +222,6 @@
 
 </style>
 <%= Gon::Base.render_data %>
-
     <div class = "main-container">
       <%= render "course_home_video_container" %>
       <div class = "hider"> </div>
@@ -231,10 +230,12 @@
         <%= render 'course_information'%>
       </div>
     </div>
-    <div class= 'footer-cls'>
-      <div class= 'image-cls'> </div>
-      <button class= 'btn-cls'> BECOME A MEMBER </button>
-    </div>
+    <% if @resort.lead_generation.blank? %>
+      <div class= 'footer-cls'>
+        <div class= 'image-cls'> </div>
+        <button class= "btn-cls" onclick="redirect()" type="button"> BECOME A MEMBER </button>
+      </div>
+    <% end %>
     <div class="signature pb-20">
       <div class='col-md-12 col-sm-12'>
         <div class='col-md-4 col-sm-4 col-xs-4 col-md-offset-8 col-sm-offset-8 col-xs-offset-8 p0'>
@@ -248,6 +249,9 @@
 <!-- JavaScript -->
 
 <script type="text/javascript">
+  function redirect(){
+    window.location.replace("https://foregolf.com");
+  }
   $(function(){
     var player = videojs('home-vid');
     player.dispose();
