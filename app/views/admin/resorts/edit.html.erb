@@ -50,6 +50,10 @@
             <%= label_tag :hide_about_course ,'Hide About Course Info'%>
           </div>
           <div class="col-md-8 form-group">
+            <%= f.check_box :lead_generation %>
+            <%= label_tag :lead_generation ,'Hide Lead Generation'%>
+          </div>
+          <div class="col-md-8 form-group">
             <h4>Embedable Link For Client</h4>
             <textarea style="height:90px; resize:none; padding: 10px; text-align: center; " readonly id="iframe_link" class="form-control">
               <div class="fore-test-iframe">
