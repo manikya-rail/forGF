@@ -53,6 +53,27 @@
             <%= f.check_box :lead_generation %>
             <%= label_tag :lead_generation ,'Hide Lead Generation'%>
           </div>
+
+          <div class="col-md-6 form-group">
+            <%= label_tag :custom_url, 'Custom URL',class:"col-md-12 zero-left-right-padd"%>
+            <%= f.text_field :lead_url, class:"col-md-12 form-control contact-info check-field", placeholder: "Custom URL"%>
+          </div>
+          
+          <div class = "col-md-6">
+            <%= label_tag :logo, "Logo Image", class:"col-md-12 zero-left-right-padd "%>  
+            <div class = "clearfix"></div>
+            <div class="btn btn-success upload-btn">
+              <div class = "logo-field">
+                <%= f.file_field :logo, class: 'check-field logo-field'%>
+              </div>
+
+              <div class="cover image-division">
+                <span class="close-cross hide">&times;</span>
+                <%= image_tag("", class: "uploaded-cover-image course-create-image hide") %>
+              </div>
+            </div>
+          </div>
+
           <div class="col-md-8 form-group">
             <h4>Embedable Link For Client</h4>
             <textarea style="height:90px; resize:none; padding: 10px; text-align: center; " readonly id="iframe_link" class="form-control">
@@ -89,4 +110,24 @@
     /* Copy the text inside the text field */
     document.execCommand("copy");
   }
+
+  $(".logo-field").change(function(){
+    var imageDiv = $('.cover.image-division');
+    if (this.files.length > 0) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        if (window.location.href.indexOf('edit') < 0){
+          $('.uploaded-cover-image.course-create-image').attr('src', e.target.result).removeClass('hide');
+          $(imageDiv).find('.close-cross').removeClass('hide');
+        }else{
+          if ($('.cover .resort-logo-image.cimage').length != 0){
+            $('.cover .resort-logo-image.cimage').attr('src', e.target.result);
+          }else{
+            $(imageDiv).append("<span class='close-cross'>&times;</span> <img src='"+e.target.result+"' class='resort-logo-image cimage'>");
+          }
+        }
+      }
+      reader.readAsDataURL(this.files[0]);
+    }
+  });
 </script>

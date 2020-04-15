@@ -200,12 +200,11 @@
   }
 
   .image-cls{
-    background: url(/assets/logo.png);
     height: 50px;
-    width: 173px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    width: 200px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
     align-self: center;
   } 
 
@@ -222,6 +221,12 @@
 
 </style>
 <%= Gon::Base.render_data %>
+    <% lead_url = @resort.lead_url %>
+    <% if lead_url.nil? == false %>
+      <% lead_url = (lead_url.include? "https://") ? lead_url : "https://"+lead_url%>
+    <% else %>
+      <% lead_url = ''%>
+    <% end %>
     <div class = "main-container">
       <%= render "course_home_video_container" %>
       <div class = "hider"> </div>
@@ -232,8 +237,8 @@
     </div>
     <% if @resort.lead_generation.blank? %>
       <div class= 'footer-cls'>
-        <div class= 'image-cls'> </div>
-        <button class= "btn-cls" onclick="redirect()" type="button"> BECOME A MEMBER </button>
+        <div style ="background: url('<%=@resort.logo.url.gsub("http", "https")%>');" class= 'image-cls'> </div>
+        <button class= "btn-cls" onclick='redirect("<%=lead_url%>")' type="button"> BECOME A MEMBER </button>
       </div>
     <% end %>
     <div class="signature pb-20">
@@ -249,8 +254,8 @@
 <!-- JavaScript -->
 
 <script type="text/javascript">
-  function redirect(){
-    window.location.replace("https://foregolf.com");
+  function redirect(url){
+    window.location.replace(url);
   }
   $(function(){
     var player = videojs('home-vid');
