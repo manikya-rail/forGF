@@ -189,7 +189,8 @@
   }
 
   .footer-cls{
-    background: url('/assets/bar_background.png') ;
+    border-top: 3px solid #ec3f3c;
+    background: url(<%= image_url "bar_background.png" %>) center !important ;
     min-height: 63px;
     background-size: cover;
     background-position: center;
@@ -200,8 +201,8 @@
   }
 
   .image-cls{
-    height: 50px;
-    width: 200px;
+    height: 55px;
+    width: 236px;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
@@ -218,6 +219,40 @@
     padding-right: 35px;
     padding-left: 35px;
   }
+
+@media only screen and (max-width: 768px){
+    .image-cls {
+    height: 35px;
+    width: 140px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    align-self: center;
+  }
+
+  .btn-cls {
+    background-color: #ec3f3c;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 0px;
+    font-weight: bold;
+    padding-right: 30px;
+    padding-left: 30px;
+    width: auto;
+    font-size: 10px;
+    align-self: center;
+    margin-left: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }  
+
+  .footer-cls{
+    padding-right: 19px;
+   }
+}
+
+
 
 </style>
 <%= Gon::Base.render_data %>
