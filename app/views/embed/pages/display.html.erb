@@ -161,16 +161,107 @@
      
     }
 
+    .image-cls{
+    background: url('/assets/logo.png');
+    height: 30px;
+    width: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-self: center;
+  } 
+
+    .btn-cls{
+    background-color: #ec3f3c;
+    color: white;
+    font-size: 10px;
+    border-radius: 8px;
+    border: 0px;
+    font-weight: bold;
+    padding-right: 25px;
+    padding-left: 25px;
+  }
+
   }
   .hole-home.active{
     background-color: #1d1e20;
     border-bottom: 4px solid <%= @course.color_selector %>;
   }
 
+  .footer-cls{
+    border-top: 3px solid #ec3f3c;
+    background: url(<%= image_url "bar_background.png" %>) center !important ;
+    min-height: 63px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    padding-right: 40px;
+  }
+
+  .image-cls{
+    height: 55px;
+    width: 236px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    align-self: center;
+  } 
+
+  .btn-cls{
+    background-color: #ec3f3c;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 0px;
+    font-weight: bold;
+    padding-right: 35px;
+    padding-left: 35px;
+  }
+
+@media only screen and (max-width: 768px){
+    .image-cls {
+    height: 35px;
+    width: 140px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    align-self: center;
+  }
+
+  .btn-cls {
+    background-color: #ec3f3c;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 0px;
+    font-weight: bold;
+    padding-right: 30px;
+    padding-left: 30px;
+    width: auto;
+    font-size: 10px;
+    align-self: center;
+    margin-left: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }  
+
+  .footer-cls{
+    padding-right: 19px;
+   }
+}
+
+
 
 </style>
 <%= Gon::Base.render_data %>
-
+    <% lead_url = @resort.lead_url %>
+    <% if lead_url.nil? == false %>
+      <% lead_url = (lead_url.include? "https://") ? lead_url : "https://"+lead_url%>
+    <% else %>
+      <% lead_url = ''%>
+    <% end %>
     <div class = "main-container">
       <%= render "course_home_video_container" %>
       <div class = "hider"> </div>
@@ -179,6 +270,12 @@
         <%= render 'course_information'%>
       </div>
     </div>
+    <% if @resort.lead_generation.blank? %>
+      <div class= 'footer-cls'>
+        <div style ="background: url('<%=@resort.logo.url.gsub("http", "https")%>');" class= 'image-cls'> </div>
+        <button class= "btn-cls" onclick='redirect("<%=lead_url%>")' type="button"> BECOME A MEMBER </button>
+      </div>
+    <% end %>
     <div class="signature pb-20">
       <div class='col-md-12 col-sm-12'>
         <div class='col-md-4 col-sm-4 col-xs-4 col-md-offset-8 col-sm-offset-8 col-xs-offset-8 p0'>
@@ -192,6 +289,9 @@
 <!-- JavaScript -->
 
 <script type="text/javascript">
+  function redirect(url){
+    window.location.replace(url);
+  }
   $(function(){
     var player = videojs('home-vid');
     player.dispose();
