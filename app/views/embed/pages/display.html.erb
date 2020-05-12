@@ -273,7 +273,7 @@
     <% if @resort.lead_generation.blank? %>
       <div class= 'footer-cls'>
         <div style ="background: url('<%=@resort.logo.url.gsub("http", "https")%>');" class= 'image-cls'> </div>
-        <button class= "btn-cls" onclick='redirect("<%=lead_url%>")' type="button"> BECOME A MEMBER </button>
+        <button class= "btn-cls" onclick='redirect("<%=lead_url%>")' type="button" formtarget="_blank"> BECOME A MEMBER </button>
       </div>
     <% end %>
     <div class="signature pb-20">
@@ -290,7 +290,7 @@
 
 <script type="text/javascript">
   function redirect(url){
-    window.location.replace(url);
+    window.open(url);
   }
   $(function(){
     var player = videojs('home-vid');
