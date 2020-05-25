@@ -16,7 +16,7 @@
     
   </div>
 
-    <div class="merge-dropdown-home">
+    <div class="merge-dropdown-home hidden">
       <% if sibling_courses.count > 0 %>
         <div class="dropdown">
           <ul class="dropdown-menu on-home">
@@ -75,6 +75,7 @@
       </div>
     </div>
 </div>
+
 <style type="text/css">
 .fa-check:before {
   color: #0083A9;
@@ -120,6 +121,12 @@
 }
 </style>
 <script type="text/javascript">
+  $(document).ready(function() {
+    if(<%= @course.resort.hide_carousel == false%>){
+      $(".merge-dropdown-home").removeClass("hidden");
+    }
+  });
+
   $(function(){
     function handlerIn() {
       $(".merge-dropdown-home").find(".dropdown-menu").show();
