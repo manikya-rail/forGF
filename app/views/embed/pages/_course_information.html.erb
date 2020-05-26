@@ -34,7 +34,7 @@
       </div>
   </div>
 <% end %>
-<div class="row slider description hidden" style="padding-top: 5px;">
+<div class="row slider description" style="padding-top: 5px;">
   <div class="col-md-12 col-xs-12 col-sm-12 st1">
     <div class="row scorecard-row">
       <div class="col-md-6 col-sm-12 col-lg-6 col-xs-12">
@@ -110,8 +110,8 @@
 
   $(document).ready(function(){
 
-    if(<%= @course.resort.hide_score_card == false%>){
-      $(".slider").removeClass("hidden");
+    if(<%= @course.resort.hide_score_card == true%>){
+      $(".slider").addClass("hidden");
     }
 
     $('.playlist_items').on('click', function(){
