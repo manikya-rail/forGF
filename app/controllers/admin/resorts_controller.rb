@@ -91,7 +91,7 @@ class Admin::ResortsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resort_params
-      params.require(:resort).permit(:name, :hide_logo, :hide_about_course, :lead_generation, :logo, :lead_url)
+      params.require(:resort).permit(:name, :hide_logo, :hide_about_course, :lead_generation, :logo, :lead_url, :hide_carousel, :hide_score_card)
     end
 
     def set_version_header
