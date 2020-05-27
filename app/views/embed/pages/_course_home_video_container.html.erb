@@ -120,6 +120,12 @@
 }
 </style>
 <script type="text/javascript">
+  $(document).ready(function() {
+    if(<%= @course.resort.hide_carousel == true%>){
+      $(".merge-dropdown-home").addClass("hidden");
+    }
+  });
+
   $(function(){
     function handlerIn() {
       $(".merge-dropdown-home").find(".dropdown-menu").show();
