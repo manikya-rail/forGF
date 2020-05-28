@@ -250,6 +250,18 @@
         clearTimeout(timer);
     });
 
+    <% if @videos_urls.size > 1 %>
+    $(function(){
+      document.querySelector('.previous').addEventListener('click', function() {
+        player.playlist.previous();
+      });
+      document.querySelector('.next').addEventListener('click', function() {
+        player.playlist.next();
+      });
+    });
+   <% end %>
+
+
     document.querySelector('.right-green').addEventListener('click', function() {
       var nextActiveId;
       $firstElement = 0;
@@ -332,15 +344,3 @@
   })
 // });
 </script>
-<% if @videos_urls.size > 1 %>
-  <script type="text/javascript">
-    $(function(){
-      document.querySelector('.previous').addEventListener('click', function() {
-        player.playlist.previous();
-      });
-      document.querySelector('.next').addEventListener('click', function() {
-        player.playlist.next();
-      });
-    });
-  </script>
-<% end %>
