@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def logo_on_video(course)
-    course.transparent_logo.present? ? course.transparent_logo.url(:medium) : 'logo.png'
+    course.transparent_logo.present? ? course.transparent_logo.url(:medium).gsub("http", "https") : 'logo.png'
   end
 
   def hyperlink_on_video(course)
