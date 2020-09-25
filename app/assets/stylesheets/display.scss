@@ -354,7 +354,7 @@ div:focus {
 }
 
 .slider-bg-color:hover {  
-  background-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+  background-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)) !important;
 }
 
 .slider-bg-color-right{
@@ -367,7 +367,7 @@ div:focus {
 }
 
 .slider-bg-color-right:hover{
-  background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1));
+  background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1)) !important;;
 }
 
 .vjs-playlist .hole-home{
