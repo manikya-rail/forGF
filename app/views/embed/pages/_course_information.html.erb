@@ -85,11 +85,16 @@
   </div>
 </div>
 <div class="clearfix"></div>
-<ul id="slider" class="bxslider">
+
+<div style= "position: relative;">
+<div class= "slider-bg-color"> </div>
+<div class="slider-bg-color-right"> </div>
+<ul id="slider" class="bxslider"> 
   <% @course.course_images.each do | courseimage | %>
     <li><%=image_tag courseimage.photo.url.gsub("http", "https") %></li>
   <% end%>
 </ul>
+</div>
 
 <script type="text/javascript">
   $(document).ready(sliderInitializer);
@@ -100,8 +105,8 @@
       mode: 'horizontal',
       useCSS: false,
         pager: false,
-        nextText: '<%= image_tag "right.png" %>',
-        prevText: '<%= image_tag "left.png" %>'
+        nextText: '<%= image_tag "right.png", class: 'right-arrow-hover'%>',
+        prevText: '<%= image_tag "left.png", class: 'left-arrow-hover' %>'
      });
     return slider;
   }
@@ -115,6 +120,22 @@
       var player = videojs('home-vid');
       player.playlist.currentItem(parseInt(clicked_item));
       player.play();
+    });
+
+    $(".right-arrow-hover").mouseover(function(){
+      $(".slider-bg-color-right").css("background-image", "linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1))");
+    });
+
+    $(".right-arrow-hover").mouseout(function(){
+      $(".slider-bg-color-right").css("background-image", "none");
+    });
+
+    $(".left-arrow-hover").mouseover(function(){
+      $(".slider-bg-color").css("background-image", "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0))");
+    });
+
+    $(".left-arrow-hover").mouseout(function(){
+      $(".slider-bg-color").css("background-image", "none");
     });
 
     $('#playlist-thumb').slick({
@@ -502,8 +523,12 @@ table.score-specs tr:nth-child(2) td  {
 
 .bx-next, .bx-prev {
   position: absolute;
-  top: 50%;
+  top: 48%;
   width: 17px;
+  z-index: 101;
+}
+.bx-next img, .bx-prev img{
+  height: 55px;
 }
 .bx-next {
   /*right: 62px;*/
@@ -796,7 +821,7 @@ table.score-specs tr:nth-child(2) td  {
           margin-top: 0px;
           padding-top: 0px;
       }
-      /*.bx-controls-direction {
+      /*.x {
         height: 55px;
         margin-top: 0%;
       }*/
@@ -1219,6 +1244,7 @@ table.score-specs tr:nth-child(2) td  {
         }
         .bx-next img, .bx-prev img {
           width: inherit;
+          height: 40px;
         }
         .bx-prev, .bx-next {
             margin-top: -15px;
