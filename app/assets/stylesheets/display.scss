@@ -337,9 +337,37 @@ div:focus {
   margin-right: -25px;
   align-items: center;
   justify-content: center;
+  z-index: 101;
 }
+
 .previous.on-video img, .next.on-video img{
-  width: 17px;
+  width: 25px;
+}
+
+.slider-bg-color{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 100;
+}
+
+.slider-bg-color:hover{  
+  background-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+.slider-bg-color-right{
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 100;
+}
+
+.slider-bg-color-right:hover{
+  background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1));
 }
 
 .vjs-playlist .hole-home{
