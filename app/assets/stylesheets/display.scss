@@ -341,7 +341,7 @@ div:focus {
 }
 
 .previous.on-video img, .next.on-video img{
-  width: 25px;
+  width: 17px;
 }
 
 .slider-bg-color{
@@ -349,12 +349,8 @@ div:focus {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 150px;
+  width: 170px;
   z-index: 100;
-}
-
-.slider-bg-color:hover {  
-  background-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)) !important;
 }
 
 .slider-bg-color-right{
@@ -362,12 +358,8 @@ div:focus {
   right: 0;
   top: 0;
   bottom: 0;
-  width: 150px;
+  width: 170px;
   z-index: 100;
-}
-
-.slider-bg-color-right:hover{
-  background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1)) !important;;
 }
 
 .vjs-playlist .hole-home{
@@ -1061,6 +1053,12 @@ div:focus {
 @media only screen and (min-width: 600px) {
   .left-green svg, .right-green svg{
     width: 17px;
+  }
+  .slider-bg-color:hover {  
+    background-image: linear-gradient(to right, #000000b5, rgba(0,0,0,0)) !important;
+  }
+  .slider-bg-color-right:hover{
+    background-image: linear-gradient(to right, rgba(0,0,0,0), #000000b5) !important;;
   }
 }
 
