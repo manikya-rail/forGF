@@ -1055,10 +1055,10 @@ div:focus {
     width: 17px;
   }
   .slider-bg-color:hover {  
-    background-image: linear-gradient(to right, #000000b5, rgba(0,0,0,0)) !important;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.71), rgba(0,0,0,0)) !important;
   }
   .slider-bg-color-right:hover{
-    background-image: linear-gradient(to right, rgba(0,0,0,0), #000000b5) !important;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0, 0, 0, 0.71)) !important;
   }
 }
 
