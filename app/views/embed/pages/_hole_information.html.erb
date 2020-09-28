@@ -38,7 +38,9 @@
         </ul>
       </div>
       <div id="22">
-        <ul id="slider" class="bxslider">
+        <div class= "slider-bg-color"> </div>
+        <div class="slider-bg-color-right"> </div>
+        <ul id="slider-1" class="bxslider">
           <% @hole.hole_images.order(:rank).each do | holeimage | %>
             <li><%=image_tag holeimage.image.url %></li>
           <% end%>
@@ -56,7 +58,9 @@
         </ul>
       </div>
       <div id="44">
-        <ul id="slider" class="bxslider">
+        <div class= "slider-bg-color hole-info-left"> </div>
+        <div class="slider-bg-color-right hole-info-right"> </div>
+        <ul id="slider-2" class="bxslider">
           <% @hole.hole_images.order(:rank).each do | holeimage | %>
             <li><%=image_tag holeimage.image.url %></li>
           <% end%>
@@ -66,17 +70,50 @@
   </div>
 
 <script type="text/javascript">
-$(document).ready(sliderInitializer);
+  
+$(document).ready(function() {
+  sliderInitializer1();
+  sliderInitializer2();
+});
 
-function sliderInitializer (){
-  var slider = $('.bxslider').bxSlider({
+function sliderInitializer1 (){
+  var slider1 = $('#slider-1').bxSlider({
     mode: 'horizontal',
     useCSS: false,
       pager: false,
       nextText: '<%= image_tag "right.png" %>',
       prevText: '<%= image_tag "left.png" %>'
    });
-  return slider;
+
+  $('.slider-bg-color-right').click(function() {
+    slider1.goToNextSlide();
+  });
+
+  $('.slider-bg-color').click(function() {
+    slider1.goToPrevSlide();
+  });
+
+  return slider1;
+}
+
+function sliderInitializer2 (){
+  var slider2 = $('#slider-2').bxSlider({
+    mode: 'horizontal',
+    useCSS: false,
+      pager: false,
+      nextText: '<%= image_tag "right.png" %>',
+      prevText: '<%= image_tag "left.png" %>'
+   });
+
+  $('.hole-info-right').click(function() {
+    slider2.goToNextSlide();
+  });
+
+  $('.hole-info-left').click(function() {
+    slider2.goToPrevSlide();
+  });
+
+  return slider2;
 }
 
 $('#select_map').click(function (){
