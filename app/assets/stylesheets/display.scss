@@ -349,8 +349,9 @@ div:focus {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 170px;
+  width: 200px;
   z-index: 100;
+  cursor: pointer;
 }
 
 .slider-bg-color-right{
@@ -358,8 +359,9 @@ div:focus {
   right: 0;
   top: 0;
   bottom: 0;
-  width: 170px;
+  width: 200px;
   z-index: 100;
+  cursor: pointer;
 }
 
 .vjs-playlist .hole-home{
