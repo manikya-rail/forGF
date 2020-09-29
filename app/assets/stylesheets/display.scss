@@ -1003,6 +1003,16 @@ div:focus {
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .slider-bg-color{
+    width: 200px;
+  }
+
+  .slider-bg-color-right{
+    width: 200px;
+  }
+}
+
 @media only screen and (min-width: 600px) and (max-width: 760px) {
   .description {
     padding-top: 30px;
@@ -1366,6 +1376,13 @@ div:focus {
   }
   .playlist ul li a {
     padding: 7px 28px 1px !important;
+  }
+  .slider-bg-color{
+    width: 100px;
+  }
+
+  .slider-bg-color-right{
+    width: 100px;
   }
 }
 @media only screen and (min-width: 350px) and (max-width: 479px) {
