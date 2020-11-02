@@ -85,11 +85,16 @@
   </div>
 </div>
 <div class="clearfix"></div>
-<ul id="slider" class="bxslider">
+
+<div style= "position: relative;">
+<div class= "slider-bg-color"> </div>
+<div class="slider-bg-color-right"> </div>
+<ul id="slider" class="bxslider"> 
   <% @course.course_images.each do | courseimage | %>
     <li><%=image_tag courseimage.photo.url.gsub("http", "https") %></li>
   <% end%>
 </ul>
+</div>
 
 <script type="text/javascript">
   $(document).ready(sliderInitializer);
@@ -99,10 +104,19 @@
     var slider = $('.bxslider').bxSlider({
       mode: 'horizontal',
       useCSS: false,
-        pager: false,
-        nextText: '<%= image_tag "right.png" %>',
-        prevText: '<%= image_tag "left.png" %>'
+      pager: false,
+      nextText: '<%= image_tag "right.png", class: 'right-arrow-hover'%>',
+      prevText: '<%= image_tag "left.png", class: 'left-arrow-hover' %>'
      });
+
+    $('.slider-bg-color-right').click(function() {
+      slider.goToNextSlide();
+    });
+
+    $('.slider-bg-color').click(function() {
+      slider.goToPrevSlide();
+    });
+
     return slider;
   }
 
@@ -117,6 +131,23 @@
       player.play();
     });
 
+    $(".right-arrow-hover").mouseover(function(){
+      $(".slider-bg-color-right").css("background-image", "linear-gradient(to right, rgba(0,0,0,0), rgba(0, 0, 0, 0.50))");
+    });
+
+    $(".right-arrow-hover").mouseout(function(){
+      $(".slider-bg-color-right").css("background-image", "none");
+    });
+
+    $(".left-arrow-hover").mouseover(function(){
+      $(".slider-bg-color").css("background-image", "linear-gradient(to right, rgba(0, 0, 0, 0.50), rgba(0,0,0,0))");
+    });
+
+    $(".left-arrow-hover").mouseout(function(){
+      $(".slider-bg-color").css("background-image", "none");
+    });
+
+    
     $('#playlist-thumb').slick({
       infinite: true,
       slidesToShow: 3,
@@ -502,16 +533,18 @@ table.score-specs tr:nth-child(2) td  {
 
 .bx-next, .bx-prev {
   position: absolute;
-  top: 50%;
+  top: 48%;
+  width: 17px;
+  z-index: 101;
+}
+.bx-next img, .bx-prev img{
   width: 17px;
 }
 .bx-next {
-  /*right: 62px;*/
-  right: 6%;
+  right: 58px;
 }
 .bx-prev {
-  /*left: 62px;*/
-  left: 5%;
+  left: 58px;
 }
 .description {
   width: 100%;
@@ -708,7 +741,7 @@ table.score-specs tr:nth-child(2) td  {
           font-size: 15px;
         }*/
         .bx-next img, .bx-prev img {
-          width: inherit;
+          width: 17px;
         }
         .pp {
           width: 26%;
@@ -796,7 +829,7 @@ table.score-specs tr:nth-child(2) td  {
           margin-top: 0px;
           padding-top: 0px;
       }
-      /*.bx-controls-direction {
+      /*.x {
         height: 55px;
         margin-top: 0%;
       }*/
@@ -872,8 +905,14 @@ table.score-specs tr:nth-child(2) td  {
         .bio {
           padding-right: 10px;
         }
+        .bx-next{
+          right: 33px;
+        }
+        .bx-prev{
+          left: 33px;
+        }
         .bx-next img, .bx-prev img {
-          width: inherit;
+          width: 13px;
         }
          .specs {
           text-align: center;
@@ -1218,7 +1257,13 @@ table.score-specs tr:nth-child(2) td  {
           font-size: 17px;
         }
         .bx-next img, .bx-prev img {
-          width: inherit;
+          width: 13px;
+        }
+        .bx-prev{
+          left: 25px;
+        }
+        .bx-next {
+          right: 25px;
         }
         .bx-prev, .bx-next {
             margin-top: -15px;

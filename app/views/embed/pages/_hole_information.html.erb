@@ -28,7 +28,7 @@
   </div>
   <div class="row slider">
     <div class="col-md-12 st1">
-      <div class="btn-group btn-group-lg map-slecter">
+      <div class="btn-group btn-group-lg map-slecter map-photos-section">
         <button type="button" class="btn" id="select_map" color="<%=color_selector(@course_color)%>">Map</button>
         <button type="button" class="btn" id="select_photos" color="<%=color_selector(@course_color)%>">Photos</button>
       </div>
@@ -38,7 +38,9 @@
         </ul>
       </div>
       <div id="22">
-        <ul id="slider" class="bxslider">
+        <div class= "slider-bg-color"> </div>
+        <div class="slider-bg-color-right"> </div>
+        <ul id="slider-1" class="bxslider">
           <% @hole.hole_images.order(:rank).each do | holeimage | %>
             <li><%=image_tag holeimage.image.url %></li>
           <% end%>
@@ -46,7 +48,7 @@
       </div>
     </div>
     <div class="col-md-12 st2">
-      <div class="divider">
+      <div class="divider map-photos-section">
         <button type="button" class="btn" id="hole-map" color="<%=color_selector(@course_color)%>">Map</button>
         <button type="button" class="btn" id="hole-photos" color="<%=color_selector(@course_color)%>">Photos</button>
       </div>
@@ -56,7 +58,9 @@
         </ul>
       </div>
       <div id="44">
-        <ul id="slider" class="bxslider">
+        <div class= "slider-bg-color hole-info-left"> </div>
+        <div class="slider-bg-color-right hole-info-right"> </div>
+        <ul id="slider-2" class="bxslider">
           <% @hole.hole_images.order(:rank).each do | holeimage | %>
             <li><%=image_tag holeimage.image.url %></li>
           <% end%>
@@ -66,17 +70,67 @@
   </div>
 
 <script type="text/javascript">
-$(document).ready(sliderInitializer);
+  
+$(document).ready(function() {
+  sliderInitializer1();
+  sliderInitializer2();
 
-function sliderInitializer (){
-  var slider = $('.bxslider').bxSlider({
+  $(".right-arrow-hover").mouseover(function(){
+    $(".slider-bg-color-right").css("background-image", "linear-gradient(to right, rgba(0,0,0,0), rgba(0, 0, 0, 0.50))");
+  });
+
+  $(".right-arrow-hover").mouseout(function(){
+    $(".slider-bg-color-right").css("background-image", "none");
+  });
+
+  $(".left-arrow-hover").mouseover(function(){
+    $(".slider-bg-color").css("background-image", "linear-gradient(to right, rgba(0, 0, 0, 0.50), rgba(0,0,0,0))");
+  });
+
+  $(".left-arrow-hover").mouseout(function(){
+    $(".slider-bg-color").css("background-image", "none");
+  });
+    
+});
+
+function sliderInitializer1 (){
+  var slider1 = $('#slider-1').bxSlider({
     mode: 'horizontal',
     useCSS: false,
       pager: false,
-      nextText: '<%= image_tag "right.png" %>',
-      prevText: '<%= image_tag "left.png" %>'
+      nextText: '<%= image_tag "right.png", class: 'right-arrow-hover' %>',
+      prevText: '<%= image_tag "left.png", class: 'left-arrow-hover' %>'
    });
-  return slider;
+
+  $('.slider-bg-color-right').click(function() {
+    slider1.goToNextSlide();
+  });
+
+  $('.slider-bg-color').click(function() {
+    slider1.goToPrevSlide();
+  });
+
+  return slider1;
+}
+
+function sliderInitializer2 (){
+  var slider2 = $('#slider-2').bxSlider({
+    mode: 'horizontal',
+    useCSS: false,
+      pager: false,
+      nextText: '<%= image_tag "right.png", class: 'right-arrow-hover' %>',
+      prevText: '<%= image_tag "left.png", class: 'left-arrow-hover' %>'
+   });
+
+  $('.hole-info-right').click(function() {
+    slider2.goToNextSlide();
+  });
+
+  $('.hole-info-left').click(function() {
+    slider2.goToPrevSlide();
+  });
+
+  return slider2;
 }
 
 $('#select_map').click(function (){
@@ -192,6 +246,10 @@ h3, h4 {
 h3 {
   font-size: 20px;
 }
+.map-photos-section{
+  position: relative;
+  z-index: 200;
+}
 
 .selected{
   background: black;
@@ -253,14 +311,17 @@ h3 {
   position: absolute;
   top: 50%;
   width: 17px;
+  z-index: 200;
 }
 .bx-next {
-  /*right: 62px;*/
-  right: 6%;
+  right: 50px;
+}
+.bx-next img, .bx-prev img{
+  width: 17px;
 }
 .bx-prev {
   /*left: 62px;*/
-  left: 5%;
+  left: 50px;
 }
 .description {
   width: 100%;
@@ -456,8 +517,14 @@ h3 {
           padding-right: 50px;
           /*margin-right: 0;*/
         }
+        .bx-next {
+            right: 56px;
+        }
+        .bx-prev {
+            left: 56px;
+        }
         .bx-next img, .bx-prev img {
-          width: inherit;
+          width: 17px;
         }
          .yards {
           text-align: center;
@@ -500,6 +567,17 @@ h3 {
           font-size:20px;
         }
       }
+       @media only screen and (max-width: 768px){
+        .bx-next {
+            right: 33px;
+        }
+        .bx-prev {
+            left: 33px;
+        }
+        .bx-next img, .bx-prev img {
+          width: 13px;
+        }
+       }
 
       @media only screen and (max-width: 759px) and (min-width: 480px) {
         .st2 {
@@ -630,8 +708,14 @@ h3 {
           padding-right: 20px;
           text-align: center;
         }
+        .bx-next {
+            right: 25px;
+        }
+        .bx-prev {
+            left: 25px;
+        }
         .bx-next img, .bx-prev img {
-          width: inherit;
+          width: 13px;
         }
         .yards {
           text-align: center;

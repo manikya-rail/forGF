@@ -69,6 +69,14 @@ if ($('#hole-vid').length == 0){
     player.playlist.next();
   });
 
+  document.querySelector('.slider-bg-prev').addEventListener('click', function() {
+    player.playlist.previous();
+  });
+  
+  document.querySelector('.slider-bg-right').addEventListener('click', function() {
+    player.playlist.next();
+  });
+
 
 $(document).ready(function() {
   bgcolor = $('.player-container').attr('progress-color');  

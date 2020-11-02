@@ -209,7 +209,7 @@ body{
 
 .video-js .vjs-control-bar {
   background: transparent;
-  z-index: 2;
+  z-index: 102;
 }
 .vjs-control-bar:focus {
   outline: none;
@@ -337,9 +337,31 @@ div:focus {
   margin-right: -25px;
   align-items: center;
   justify-content: center;
+  z-index: 101;
 }
+
 .previous.on-video img, .next.on-video img{
   width: 17px;
+}
+
+.slider-bg-color{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.slider-bg-color-right{
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  z-index: 100;
+  cursor: pointer;
 }
 
 .vjs-playlist .hole-home{
@@ -981,6 +1003,16 @@ div:focus {
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .slider-bg-color{
+    width: 200px;
+  }
+
+  .slider-bg-color-right{
+    width: 200px;
+  }
+}
+
 @media only screen and (min-width: 600px) and (max-width: 760px) {
   .description {
     padding-top: 30px;
@@ -1033,6 +1065,12 @@ div:focus {
 @media only screen and (min-width: 600px) {
   .left-green svg, .right-green svg{
     width: 17px;
+  }
+  .slider-bg-color:hover {  
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.50), rgba(0,0,0,0)) !important;
+  }
+  .slider-bg-color-right:hover{
+    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0, 0, 0, 0.50)) !important;
   }
 }
 
@@ -1338,6 +1376,13 @@ div:focus {
   }
   .playlist ul li a {
     padding: 7px 28px 1px !important;
+  }
+  .slider-bg-color{
+    width: 100px;
+  }
+
+  .slider-bg-color-right{
+    width: 100px;
   }
 }
 @media only screen and (min-width: 350px) and (max-width: 479px) {

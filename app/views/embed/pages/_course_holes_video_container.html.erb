@@ -24,8 +24,9 @@
     
     <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered video_container" playsinline></video>
 
-    <div class="previous on-video"> <%= image_tag "left.png" %> </div>
-    <div class="next on-video"><%= image_tag "right.png" %></div>
+    <div class="slider-bg-color slider-bg-prev"><div class="previous on-video"> <%= image_tag "left.png" %> </div> </div>
+    <div class="slider-bg-color-right slider-bg-right"><div class="next on-video"><%= image_tag "right.png" %></div> </div>
+
     <!-- <div class="logo on-video"><%#= link_to image_tag(logo_on_video(@course)), hyperlink_on_video(@course), target: :_blank %></div> -->
     <% sibling_courses = @course.sibling_courses %>
     <div  class = "lower-gradient"></div>
