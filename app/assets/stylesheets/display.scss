@@ -79,9 +79,9 @@ a:hover {
 .upper-gradient{
   width: 100%;
   padding-top: 4%;
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+  background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0));
   position: absolute;
-  z-index: 1;
+  z-index: 999;
   height: 100px;
   /*top: 0px !important*/
 }
@@ -89,7 +89,7 @@ a:hover {
   width: 100%;
   bottom: 60px;
   padding-top: 4%;
-  background: linear-gradient(rgba(64,64,64,0), rgba(0,0,0,0.3));
+  background: linear-gradient(rgba(64,64,64,0), rgba(0,0,0,0.15));
   position: absolute;
   z-index: 0;
   height: 100px;
@@ -1067,10 +1067,10 @@ div:focus {
     width: 17px;
   }
   .slider-bg-color:hover {  
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.50), rgba(0,0,0,0)) !important;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.15), rgba(0,0,0,0)) !important;
   }
   .slider-bg-color-right:hover{
-    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0, 0, 0, 0.50)) !important;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0, 0, 0, 0.15)) !important;
   }
 }
 

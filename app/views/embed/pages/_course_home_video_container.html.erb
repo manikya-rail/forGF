@@ -253,18 +253,21 @@
 
     <% if @videos_urls.size > 1 %>
     $(function(){
-      document.querySelector('.previous').addEventListener('click', function() {
-        player.playlist.previous();
-      });
+      // document.querySelector('.previous').addEventListener('click', function() {
+      //   player.playlist.previous();
+      // });
+      // document.querySelector('.next').addEventListener('click', function() {
+      //   player.playlist.next();
+      // });
+
       document.querySelector('.slider-bg-prev').addEventListener('click', function() {
         player.playlist.previous();
       });
-      document.querySelector('.next').addEventListener('click', function() {
-        player.playlist.next();
-      });
+
       document.querySelector('.slider-bg-right').addEventListener('click', function() {
         player.playlist.next();
       });
+      
     });
    <% end %>
 
