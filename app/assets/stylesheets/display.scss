@@ -76,10 +76,13 @@ a:hover {
 .player-container{
   position: absolute;
 }
+.video-js .vjs-tech{
+  object-fit: cover;
+}
 .upper-gradient{
   width: 100%;
   padding-top: 4%;
-  background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0));
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
   position: absolute;
   z-index: 999;
   height: 100px;
