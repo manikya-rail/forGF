@@ -4,8 +4,6 @@
     <div class="logo on-video">
       <%= link_to image_tag(logo_on_video(@course)), hyperlink_on_video(@course), target: :_blank %>
     </div>
-  </div>
-  <div class="vplayer" id="vplayer">
     <div class="hole-bar">
       <ul >
         <li id="firstli" >
@@ -21,6 +19,8 @@
         <li id="lastli" ><text id="mhcp"><%= @hole.total_hcps %></text>&nbsp;<span>HCP</span></li>
       </ul>
     </div>
+  </div>
+  <div class="vplayer" id="vplayer">
     
     <video id="hole-vid" class="video-js vjs-default-skin vjs-big-play-centered video_container" playsinline></video>
 
