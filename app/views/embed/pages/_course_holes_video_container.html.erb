@@ -135,9 +135,10 @@
     $("#0").hover(handlerIn, handlerOut);
     $(".holes-on-home").hover(handlerIn, handlerOut);
 
+    var nextActiveId;
+    $firstElement = 0;
+
     document.querySelector('.right-green').addEventListener('click', function() {
-      var nextActiveId;
-      $firstElement = 0;
       if($(window).width() < 350){
         nextActiveId = $firstElement + 1;
       }
@@ -164,9 +165,8 @@
         $firstElement = nextActiveId
       }
     });
+
     document.querySelector('.left-green').addEventListener('click', function() {
-      var nextActiveId;
-      $firstElement = 0;
       if($(window).width() < 350){
         nextActiveId = $firstElement - 1;
       }
