@@ -61,6 +61,30 @@
             <%= f.check_box :hide_score_card %> 
             <%= label_tag :hide_carousel ,'Hide Score Card'%> 
           </div>
+
+          <div class="col-md-8 form-group">
+            <%= label_tag :fore_btn_text, 'FORE Button Text'%>
+            <%= f.text_field :fore_btn_text, class:"col-md-12 form-control contact-info check-field"%>
+          </div>
+
+          <div class="col-md-8 form-group" style="display: none;">
+            <%= f.text_field :fore_btn_background%>
+          </div>
+
+          <div class="col-md-8 form-group"> 
+            <label for="fore_btn_background">FORE Button Background</label>
+            <input type="color" id="fore_btn_background" name="fore_btn_background" value="<%= @resort.fore_btn_background.present? ? @resort.fore_btn_background : "#ff0000" %>">
+          </div>
+
+          <div class="col-md-8 form-group" style="display: none;">
+            <%= f.text_field :fore_line_color%>
+          </div>
+
+          <div class="col-md-8 form-group"> 
+            <label for="fore_line_color">FORE Line Color</label>
+            <input type="color" id="fore_line_color" name="fore_line_color" value="<%= @resort.fore_line_color.present? ? @resort.fore_line_color : "#ff0000" %>">
+          </div>
+
           <div class="col-md-6 form-group">
             <%= label_tag :custom_url, 'Custom URL',class:"col-md-12 zero-left-right-padd"%>
             <%= f.text_field :lead_url, class:"col-md-12 form-control contact-info check-field", placeholder: "Custom URL"%>
@@ -137,4 +161,13 @@
       reader.readAsDataURL(this.files[0]);
     }
   });
+
+  $("#fore_btn_background").change(function(){
+    $("#resort_fore_btn_background").val(this.value)
+  });
+
+  $("#fore_line_color").change(function(){
+    $("#resort_fore_line_color").val(this.value)
+  });
+
 </script>

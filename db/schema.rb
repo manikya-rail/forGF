@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190625104949) do
+ActiveRecord::Schema.define(version: 20201217041703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,14 +208,26 @@ ActiveRecord::Schema.define(version: 20190625104949) do
 
   create_table "resorts", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "resort_type"
     t.string   "website"
     t.string   "phone_num"
     t.integer  "network_id"
     t.integer  "courses_count"
     t.boolean  "hide_logo"
+    t.boolean  "hide_about_course"
+    t.boolean  "lead_generation"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "lead_url"
+    t.boolean  "hide_carousel"
+    t.boolean  "hide_score_card"
+    t.string   "fore_btn_background"
+    t.string   "fore_btn_text"
+    t.string   "fore_line_color"
   end
 
   create_table "reviews", force: :cascade do |t|

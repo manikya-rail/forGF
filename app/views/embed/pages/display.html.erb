@@ -271,9 +271,9 @@
       </div>
     </div>
     <% if @resort.lead_generation.blank? %>
-      <div class= 'footer-cls'>
+      <div class= 'footer-cls' style="border-top: <%= @resort.fore_line_color.present? ? "3px solid" + " "+ @resort.fore_line_color : "3px solid #ec3f3c" %>">
         <div style ="background: url('<%=@resort.logo.url.gsub("http", "https")%>');" class= 'image-cls'> </div>
-        <button class= "btn-cls" onclick='redirect("<%=lead_url%>")' type="button" formtarget="_blank"> BECOME A MEMBER </button>
+        <button class= "btn-cls" onclick='redirect("<%=lead_url%>")' type="button" formtarget="_blank" style="background-color: <%= @resort.fore_btn_background.present? ? @resort.fore_btn_background : "#ec3f3c" %>"> <%= @resort.fore_btn_text.present? ? @resort.fore_btn_text : "BECOME A MEMBER" %> </button>
       </div>
     <% end %>
     <div class="signature pb-20">
@@ -337,11 +337,11 @@
       //$(".video-js .vjs-menu .vjs-menu-content").fadeOut();
 
       if(window.innerWidth > 650 ){
-        $(".vjs-control-bar").animate({bottom: '-70px'});
+        $(".vjs-control-bar").css({opacity: '0'});
         $(".upper-gradient").animate({top: '-70px'});
       }
       else{
-        $(".vjs-control-bar").animate({bottom: '-40px'});
+        $(".vjs-control-bar").css({opacity: '0'});
         $(".upper-gradient").animate({top: '-40px'});
       }
       $(".lower-gradient").animate({bottom: '0px'});
