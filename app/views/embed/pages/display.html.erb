@@ -337,11 +337,11 @@
       //$(".video-js .vjs-menu .vjs-menu-content").fadeOut();
 
       if(window.innerWidth > 650 ){
-        $(".vjs-control-bar").animate({bottom: '-70px'});
+        $(".vjs-control-bar").css({opacity: '0'});
         $(".upper-gradient").animate({top: '-70px'});
       }
       else{
-        $(".vjs-control-bar").animate({bottom: '-40px'});
+        $(".vjs-control-bar").css({opacity: '0'});
         $(".upper-gradient").animate({top: '-40px'});
       }
       $(".lower-gradient").animate({bottom: '0px'});
