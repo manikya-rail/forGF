@@ -194,8 +194,17 @@
     player.on('ended', function(){
       $("li.playing").removeClass('playing');
       if(player.playlist.lastIndex() == player.playlist.currentIndex()){
-        localStorage.setItem("hole_auto_play", true);
-        $(".hole-number#1 a").click()
+
+        <% if @course_status == false %>
+            localStorage.setItem("hole_auto_play", true);
+            $(".hole-number#1 a").click()
+        <%else%>
+              //alert(videoList.length)
+              //player.playlist(videoList);
+            player.playlist(videoList);
+            player.play();
+        <%end%>
+        
       }
     });
 

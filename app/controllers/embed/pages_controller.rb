@@ -42,6 +42,7 @@ class Embed::PagesController < ApplicationController
     gon.image_urls = []
     @teename = []
     @course = Course.find(params[:id])
+    @course_status = @course.resort.hide_carousel
     @resort = @course.resort
     resolution = (is_mobile? ? 'mobile' : 'medium').to_sym
     @course.playlist_items.each do |video|
