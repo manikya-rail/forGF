@@ -51,16 +51,18 @@
           <div class="btn-group">
            
             <%if @teename.size > 0%>
-
-              <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left;padding-left: 5px;margin-left: 7px;" >
+        
+              <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left;padding-left: 5px;margin-left: 7px; display:flex;" >
+               
                 <%if @teename[0][2]=="Upload?"%>
-                <%= image_tag ScoreCard.find(@teename[0][1]).custom_logo.url , :class => "img_preview", :size => "15x25" %>
+                <%= image_tag ScoreCard.find(@teename[0][1]).custom_logo.url , :class => "img_preview", :size => "15x15" %>
                 <%else%>
                 <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %>
                 <%end -%>
+              <div style="margin:auto 0;">
                 <span class="teename-caret"><%=@teename[0][0]%></span>
 
-                <i class="caret"></i>
+                <i class="caret"></i></div>
               </button>
             <%end%>
 
