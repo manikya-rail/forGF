@@ -4,7 +4,8 @@ class ScoreCard < ApplicationRecord
     has_many :yardages, :dependent => :destroy
     has_many :pars, :dependent => :destroy
     has_many :hcps, :dependent => :destroy
-    
+    has_attached_file :custom_logo, styles: { medium: "10x10>", thumb: "10x10>" }
+    validates_attachment_content_type :custom_logo, content_type: /\Aimage\/.*\z/
     validates :tee_name, :color, :rating, :slope, presence: true
 
     def total_par
