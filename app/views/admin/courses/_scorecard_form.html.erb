@@ -1,11 +1,22 @@
+<span id=<%="custom_scorecard_logo#{scorecard_index}"%> style="display: none;" >
+       <div class="col-md-4 cover-first-row-photos bucket" style="width:100%">
+        <%= label_tag :custom_logo ,'Logo',class:"col-md-12 zero-left-right-padd "%>
+        <div class="cover-label">
+          <%#= f.file_field :custom_logo, class: 'btn btn-success upload-btn check-field cover-field' %>
+          <%= file_field_tag "score_cards[#{scorecard_index}][custom_logo]", type: :file %>
+        </div> </div>
+</span>
+
 <div class="col-md-12 course-info-row scorecard_container zero-left-right-padd" id="scorecard">
+
+
   <div class="col-md-2 ">
     <%= text_field_tag "score_cards[#{scorecard_index}][tee_name]", "", class: "col-md-12 form-control", placeholder: "Tee Name"%>
   </div>
   <div class="col-md-2">
     <%#= text_field_tag "score_cards[#{scorecard_index}][color]", "", class: "col-md-12 form-control", placeholder: "Color"%>
 
-    <%= select_tag "score_cards[#{scorecard_index}][color]", options_for_select(["Green", "Red", "White", "Blue", "Violet", "Gold", "Teal", "LightBlue", "Black"]), class:'dropdown-less-padd form-control inline check-field' ,style: 'margin-left:10px;'%>
+    <%= select_tag "score_cards[#{scorecard_index}][color]", options_for_select(["Green", "Red", "White", "Blue", "Violet", "Gold", "Teal", "LightBlue", "Black","Upload?"]), class:'dropdown-less-padd form-control inline check-field' ,style: 'margin-left:10px;', id:"ddl#{scorecard_index}"%>
   </div>
   <div class="col-md-6">
     <div class="col-md-3">
@@ -174,4 +185,33 @@
       $(this).parents('div.scorecard').find('input.total_yards').val(first_out + second_out);
     });
   });
+  var scorecard_len = $(".scorecard_container")
+  $(scorecard_len).each(function (index){
+    $("#ddl"+index).change(function() {
+
+        var strSelected = "";
+        $("#ddl"+index+" option:selected").each(function() {
+            strSelected += $(this)[0].value;
+            if (strSelected == "Upload?") { 
+
+              $("#custom_scorecard_logo"+index).show();
+            }
+            else
+            {
+              $("#custom_scorecard_logo"+index).hide();
+            }
+
+        });
+    });
+   });
 </script>
+
+
+
+
+
+
+
+
+
+

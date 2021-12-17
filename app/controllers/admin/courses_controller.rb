@@ -75,8 +75,9 @@ class Admin::CoursesController < ApplicationController
       end
       if params[:images].present?
         Thread.new do
+
           params[:images].each_with_index do |image, index|
-            @course.course_images.create(photo: image)
+            @course.course_images.create(photo: image) unless @course.course_images.blank?
           end
           if params[:scorecard_images].present?
             params[:scorecard_images].each { |scorecard_image|
@@ -98,9 +99,14 @@ class Admin::CoursesController < ApplicationController
       end
       if params[:score_cards]
         params[:score_cards].each do |scorecard_index, scorecard_params|
-          score_card = @course.score_cards.create(tee_name: scorecard_params[:tee_name],
-            color: scorecard_params[:color], rating: scorecard_params[:total_rating],
-            slope: scorecard_params[:total_slope])
+
+          score_card = @course.score_cards.new
+          score_card.tee_name = scorecard_params[:tee_name]
+          score_card.color = scorecard_params[:color]
+          score_card.rating = scorecard_params[:total_rating]
+          score_card.slope = scorecard_params[:total_slope]
+          score_card.custom_logo = scorecard_params[:custom_logo] unless scorecard_params[:custom_logo].blank?
+          score_card.save!
           scorecard_params[:holes].each do |hole_num, hole_params|
             hole = @course.holes.find_by(hole_num: hole_num)
             if score_card.id.present? && hole.present?
@@ -132,6 +138,7 @@ class Admin::CoursesController < ApplicationController
             scorecard.rating = scorecard_params[:total_rating]
             scorecard.slope = scorecard_params[:total_slope]
             scorecard.rank = scorecard_params[:rank]
+            scorecard.custom_logo = scorecard_params[:custom_logo] unless scorecard_params[:custom_logo].blank?
             scorecard.save
             scorecard_params[:holes].each do |hole_num, hole_scorecard_params|
               hole = @course.holes.find_by(hole_num: hole_num)
