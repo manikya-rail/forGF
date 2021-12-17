@@ -51,18 +51,32 @@
           <div class="btn-group">
            
             <%if @teename.size > 0%>
+
               <button type="button" class="btn btn-default dropdown-toggle tee-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left;padding-left: 5px;margin-left: 7px;" >
-                <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %><span class="teename-caret"><%=@teename[0][0]%></span>
+                <%if @teename[0][2]=="Upload?"%>
+                <%= image_tag ScoreCard.find(@teename[0][1]).custom_logo.url , :class => "img_preview", :size => "15x25" %>
+                <%else%>
+                <%= image_tag "tees/#{@teename[0][2]}.png" , :class => "img_preview" %>
+                <%end -%>
+                <span class="teename-caret"><%=@teename[0][0]%></span>
+
                 <i class="caret"></i>
               </button>
             <%end%>
 
             <ul class="dropdown-menu" style="left: 6px;">
               <% @teename.each do |teename|%>
+              <%if teename[2]=="Upload?"%>
+                <li class="tees" value="<%=teename[1]%>" course_id="<%=@course.id%>">
+                  <%= image_tag ScoreCard.find(teename[1]).custom_logo.url , :size => "15x25"%><span><%=teename[0]%></span>
+                </li>
+              <%else%>
                 <li class="tees" value="<%=teename[1]%>" course_id="<%=@course.id%>">
                   <%= image_tag "tees/#{teename[2]}.png" %><span><%=teename[0]%></span>
                 </li>
+              <%end%>
               <% end %>
+            </ul>
             </ul>
 
           </div>
